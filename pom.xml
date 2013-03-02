@@ -16,9 +16,8 @@
 	<url></url>
 
 	<modules>
-<!-- 		<module>xml</module>
-		<module>component</module>
- -->		
+		<module>xml</module>
+		<module>jsf</module>		
 	</modules>
 
 	<properties>
