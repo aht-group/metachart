@@ -14,6 +14,23 @@
     <name>MC - XML</name>
 	
 	<dependencies>
-		
+		<dependency>
+			<groupId>net.sf.ahtutils</groupId>
+			<artifactId>ahtutils-test</artifactId>
+			<scope>test</scope>
+			<version>0.2.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-util</artifactId>
+			<version>0.1.4</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
