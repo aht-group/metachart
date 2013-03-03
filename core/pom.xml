@@ -19,6 +19,7 @@
 		<groupId>org.metachart</groupId>
 		<artifactId>metachart-xml</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<scope>provided</scope>
 	</dependency>
 	<dependency>
 		<groupId>jfree</groupId>
