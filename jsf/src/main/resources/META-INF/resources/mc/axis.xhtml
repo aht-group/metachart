@@ -8,6 +8,7 @@
 	<composite:interface>
 		<composite:attribute name="code" required="true" default=""/>
 		<composite:attribute name="type" required="false" default="linear"/>
+		<composite:attribute name="min" required="false" default="null"/>
 		<composite:attribute name="maxZoom" required="false" default="null"/>
 		<composite:attribute name="showFirstLabel" required="false" default="true"/>
 	</composite:interface>
@@ -15,6 +16,7 @@
 	<composite:implementation>
         #{cc.attrs.code}Axis:{
         	title: {text: null},
+        	min: #{cc.attrs.min},
           type: '#{cc.attrs.type}',
           maxZoom: #{cc.attrs.maxZoom},
           showFirstLabel: #{cc.attrs.showFirstLabel},

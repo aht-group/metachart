@@ -6,12 +6,13 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
-		<composite:attribute name="value" required="false" default=""/>
+		<composite:attribute name="shared" required="false" default="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
               tooltip:{
-              	enabled: true
+              	enabled: true,
+              	shared: #{cc.attrs.shared}
               	},
 	</composite:implementation>
 </html>

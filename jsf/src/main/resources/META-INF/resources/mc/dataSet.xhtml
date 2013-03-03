@@ -6,15 +6,13 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface componentType="org.metachart.jsf.UiDataSet">
-		<composite:attribute name="value" required="false" default=""/>
+		<composite:attribute name="value" required="true"/>
 	</composite:interface>
 	        
 	<composite:implementation>
         {
             type: 'area',
-            name: 'USD to EUR',
-            pointInterval: 24 * 3600 * 1000,
-            pointStart: Date.UTC(2006, 0, 01),
+            name: '#{cc.attrs.value.label}',
             data: [ #{cc.data(cc.attrs.value)} ]
         },
 	</composite:implementation>
