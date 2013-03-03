@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsp/jstl/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:composite="http://java.sun.com/jsf/composite">
+    
+	<composite:interface>
+		<composite:attribute name="code" required="true" default=""/>
+		<composite:attribute name="type" required="false" default="linear"/>
+		<composite:attribute name="maxZoom" required="false" default="null"/>
+		<composite:attribute name="showFirstLabel" required="false" default="true"/>
+	</composite:interface>
+	        
+	<composite:implementation>
+        #{cc.attrs.code}Axis:{
+        	title: {text: null},
+          type: '#{cc.attrs.type}',
+          maxZoom: #{cc.attrs.maxZoom},
+          showFirstLabel: #{cc.attrs.showFirstLabel},
+        	},
+	</composite:implementation>
+</html>

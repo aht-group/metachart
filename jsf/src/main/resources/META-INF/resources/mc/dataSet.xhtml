@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsp/jstl/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:composite="http://java.sun.com/jsf/composite">
+    
+	<composite:interface>
+		<composite:attribute name="value" required="false" default=""/>
+	</composite:interface>
+	        
+	<composite:implementation>
+        {
+            type: 'area',
+            name: 'USD to EUR',
+            pointInterval: 24 * 3600 * 1000,
+            pointStart: Date.UTC(2006, 0, 01),
+            data: [0.8446, 0.8445, 0.8444, 0.8451, 0.8418, 0.8264]
+        },
+	</composite:implementation>
+</html>
