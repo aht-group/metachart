@@ -11,7 +11,7 @@
 	
     <artifactId>metachart-jsf</artifactId>
     <packaging>jar</packaging> 
-    <name>JsfChart - XML</name>
+    <name>MC - JSF</name>
 	
 	<dependencies>
 		

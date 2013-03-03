@@ -9,9 +9,9 @@
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	
-    <artifactId>metachart-xml</artifactId>
+    <artifactId>metachart-core</artifactId>
     <packaging>jar</packaging> 
-    <name>MC - XML</name>
+    <name>MC - Core</name>
 	
 	<dependencies>
 		
