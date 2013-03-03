@@ -7,11 +7,14 @@
     
 	<composite:interface componentType="org.metachart.jsf.UiDataSet">
 		<composite:attribute name="value" required="true"/>
+		<composite:attribute name="type" required="false" default="line"/>
+		<composite:attribute name="step" required="false" default=""/>
 	</composite:interface>
 	        
 	<composite:implementation>
         {
-            type: 'area',
+            type: '#{cc.attrs.type}',
+            step: '#{cc.attrs.step}',
             name: '#{cc.attrs.value.label}',
             data: [ #{cc.data(cc.attrs.value)} ]
         },

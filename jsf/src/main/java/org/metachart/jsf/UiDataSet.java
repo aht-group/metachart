@@ -12,7 +12,7 @@ public class UiDataSet extends UINamingContainer
 	public String data(DataSet ds)
 	{
 		StringBuffer sb = new StringBuffer();
-		if(ds!=null)
+		if(ds!=null && ds.getData().size()>0)
 		{
 			for(Data data : ds.getData())
 			{

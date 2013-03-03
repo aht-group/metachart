@@ -1,10 +1,12 @@
 package org.metachart.factory.xml;
 
+import java.util.Date;
+
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.metachart.factory.dataset.TimeSeriesDataSetFactory;
+import org.joda.time.DateTime;
 import org.metachart.xml.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,18 +19,36 @@ public class XmlDataFactory
 	{
 		Data data = new Data();
 		data.setY(y);
-		
 		return data;
+	}
+	
+	public static Data build(double y, Date date)
+	{
+		try
+		{
+			DateTime dt = new DateTime(date);
+			XMLGregorianCalendar xmlGc = DatatypeFactory.newInstance().newXMLGregorianCalendar();
+			xmlGc.setDay(dt.getDayOfMonth());
+			xmlGc.setMonth(dt.getMonthOfYear());
+			xmlGc.setYear(dt.getYear());
+			xmlGc.setHour(dt.getHourOfDay());
+			xmlGc.setMinute(dt.getMinuteOfHour());
+			xmlGc.setSecond(dt.getSecondOfMinute());
+			return build(y, xmlGc);		
+		}
+		catch (DatatypeConfigurationException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 	
 	public static Data buildForYearMonth(double y, int year, int month)
 	{
-		Data xml = build(y);
-		
 		try
 		{
-			XMLGregorianCalendar xmlGc;
-			xmlGc = DatatypeFactory.newInstance().newXMLGregorianCalendar();
+			XMLGregorianCalendar xmlGc = DatatypeFactory.newInstance().newXMLGregorianCalendar();
 			xmlGc.setDay(1);
 			xmlGc.setMonth(month);
 			xmlGc.setYear(year);
@@ -36,10 +56,19 @@ public class XmlDataFactory
 			xmlGc.setMinute(0);
 			xmlGc.setSecond(0);
 			
-			xml.setRecord(xmlGc);			
+			return build(y, xmlGc);		
 		}
-		catch (DatatypeConfigurationException e) {e.printStackTrace();}
-
+		catch (DatatypeConfigurationException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static Data build(double y, XMLGregorianCalendar record)
+	{
+		Data xml = build(y);
+		xml.setRecord(record);
 		return xml;
 	}
 }
