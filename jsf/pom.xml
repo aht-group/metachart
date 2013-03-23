@@ -27,4 +27,50 @@
 		<scope>provided</scope>
 	</dependency>
 	</dependencies>
+	
+	<build>
+	    <plugins>
+	        <plugin>
+	            <groupId>com.google.code.maven-replacer-plugin</groupId>
+           		<artifactId>replacer</artifactId>
+          		 <version>1.5.2</version>
+	            <executions>
+	                <execution>
+	                    <phase>prepare-package</phase>
+	                    <goals>
+	                        <goal>replace</goal>
+	                    </goals>                    
+	                </execution>
+	            </executions>
+	            <configuration>
+	                <file>${my.build.directory}/classes/META-INF/resources/metachart/dhtmlx/js/dhtmlxgantt.js</file>
+	                <regex>false</regex>
+	                <replacements>
+	                    <replacement>
+	                        <token>;GanttChart.prototype.setStylePath</token>
+	                        <value>;GanttChart.prototype.setImageSuffix = function(newPath) {this.imgSfx = newPath};GanttChart.prototype.setStylePath</value>
+	                    </replacement>
+	                    <replacement>
+	                        <token>this.imgs = "codebase/imgs/";</token>
+	                        <value>this.imgs = "codebase/imgs/";this.imgSfx = "";</value>
+	                    </replacement>
+	                    <replacement>
+	                        <token>this.imgs = "codebase/imgs/";</token>
+	                        <value>this.imgs = "codebase/imgs/";this.imgSfx = "";</value>
+	                    </replacement>
+	                    <replacement>
+	                        <token>.png"</token>
+	                        <value>.png"+this.Chart.imgSfx</value>
+	                    </replacement>
+
+	                    <replacement>
+	                        <token>.png)</token>
+	                        <value>.png"+this.imgSfx+")</value>
+	                    </replacement>	                    
+	                </replacements>             
+	            </configuration>
+	        </plugin>
+	    </plugins>
+	</build>
+	
 </project>
