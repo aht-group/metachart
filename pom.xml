@@ -18,7 +18,8 @@
 	<modules>
 		<module>xml</module>
 		<module>jsf</module>
-		<module>core</module>		
+		<module>core</module>
+		<module>bom</module>
 	</modules>
 
 	<properties>
