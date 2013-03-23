@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+    	<groupId>org.metachart</groupId>
+    	<artifactId>metachart</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+	</parent>
+	
+    <artifactId>metachart-web</artifactId>
+    <packaging>jar</packaging> 
+    <name>MC - WEB</name>
+	
+	<build>
+	    <finalName>mc</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<inherited>true</inherited>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+	            <groupId>org.jboss.as.plugins</groupId>
+	            <artifactId>jboss-as-maven-plugin</artifactId>
+	            <configuration>
+	               <skip>false</skip>
+	            </configuration>
+         	</plugin>
+         	<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+		     	<artifactId>maven-deploy-plugin</artifactId>
+		     	<version>2.4</version>
+		     	<configuration>
+		       		<skip>true</skip>
+		     	</configuration>
+		   	</plugin>
+		   	<plugin>
+        		<artifactId>maven-resources-plugin</artifactId>
+        		<version>2.5</version>
+        		<executions>
+          			<execution>
+            			<id>copy-resources</id>
+            			<phase>prepare-package</phase>
+            			<goals>
+              				<goal>copy-resources</goal>
+            			</goals>
+            			<configuration>
+	              			<outputDirectory>${project.build.directory}/classes/composition.mc</outputDirectory>
+	              			<resources>          
+	                			<resource>
+	                  				<directory>src/main/webapp/WEB-INF/showcase</directory>
+	                  				<filtering>true</filtering>
+	                			</resource>
+	              			</resources>              
+	            		</configuration>            
+          			</execution>
+          			<execution>
+            			<id>copy-resources-java</id>
+            			<phase>prepare-package</phase>
+            			<goals>
+              				<goal>copy-resources</goal>
+            			</goals>
+            			<configuration>
+	              			<outputDirectory>${project.build.directory}/classes/java.mc-demo</outputDirectory>
+	              			<resources>          
+	                			<resource>
+	                  				<directory>src/main/java</directory>
+	                  				<filtering>true</filtering>
+	                			</resource>
+	              			</resources>              
+	            		</configuration>            
+          			</execution>
+        		</executions>
+      		</plugin>
+		</plugins>
+	</build>
+	
+	<dependencyManagement>
+		<dependencies>      	         
+			<dependency>
+				<groupId>org.metachart</groupId>
+    			<artifactId>metachart-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<dependencies>
+		
+	</dependencies>
+	
+	<repositories>
+	    <repository>  
+	        <id>prime-repo</id>  
+	        <name>PrimeFaces Maven Repository</name>  
+	        <url>http://repository.primefaces.org</url>  
+	        <layout>default</layout>  
+	    </repository> 
+     	<repository>
+            <id>jboss-public</id>
+            <name>JBoss Repository</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public</url>
+            <releases><updatePolicy>daily</updatePolicy></releases>
+            <snapshots><updatePolicy>daily</updatePolicy></snapshots>
+        </repository>
+    </repositories> 
+</project>
