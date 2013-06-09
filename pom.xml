@@ -63,7 +63,6 @@
 		<maven>2.0.9</maven>
 	</prerequisites>
 
-	
 	<issueManagement>
 	</issueManagement>
 
@@ -78,7 +77,6 @@
 		
     </repositories>
 
-		
 	<build>
 		<plugins>
 			<plugin>
