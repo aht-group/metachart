@@ -30,7 +30,7 @@
 	
 	<build>
 	    <plugins>
-	        <plugin>
+<!--	        <plugin>
 	            <groupId>com.google.code.maven-replacer-plugin</groupId>
            		<artifactId>replacer</artifactId>
           		 <version>1.5.2</version>
@@ -70,7 +70,7 @@
 	                </replacements>             
 	            </configuration>
 	        </plugin>
-	    </plugins>
+ -->	    </plugins>
 	</build>
 	
 </project>
