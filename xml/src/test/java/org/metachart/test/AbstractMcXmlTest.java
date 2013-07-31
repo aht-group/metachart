@@ -19,7 +19,7 @@ public class AbstractMcXmlTest extends AbstractAhtUtilsXmlTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("src/test/resources/config");
+		loggerInit.addAltPath("config.metachart-xml.test");
 		loggerInit.init();
     }
 	
