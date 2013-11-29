@@ -5,27 +5,39 @@
 	<parent>
     	<groupId>org.metachart</groupId>
     	<artifactId>metachart</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	
     <artifactId>metachart-jsf</artifactId>
     <packaging>jar</packaging> 
     <name>MC - JSF</name>
-	
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.metachart</groupId>
+				<artifactId>metachart-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
+		<dependency>
+			<groupId>org.metachart</groupId>
+			<artifactId>metachart-xml</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 	<dependency>
 		<groupId>com.sun.faces</groupId>
 		<artifactId>jsf-api</artifactId>
 		<version>2.1.0</version>
 	</dependency>
-	<dependency>
-		<groupId>org.metachart</groupId>
-		<artifactId>metachart-xml</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<scope>provided</scope>
-	</dependency>
+
 	</dependencies>
 	
 	<build>

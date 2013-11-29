@@ -5,27 +5,52 @@
 	<parent>
     	<groupId>org.metachart</groupId>
     	<artifactId>metachart</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
 	</parent>
     
     <artifactId>metachart-bom</artifactId>
-    <packaging>jar</packaging> 
+    <packaging>pom</packaging>
     <name>MC - BOM</name>
 
     <dependencyManagement>
         <dependencies>
+
+	        <!-- METACHART -->
         	<dependency>
 				<groupId>metachart</groupId>
 				<artifactId>metachart-xml</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
+	        <!-- Logging -->
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>1.2.16</version>
 				<type>jar</type>
 			</dependency>
+	        <dependency>
+		        <groupId>org.slf4j</groupId>
+		        <artifactId>slf4j-log4j12</artifactId>
+		        <version>1.6.4</version>
+	        </dependency>
+
+	        <!-- Utils -->
+	        <dependency>
+		        <groupId>joda-time</groupId>
+		        <artifactId>joda-time</artifactId>
+		        <version>2.0</version>
+	        </dependency>
+
+	        <!-- Test -->
+	        <dependency>
+		        <groupId>junit</groupId>
+		        <artifactId>junit</artifactId>
+		        <version>4.10</version>
+	        </dependency>
+
         </dependencies>
     </dependencyManagement>
+
 </project>

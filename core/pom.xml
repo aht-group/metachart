@@ -5,36 +5,46 @@
 	<parent>
     	<groupId>org.metachart</groupId>
     	<artifactId>metachart</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	
     <artifactId>metachart-core</artifactId>
     <packaging>jar</packaging> 
     <name>MC - Core</name>
-	
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.metachart</groupId>
+				<artifactId>metachart-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 
-	<dependency>
-		<groupId>org.metachart</groupId>
-		<artifactId>metachart-xml</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<scope>provided</scope>
-	</dependency>
-	<dependency>
-		<groupId>jfree</groupId>
-		<artifactId>jfreechart</artifactId>
-		<version>1.0.13</version>
-	</dependency>
-	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-api</artifactId>
-		<version>1.6.4</version>
-	</dependency>
-	<dependency>
-		<groupId>joda-time</groupId>
-		<artifactId>joda-time</artifactId>
-		<version>2.0</version>
-	</dependency>
+		<dependency>
+			<groupId>org.metachart</groupId>
+			<artifactId>metachart-xml</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
 	</dependencies>
 </project>

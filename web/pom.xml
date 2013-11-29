@@ -5,7 +5,7 @@
 	<parent>
     	<groupId>org.metachart</groupId>
     	<artifactId>metachart</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	
@@ -18,7 +18,7 @@
 	<dependency>
 		<groupId>org.metachart</groupId>
 		<artifactId>metachart-xml</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>${project.version}</version>
 		<scope>provided</scope>
 	</dependency>
 	</dependencies>
@@ -48,6 +48,14 @@
 	               <skip>false</skip>
 	            </configuration>
          	</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	
