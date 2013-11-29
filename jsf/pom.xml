@@ -29,7 +29,14 @@
 		<dependency>
 			<groupId>org.metachart</groupId>
 			<artifactId>metachart-xml</artifactId>
-			<scope>provided</scope>
+			<scope>compile</scope>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.metachart</groupId>
+			<artifactId>metachart-core</artifactId>
+			<scope>compile</scope>
+			<version>${project.version}</version>
 		</dependency>
 
 	<dependency>

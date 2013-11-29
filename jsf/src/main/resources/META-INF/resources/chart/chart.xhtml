@@ -7,70 +7,37 @@
     
 	<composite:interface>
 		<composite:attribute name="value" required="true"/>
+        <composite:attribute name="jquery" required="false" default="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
+
+    <ui:fragment rendered="#{cc.attrs.jquery}">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    </ui:fragment>
+
 	<script src="http://code.highcharts.com/highcharts.js"></script>
 
-	<div id="container" style="height: 200px; margin: 0 auto"></div>
+	<div id="mccContainer" style="height: 500px; margin: 0 auto"></div>
 
-<h:outputScript>
-	$(function () {
-    var chart;
-    $(document).ready(function() {
-        chart = new Highcharts.Chart({
-        	title: {text: ''},
-            legend: {enabled: false},
-        	credits : {enabled : false},
-        	tooltip: {enabled: false},
-        	xAxis: {},
-        	yAxis: {},
-        	
-            chart: {
-                renderTo: 'container',
-                zoomType: 'x',
-                spacingRight: 0
-            },
-            
-            
+	<h:outputScript>
+        $(function (){
+            $('#mccContainer').highcharts({
+                chart: {
+                    type: 'column',
+                    borderWidth : 1
+                },
 
-            
-            plotOptions: {
-                area: {
-                    fillColor: {
-                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
-                        stops: [
-                            [0, Highcharts.getOptions().colors[0]],
-                            [1, 'rgba(2,0,0,0)']
-                        ]
-                    },
-                    lineWidth: 1,
-                    marker: {
-                        enabled: false,
-                        states: {
-                            hover: {
-                                enabled: true,
-                                radius: 5
-                            }
-                        }
-                    },
-                    shadow: false,
-                    states: {
-                        hover: {
-                            lineWidth: 1
-                        }
-                    },
-                    threshold: null
-                }
-            },
-            <composite:insertChildren />
-    
-            
+                title: {text: null},
+                subtitle: {text: null},
+                credits: {text: null},
+				colors: ['#2f7ed8','#8bbc21'],
+
+                <composite:insertChildren />
+            });
         });
-    });
-    
-});
-</h:outputScript>
+
+	</h:outputScript>
 
 	</composite:implementation>
 </html>

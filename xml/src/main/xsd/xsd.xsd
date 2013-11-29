@@ -144,7 +144,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="data" maxOccurs="unbounded"/>
-            		<xsd:element ref="dataSet" maxOccurs="unbounded"/>
+            	<xsd:element ref="dataSet" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="label" type="xsd:string"/>

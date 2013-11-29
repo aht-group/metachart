@@ -6,15 +6,12 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
-		<composite:attribute name="shared" required="false" default="false"/>
+        <composite:attribute name="rotation" required="false" default="0"/>
 	</composite:interface>
 	        
 	<composite:implementation>
-
-        tooltip:{
-            enabled: true,
-            shared: #{cc.attrs.shared}
-            <composite:insertChildren />
+        labels: {
+            rotation: #{cc.attrs.rotation}
         },
 	</composite:implementation>
 </html>

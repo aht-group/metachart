@@ -21,6 +21,13 @@ public class XmlDataFactory
 		data.setY(y);
 		return data;
 	}
+
+    public static Data build(String category)
+    {
+        Data data = new Data();
+        data.setCategory(category);
+        return data;
+    }
 	
 	public static Data build(double y, Date date)
 	{

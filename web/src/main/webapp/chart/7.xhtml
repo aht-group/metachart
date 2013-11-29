@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:mcc="http://www.metachart.org/chart"
+   template="/WEB-INF/templates/clean.xhtml">
+<ui:define name="content">
+	MC-7
+	#{versionBean.date}
+
+	<mcc:chart value="" jquery="true">
+		<mcc:title value="MyTitle"/>
+        <mcc:subTitle value="MySubTitle"/>
+        <mcc:credits text="MetaChart" href="http://www.metachart.org"/>
+        <mcc:axis code="y" min="1" type="logarithmic">
+            <mcc:title value="nombre des indivus"/>
+        </mcc:axis>
+        <mcc:axis code="x" categories="#{datasetBean.dsCategories}">
+			<mcc:labels rotation="-45"/>
+        </mcc:axis>
+		<mcc:tooltip shared="true"/>
+        <mcc:series>
+            <mcc:dataSet value="#{datasetBean.ds1}"/>
+            <mcc:dataSet value="#{datasetBean.ds2}"/>
+        </mcc:series>
+	</mcc:chart>
+
+</ui:define>
+</ui:composition>

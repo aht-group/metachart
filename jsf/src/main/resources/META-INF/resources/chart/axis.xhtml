@@ -5,8 +5,9 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
-	<composite:interface>
+	<composite:interface componentType="org.metachart.jsf.UiAxis">
 		<composite:attribute name="code" required="true" default=""/>
+        <composite:attribute name="categories" required="false" default=""/>
 		<composite:attribute name="type" required="false" default="linear"/>
 		<composite:attribute name="min" required="false" default="null"/>
 		<composite:attribute name="maxZoom" required="false" default="null"/>
@@ -17,9 +18,12 @@
         #{cc.attrs.code}Axis:{
         	title: {text: null},
         	min: #{cc.attrs.min},
-          type: '#{cc.attrs.type}',
-          maxZoom: #{cc.attrs.maxZoom},
-          showFirstLabel: #{cc.attrs.showFirstLabel},
-        	},
+            type: '#{cc.attrs.type}',
+            maxZoom: #{cc.attrs.maxZoom},
+            lineWidth: 1,
+            showFirstLabel: #{cc.attrs.showFirstLabel},
+            #{cc.categories(cc.attrs.categories)}
+            <composite:insertChildren />
+        },
 	</composite:implementation>
 </html>
