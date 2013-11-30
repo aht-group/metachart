@@ -26,6 +26,22 @@
             <mcc:dataSet value="#{datasetBean.ds2}"/>
         </mcc:series>
 	</mcc:chart>
+    <mcc:chart value="" jquery="true">
+        <mcc:title value="MyTitle"/>
+        <mcc:subTitle value="MySubTitle"/>
+        <mcc:credits text="MetaChart" href="http://www.metachart.org"/>
+        <mcc:axis code="y" min="1" type="logarithmic">
+            <mcc:title value="nombre des indivus"/>
+        </mcc:axis>
+        <mcc:axis code="x" categories="#{datasetBean.dsCategories}">
+            <mcc:labels rotation="-45"/>
+        </mcc:axis>
+        <mcc:tooltip shared="true"/>
+        <mcc:series>
+            <mcc:dataSet value="#{datasetBean.ds1}"/>
+            <mcc:dataSet value="#{datasetBean.ds2}"/>
+        </mcc:series>
+    </mcc:chart>
 
 </ui:define>
 </ui:composition>

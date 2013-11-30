@@ -18,7 +18,8 @@ public class UiDataSet extends UINamingContainer
 			for(Data data : ds.getData())
 			{
                 if(data.isSetRecord()){appendDate(data.getRecord(),sb);}
-				sb.append(data.getY());
+				if(data.isSetY()){sb.append(data.getY());}
+                else{sb.append("null");}
                 if(data.isSetRecord()){sb.append("]");}
 				sb.append(", ");
 			}

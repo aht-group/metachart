@@ -11,18 +11,14 @@
 	</composite:interface>
 	        
 	<composite:implementation>
+        <h:outputScript rendered="#{cc.attrs.jquery}" library="jsMetaChart" name="jquery-1.9.1.min.js" target="head" />
+        <h:outputScript library="jsMetaChart" name="highcharts-3.0.7.js" target="head" />
 
-    <ui:fragment rendered="#{cc.attrs.jquery}">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    </ui:fragment>
-
-	<script src="http://code.highcharts.com/highcharts.js"></script>
-
-	<div id="mccContainer" style="height: 500px; margin: 0 auto"></div>
+		<div id="#{cc.id}" style="height: 350px; margin: 0 auto"></div>
 
 	<h:outputScript>
         $(function (){
-            $('#mccContainer').highcharts({
+            $('##{cc.id}').highcharts({
                 chart: {
                     type: 'column',
                     borderWidth : 1
