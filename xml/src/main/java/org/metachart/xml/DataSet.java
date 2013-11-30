@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://www.metachart.org/xml}dataSet" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="color" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="rangeIndex" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="colorIndex" type="{http://www.w3.org/2001/XMLSchema}int" />
@@ -53,6 +54,8 @@ public class DataSet
     protected List<DataSet> dataSet;
     @XmlAttribute(name = "code")
     protected String code;
+    @XmlAttribute(name = "color")
+    protected String color;
     @XmlAttribute(name = "label")
     protected String label;
     @XmlAttribute(name = "rangeIndex")
@@ -160,6 +163,34 @@ public class DataSet
 
     public boolean isSetCode() {
         return (this.code!= null);
+    }
+
+    /**
+     * Gets the value of the color property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * Sets the value of the color property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setColor(String value) {
+        this.color = value;
+    }
+
+    public boolean isSetColor() {
+        return (this.color!= null);
     }
 
     /**

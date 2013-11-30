@@ -27,7 +27,9 @@ public class DatasetBean implements Serializable
     public void init()
     {
         ds1 = new DataSet();ds1.setLabel("PNBA");
+        ds1.setColor("#8bbc21");
         ds2 = new DataSet();ds2.setLabel("RBT");
+        ds2.setColor("#2f7ed8");
 
         dsCategories = new DataSet();
         dsCategories.getData().add(XmlDataFactory.build("Accipitriformes"));

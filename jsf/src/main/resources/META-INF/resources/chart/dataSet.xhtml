@@ -13,6 +13,9 @@
 	        
 	<composite:implementation>
         {
+        <ui:fragment rendered="#{not empty cc.attrs.value.color}">
+            color: '#{cc.attrs.value.color}',
+        </ui:fragment>
             type: '#{cc.attrs.type}',
             step: '#{cc.attrs.step}',
             name: '#{cc.attrs.value.label}',
