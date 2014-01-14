@@ -8,6 +8,7 @@
 	<composite:interface>
         <composite:attribute name="jquery" required="false" default="false"/>
         <composite:attribute name="type" required="false" default="line"/>
+        <composite:attribute name="height" required="false" default="350"/>
 
 	</composite:interface>
 	        
@@ -15,7 +16,7 @@
         <h:outputScript rendered="#{cc.attrs.jquery}" library="jsMetaChart" name="jquery-1.9.1.min.js" target="head" />
         <h:outputScript library="jsMetaChart" name="highcharts-3.0.7.js" target="head" />
 
-		<div id="#{cc.id}" style="height: 350px; margin: 0 auto"></div>
+		<div id="#{cc.id}" style="height: #{cc.attrs.height}px; margin: 0 auto"></div>
 
 	<h:outputScript>
         $(function (){
