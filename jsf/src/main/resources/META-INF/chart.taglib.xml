@@ -4,5 +4,5 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
         http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
  <namespace>http://www.metachart.org/chart</namespace> 
- <composite-library-name>chart</composite-library-name> 
+ <composite-library-name>metachartChart</composite-library-name>
  </facelet-taglib> 
