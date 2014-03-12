@@ -6,9 +6,12 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
-        <composite:attribute name="jquery" required="false" default="false"/>
-        <composite:attribute name="type" required="false" default="line"/>
-        <composite:attribute name="height" required="false" default="350"/>
+        <composite:attribute name="jquery" required="false" default="false"
+                             shortDescription="If true, jquery lib will be added by MetaChart."/>
+        <composite:attribute name="type" required="false" default="line"
+                             shortDescription="Currently tested types are: column,line"/>
+        <composite:attribute name="height" required="false" default="350"
+                             shortDescription="The height in px of the chart."/>
 
 	</composite:interface>
 	        
