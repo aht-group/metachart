@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.metachart.org/xml"
     xmlns="http://www.metachart.org/xml"
+    xmlns:graph="http://www.metachart.org/graph"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:extensionBindingPrefixes="xjc"
     jaxb:version="2.0">
+    <xsd:import namespace="http://www.metachart.org/graph"  schemaLocation="metachart/graph.xsd"/>
     <xsd:annotation>
         <xsd:appinfo>
             <jaxb:globalBindings generateIsSetMethod="true">
