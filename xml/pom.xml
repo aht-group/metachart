@@ -30,7 +30,7 @@
 			<groupId>net.sf.ahtutils</groupId>
 			<artifactId>ahtutils-test</artifactId>
 			<scope>test</scope>
-			<version>0.2.5-SNAPSHOT</version>
+			<version>0.2.6-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
