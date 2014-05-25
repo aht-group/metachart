@@ -34,6 +34,7 @@ public class TestXmlNode extends AbstractXmlGraphTest
     	xml.setId(123);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
+    	xml.setCategory("myCategory");
     	
     	return xml;
     }
