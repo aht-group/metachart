@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.metachart.xml.graph.Node;
@@ -24,7 +23,7 @@ public class GraphXpath
 		
 		@SuppressWarnings("unchecked")
 		List<Node> listResult = (List<Node>)context.selectNodes(sb.toString());
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Node.class.getSimpleName()+" for category="+category+" in "+JaxbUtil.toString(root));}
+		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Node.class.getSimpleName()+" for category="+category+" in XML");}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+Node.class.getSimpleName()+" for category="+category);}
 		return listResult.get(0);
 	}
@@ -38,7 +37,7 @@ public class GraphXpath
 		
 		@SuppressWarnings("unchecked")
 		List<Node> listResult = (List<Node>)context.selectNodes(sb.toString());
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Node.class.getSimpleName()+" for code="+code+" in "+JaxbUtil.toString(root));}
+		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Node.class.getSimpleName()+" for code="+code+" in XML");}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+Node.class.getSimpleName()+" for label="+code);}
 		return listResult.get(0);
 	}
