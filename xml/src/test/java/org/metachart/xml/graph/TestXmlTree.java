@@ -10,27 +10,28 @@ import org.metachart.test.McXmlTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlNode extends AbstractXmlGraphTest
+public class TestXmlTree extends AbstractXmlGraphTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlNode.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlTree.class);
 	
-	@BeforeClass public static void initFiles(){setXmlFile(dirSuffix, Node.class);}
+	@BeforeClass public static void initFiles(){setXmlFile(dirSuffix, Tree.class);}
     
     @Test
     public void testAclContainer() throws FileNotFoundException
     {
-    	Node actual = create(true);
-    	Node expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Node.class);
+    	Tree actual = create(true);
+    	Tree expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Tree.class);
     	assertJaxbEquals(expected, actual);
     }
     
-    public static Node create(boolean withChilds)
+    public static Tree create(boolean withChilds)
     {
-    	Node xml = new Node();
-    	xml.setId(123);
-    	xml.setCode("myCode");
-    	xml.setLabel("myLabel");
-    	xml.setCategory("myCategory");
+    	Tree xml = new Tree();
+    	
+    	if(withChilds)
+    	{
+    		xml.setNode(TestXmlNode.create(false));
+    	}
     	
     	return xml;
     }
@@ -41,8 +42,8 @@ public class TestXmlNode extends AbstractXmlGraphTest
     {
 		McXmlTestBootstrap.init();
 			
-		TestXmlNode.initFiles();
-		TestXmlNode test = new TestXmlNode();
+		TestXmlTree.initFiles();
+		TestXmlTree test = new TestXmlTree();
 		test.save();
     }
 }

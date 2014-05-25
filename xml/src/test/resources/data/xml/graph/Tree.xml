@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tree xmlns="http://www.metachart.org/graph">
+    <node category="myCategory" label="myLabel" code="myCode" id="123"/>
+</tree>
