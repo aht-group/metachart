@@ -26,6 +26,7 @@
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="label" type="xsd:string"/>
             <xsd:attribute name="category" type="xsd:string"/>
+            <xsd:attribute name="type" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="nodes">
