@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tree xmlns="http://www.metachart.org/graph">
-    <node type="myType" category="myCategory" label="myLabel" code="myCode" id="123"/>
+    <node size="1" type="myType" category="myCategory" label="myLabel" code="myCode" id="123"/>
 </tree>

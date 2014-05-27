@@ -32,6 +32,12 @@ public class TestXmlNode extends AbstractXmlGraphTest
     	xml.setLabel("myLabel");
     	xml.setCategory("myCategory");
     	xml.setType("myType");
+    	xml.setSize(1);
+    	
+    	if(withChilds)
+    	{
+    		xml.getNode().add(TestXmlNode.create(false));
+    	}
     	
     	return xml;
     }

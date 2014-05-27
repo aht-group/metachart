@@ -5,7 +5,6 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.metachart.xml.graph.Edge;
 import org.metachart.xml.graph.Graph;
@@ -23,7 +22,7 @@ public class Graph2DotConverter
 	private ColorSchemeManager csm;
 	
 	private StringBuffer sb;
-	private String code,label;
+	private String label;
 	
 	private ExlpTxtWriter txtWriter;
 	
@@ -32,9 +31,8 @@ public class Graph2DotConverter
 	private Double ratio,ranksep;
 	private Boolean overlap;
 
-	public Graph2DotConverter(String code, String label)
+	public Graph2DotConverter(String label)
 	{
-		this.code=code;
 		this.label=label;
 		
 		csm = new ColorSchemeManager();
@@ -64,9 +62,9 @@ public class Graph2DotConverter
 			Node nSrc = mapNodes.get(e.getFrom());
 			Node nDst = mapNodes.get(e.getTo());
 			
-			sb.append(q).append(nSrc.getLabel()).append(q);
+			sb.append(q).append(nSrc.getId()).append(q);
 			sb.append(" -> ");
-			sb.append(q).append(nDst.getLabel()).append(q);
+			sb.append(q).append(nDst.getId()).append(q);
 			sb.append(" ");
 			
 			if(!e.isDirected()){sb.append("[dir=none]");}
@@ -84,15 +82,34 @@ public class Graph2DotConverter
 		for(Node n : g.getNodes().getNode())
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("  ").append(n.getLabel());
-			sb.append(" [").append("style=filled,");
-//			txtWriter.add(n.getLabel()+" [colorscheme=spectral9,  fillcolor=2];");
+			sb.append("  ").append(n.getId());
+			
+			sb.append(" [");
+			sb.append("label=\""+n.getLabel()+"\",");
+			sb.append("style=filled,");
+			sb.append("fixedsize=false,");
 			sb.append(csm.getColor(n));
+			sb.append(getFontSize(n));
+			
+			
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("];");
 			txtWriter.add(sb.toString());
 		}
 		txtWriter.add("");
+	}
+	
+	private String getFontSize(Node n)
+	{
+		StringBuffer sb = new StringBuffer();
+		if(n.isSetSize())
+		{
+			if(n.getSize()==3)
+			{
+				sb.append("fontsize=9,");
+			}
+		}
+		return sb.toString();
 	}
 	
 	public void save(File f)

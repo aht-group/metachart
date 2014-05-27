@@ -41,8 +41,6 @@ public class ColorSchemeManager
 					logger.warn(e.getMessage());
 					return "";
 				}
-				
-				
 			}
 			catch (ExlpXpathNotFoundException e) {logger.error(e.getMessage());return "";}
 			catch (ExlpXpathNotUniqueException e)

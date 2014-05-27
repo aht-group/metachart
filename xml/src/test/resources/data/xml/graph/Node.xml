@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<node xmlns="http://www.metachart.org/graph" type="myType" category="myCategory" label="myLabel" code="myCode" id="123"/>
+<node xmlns="http://www.metachart.org/graph" size="1" type="myType" category="myCategory" label="myLabel" code="myCode" id="123">
+    <node size="1" type="myType" category="myCategory" label="myLabel" code="myCode" id="123"/>
+</node>
