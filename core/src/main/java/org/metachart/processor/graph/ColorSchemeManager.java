@@ -24,6 +24,20 @@ public class ColorSchemeManager
 	public String getColor(Node node)
 	{
 		logger.info("Getting color for "+node.getLabel());
+		
+		int colorAdjust = 0;
+		if(node.isSetSizeAdjustsColor() && node.isSizeAdjustsColor())
+		{
+			if(node.isSetSizeRelative() && node.isSizeRelative()==false)
+			{
+				logger.error("adjust and rel=false not allowed");
+			}
+			else
+			{
+				colorAdjust = colorAdjust+node.getSize();
+			}
+		}
+		
 		if(xml!=null && node.isSetCategory())
 		{
 			try
@@ -33,9 +47,9 @@ public class ColorSchemeManager
 				try
 				{
 					Node entity = GraphXpath.getNodeForCode(category, node.getLabel());
-					return buildColorString(category, entity);
+					return buildColorString(category, entity,colorAdjust);
 				}
-				catch (ExlpXpathNotFoundException e) {return buildColorString(category, category);}
+				catch (ExlpXpathNotFoundException e) {return buildColorString(category, category,colorAdjust);}
 				catch (ExlpXpathNotUniqueException e)
 				{
 					logger.warn(e.getMessage());
@@ -53,11 +67,12 @@ public class ColorSchemeManager
 		return "";
 	}
 	
-	private String buildColorString(Node category, Node entity)
+	private String buildColorString(Node category, Node entity, int colorAdjust)
 	{
+		long colorId = entity.getId() + colorAdjust;
 		StringBuffer sb = new StringBuffer();
 		sb.append(" colorscheme=").append(category.getCode()).append(",");
-		sb.append(" fillcolor=").append(entity.getId()).append(",");
+		sb.append(" fillcolor=").append(colorId).append(",");
 		return sb.toString();
 	}
 }

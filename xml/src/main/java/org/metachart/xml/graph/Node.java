@@ -29,7 +29,10 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="category" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="color" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="size" type="{http://www.w3.org/2001/XMLSchema}int" />
+ *       &lt;attribute name="sizeRelative" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="sizeAdjustsColor" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -59,8 +62,14 @@ public class Node
     protected String category;
     @XmlAttribute(name = "type")
     protected String type;
+    @XmlAttribute(name = "color")
+    protected String color;
     @XmlAttribute(name = "size")
     protected Integer size;
+    @XmlAttribute(name = "sizeRelative")
+    protected Boolean sizeRelative;
+    @XmlAttribute(name = "sizeAdjustsColor")
+    protected Boolean sizeAdjustsColor;
 
     /**
      * Gets the value of the node property.
@@ -244,6 +253,34 @@ public class Node
     }
 
     /**
+     * Gets the value of the color property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * Sets the value of the color property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setColor(String value) {
+        this.color = value;
+    }
+
+    public boolean isSetColor() {
+        return (this.color!= null);
+    }
+
+    /**
      * Gets the value of the size property.
      * 
      * @return
@@ -273,6 +310,70 @@ public class Node
 
     public void unsetSize() {
         this.size = null;
+    }
+
+    /**
+     * Gets the value of the sizeRelative property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isSizeRelative() {
+        return sizeRelative;
+    }
+
+    /**
+     * Sets the value of the sizeRelative property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setSizeRelative(boolean value) {
+        this.sizeRelative = value;
+    }
+
+    public boolean isSetSizeRelative() {
+        return (this.sizeRelative!= null);
+    }
+
+    public void unsetSizeRelative() {
+        this.sizeRelative = null;
+    }
+
+    /**
+     * Gets the value of the sizeAdjustsColor property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isSizeAdjustsColor() {
+        return sizeAdjustsColor;
+    }
+
+    /**
+     * Sets the value of the sizeAdjustsColor property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setSizeAdjustsColor(boolean value) {
+        this.sizeAdjustsColor = value;
+    }
+
+    public boolean isSetSizeAdjustsColor() {
+        return (this.sizeAdjustsColor!= null);
+    }
+
+    public void unsetSizeAdjustsColor() {
+        this.sizeAdjustsColor = null;
     }
 
 }
