@@ -17,7 +17,7 @@ public class TestXmlNode extends AbstractXmlGraphTest
 	@BeforeClass public static void initFiles(){setXmlFile(dirSuffix, Node.class);}
     
     @Test
-    public void testAclContainer() throws FileNotFoundException
+    public void xml() throws FileNotFoundException
     {
     	Node actual = create(true);
     	Node expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Node.class);
