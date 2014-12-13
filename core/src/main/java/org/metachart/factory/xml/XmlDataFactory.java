@@ -48,7 +48,30 @@ public class XmlDataFactory
 			e.printStackTrace();
 			return null;
 		}
-		
+	}
+
+	public static Data build(Date date)
+	{
+		try
+		{
+			DateTime dt = new DateTime(date);
+			XMLGregorianCalendar xmlGc = DatatypeFactory.newInstance().newXMLGregorianCalendar();
+			xmlGc.setDay(dt.getDayOfMonth());
+			xmlGc.setMonth(dt.getMonthOfYear());
+			xmlGc.setYear(dt.getYear());
+			xmlGc.setHour(dt.getHourOfDay());
+			xmlGc.setMinute(dt.getMinuteOfHour());
+			xmlGc.setSecond(dt.getSecondOfMinute());
+			Data xml = new Data();
+			xml.setRecord(xmlGc);
+			return xml;
+		}
+		catch (DatatypeConfigurationException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 	
 	public static Data buildForYearMonth(double y, int year, int month)
