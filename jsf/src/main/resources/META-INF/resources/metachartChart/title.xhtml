@@ -3,6 +3,7 @@
     xmlns:f="http://java.sun.com/jsp/jstl/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:of="http://omnifaces.org/functions"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
@@ -10,6 +11,6 @@
 	</composite:interface>
 	        
 	<composite:implementation>
-             title: {text: '#{cc.attrs.value}'},
+             title: {text: '#{of:escapeJS(cc.attrs.value)}'},
 	</composite:implementation>
 </html>
