@@ -10,6 +10,8 @@
                              shortDescription="If true, jquery lib will be added by MetaChart."/>
         <composite:attribute name="type" required="false" default="line"
                              shortDescription="Currently tested types are: column,line"/>
+        <composite:attribute name="zoomType" required="false" default=""
+                             shortDescription="Currently tested types are: x,y"/>
         <composite:attribute name="height" required="false" default="350"
                              shortDescription="The height in px of the chart."/>
 
@@ -26,6 +28,7 @@
             $('##{cc.id}').highcharts({
                 chart: {
                     type: '#{cc.attrs.type}',
+                    zoomType: '#{cc.attrs.zoomType}',
                     borderWidth : 1
                 },
 
