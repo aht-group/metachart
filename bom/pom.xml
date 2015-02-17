@@ -13,8 +13,8 @@
     <packaging>pom</packaging>
     <name>MC - BOM</name>
 
-    <dependencyManagement>
-        <dependencies>
+	<dependencyManagement>
+		<dependencies>
 
 	        <!-- METACHART -->
         	<dependency>
@@ -33,23 +33,15 @@
 		        <version>${project.version}</version>
 	        </dependency>
 
-	        <!-- Logging -->
+			<!-- Manages BOMs -->
 			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.16</version>
-				<type>jar</type>
+				<groupId>net.sf.exlp</groupId>
+				<artifactId>exlp-bom</artifactId>
+				<version>0.1.11-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
-	        <dependency>
-		        <groupId>org.slf4j</groupId>
-		        <artifactId>slf4j-log4j12</artifactId>
-		        <version>1.6.4</version>
-	        </dependency>
-	        <dependency>
-		        <groupId>org.slf4j</groupId>
-		        <artifactId>slf4j-api</artifactId>
-		        <version>1.6.4</version>
-	        </dependency>
+
 
 	        <!-- Utils -->
 	        <dependency>
