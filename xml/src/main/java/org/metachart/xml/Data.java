@@ -20,6 +20,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="x" type="{http://www.w3.org/2001/XMLSchema}double" />
  *       &lt;attribute name="y" type="{http://www.w3.org/2001/XMLSchema}double" />
  *       &lt;attribute name="record" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
@@ -42,6 +43,8 @@ public class Data
 {
 
     private final static long serialVersionUID = 1L;
+    @XmlAttribute(name = "id")
+    protected Long id;
     @XmlAttribute(name = "x")
     protected Double x;
     @XmlAttribute(name = "y")
@@ -59,6 +62,38 @@ public class Data
     protected String label;
     @XmlAttribute(name = "category")
     protected String category;
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setId(long value) {
+        this.id = value;
+    }
+
+    public boolean isSetId() {
+        return (this.id!= null);
+    }
+
+    public void unsetId() {
+        this.id = null;
+    }
 
     /**
      * Gets the value of the x property.

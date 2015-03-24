@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://www.metachart.org/xml}data" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.metachart.org/xml}dataSet" maxOccurs="unbounded"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="color" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -52,6 +53,8 @@ public class DataSet
     protected List<Data> data;
     @XmlElement(required = true)
     protected List<DataSet> dataSet;
+    @XmlAttribute(name = "id")
+    protected Long id;
     @XmlAttribute(name = "code")
     protected String code;
     @XmlAttribute(name = "color")
@@ -135,6 +138,38 @@ public class DataSet
 
     public void unsetDataSet() {
         this.dataSet = null;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setId(long value) {
+        this.id = value;
+    }
+
+    public boolean isSetId() {
+        return (this.id!= null);
+    }
+
+    public void unsetId() {
+        this.id = null;
     }
 
     /**
