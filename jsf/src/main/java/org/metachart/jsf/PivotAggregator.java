@@ -17,11 +17,12 @@ public class PivotAggregator extends UINamingContainer
 {
 final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 	
-	private static enum Attribute {type, parameters}
+	private static enum Attribute {type, parameters, label}
 	
 	private enum aggregatorType {SUM, AVERAGE, COUNT};
 	private String type;
 	private String parameters;
+	private String label = "";
 	
 	@Override
 	public void encodeAll(FacesContext ctx) throws IOException
@@ -29,6 +30,14 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 		Map<String,Object> map = this.getAttributes();
 		this.type         = (String) map.get(Attribute.type.toString());
 		this.parameters   = (String) map.get(Attribute.parameters.toString());
+		if (map.get(Attribute.label.toString())!=null)
+		{
+			this.label    = (String) map.get(Attribute.label.toString());
+		}
+		else
+		{
+			this.label    = this.type;
+		}
 		
 		String argument   = "";
 		ArrayList<String> parameterList = new ArrayList<String>();
@@ -45,15 +54,15 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 		String javascriptDefinition = "";
 		if (type.equals(aggregatorType.COUNT.toString()))
 			{
-				javascriptDefinition += "'Number of' :      function() { return tpl.count()() },";
+				javascriptDefinition += "'" +label +"' :      function() { return tpl.count()() },";
 			}
 		if (type.equals(aggregatorType.AVERAGE.toString()))
 			{
-				javascriptDefinition += "'Average' :      function() { return tpl.average()(['"+parameters +"'])},";
+				javascriptDefinition += "'" +label +"' :      function() { return tpl.average()(['"+parameters +"'])},";
 			}
 		if (type.equals(aggregatorType.SUM.toString()))
 			{
-				javascriptDefinition += "'Sum' :      function() { return tpl.sum()(['"+parameters +"'])},";
+				javascriptDefinition += "'" +label +"' :      function() { return tpl.sum()(['"+parameters +"'])},";
 			}
 		logger.info(javascriptDefinition);
 		ctx.getResponseWriter().write(javascriptDefinition);
