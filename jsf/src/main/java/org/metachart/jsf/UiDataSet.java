@@ -35,6 +35,9 @@ public class UiDataSet extends UINamingContainer
         sb.append(xmlGc.getYear());
         sb.append(",").append(xmlGc.getMonth()-1);
         sb.append(",").append(xmlGc.getDay());
+        sb.append(",").append(xmlGc.getHour());
+        sb.append(",").append(xmlGc.getMinute());
+        sb.append(",").append(xmlGc.getSecond());
         sb.append("), ");
     }
 }
