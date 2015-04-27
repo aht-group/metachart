@@ -5,4 +5,22 @@
         http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
  <namespace>http://www.metachart.org/pivot</namespace>
  <composite-library-name>metachartPivotNk</composite-library-name>
+ 	<tag>
+		<tag-name>pivotTable</tag-name>
+		<component>
+			<component-type>org.metachart.jsf.PivotTable</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>pivotAggregator</tag-name>
+		<component>
+			<component-type>org.metachart.jsf.PivotAggregator</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>pivotFields</tag-name>
+		<component>
+			<component-type>org.metachart.jsf.PivotFields</component-type>
+		</component>
+	</tag>
  </facelet-taglib> 
