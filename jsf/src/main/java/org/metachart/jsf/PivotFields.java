@@ -23,8 +23,8 @@ final static Logger logger = LoggerFactory.getLogger(PivotFields.class);
 	private static enum Attribute {name, col, row}
 
 	private String  name;
-	private Boolean col;
-	private Boolean row;
+	private Boolean col   = false;
+	private Boolean row   = false;
 	
 	@Override
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException

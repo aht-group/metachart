@@ -64,15 +64,20 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 		ArrayList<String> rows    = new ArrayList<String>();
 		String            colDef  = "";
 		String            rowDef  = "";
-		
+		Boolean           hasAgg  = false;
 		logger.info("Pivot Table has " +this.getChildCount() +" Children");
 		for (UIComponent child : this.getChildren())
 		{
-			if (child.getClass().isInstance(PivotFields.class))
+			logger.info("class " +child.getClass().toString());
+			if (child.getClass().getSimpleName().equals("PivotFields"))
 			{
 				PivotFields field = (PivotFields) child;
 				if (field.getCol()) {columns.add(field.getName());logger.info("Adding " +field.getName() +" to Column definitions");}
 				if (field.getRow()) {   rows.add(field.getName());logger.info("Adding " +field.getName() +" to Row    definitions");}
+			}
+			if (child.getClass().getSimpleName().equals("PivotAggregator"))
+			{
+				hasAgg = true;
 			}
 		}
 		
@@ -104,7 +109,13 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
         writer.write("    {");
         
         // Aggregators can be inserted here
-        this.encodeChildren(ctx);
+        if (hasAgg)
+        {
+        	writer.write("aggregators: {");
+        		this.encodeChildren(ctx);
+        	writer.write("},");
+        }
+        
         
         // Columns and row setup need to be done here because they are not standalone renderable
 		writer.write("    cols: [" +colDef +"]," );

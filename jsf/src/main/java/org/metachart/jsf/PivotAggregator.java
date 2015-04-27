@@ -32,13 +32,17 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 		
 		String argument   = "";
 		ArrayList<String> parameterList = new ArrayList<String>();
-		parameterList.addAll(Arrays.asList(parameters.split("\\s*,\\s*")));
-		for (String parameter : parameterList)
+		if (parameters!=null)
 		{
-			argument = argument + "'" +parameter +"',";
+			parameterList.addAll(Arrays.asList(parameters.split("\\s*,\\s*")));
+			for (String parameter : parameterList)
+			{
+				argument = argument + "'" +parameter +"',";
+			}
+			argument = argument.substring(0, argument.lastIndexOf(","));
 		}
-		argument = argument.substring(0, argument.lastIndexOf(","));
-		String javascriptDefinition = "aggregators: {";
+		
+		String javascriptDefinition = "";
 		if (type.equals(aggregatorType.COUNT.toString()))
 			{
 				javascriptDefinition += "'Number of' :      function() { return tpl.count()() },";
@@ -51,7 +55,6 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 			{
 				javascriptDefinition += "'Sum' :      function() { return tpl.sum()(['"+parameters +"'])},";
 			}
-		javascriptDefinition += "},";
 		logger.info(javascriptDefinition);
 		ctx.getResponseWriter().write(javascriptDefinition);
 	}
