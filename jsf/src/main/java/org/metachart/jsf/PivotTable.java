@@ -116,6 +116,17 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("     var tpl =          $.pivotUtilities.aggregatorTemplates;");
 		writer.writeText(System.getProperty("line.separator"), null);
+		
+		writer.write("     var numberFormat = $.pivotUtilities.numberFormat;");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("     var usFmt = numberFormat();");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("     var usFmtInt = numberFormat({");
+		writer.writeText(System.getProperty("line.separator"), null);
+	    writer.write("       digitsAfterDecimal: 0");
+	    writer.writeText(System.getProperty("line.separator"), null);
+	    writer.write("     });");
+	    writer.writeText(System.getProperty("line.separator"), null);
 
 	    writer.write("$('#output').pivotUI(");
         writer.write("    " +data +","); 

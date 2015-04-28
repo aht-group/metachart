@@ -19,7 +19,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 	
 	private static enum Attribute {type, parameters, label}
 	
-	private enum aggregatorType {SUM, AVERAGE, COUNT};
+	private enum aggregatorType {SUM, AVERAGE, COUNT, MIN, MAX, INTSUM};
 	private String type;
 	private String parameters;
 	private String label = "";
@@ -62,8 +62,20 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 			}
 		if (type.equals(aggregatorType.SUM.toString()))
 			{
-				javascriptDefinition += "'" +label +"' :      function() { return tpl.sum()(['"+parameters +"'])},";
+				javascriptDefinition += "'" +label +"' :      function() { return tpl.sum(usFmt)(['"+parameters +"'])},";
 			}
+		if (type.equals(aggregatorType.INTSUM.toString()))
+		{
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.sum(usFmtInt)(['"+parameters +"'])},";
+		}
+		if (type.equals(aggregatorType.MAX.toString()))
+		{
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.max()(['"+parameters +"'])},";
+		}
+		if (type.equals(aggregatorType.MIN.toString()))
+		{
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.min()(['"+parameters +"'])},";
+		}
 		logger.info(javascriptDefinition);
 		ctx.getResponseWriter().write("      " +javascriptDefinition);
 	}
