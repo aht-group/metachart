@@ -33,13 +33,21 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 	{
 		if(event instanceof PostAddToViewEvent)
 		{
-			// Include JavaScript
+			// Include Pivot.js JavaScript
 			UIOutput js = new UIOutput();
 			js.setRendererType("javax.faces.resource.Script");
 			js.getAttributes().put("library", "jsMetaChart");
 			js.getAttributes().put("name", "pivot.js");
 			FacesContext context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, js, "head");
+			
+			// Include Export Renderers for Excel Export JavaScript
+			UIOutput jse = new UIOutput();
+			jse.setRendererType("javax.faces.resource.Script");
+			jse.getAttributes().put("library", "jsMetaChart");
+			jse.getAttributes().put("name", "export_renderers.js");
+			context = this.getFacesContext();
+			context.getViewRoot().addComponentResource(context, jse, "head");
 			
 			// Include CSS
 	        UIOutput css = new UIOutput();
@@ -101,30 +109,48 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 		
 		
 		writer.write("$(function(){");
+		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("     var derivers =     $.pivotUtilities.derivers;");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("     var renderers =    $.extend($.pivotUtilities.renderers, $.pivotUtilities.export_renderers);");
+		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("     var tpl =          $.pivotUtilities.aggregatorTemplates;");
+		writer.writeText(System.getProperty("line.separator"), null);
 
 	    writer.write("$('#output').pivotUI(");
         writer.write("    " +data +","); 
+        writer.writeText(System.getProperty("line.separator"), null);
         writer.write("    {");
+        writer.writeText(System.getProperty("line.separator"), null);
+        
+        // Add the renderers incl Exporter
+        writer.write("    renderers:   renderers," );
+        writer.writeText(System.getProperty("line.separator"), null);
+        
         
         // Aggregators can be inserted here
         if (hasAgg)
         {
-        	writer.write("aggregators: {");
+        	writer.write("    aggregators: {");
         		this.encodeChildren(ctx);
-        	writer.write("},");
+        	writer.write("    },");
         }
+        
+        writer.writeText(System.getProperty("line.separator"), null);
         
         
         // Columns and row setup need to be done here because they are not standalone renderable
-		writer.write("    cols: [" +colDef +"]," );
-		writer.write("    rows: [" +rowDef +"]," );
+		writer.write("    cols:        [" +colDef +"]," );
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("    rows:        [" +rowDef +"]," );
+		writer.writeText(System.getProperty("line.separator"), null);
         writer.write("    });");
+        writer.writeText(System.getProperty("line.separator"), null);
         writer.write("  });");   
+        writer.writeText(System.getProperty("line.separator"), null);
         
         writer.endElement("script");
-        
+        writer.writeText(System.getProperty("line.separator"), null);
         writer.startElement("div", this);
         writer.write("<div id='output' style='margin: 10px;'></div>");
 		
