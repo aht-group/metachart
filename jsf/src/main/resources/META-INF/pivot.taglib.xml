@@ -23,4 +23,10 @@
 			<component-type>org.metachart.jsf.PivotFields</component-type>
 		</component>
 	</tag>
+        <tag>
+		<tag-name>renderer</tag-name>
+		<component>
+			<component-type>org.metachart.jsf.PivotRenderer</component-type>
+		</component>
+	</tag>
  </facelet-taglib> 

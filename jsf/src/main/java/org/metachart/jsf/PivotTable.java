@@ -68,22 +68,29 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 		ResponseWriter writer = ctx.getResponseWriter();
 		writer.startElement("script", this);
 		// Prepare the column and row default configurations
-		ArrayList<String> columns = new ArrayList<String>();
-		ArrayList<String> rows    = new ArrayList<String>();
+		ArrayList<String> columns    = new ArrayList<String>();
+		ArrayList<String> rows       = new ArrayList<String>();
+                ArrayList<String> renderers  = new ArrayList<String>();
+                
 		String            colDef  = "";
 		String            rowDef  = "";
 		Boolean           hasAgg  = false;
-		logger.info("Pivot Table has " +this.getChildCount() +" Children");
+		logger.debug("Pivot Table has " +this.getChildCount() +" Children");
 		for (UIComponent child : this.getChildren())
 		{
-			logger.info("class " +child.getClass().toString());
+			logger.debug("class " +child.getClass().toString());
 			if (child.getClass().getSimpleName().equals("PivotFields"))
 			{
 				PivotFields field = (PivotFields) child;
-				if (field.getCol()) {columns.add(field.getName());logger.info("Adding " +field.getName() +" to Column definitions");}
-				if (field.getRow()) {   rows.add(field.getName());logger.info("Adding " +field.getName() +" to Row    definitions");}
+				if (field.getCol()) {columns.add(field.getName());logger.debug("Adding " +field.getName() +" to Column definitions");}
+				if (field.getRow()) {   rows.add(field.getName());logger.debug("Adding " +field.getName() +" to Row    definitions");}
 			}
-			if (child.getClass().getSimpleName().equals("PivotAggregator"))
+                        else if (child.getClass().getSimpleName().equals("PivotRenderer"))
+			{
+				PivotRenderer renderer = (PivotRenderer) child;
+				renderers.add(renderer.getType());
+			}
+                        else if (child.getClass().getSimpleName().equals("PivotAggregator"))
 			{
 				hasAgg = true;
 			}
@@ -114,6 +121,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("     var renderers =    $.extend($.pivotUtilities.renderers, $.pivotUtilities.export_renderers);");
 		writer.writeText(System.getProperty("line.separator"), null);
+		
 		writer.write("     var tpl =          $.pivotUtilities.aggregatorTemplates;");
 		writer.writeText(System.getProperty("line.separator"), null);
 		
@@ -134,9 +142,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
         writer.write("    {");
         writer.writeText(System.getProperty("line.separator"), null);
         
-        // Add the renderers incl Exporter
-        writer.write("    renderers:   renderers," );
-        writer.writeText(System.getProperty("line.separator"), null);
+        
         
         
         // Aggregators can be inserted here
@@ -146,9 +152,32 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
         		this.encodeChildren(ctx);
         	writer.write("    },");
         }
-        
         writer.writeText(System.getProperty("line.separator"), null);
+        // If Renderer definitions are given, add them here
+        if (renderers.size()>0)
+        {
+            	writer.write("    renderers: {");
+                    StringBuffer buffer = new StringBuffer();
+                    for (String renderer : renderers)
+                    {
+                        buffer.append("\"" +renderer +"\": renderers['" +renderer +"']");
+                        buffer.append(",");
+                    }
+                    String jsRendererCommand = buffer.toString();
+                    jsRendererCommand = jsRendererCommand.substring(0, jsRendererCommand.lastIndexOf(","));
+                writer.write(jsRendererCommand);
+        	writer.write("},");
+                writer.writeText(System.getProperty("line.separator"), null);
+        }
+        else
+        {
+            // Add the renderers incl Exporter
+            writer.write("    renderers:   renderers," );
+            writer.writeText(System.getProperty("line.separator"), null);
         
+        
+            writer.writeText(System.getProperty("line.separator"), null);
+        }
         
         // Columns and row setup need to be done here because they are not standalone renderable
 		writer.write("    cols:        [" +colDef +"]," );

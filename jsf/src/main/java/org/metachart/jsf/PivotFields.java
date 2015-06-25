@@ -35,7 +35,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotFields.class);
 			this.col         = (Boolean) map.get(Attribute.col.toString());
 			this.row         = (Boolean) map.get(Attribute.row.toString());
 			this.name        = (String)  map.get(Attribute.name.toString());
-			logger.info("Added " +name);
+			logger.trace("Added " +name);
 		}
 		super.processEvent(event);
 	}
@@ -43,7 +43,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotFields.class);
 	@Override
 	public void encodeAll(FacesContext ctx) throws IOException
 	{
-		logger.info("Data already included in Pivot Table");
+		logger.debug("Data already included in Pivot Table");
 	}
 	
 	public String getName() {return name;}

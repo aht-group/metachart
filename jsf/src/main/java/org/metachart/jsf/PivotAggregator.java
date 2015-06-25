@@ -76,7 +76,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 		{
 			javascriptDefinition += "'" +label +"' :      function() { return tpl.min()(['"+parameters +"'])},";
 		}
-		logger.info(javascriptDefinition);
+		logger.trace(javascriptDefinition);
 		ctx.getResponseWriter().write("      " +javascriptDefinition);
 	}
 	
