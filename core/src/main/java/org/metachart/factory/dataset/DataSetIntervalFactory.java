@@ -2,7 +2,6 @@ package org.metachart.factory.dataset;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -12,17 +11,16 @@ import org.metachart.xml.DataSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TimeSeriesDataSetFactory
+public class DataSetIntervalFactory
 {
-	final static Logger logger = LoggerFactory.getLogger(TimeSeriesDataSetFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(DataSetIntervalFactory.class);
 	
 	private Map<Object,List<Data>> map;
 	private List<Object> list;
 
-	public TimeSeriesDataSetFactory()
+	public DataSetIntervalFactory()
 	{
-		map = new Hashtable<Object,List<Data>>();
-		list = new ArrayList<Object>();
+
 	}
 	
 	public void add(Object id, double value, int year, int month)

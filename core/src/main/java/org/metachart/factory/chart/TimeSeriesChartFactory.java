@@ -15,9 +15,8 @@ public class TimeSeriesChartFactory
 {
 	private boolean withLegend, cumulateValues, withGaps, sumDate, orderRecords;
 	
-	public void setOrderRecords(boolean orderRecords) {
-		this.orderRecords = orderRecords;
-	}
+	public void setOrderRecords(boolean orderRecords) {this.orderRecords = orderRecords;}
+	
 	private OfxChartTimePeriod timePeriod;
 	
 	public TimeSeriesChartFactory()
