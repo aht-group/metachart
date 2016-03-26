@@ -10,6 +10,12 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+    <jxb:bindings schemaLocation="../xsd/metachart/chart.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.metachart.xml.chart"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
     <jxb:bindings schemaLocation="../xsd/metachart/graph.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.metachart.xml.graph"/>

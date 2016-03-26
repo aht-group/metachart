@@ -7,7 +7,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.joda.time.DateTime;
-import org.metachart.xml.Data;
+import org.metachart.xml.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

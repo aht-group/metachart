@@ -1,9 +1,9 @@
 package org.metachart.processor;
 
 
-import org.metachart.xml.Data;
-import org.metachart.xml.DataSet;
-import org.metachart.xml.RendererTimeseries;
+import org.metachart.xml.chart.Data;
+import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

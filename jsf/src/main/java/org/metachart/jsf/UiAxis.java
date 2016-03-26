@@ -3,8 +3,8 @@ package org.metachart.jsf;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
 
-import org.metachart.xml.Data;
-import org.metachart.xml.DataSet;
+import org.metachart.xml.chart.Data;
+import org.metachart.xml.chart.DataSet;
 
 @FacesComponent(value="org.metachart.jsf.UiAxis")
 public class UiAxis extends UINamingContainer

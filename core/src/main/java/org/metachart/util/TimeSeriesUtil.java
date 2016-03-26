@@ -2,8 +2,8 @@ package org.metachart.util;
 
 import java.util.List;
 
-import org.metachart.xml.Data;
-import org.metachart.xml.DataSet;
+import org.metachart.xml.chart.Data;
+import org.metachart.xml.chart.DataSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,5 +1,5 @@
 
-package org.metachart.xml;
+package org.metachart.xml.chart;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
