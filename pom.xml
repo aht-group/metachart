@@ -20,6 +20,7 @@
 		<module>jsf</module>
 		<module>core</module>
 		<module>bom</module>
+		<module>util</module>
 		<module>web</module>
 	</modules>
 
