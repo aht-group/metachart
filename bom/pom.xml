@@ -17,11 +17,6 @@
 		<dependencies>
 
 	        <!-- METACHART -->
-        	<dependency>
-				<groupId>org.metachart</groupId>
-				<artifactId>metachart-xml</artifactId>
-				<version>${project.version}</version>
-			</dependency>
 	        <dependency>
 		        <groupId>org.metachart</groupId>
 		        <artifactId>metachart-jsf</artifactId>
@@ -32,6 +27,16 @@
 		        <artifactId>metachart-core</artifactId>
 		        <version>${project.version}</version>
 	        </dependency>
+	        <dependency>
+				<groupId>org.metachart</groupId>
+				<artifactId>metachart-util</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+	        <dependency>
+				<groupId>org.metachart</groupId>
+				<artifactId>metachart-xml</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- Manages BOMs -->
 			<dependency>

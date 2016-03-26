@@ -26,7 +26,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.metachart</groupId>
 			<artifactId>metachart-xml</artifactId>
@@ -37,7 +36,6 @@
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
 			<scope>compile</scope>
-			<version>0.1.11-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>jdom</artifactId>
@@ -74,11 +72,6 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>jfree</groupId>
-			<artifactId>jfreechart</artifactId>
-			<version>1.0.13</version>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
