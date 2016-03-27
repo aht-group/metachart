@@ -4,12 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.sf.ahtutils.test.AbstractAhtUtilsXmlTest;
-import net.sf.exlp.util.io.LoggerInit;
-
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
 
 public class AbstractMcXmlTest extends AbstractAhtUtilsXmlTest
 {

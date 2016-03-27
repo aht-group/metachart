@@ -59,13 +59,6 @@
 				<artifactId>jfreechart</artifactId>
 				<version>1.0.13</version>
 			</dependency>
-	        
-	        <!-- XML -->
-    	   	<dependency>
-    	   		<groupId>com.sun.xml.bind</groupId>
-    	   		<artifactId>jaxb-impl</artifactId>
-    	   		<version>2.2.2</version>
-    	   	</dependency>
 
 	        <!-- Test -->
 	        <dependency>
