@@ -1,4 +1,4 @@
-package org.metachart.factory.xml;
+package org.metachart.factory.xml.chart;
 
 import java.util.Date;
 

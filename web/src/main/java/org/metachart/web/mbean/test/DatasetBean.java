@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
-import org.metachart.factory.xml.XmlDataFactory;
+import org.metachart.factory.xml.chart.XmlDataFactory;
 import org.metachart.xml.chart.DataSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -136,9 +136,9 @@
                 <xsd:element ref="data" maxOccurs="unbounded"/>
             	<xsd:element ref="dataSet" maxOccurs="unbounded"/>
             </xsd:sequence>
-				<xsd:attribute name="id" type="xsd:long"/>
+			<xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="code" type="xsd:string"/>
-				<xsd:attribute name="color" type="xsd:string"/>
+			<xsd:attribute name="color" type="xsd:string"/>
             <xsd:attribute name="label" type="xsd:string"/>
             <xsd:attribute name="rangeIndex" type="xsd:int"/>
             <xsd:attribute name="colorIndex" type="xsd:int"/>
