@@ -13,7 +13,7 @@
 
   callWithJQuery(function($) {
     return $.pivotUtilities.export_renderers = {
-      "TSV Export": function(pivotData, opts) {
+      "Excel Export": function(pivotData, opts) {
         var agg, colAttrs, colKey, colKeys, defaults, r, result, row, rowAttr, rowAttrs, rowKey, rowKeys, text, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n;
         defaults = {
           localeStrings: {}
@@ -67,6 +67,12 @@
           r = result[_n];
           text += r.join("\t") + "\n";
         }
+		console.log('Excel will be exported.');
+		var blob = new Blob([text], {type: 'data:text/tsv;charset=utf-8'});
+		var fileName = 'data.tsv';
+		saveAs(blob, fileName);
+		
+		console.log('Filling out web representation.');
         return $("<textarea>").text(text).css({
           width: ($(window).width() / 2) + "px",
           height: ($(window).height() / 2) + "px"

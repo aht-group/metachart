@@ -41,6 +41,14 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 			FacesContext context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, js, "head");
 			
+			// Include FileSaver.js JavaScript
+			UIOutput jsfs = new UIOutput();
+			jsfs.setRendererType("javax.faces.resource.Script");
+			jsfs.getAttributes().put("library", "jsMetaChart");
+			jsfs.getAttributes().put("name", "fileSaver.js");
+			context = this.getFacesContext();
+			context.getViewRoot().addComponentResource(context, jsfs, "head");
+			
 			// Include Export Renderers for Excel Export JavaScript
 			UIOutput jse = new UIOutput();
 			jse.setRendererType("javax.faces.resource.Script");
@@ -189,10 +197,35 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
         writer.write("  });");   
         writer.writeText(System.getProperty("line.separator"), null);
         
+		// Now add some Excel export magic
+		writer.write("function exportToTSVFile() {");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("    console.log('Selected ' +this.value);");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("    if (this.value=='TSV Export'){");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("    var data = $('.pvtRendererArea').find('textarea').text();");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("    var blob = new Blob([data], {type: 'data:text/tsv;charset=utf-8'});");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("    var fileName = 'data.tsv';");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("    saveAs(blob, fileName);");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("    console.log('TSV Selected');}");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("};");
+		writer.writeText(System.getProperty("line.separator"), null);
+		
+		// Connect this logic to the selection of the TSV export
+		writer.write("$('.pvtRenderer').on('change',exportToTSVFile);");
+		writer.writeText(System.getProperty("line.separator"), null);
+		
         writer.endElement("script");
         writer.writeText(System.getProperty("line.separator"), null);
         writer.startElement("div", this);
         writer.write("<div id='output' style='margin: 10px;'></div>");
+		
 		
 	}
 	
