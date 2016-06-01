@@ -10,6 +10,7 @@
         <composite:attribute name="categories" required="false" default=""/>
 		<composite:attribute name="type" required="false" default="linear"/>
 		<composite:attribute name="min" required="false" default="null"/>
+		<composite:attribute name="max" required="false" default="null"/>
 		<composite:attribute name="maxZoom" required="false" default="null"/>
 		<composite:attribute name="showFirstLabel" required="false" default="true"/>
 	</composite:interface>
@@ -18,6 +19,7 @@
         #{cc.attrs.code}Axis:{
         	title: {text: null},
         	min: #{cc.attrs.min},
+        	max: #{cc.attrs.max},
             type: '#{cc.attrs.type}',
             maxZoom: #{cc.attrs.maxZoom},
             lineWidth: 1,
