@@ -17,19 +17,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="gap" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="from" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *       &lt;attribute name="to" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *       &lt;attribute name="cumulate" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="timePeriod" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="orderRecords" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="sumDate" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;attribute name="gap" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="from" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
+ *       &lt;attribute name="to" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
+ *       &lt;attribute name="cumulate" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="timePeriod" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="orderRecords" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="sumDate" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

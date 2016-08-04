@@ -17,20 +17,20 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="x" type="{http://www.w3.org/2001/XMLSchema}double" />
- *       &lt;attribute name="y" type="{http://www.w3.org/2001/XMLSchema}double" />
- *       &lt;attribute name="record" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *       &lt;attribute name="from" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *       &lt;attribute name="to" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="category" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *       &lt;attribute name="x" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
+ *       &lt;attribute name="y" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
+ *       &lt;attribute name="record" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
+ *       &lt;attribute name="from" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
+ *       &lt;attribute name="to" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
+ *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="category" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

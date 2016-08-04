@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AxisType }
-     * 
-     */
-    public AxisType createAxisType() {
-        return new AxisType();
-    }
-
-    /**
      * Create an instance of {@link Renderer }
      * 
      */
     public Renderer createRenderer() {
         return new Renderer();
+    }
+
+    /**
+     * Create an instance of {@link AxisType }
+     * 
+     */
+    public AxisType createAxisType() {
+        return new AxisType();
     }
 
     /**
@@ -67,6 +67,38 @@ public class ObjectFactory {
      */
     public AxisType.Number createAxisTypeNumber() {
         return new AxisType.Number();
+    }
+
+    /**
+     * Create an instance of {@link RendererTimeseries }
+     * 
+     */
+    public RendererTimeseries createRendererTimeseries() {
+        return new RendererTimeseries();
+    }
+
+    /**
+     * Create an instance of {@link Renderer.Timebar }
+     * 
+     */
+    public Renderer.Timebar createRendererTimebar() {
+        return new Renderer.Timebar();
+    }
+
+    /**
+     * Create an instance of {@link Renderer.Bar }
+     * 
+     */
+    public Renderer.Bar createRendererBar() {
+        return new Renderer.Bar();
+    }
+
+    /**
+     * Create an instance of {@link Renderer.Gantt }
+     * 
+     */
+    public Renderer.Gantt createRendererGantt() {
+        return new Renderer.Gantt();
     }
 
     /**
@@ -102,27 +134,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Color }
+     * Create an instance of {@link Chart.Colors }
      * 
      */
-    public Color createColor() {
-        return new Color();
-    }
-
-    /**
-     * Create an instance of {@link RendererTimeseries }
-     * 
-     */
-    public RendererTimeseries createRendererTimeseries() {
-        return new RendererTimeseries();
-    }
-
-    /**
-     * Create an instance of {@link Data }
-     * 
-     */
-    public Data createData() {
-        return new Data();
+    public Chart.Colors createChartColors() {
+        return new Chart.Colors();
     }
 
     /**
@@ -134,43 +150,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Renderer.Timebar }
-     * 
-     */
-    public Renderer.Timebar createRendererTimebar() {
-        return new Renderer.Timebar();
-    }
-
-    /**
-     * Create an instance of {@link Renderer.Bar }
-     * 
-     */
-    public Renderer.Bar createRendererBar() {
-        return new Renderer.Bar();
-    }
-
-    /**
-     * Create an instance of {@link Renderer.Gantt }
-     * 
-     */
-    public Renderer.Gantt createRendererGantt() {
-        return new Renderer.Gantt();
-    }
-
-    /**
-     * Create an instance of {@link Chart.Colors }
-     * 
-     */
-    public Chart.Colors createChartColors() {
-        return new Chart.Colors();
-    }
-
-    /**
      * Create an instance of {@link DataSet }
      * 
      */
     public DataSet createDataSet() {
         return new DataSet();
+    }
+
+    /**
+     * Create an instance of {@link Data }
+     * 
+     */
+    public Data createData() {
+        return new Data();
+    }
+
+    /**
+     * Create an instance of {@link Color }
+     * 
+     */
+    public Color createColor() {
+        return new Color();
     }
 
     /**
