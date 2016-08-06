@@ -83,7 +83,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -99,16 +98,16 @@
 	
 	<build>
 		<plugins>
-				<plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-pmd-plugin</artifactId>
-		        <configuration>
-			        <excludes>
-			            <exclude>org/metachart/xml/chart/*.java</exclude>
-			            <exclude>org/metachart/xml/graph/*.java</exclude>
+			<plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+		        <excludes>
+		            <exclude>org/metachart/xml/chart/*.java</exclude>
+		            <exclude>org/metachart/xml/graph/*.java</exclude>
 					</excludes>
-	        </configuration>
-	      </plugin>
-        </plugins>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
