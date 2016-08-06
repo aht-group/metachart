@@ -1,4 +1,4 @@
-package org.metachart.util;
+package org.metachart.factory.pojo;
 
 import java.awt.Color;
 import java.util.Hashtable;
@@ -23,7 +23,7 @@ public class ChartColorFactory
 			{
 				if(c.getTyp().equals(area.toString()))
 				{
-					return new java.awt.Color(c.getR(),c.getB(),c.getG(),c.getA());
+					return new Color(c.getR(),c.getB(),c.getG(),c.getA());
 				}
 			}
 		}

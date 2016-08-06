@@ -3,7 +3,7 @@ package org.metachart.chart.renderer.generic;
 import java.awt.Dimension;
 
 import org.jfree.chart.JFreeChart;
-import org.metachart.util.ChartColorFactory;
+import org.metachart.factory.pojo.ChartColorFactory;
 import org.metachart.util.OfxChartTypeResolver.AxisOrientation;
 import org.metachart.xml.chart.Axis;
 import org.metachart.xml.chart.Chart;

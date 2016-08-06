@@ -20,7 +20,7 @@ public class XmlEdgeFactory
 	
 	public static Edge build(String from, String to)
 	{
-		return build(new Long((from).hashCode()),new Long((to).hashCode()),true);
+		return build(new Long(from.hashCode()),new Long(to.hashCode()),true);
 	}
 	
 	public static Edge build(long from, long to, boolean directed)

@@ -10,7 +10,7 @@ public class XmlNodeFactory
 	
 	public static Node build(String code, String label)
 	{
-		return build(new Long((code).hashCode()),label);
+		return build(new Long(code.hashCode()),label);
 	}
 	
 	public static Node build(long id, String label)
