@@ -35,6 +35,7 @@
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>
 			<version>1.8.1</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
