@@ -11,12 +11,13 @@
 	<description>MC is a charting library </description>
 
 	<modules>
-		<module>xml</module>
+		<module>doc</module>
 		<module>jsf</module>
 		<module>core</module>
 		<module>bom</module>
 		<module>util</module>
 		<module>web</module>
+		<module>xml</module>
 	</modules>
 
 	<properties>
