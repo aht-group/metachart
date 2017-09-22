@@ -19,6 +19,11 @@
 	        <!-- METACHART -->
 	        <dependency>
 		        <groupId>org.metachart</groupId>
+		        <artifactId>metachart-doc</artifactId>
+		        <version>${project.version}</version>
+	        </dependency>
+	        <dependency>
+		        <groupId>org.metachart</groupId>
 		        <artifactId>metachart-jsf</artifactId>
 		        <version>${project.version}</version>
 	        </dependency>
