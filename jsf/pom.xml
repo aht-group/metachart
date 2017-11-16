@@ -30,7 +30,7 @@
 			<artifactId>metachart-core</artifactId>
 			<scope>compile</scope>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>

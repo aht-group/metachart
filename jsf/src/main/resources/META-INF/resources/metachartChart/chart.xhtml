@@ -5,7 +5,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
-	<composite:interface>
+	<composite:interface componentType="org.metachart.jsf.Chart">
         <composite:attribute name="jquery" required="false" default="false"
                              shortDescription="If true, jquery lib will be added by MetaChart."/>
         <composite:attribute name="type" required="false" default="line"
@@ -14,24 +14,23 @@
                              shortDescription="Currently tested types are: x,y"/>
         <composite:attribute name="height" required="false" default="350"
                              shortDescription="The height in px of the chart."/>
-
 	</composite:interface>
 	        
 	<composite:implementation>
         <h:outputScript rendered="#{cc.attrs.jquery}" library="jsMetaChart" name="jquery-1.9.1.min.js" target="head" />
         <h:outputScript library="jsMetaChart" name="highcharts-3.0.7.js" target="head" />
 
-		<div id="#{cc.id}" style="height: #{cc.attrs.height}px; margin: 0 auto"></div>
+		<div id="#{cc.attrs.chartId}" style="height: #{cc.attrs.height}px; margin: 0 auto"></div>
 
 	<h:outputScript>
         $(function (){
-            $('##{cc.id}').highcharts({
+            $('##{cc.attrs.chartId}').highcharts({
                 chart: {
                     type: '#{cc.attrs.type}',
                     zoomType: '#{cc.attrs.zoomType}',
                     borderWidth : 1
                 },
-
+										
                 title: {text: null},
                 subtitle: {text: null},
                 credits: {text: null},
