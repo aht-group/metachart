@@ -3,6 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
         http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
- <namespace>http://www.metachart.org/chart</namespace> 
- <composite-library-name>mcChart</composite-library-name>
+ <namespace>http://www.metachart.org/map</namespace> 
+ <composite-library-name>mcMap</composite-library-name>
  </facelet-taglib> 
