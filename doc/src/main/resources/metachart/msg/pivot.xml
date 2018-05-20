@@ -7,4 +7,11 @@
 	    		<s:lang key="fr" translation="Sum"/>
 	    	</s:langs>
     </s:translation>
+    <s:translation key="mcPivotCount">
+	    	<s:langs>
+	    		<s:lang key="de" translation="Anzahl"/>
+	    		<s:lang key="en" translation="Count"/>
+	    		<s:lang key="fr" translation="Count"/>
+	    	</s:langs>
+    </s:translation>
 </s:translations>
