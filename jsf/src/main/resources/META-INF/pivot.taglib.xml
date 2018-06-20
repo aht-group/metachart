@@ -12,6 +12,12 @@
 		</component>
 	</tag>
 	<tag>
+        <tag-name>pivot</tag-name>
+        <component>
+             <component-type>org.metachart.jsf.Pivot</component-type>
+        </component>
+     </tag>
+	<tag>
 		<tag-name>aggregator</tag-name>
 		<component>
 			<component-type>org.metachart.jsf.PivotAggregator</component-type>
