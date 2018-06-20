@@ -71,34 +71,16 @@ final static Logger logger = LoggerFactory.getLogger(Pivot.class);
 		
 		writer.write("var dataset = " +data +";");
 		writer.writeText(LS, null);
-		writer.writeText(LS, null);
 		
 		writer.write("var myPivot = new dhx.Pivot(\"pivotOutput\", {");
 		writer.writeText(LS, null);
 		writer.write("     data: dataset,"+LS);
-		writer.write("     fields: "+JsonUtil.toString(container.getFields())+LS);
-		writer.write("     ,"+LS);
-		
-		writer.write("     fieldList: [ ");
-		writer.writeText(LS, null);
-		writer.write("     { id: \"name\", label: \"Name\" },");
-		writer.writeText(LS, null);
-		writer.write("     { id: \"year\", label: \"Year\" },");
-		writer.writeText(LS, null);
-		writer.write("     { id: \"gdp\", label: \"G D P\" }");
-		writer.writeText(LS, null);
-		
-		writer.write("     ]");
-		writer.writeText(LS, null);
+		writer.write("     fields: "+JsonUtil.toString(container.getFields())+","+LS);
+		writer.write("     fieldList: "+JsonUtil.toString(container.getFieldList())+LS);
 	    writer.write("     });");
 	    writer.writeText(LS, null);
         
         writer.endElement("script");
         writer.writeText(LS, null);
-        
-	}
-	
-	
-
-	
+	}	
 }

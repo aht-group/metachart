@@ -8,7 +8,7 @@ public class PivotValue implements Serializable
 {
 	public static final long serialVersionUID=1;
 
-	public enum Method{sum}
+	public enum Method{sum,count}
 	
 	@JsonProperty("id")
 	private String id;

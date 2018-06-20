@@ -1,14 +1,14 @@
 package org.metachart.factory.json.pivot;
 
 import org.metachart.model.json.pivot.PivotContainer;
+import org.metachart.model.json.pivot.PivotField;
 import org.metachart.model.json.pivot.PivotFieldList;
 import org.metachart.model.json.pivot.PivotFields;
 import org.metachart.model.json.pivot.PivotValue;
 
 public class McPivotFactory
 {
-	protected PivotFields fields;
-	protected PivotFieldList fieldList;
+	protected PivotContainer container;
 	
 	public McPivotFactory()
 	{
@@ -19,15 +19,15 @@ public class McPivotFactory
 	
 	public void clear()
 	{
-		fields = new PivotFields();
-		fieldList = new PivotFieldList();
+		container = new PivotContainer();
+		container.setFields(new PivotFields());
 	}
 	
 	public void rows(String... rows)
 	{
 		for(String row : rows)
 		{
-			fields.getRows().add(row);
+			container.getFields().getRows().add(row);
 		}
 	}
 	
@@ -35,20 +35,25 @@ public class McPivotFactory
 	{
 		for(String column : columns)
 		{
-			fields.getColumns().add(column);
+			container.getFields().getColumns().add(column);
 		}
 	}
 	
 	public void value(PivotValue.Method method, String id)
 	{
-		fields.getValues().add(PivotValueFactory.build(method, id));
+		container.getFields().getValues().add(PivotValueFactory.build(method, id));
+	}
+	
+	public void addField(String id, String label)
+	{
+		PivotField json = new PivotField();
+		json.setId(id);
+		json.setLabel(label);		
+		container.getFieldList().add(json);
 	}
 	
 	public PivotContainer toContainer()
 	{
-		PivotContainer json = new PivotContainer();
-		json.setFields(fields);
-		json.setFieldList(fieldList);
-		return json;
+		return container;
 	}
 }
