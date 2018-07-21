@@ -1,6 +1,6 @@
 package org.metachart.factory.json.pivot;
 
-import org.metachart.model.json.pivot.PivotContainer;
+import org.metachart.model.json.pivot.PivotSettings;
 import org.metachart.model.json.pivot.PivotField;
 import org.metachart.model.json.pivot.PivotFieldList;
 import org.metachart.model.json.pivot.PivotFields;
@@ -8,18 +8,18 @@ import org.metachart.model.json.pivot.PivotValue;
 
 public class McPivotFactory
 {
-	protected PivotContainer container;
+	protected PivotSettings container;
 	
 	public McPivotFactory()
 	{
 		this.clear();
 	}
 	
-	public static PivotContainer build() {return new PivotContainer();}
+	public static PivotSettings build() {return new PivotSettings();}
 	
 	public void clear()
 	{
-		container = new PivotContainer();
+		container = new PivotSettings();
 		container.setFields(new PivotFields());
 	}
 	
@@ -52,7 +52,7 @@ public class McPivotFactory
 		container.getFieldList().add(json);
 	}
 	
-	public PivotContainer toContainer()
+	public PivotSettings toContainer()
 	{
 		return container;
 	}

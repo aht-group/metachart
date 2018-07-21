@@ -13,7 +13,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 import net.sf.exlp.util.io.JsonUtil;
-import org.metachart.model.json.pivot.PivotContainer;
+import org.metachart.model.json.pivot.PivotSettings;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ final static Logger logger = LoggerFactory.getLogger(Pivot.class);
 	private static enum Attribute {data, container}
 	
 	private String data;
-	private PivotContainer container;
+	private PivotSettings container;
 	
 	@Override
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException
@@ -57,7 +57,7 @@ final static Logger logger = LoggerFactory.getLogger(Pivot.class);
 	{
 		Map<String,Object> map = this.getAttributes();
 		this.data         = (String) map.get(Attribute.data.toString());
-		this.container    = (PivotContainer) map.get(Attribute.container.toString());
+		this.container    = (PivotSettings) map.get(Attribute.container.toString());
 		
 		ResponseWriter writer = ctx.getResponseWriter();
         writer.write("<div id='pivotOutput' style='margin: 10px;'></div>");

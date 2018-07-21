@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PivotContainer implements Serializable
+public class PivotSettings implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
