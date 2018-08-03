@@ -5,18 +5,18 @@
     <xsd:element name="chart">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="renderer" maxOccurs="1"/>
+                <xsd:element ref="renderer"/>
                 <xsd:element ref="axis" maxOccurs="2"/>
-                <xsd:element ref="title" maxOccurs="1"/>
-            		<xsd:element ref="dimension" maxOccurs="1"/>
-                <xsd:element name="colors" maxOccurs="1">
+                <xsd:element ref="title"/>
+            		<xsd:element ref="dimension"/>
+                <xsd:element name="colors">
                     <xsd:complexType>
                         <xsd:sequence>
                             <xsd:element ref="color" maxOccurs="unbounded"/>
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
-                <xsd:element ref="grid" maxOccurs="1"/>      
+                <xsd:element ref="grid"/>
             	<xsd:element ref="dataSet" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:int"/>
@@ -46,8 +46,8 @@
     <xsd:element name="axis">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="axisType" maxOccurs="1"/>
-                <xsd:element ref="label" maxOccurs="1"/>
+                <xsd:element ref="axisType"/>
+                <xsd:element ref="label"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="dateformat" type="xsd:string"/>

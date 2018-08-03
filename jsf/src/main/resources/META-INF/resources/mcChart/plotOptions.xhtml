@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsp/jstl/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:composite="http://java.sun.com/jsf/composite">
+    
+	<composite:interface componentType="org.metachart.jsf.UiAxis">
+        <composite:attribute name="type" required="true" default="linear"/>
+        <composite:attribute name="pointerStart" required="false" default="null"/>
+        <composite:attribute name="dataLabel" required="false" default="false"/>
+		<composite:attribute name="marker" required="false" default="true"/>
+		<composite:attribute name="symbol" required="false" default="circle"/>
+		<composite:attribute name="radius" required="false" default="2"/>
+        <composite:attribute name="markerHoverEnabled" required="false" default="true"/>
+	</composite:interface>
+	        
+	<composite:implementation>
+        plotOptions:{
+        	#{cc.attrs.type}: {
+                pionterstart: #{cc.attrs.pointerStart},
+                dataLabels: {
+                    enabled: #{cc.attrs.dataLabel}
+                },
+                marker: {
+                    enabled: #{cc.attrs.marker},
+                    symbol: '#{cc.attrs.symbol}',
+                    radius: #{cc.attrs.radius},
+                    states: {
+                        hover: {
+                            enabled: #{cc.attrs.markerHoverEnabled}
+                        }
+                    }
+                }
+            }
+        },
+	</composite:implementation>
+</html>
