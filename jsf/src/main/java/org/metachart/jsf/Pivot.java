@@ -60,7 +60,7 @@ final static Logger logger = LoggerFactory.getLogger(Pivot.class);
 		this.container    = (PivotSettings) map.get(Attribute.container.toString());
 		
 		ResponseWriter writer = ctx.getResponseWriter();
-        writer.write("<div id='pivotOutput' style='margin: 10px;'></div>");
+        writer.write("<div id='pivotOutput' style='margin: 10px; height: 700px'></div>");
 		writer.startElement("script", this);
 		
 		writer.write("var dataset = " +data +";");
@@ -72,19 +72,27 @@ final static Logger logger = LoggerFactory.getLogger(Pivot.class);
 		writer.write("     data: dataset,");
 		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("     fields: ");
-		writer.write(JsonUtil.toString(container.getFields()));
+		writer.write(JsonUtil.toPrettyString(container.getFields()).replace("\"map\" : {", "\"aliases\" :{ "));
 		
 		writer.write("     ,");
 		writer.writeText(System.getProperty("line.separator"), null);
 		
 		writer.write("     fieldList:  ");
-		writer.writeText(JsonUtil.toString(container.getFieldList()), null);
+		writer.writeText(JsonUtil.toPrettyString(container.getFieldList()).replace("\"map\" : {", "\"aliases\" :{ "), null);
 		
-		writer.write("     ");
+		writer.write("     ,");
 		writer.writeText(System.getProperty("line.separator"), null);
-	    writer.write("     });");
+	    
+		writer.writeText(System.getProperty("line.separator"), null);
+	    writer.write("     layout: {");
 	    writer.writeText(System.getProperty("line.separator"), null);
-        
+        writer.write("      columnsWidth:\"auto\",                rowsHeadersWidth: \"auto\"        }");
+	    writer.writeText(System.getProperty("line.separator"), null);
+         
+        writer.write("     });");
+	    writer.writeText(System.getProperty("line.separator"), null);
+		
+		
         writer.endElement("script");
         writer.writeText(System.getProperty("line.separator"), null);
         
