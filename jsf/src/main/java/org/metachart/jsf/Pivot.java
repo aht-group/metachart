@@ -37,7 +37,7 @@ final static Logger logger = LoggerFactory.getLogger(Pivot.class);
 			// Include DHTMLX Pivot.js JavaScript
 			UIOutput js = new UIOutput();
 			js.setRendererType("javax.faces.resource.Script");
-			js.getAttributes().put("library", "jsMetaChart");
+			js.getAttributes().put("library", "jsDhtmlx");
 			js.getAttributes().put("name", "dhtmlxPivot.js");
 			FacesContext context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, js, "head");
@@ -45,7 +45,7 @@ final static Logger logger = LoggerFactory.getLogger(Pivot.class);
 			// Include CSS
 	        UIOutput css = new UIOutput();
 			css.setRendererType("javax.faces.resource.Stylesheet");
-			css.getAttributes().put("library", "cssMetaChart");
+			css.getAttributes().put("library", "cssDhtmlx");
 			css.getAttributes().put("name", "dhtmlxPivot.css");
 			context.getViewRoot().addComponentResource(context, css, "head");
 		}
@@ -92,8 +92,17 @@ final static Logger logger = LoggerFactory.getLogger(Pivot.class);
         writer.write("     });");
 	    writer.writeText(System.getProperty("line.separator"), null);
 		
-		
-        writer.endElement("script");
+		writer.write("function runExport() {");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("	myPivot.export({");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("		url: 'http://server:port'");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("	});");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("};");
+        writer.writeText(System.getProperty("line.separator"), null);
+		writer.endElement("script");
         writer.writeText(System.getProperty("line.separator"), null);
         
 	}
