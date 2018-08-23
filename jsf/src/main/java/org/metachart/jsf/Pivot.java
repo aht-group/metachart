@@ -92,11 +92,11 @@ final static Logger logger = LoggerFactory.getLogger(Pivot.class);
         writer.write("     });");
 	    writer.writeText(System.getProperty("line.separator"), null);
 		
-		writer.write("function runExport() {");
+		writer.write("function runExport(url) {");
 		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("	myPivot.export({");
 		writer.writeText(System.getProperty("line.separator"), null);
-		writer.write("		url: 'http://server:port'");
+		writer.write("		url: url");
 		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("	});");
 		writer.writeText(System.getProperty("line.separator"), null);
