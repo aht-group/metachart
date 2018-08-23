@@ -25,16 +25,7 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<dependency>
-			<!-- This references the commercial Pivot library by dhtmlx -->
-			<!-- If you want to use it, please obtain a license -->
-			<!-- And create the private artifact below including the CSS, font and JS files -->
-			<!-- They need to be stored in a resource library called cssDhtmlx respectively jsDhtmlx -->
-				<groupId>org.metachart</groupId>
-				<artifactId>dhtmlx</artifactId>
-				<version>1.3</version>
-				<optional>true</optional> 
-		</dependency>
+		
 		<dependency>
 			<groupId>org.metachart</groupId>
 			<artifactId>metachart-core</artifactId>
