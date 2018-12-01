@@ -1,6 +1,7 @@
 package org.metachart.factory.xml.chart;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -29,6 +30,10 @@ public class XmlDataFactory
         return data;
     }
 	
+    public static Data build(double y, GregorianCalendar record)
+	{
+		return build(y,record.getTime());
+	}
 	public static Data build(double y, Date date)
 	{
 		try

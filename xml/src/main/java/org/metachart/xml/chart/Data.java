@@ -21,9 +21,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *       &lt;attribute name="record" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
  *       &lt;attribute name="x" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
  *       &lt;attribute name="y" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
- *       &lt;attribute name="record" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
  *       &lt;attribute name="from" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
  *       &lt;attribute name="to" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -45,13 +45,13 @@ public class Data
     private final static long serialVersionUID = 1L;
     @XmlAttribute(name = "id")
     protected Long id;
+    @XmlAttribute(name = "record")
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar record;
     @XmlAttribute(name = "x")
     protected Double x;
     @XmlAttribute(name = "y")
     protected Double y;
-    @XmlAttribute(name = "record")
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar record;
     @XmlAttribute(name = "from")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar from;
@@ -93,6 +93,34 @@ public class Data
 
     public void unsetId() {
         this.id = null;
+    }
+
+    /**
+     * Gets the value of the record property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getRecord() {
+        return record;
+    }
+
+    /**
+     * Sets the value of the record property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setRecord(XMLGregorianCalendar value) {
+        this.record = value;
+    }
+
+    public boolean isSetRecord() {
+        return (this.record!= null);
     }
 
     /**
@@ -157,34 +185,6 @@ public class Data
 
     public void unsetY() {
         this.y = null;
-    }
-
-    /**
-     * Gets the value of the record property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getRecord() {
-        return record;
-    }
-
-    /**
-     * Sets the value of the record property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setRecord(XMLGregorianCalendar value) {
-        this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
     /**
