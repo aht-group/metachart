@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;/element&gt;
  *         &lt;element ref="{http://www.metachart.org/xml}grid"/&gt;
  *         &lt;element ref="{http://www.metachart.org/xml}dataSet" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.metachart.org/xml}ds"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -58,7 +59,8 @@ import javax.xml.bind.annotation.XmlType;
     "dimension",
     "colors",
     "grid",
-    "dataSet"
+    "dataSet",
+    "ds"
 })
 @XmlRootElement(name = "chart")
 public class Chart
@@ -80,6 +82,8 @@ public class Chart
     protected Grid grid;
     @XmlElement(required = true)
     protected List<DataSet> dataSet;
+    @XmlElement(required = true)
+    protected Ds ds;
     @XmlAttribute(name = "id")
     protected Integer id;
     @XmlAttribute(name = "code")
@@ -299,6 +303,34 @@ public class Chart
 
     public void unsetDataSet() {
         this.dataSet = null;
+    }
+
+    /**
+     * Gets the value of the ds property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Ds }
+     *     
+     */
+    public Ds getDs() {
+        return ds;
+    }
+
+    /**
+     * Sets the value of the ds property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Ds }
+     *     
+     */
+    public void setDs(Ds value) {
+        this.ds = value;
+    }
+
+    public boolean isSetDs() {
+        return (this.ds!= null);
     }
 
     /**

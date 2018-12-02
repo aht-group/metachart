@@ -166,6 +166,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Ds }
+     * 
+     */
+    public Ds createDs() {
+        return new Ds();
+    }
+
+    /**
      * Create an instance of {@link Color }
      * 
      */

@@ -6,12 +6,23 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.DataSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 @FacesComponent(value="org.metachart.jsf.UiDataSet")
 public class UiDataSet extends UINamingContainer
 {
+	final static Logger logger = LoggerFactory.getLogger(UiDataSet.class);
+	
 	public String data(DataSet ds)
 	{
+		logger.info("Building data ");
+		
+		if(ds==null) {logger.warn("ds is NULL");}
+		else {logger.warn("size: "+ds.getData().size());}
+		
 		StringBuffer sb = new StringBuffer();
 		if(ds!=null && ds.getData().size()>0)
 		{
