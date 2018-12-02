@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://www.metachart.org/xml}renderer"/&gt;
  *         &lt;element ref="{http://www.metachart.org/xml}axis" maxOccurs="2"/&gt;
  *         &lt;element ref="{http://www.metachart.org/xml}title"/&gt;
+ *         &lt;element ref="{http://www.metachart.org/xml}subtitle"/&gt;
  *         &lt;element ref="{http://www.metachart.org/xml}dimension"/&gt;
  *         &lt;element name="colors"&gt;
  *           &lt;complexType&gt;
@@ -56,6 +57,7 @@ import javax.xml.bind.annotation.XmlType;
     "renderer",
     "axis",
     "title",
+    "subtitle",
     "dimension",
     "colors",
     "grid",
@@ -74,6 +76,8 @@ public class Chart
     protected List<Axis> axis;
     @XmlElement(required = true)
     protected Title title;
+    @XmlElement(required = true)
+    protected Subtitle subtitle;
     @XmlElement(required = true)
     protected Dimension dimension;
     @XmlElement(namespace = "", required = true)
@@ -182,6 +186,34 @@ public class Chart
 
     public boolean isSetTitle() {
         return (this.title!= null);
+    }
+
+    /**
+     * Gets the value of the subtitle property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Subtitle }
+     *     
+     */
+    public Subtitle getSubtitle() {
+        return subtitle;
+    }
+
+    /**
+     * Sets the value of the subtitle property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Subtitle }
+     *     
+     */
+    public void setSubtitle(Subtitle value) {
+        this.subtitle = value;
+    }
+
+    public boolean isSetSubtitle() {
+        return (this.subtitle!= null);
     }
 
     /**

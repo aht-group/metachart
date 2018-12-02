@@ -126,6 +126,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Labels }
+     * 
+     */
+    public Labels createLabels() {
+        return new Labels();
+    }
+
+    /**
+     * Create an instance of {@link Subtitle }
+     * 
+     */
+    public Subtitle createSubtitle() {
+        return new Subtitle();
+    }
+
+    /**
      * Create an instance of {@link Dimension }
      * 
      */
