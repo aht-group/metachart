@@ -5,7 +5,6 @@ import javax.faces.component.UINamingContainer;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
 import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,7 @@ public class UiDataSet extends UINamingContainer
 {
 	final static Logger logger = LoggerFactory.getLogger(UiDataSet.class);
 	
-	public String data(DataSet ds)
+/*	public String data(DataSet ds)
 	{
 		logger.info("Building data ");
 		
@@ -37,7 +36,7 @@ public class UiDataSet extends UINamingContainer
 		}
 		return sb.toString();
 	}
-	
+*/
 	public String data(Ds ds)
 	{
 		logger.info("Building data ");

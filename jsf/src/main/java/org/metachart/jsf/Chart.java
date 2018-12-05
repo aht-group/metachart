@@ -1,6 +1,5 @@
 package org.metachart.jsf;
 
-import java.util.Date;
 import java.util.UUID;
 
 import javax.faces.component.FacesComponent;
@@ -10,13 +9,8 @@ import javax.faces.component.UINamingContainer;
 public class Chart extends UINamingContainer
 {
 	
-	private String chartId= UUID.randomUUID().toString().replaceAll("-","");
+	private String chartId = UUID.randomUUID().toString().replaceAll("-","");
 	
-	public String getChartId() {
-		return chartId;
-	}
-
-	public void setCodeId(String chartId) {
-		this.chartId = chartId;
-	}
+	public String getChartId() {return chartId;}
+	public void setCodeId(String chartId) {this.chartId = chartId;}
 }
