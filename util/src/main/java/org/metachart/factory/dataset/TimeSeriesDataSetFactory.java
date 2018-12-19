@@ -9,6 +9,7 @@ import java.util.Map;
 import org.metachart.factory.xml.chart.XmlDataFactory;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,9 +38,17 @@ public class TimeSeriesDataSetFactory
 		
 	}
 	
+	@Deprecated
 	public DataSet build(Object id)
 	{
 		DataSet ds = new DataSet();
+		ds.getData().addAll(map.get(id));
+		return ds;
+	}
+	
+	public Ds buildDs(Object id)
+	{
+		Ds ds = new Ds();
 		ds.getData().addAll(map.get(id));
 		return ds;
 	}

@@ -3,6 +3,7 @@ package org.metachart.processor;
 
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,20 @@ public class DataSetCumulator
 	}
 	
 	public DataSet process(DataSet dataSet)
+	{
+		if(!activated){return dataSet;}
+		
+		double value=0;
+		for(Data data : dataSet.getData())
+		{
+			data.setY(data.getY()+value);
+			value=data.getY();
+		}
+		
+		return dataSet;
+	}
+	
+	public Ds process(Ds dataSet)
 	{
 		if(!activated){return dataSet;}
 		

@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,13 @@ public class TimeSeriesRecordOrderer
 			logger.warn("RendererTimeseries@orderRecords not set. Defaulting to false");
 		}
 		return new TimeSeriesRecordOrderer(false);
+	}
+	
+	public Ds process(Ds dataSet)
+	{
+		if(!activated){return dataSet;}
+		Collections.sort(dataSet.getData(), new RecordComparator());
+		return dataSet;
 	}
 	
 	public DataSet process(DataSet dataSet)

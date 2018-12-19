@@ -4,12 +4,12 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
 
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 
 @FacesComponent(value="org.metachart.jsf.UiAxis")
 public class UiAxis extends UINamingContainer
 {
-	public String categories(DataSet ds)
+	public String categories(Ds ds)
 	{
 		StringBuffer sb = new StringBuffer();
 		if(ds!=null && ds.getData().size()>0)
