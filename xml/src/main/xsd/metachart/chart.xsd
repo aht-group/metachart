@@ -18,7 +18,6 @@
                     </xsd:complexType>
                 </xsd:element>
                 <xsd:element ref="grid"/>
-            	<xsd:element ref="dataSet" maxOccurs="unbounded"/>
             	<xsd:element ref="ds" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:int"/>
@@ -142,20 +141,6 @@
             <xsd:attribute name="g" type="xsd:int"/>
             <xsd:attribute name="b" type="xsd:int"/>
             <xsd:attribute name="a" type="xsd:int"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="dataSet"> <!-- Deprecated, use ds -->
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="data" maxOccurs="unbounded"/>
-            	<xsd:element ref="dataSet" maxOccurs="unbounded"/>
-            </xsd:sequence>
-			<xsd:attribute name="id" type="xsd:long"/>
-            <xsd:attribute name="code" type="xsd:string"/>
-			<xsd:attribute name="color" type="xsd:string"/>
-            <xsd:attribute name="label" type="xsd:string"/>
-            <xsd:attribute name="rangeIndex" type="xsd:int"/>
-            <xsd:attribute name="colorIndex" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="ds">

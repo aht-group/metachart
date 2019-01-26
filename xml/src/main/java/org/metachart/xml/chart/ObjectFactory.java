@@ -166,11 +166,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DataSet }
+     * Create an instance of {@link Ds }
      * 
      */
-    public DataSet createDataSet() {
-        return new DataSet();
+    public Ds createDs() {
+        return new Ds();
     }
 
     /**
@@ -179,14 +179,6 @@ public class ObjectFactory {
      */
     public Data createData() {
         return new Data();
-    }
-
-    /**
-     * Create an instance of {@link Ds }
-     * 
-     */
-    public Ds createDs() {
-        return new Ds();
     }
 
     /**

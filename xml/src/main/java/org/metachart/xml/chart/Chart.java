@@ -39,7 +39,6 @@ import javax.xml.bind.annotation.XmlType;
  *           &lt;/complexType&gt;
  *         &lt;/element&gt;
  *         &lt;element ref="{http://www.metachart.org/xml}grid"/&gt;
- *         &lt;element ref="{http://www.metachart.org/xml}dataSet" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://www.metachart.org/xml}ds"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
@@ -61,7 +60,6 @@ import javax.xml.bind.annotation.XmlType;
     "dimension",
     "colors",
     "grid",
-    "dataSet",
     "ds"
 })
 @XmlRootElement(name = "chart")
@@ -84,8 +82,6 @@ public class Chart
     protected Chart.Colors colors;
     @XmlElement(required = true)
     protected Grid grid;
-    @XmlElement(required = true)
-    protected List<DataSet> dataSet;
     @XmlElement(required = true)
     protected Ds ds;
     @XmlAttribute(name = "id")
@@ -298,43 +294,6 @@ public class Chart
 
     public boolean isSetGrid() {
         return (this.grid!= null);
-    }
-
-    /**
-     * Gets the value of the dataSet property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dataSet property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDataSet().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DataSet }
-     * 
-     * 
-     */
-    public List<DataSet> getDataSet() {
-        if (dataSet == null) {
-            dataSet = new ArrayList<DataSet>();
-        }
-        return this.dataSet;
-    }
-
-    public boolean isSetDataSet() {
-        return ((this.dataSet!= null)&&(!this.dataSet.isEmpty()));
-    }
-
-    public void unsetDataSet() {
-        this.dataSet = null;
     }
 
     /**
