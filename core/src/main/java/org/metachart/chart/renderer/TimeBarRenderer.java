@@ -18,7 +18,7 @@ import org.metachart.interfaces.ChartRenderer;
 import org.metachart.util.ChartLabelResolver;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.Renderer.Timebar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class TimeBarRenderer extends XYPlotRenderer implements ChartRenderer
         	ChartLabelResolver.getAxisLabelX(ofxChart),
             true,
             ChartLabelResolver.getAxisLabelY(ofxChart),                        // range axis label
-            createDataset(ofxChart.getDataSet()),                    // data
+            createDataset(ofxChart.getDs().getDs()),                    // data
             PlotOrientation.VERTICAL,
             ofxChart.isLegend(),                       // include legend
             true,
@@ -68,10 +68,10 @@ public class TimeBarRenderer extends XYPlotRenderer implements ChartRenderer
         return chart;
 	}
 
-	private IntervalXYDataset createDataset(List<DataSet> lContainer)
+	private IntervalXYDataset createDataset(List<Ds> lContainer)
 	{
 		TimeSeriesCollection dataset = new TimeSeriesCollection();
-		for(DataSet container : lContainer)
+		for(Ds container : lContainer)
 		{
 			TimeSeries ts = new TimeSeries(container.getLabel());
 			for(Data data : container.getData())

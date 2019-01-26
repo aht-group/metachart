@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.metachart.util.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class TimeSeriesGapNullifier
 		}
 	}
 	
-	public DataSet nullifyGapsInContainer(DataSet container)
+	public Ds nullifyGapsInContainer(Ds container)
 	{
 		List<Data> lData = new ArrayList<Data>();
 		

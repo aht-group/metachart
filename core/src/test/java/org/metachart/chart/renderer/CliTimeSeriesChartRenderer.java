@@ -14,7 +14,7 @@ import org.metachart.factory.pojo.ChartColorFactory;
 import org.metachart.test.McCoreTestBootstrap;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,8 +38,8 @@ public class CliTimeSeriesChartRenderer
 		
 		chart.setColors(getColors());
 		
-		chart.getDataSet().add(getX("a"));
-		chart.getDataSet().add(getX("b"));
+//		chart.getDs().add(getX("a"));
+//		chart.getDs().add(getX("b"));
 		return chart;
 	}
 	
@@ -51,10 +51,10 @@ public class CliTimeSeriesChartRenderer
 		return colors;
 	}
 	
-	private DataSet getX(String label)
+	private Ds getX(String label)
 	{
 		Random rnd = new Random();
-		DataSet dataSet = new DataSet();
+		Ds dataSet = new Ds();
 		dataSet.setLabel(label);
 		for(int i=1;i<20;i++)
 		{

@@ -21,7 +21,7 @@ import org.metachart.util.ChartLabelResolver;
 import org.metachart.util.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,15 +43,15 @@ public class TimeSeriesChartRenderer extends XYPlotRenderer implements ChartRend
 		
 		setTimePeriod();
 		
-        chart = ChartFactory.createTimeSeriesChart(
-        		ChartLabelResolver.getTitle(ofxChart),
-        		null,
-        		null,
-        		createDataset(ofxChart.getDataSet()),
-        		ofxChart.isLegend(),
-	            true,
-	            false
-	        );
+//        chart = ChartFactory.createTimeSeriesChart(
+//        		ChartLabelResolver.getTitle(ofxChart),
+//        		null,
+//        		null,
+//        		createDataset(ofxChart.getDs()),
+//        		ofxChart.isLegend(),
+//	            true,
+//	            false
+//	        );
         setColors();
         setGrid();
         setAxis();
@@ -72,7 +72,7 @@ public class TimeSeriesChartRenderer extends XYPlotRenderer implements ChartRend
 		return rtp;
 	}
 	
-	private TimeSeriesCollection createDataset(List<DataSet> dataSets)
+	private TimeSeriesCollection createDataset(List<Ds> dataSets)
 	{
 		TimeSeriesDateSummer dateSummer = TimeSeriesDateSummer.factory(ofxChart.getRenderer().getRendererTimeseries());
 		TimeSeriesRecordOrderer recordOrderer = TimeSeriesRecordOrderer.factory(ofxChart.getRenderer().getRendererTimeseries());
@@ -87,7 +87,7 @@ public class TimeSeriesChartRenderer extends XYPlotRenderer implements ChartRend
 		}
 		
 		TimeSeriesCollection dataset = new TimeSeriesCollection();
-		for(DataSet dataSet : dataSets)
+		for(Ds dataSet : dataSets)
 		{
 			dataSet = recordOrderer.process(dataSet);
 			dataSet = dateSummer.process(dataSet);

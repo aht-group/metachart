@@ -13,7 +13,7 @@ import org.metachart.test.McCoreTestBootstrap;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Color;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.Grid;
 import org.metachart.xml.chart.Renderer;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class TstGanttRenderer
 		chart.setRenderer(getType());
 		chart.setGrid(getGrid());
 		
-		chart.getDataSet().add(getX("Person A"));
+//		chart.getDs().add(getX("Person A"));
 		return chart;
 	}
 	
@@ -74,9 +74,9 @@ public class TstGanttRenderer
 		return type;
 	}
 	
-	private DataSet getX(String label)
+	private Ds getX(String label)
 	{
-		DataSet c = new DataSet();
+		Ds c = new Ds();
 		c.setLabel(label);
 		
 		Data d1 = new Data();

@@ -14,7 +14,7 @@ import org.metachart.test.McCoreTestBootstrap;
 import org.metachart.util.TimePeriodFactory;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.Renderer;
 import org.metachart.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
@@ -40,7 +40,7 @@ public class TstTimeSeriesGapFiller
 		chart.setRenderer(getType());
 		chart.setColors(getColors());
 		
-		chart.getDataSet().add(getX("a"));
+//		chart.getDs().add(getX("a"));
 //		chart.getContainer().add(getX("b"));
 		return chart;
 	}
@@ -63,10 +63,10 @@ public class TstTimeSeriesGapFiller
 		return colors;
 	}
 	
-	private DataSet getX(String label)
+	private Ds getX(String label)
 	{
 		Random rnd = new Random();
-		DataSet x = new DataSet();
+		Ds x = new Ds();
 		x.setLabel(label);
 		for(int i=1;i<20;i++)
 		{

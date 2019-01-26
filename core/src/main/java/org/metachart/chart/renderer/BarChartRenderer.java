@@ -13,7 +13,7 @@ import org.metachart.interfaces.ChartRenderer;
 import org.metachart.util.ChartLabelResolver;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,23 +28,25 @@ public class BarChartRenderer extends AbstractChartRenderer implements ChartRend
 	
 	public JFreeChart render(Chart ofxChart)
 	{
-        JFreeChart chart = ChartFactory.createBarChart(
-        		ChartLabelResolver.getTitle(ofxChart),
-        		ChartLabelResolver.getAxisLabelX(ofxChart),
-        		ChartLabelResolver.getAxisLabelY(ofxChart),
-        		createDataset(ofxChart.getDataSet()),
-        		PlotOrientation.VERTICAL,
-        		ofxChart.isLegend(),
-	            true,               // generate tooltips?
-	            false               // generate URLs?
-	        );
+        JFreeChart chart = null;
+        logger.warn("NYI");
+//        ChartFactory.createBarChart(
+//        		ChartLabelResolver.getTitle(ofxChart),
+//        		ChartLabelResolver.getAxisLabelX(ofxChart),
+//        		ChartLabelResolver.getAxisLabelY(ofxChart),
+//        		createDataset(ofxChart.getDataSet()),
+//        		PlotOrientation.VERTICAL,
+//        		ofxChart.isLegend(),
+//	            true,               // generate tooltips?
+//	            false               // generate URLs?
+//	        );
         return chart;
 	}
 	
-	private CategoryDataset createDataset(List<DataSet> lContainer)
+	private CategoryDataset createDataset(List<Ds> lContainer)
 	{
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		for(DataSet container : lContainer)
+		for(Ds container : lContainer)
 		{
 			for(Data data : container.getData())
 			{

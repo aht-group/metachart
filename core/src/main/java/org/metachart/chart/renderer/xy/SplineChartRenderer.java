@@ -19,11 +19,11 @@ import org.metachart.interfaces.ChartRenderer;
 import org.metachart.util.AxisFactory;
 import org.metachart.util.ChartLabelResolver;
 import org.metachart.util.OfxChartTypeResolver;
-import org.metachart.util.OfxCustomPaintColors;
 import org.metachart.util.OfxChartTypeResolver.AxisOrientation;
+import org.metachart.util.OfxCustomPaintColors;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements ChartRenderer
         XYPlot plot = new XYPlot();
         plot.setDomainAxis(xAxis);
         
-        createDataset3(ofxChart.getDataSet());
+        createDataset3(ofxChart.getDs().getDs());
         
         for(Integer i : mapXySeriesCollection.keySet())
         {
@@ -89,13 +89,13 @@ public class SplineChartRenderer extends XYPlotRenderer implements ChartRenderer
 		return rtp;
 	}
 	
-	protected void createDataset3(List<DataSet> lContainer)
+	protected void createDataset3(List<Ds> lContainer)
 	{
 		mapXySeriesCollection = new Hashtable<Integer,XYSeriesCollection>();
 		mapColorSeriesIndex = new Hashtable<Integer,Integer>();
 		
 		int colorIndex=0;	
-		for(DataSet c : lContainer)
+		for(Ds c : lContainer)
 		{
 			if(!c.isSetRangeIndex()){c.setRangeIndex(0);}
 			XYSeries series;
@@ -115,7 +115,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements ChartRenderer
 				incrementColorSeriesIndex(c.getRangeIndex());
 			}
 			
-			for(DataSet c2 : c.getDataSet())
+			for(Ds c2 : c.getDs())
 			{
 				if(!c2.isSetRangeIndex()){c2.setRangeIndex(0);}
 				if(c2.isSetData())

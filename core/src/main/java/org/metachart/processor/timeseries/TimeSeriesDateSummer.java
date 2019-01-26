@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
 import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
@@ -40,35 +39,6 @@ public class TimeSeriesDateSummer
 			logger.warn("RendererTimeseries@sumDate not set. Defaulting to false");
 		}
 		return new TimeSeriesDateSummer(false);
-	}
-	
-	public DataSet process(DataSet dataSet)
-	{
-		if(!activated){return dataSet;}
-		
-		List<Data> result = new ArrayList<Data>();
-		
-		for(Data data : dataSet.getData())
-		{
-			if(result.size()==0)
-			{
-				result.add(data);
-			}
-			else
-			{
-				if(result.get(result.size()-1).getRecord().equals(data.getRecord()))
-				{
-					result.get(result.size()-1).setY(result.get(result.size()-1).getY()+data.getY());
-				}
-				else
-				{
-					result.add(data);
-				}
-			}
-		}
-		dataSet.getData().clear();
-		dataSet.getData().addAll(result);
-		return dataSet;
 	}
 	
 	public Ds process(Ds dataSet)

@@ -11,7 +11,7 @@ import org.metachart.chart.OfxChartRenderer;
 import org.metachart.test.McCoreTestBootstrap;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.Grid;
 import org.metachart.xml.chart.Renderer;
 import org.slf4j.Logger;
@@ -37,7 +37,7 @@ public class CliTimeBarRenderer
 		chart.setRenderer(getType());
 		chart.setGrid(getGrid());
 		
-		chart.getDataSet().add(getX("a"));
+//		chart.getDs().add(getX("a"));
 		return chart;
 	}
 	
@@ -59,10 +59,10 @@ public class CliTimeBarRenderer
 		return type;
 	}
 	
-	private DataSet getX(String label)
+	private Ds getX(String label)
 	{
 		Random rnd = new Random();
-		DataSet x = new DataSet();
+		Ds x = new Ds();
 		x.setLabel(label);
 		for(int i=1;i<5;i++)
 		{

@@ -16,20 +16,20 @@ public class TestXmlDataSet extends AbstractXmlChartTest
 	@BeforeClass
 	public static void initFiles()
 	{
-        setXmlFile(dirSuffix, DataSet.class);
+        setXmlFile(dirSuffix, Ds.class);
 	}
     
     @Test
     public void testAclContainer() throws FileNotFoundException
     {
-        DataSet actual = create(true);
-        DataSet expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), DataSet.class);
+    	Ds actual = create(true);
+    	Ds expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Ds.class);
     	assertJaxbEquals(expected, actual);
     }
     
-    public static DataSet create(boolean withChilds)
+    public static Ds create(boolean withChilds)
     {
-        DataSet xml = new DataSet();
+    	Ds xml = new Ds();
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
         xml.setColor("myColor");

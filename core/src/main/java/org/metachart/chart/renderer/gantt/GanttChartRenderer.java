@@ -24,7 +24,7 @@ import org.metachart.interfaces.ChartRenderer;
 import org.metachart.util.ChartLabelResolver;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +45,7 @@ public class GanttChartRenderer extends XYPlotRenderer implements ChartRenderer
 		setTimePeriod();
 		
 		IntervalXYDataset dataset;
-		dataset = new XYTaskDataset(createTasks(ofxChart.getDataSet()));
+		dataset = new XYTaskDataset(createTasks(ofxChart.getDs().getDs()));
 //		dataset = new XYTaskDataset(createTasksDummy());
 		
 		chart = ChartFactory.createXYBarChart(
@@ -83,10 +83,10 @@ public class GanttChartRenderer extends XYPlotRenderer implements ChartRenderer
 	private void setTaskNames()
 	{
 		 XYPlot plot = (XYPlot) chart.getPlot();
-		 String[] taskNames = new String[ofxChart.getDataSet().size()];
+		 String[] taskNames = new String[ofxChart.getDs().getDs().size()];
 		 
 		 int i=0;
-		 for(DataSet c : ofxChart.getDataSet())
+		 for(Ds c : ofxChart.getDs().getDs())
 		 {
 			 taskNames[i] = c.getLabel();
 			 i++;
@@ -142,11 +142,11 @@ public class GanttChartRenderer extends XYPlotRenderer implements ChartRenderer
         return dataset;
     }
 	
-	private TaskSeriesCollection createTasks(List<DataSet> container)
+	private TaskSeriesCollection createTasks(List<Ds> container)
 	{
 		TaskSeriesCollection dataset = new TaskSeriesCollection();
 		
-		for(DataSet c: container)
+		for(Ds c : container)
 		{	
 			TaskSeries ts = new TaskSeries(c.getLabel());
 			for(Data d : c.getData())
@@ -166,7 +166,7 @@ public class GanttChartRenderer extends XYPlotRenderer implements ChartRenderer
 	public Dimension getSuggestedSize()
 	{
 		Dimension d = new Dimension();
-		d.setSize(0, 75+(ofxChart.getDataSet().size()*25));
+		d.setSize(0, 75+(ofxChart.getDs().getDs().size()*25));
 		return d;
 	}
 }
