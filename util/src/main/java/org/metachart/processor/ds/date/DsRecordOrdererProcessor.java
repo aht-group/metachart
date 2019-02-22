@@ -1,47 +1,43 @@
-package org.metachart.processor.timeseries;
+package org.metachart.processor.ds.date;
 
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.metachart.interfaces.McDatasetProcessor;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TimeSeriesRecordOrderer
+public class DsRecordOrdererProcessor implements McDatasetProcessor
 {
-	final static Logger logger = LoggerFactory.getLogger(TimeSeriesRecordOrderer.class);
+	final static Logger logger = LoggerFactory.getLogger(DsRecordOrdererProcessor.class);
 	
 	boolean activated;
 	
-	private TimeSeriesRecordOrderer(boolean activated)
+	public DsRecordOrdererProcessor(boolean activated)
 	{
 		this.activated=activated;
 	}
 	
-	public static TimeSeriesRecordOrderer factory()
-	{
-		return new TimeSeriesRecordOrderer(true);
-	}
-	
-	public static TimeSeriesRecordOrderer factory(RendererTimeseries renderer)
+	public static DsRecordOrdererProcessor factory(RendererTimeseries renderer)
 	{
 		if(renderer.isSetOrderRecords())
 		{
 			if(renderer.isOrderRecords())
 			{
-				return new TimeSeriesRecordOrderer(true);
+				return new DsRecordOrdererProcessor(true);
 			}
 		}
 		else
 		{
 			logger.warn("RendererTimeseries@orderRecords not set. Defaulting to false");
 		}
-		return new TimeSeriesRecordOrderer(false);
+		return new DsRecordOrdererProcessor(false);
 	}
 	
-	public Ds process(Ds dataSet)
+	@Override public Ds process(Ds dataSet)
 	{
 		if(!activated){return dataSet;}
 		Collections.sort(dataSet.getData(), new RecordComparator());

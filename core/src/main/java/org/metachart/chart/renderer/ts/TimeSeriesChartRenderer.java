@@ -12,11 +12,12 @@ import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.metachart.chart.renderer.generic.XYPlotRenderer;
+import org.metachart.exception.McProcessingException;
 import org.metachart.interfaces.ChartRenderer;
-import org.metachart.processor.DataSetCumulator;
-import org.metachart.processor.timeseries.TimeSeriesDateSummer;
+import org.metachart.processor.ds.DsAccumulatorProcessor;
+import org.metachart.processor.ds.date.DsDateAccumulationProcessor;
+import org.metachart.processor.ds.date.DsRecordOrdererProcessor;
 import org.metachart.processor.timeseries.TimeSeriesGapNullifier;
-import org.metachart.processor.timeseries.TimeSeriesRecordOrderer;
 import org.metachart.util.ChartLabelResolver;
 import org.metachart.util.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.xml.chart.Chart;
@@ -72,11 +73,11 @@ public class TimeSeriesChartRenderer extends XYPlotRenderer implements ChartRend
 		return rtp;
 	}
 	
-	private TimeSeriesCollection createDataset(List<Ds> dataSets)
+	private TimeSeriesCollection createDataset(List<Ds> dataSets) throws McProcessingException
 	{
-		TimeSeriesDateSummer dateSummer = TimeSeriesDateSummer.factory(ofxChart.getRenderer().getRendererTimeseries());
-		TimeSeriesRecordOrderer recordOrderer = TimeSeriesRecordOrderer.factory(ofxChart.getRenderer().getRendererTimeseries());
-		DataSetCumulator cumulator = DataSetCumulator.factory(ofxChart.getRenderer().getRendererTimeseries());
+		DsDateAccumulationProcessor dateSummer = DsDateAccumulationProcessor.factory(ofxChart.getRenderer().getRendererTimeseries());
+		DsRecordOrdererProcessor recordOrderer = DsRecordOrdererProcessor.factory(ofxChart.getRenderer().getRendererTimeseries());
+		DsAccumulatorProcessor cumulator = DsAccumulatorProcessor.factory(ofxChart.getRenderer().getRendererTimeseries());
 		
 		TimeSeriesGapNullifier gapNuller=null;
 		boolean nullifyGaps = TimeSeriesGapNullifier.gapNullerActivated(ofxChart.getRenderer().getRendererTimeseries());
