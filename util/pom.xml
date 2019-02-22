@@ -31,13 +31,14 @@
 			<artifactId>metachart-xml</artifactId>
 			<scope>compile</scope>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-interfaces</artifactId>
 			<version>0.2.6-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
-		
+		 -->
 		<dependency>
 			<groupId>jfree</groupId>
 			<artifactId>jfreechart</artifactId>
