@@ -36,10 +36,17 @@ public class McTimeseriesDsFactory <T extends Object>
 		getList(t).add(XmlDataFactory.buildForYearMonth(value, year, month));
 	}
 	
-	public void add(Object id, double value, Date date)
+	public void add(T t, double value, Date record)
 	{
-		logger.info(""+id);
-		
+		getList(t).add(XmlDataFactory.build(value,record));
+	}
+	
+	public Ds build(T t, String code, String label) throws McProcessingException
+	{
+		Ds ds = build(t);
+		ds.setCode(code);
+		ds.setLabel(label);
+		return ds;
 	}
 	
 	public Ds build(T t) throws McProcessingException

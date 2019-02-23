@@ -1,6 +1,7 @@
 package org.metachart.factory.builder;
 
 import org.metachart.processor.ds.DsAccumulatorProcessor;
+import org.metachart.processor.ds.date.DsCopyPreviousYvalueToLastProcessor;
 import org.metachart.processor.ds.date.DsDateAccumulationProcessor;
 import org.metachart.processor.ds.date.DsRecordOrdererProcessor;
 import org.slf4j.Logger;
@@ -28,5 +29,10 @@ public class McDsProcessorFactoryBuilder
 	public DsAccumulatorProcessor accumulator()
 	{
 		return new DsAccumulatorProcessor(true);
+	}
+	
+	public DsCopyPreviousYvalueToLastProcessor copyPreviousYToLastRecord()
+	{
+		return new DsCopyPreviousYvalueToLastProcessor();
 	}
 }
