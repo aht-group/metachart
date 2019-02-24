@@ -31,6 +31,12 @@ public class McTimeseriesDsFactory <T extends Object>
 		processors = new ArrayList<McDatasetProcessor>();
 	}
 	
+	public void clear()
+	{
+		map.clear();
+		list.clear();
+	}
+	
 	public void add(T t, double value, int year, int month)
 	{
 		getList(t).add(XmlDataFactory.buildForYearMonth(value, year, month));
