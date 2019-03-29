@@ -1,8 +1,8 @@
-package org.metachart.resources;
+package org.metachart.doc;
 
 import java.io.File;
 
-public class McMsgBuilder
+public class MetachartDocumentation
 {	
 	public static final String metachartPath = "utils"+File.separator+"metachart"+File.separator;
 	
