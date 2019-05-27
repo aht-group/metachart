@@ -29,6 +29,14 @@ public class XmlDataFactory
         data.setCategory(category);
         return data;
     }
+    
+    public static Data category(String category,  double value)
+    {
+        Data data = new Data();
+        data.setCategory(category);
+        data.setY(value);
+        return data;
+    }
 	
     public static Data build(double y, GregorianCalendar record)
 	{

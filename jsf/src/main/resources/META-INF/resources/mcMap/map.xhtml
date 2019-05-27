@@ -8,7 +8,7 @@
 	<composite:interface componentType="org.metachart.jsf.Chart">
         <composite:attribute name="jquery" required="false" default="false"
                              shortDescription="If true, jquery lib will be added by MetaChart."/>
-        <composite:attribute name="height" required="false" default="350"
+        <composite:attribute name="height" required="false" default="500"
                              shortDescription="The height in px of the chart."/>
         <composite:attribute name="geojson" required="true"
                              shortDescription="URL of GeoJSON map data."/>
@@ -22,42 +22,20 @@
 		<div id="mcMap" style="height: #{cc.attrs.height}px; min-width: 310px; max-width: 800px; margin: 0 auto; "></div>
 
 	<h:outputScript>
-        // Prepare random data
-var data = [
-    ['0101', 728],
-    ['0102', 710],
-    ['0103', 34],
-];
 
 $.getJSON('#{cc.attrs.geojson}', function (geojson) {
 
     // Initiate the chart
-    Highcharts.mapChart('mcMap', {
-        chart: {
-            map: geojson
-        },
+    Highcharts.mapChart('mcMap',
+    {
+        chart: {map: geojson},
+       
+        mapNavigation: {enabled: true, buttonOptions: {verticalAlign: 'bottom'}},
+        colorAxis: {tickPixelInterval: 100},
 
-        title: {
-            text: 'GeoJSON Data Source'
-        },
+		<composite:insertChildren />
 
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {verticalAlign: 'bottom'}
-        },
 
-        colorAxis: {
-            tickPixelInterval: 100
-        },
-
-        series: [{
-            data: data,
-            keys: ['code', 'value'],
-            joinBy: 'code',
-            name: 'Random data',
-            states: { hover: {color: '#a4edba'} },
-            dataLabels: {enabled: true,format: '{point.properties.name}'}
-        }]
     });
 });
 

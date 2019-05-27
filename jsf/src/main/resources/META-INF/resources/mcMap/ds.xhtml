@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsp/jstl/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:mc="http://www.metachart.org/chart"
+    xmlns:composite="http://java.sun.com/jsf/composite">
+    
+	<composite:interface componentType="org.metachart.jsf.map.UiDataSet">
+		<composite:attribute name="value" required="false"/>
+		<composite:attribute name="joinBy" required="true"/>
+	</composite:interface>
+	        
+	<composite:implementation>
+		{
+            data: [ #{cc.data(cc.attrs.value)} ],
+            keys: ['#{cc.attrs.joinBy}', 'value'],
+            joinBy: '#{cc.attrs.joinBy}',
+            name: '#{cc.attrs.value.label}',
+            states: { hover: {color: '#a4edba'} }
+        }
+	</composite:implementation>
+</html>

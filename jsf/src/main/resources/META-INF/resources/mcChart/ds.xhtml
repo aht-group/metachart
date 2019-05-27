@@ -7,7 +7,7 @@
     xmlns:mc="http://www.metachart.org/chart"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
-	<composite:interface componentType="org.metachart.jsf.UiDataSet">
+	<composite:interface componentType="org.metachart.jsf.chart.UiDataSet">
 		<composite:attribute name="value" required="false"/>
 		<composite:attribute name="d" required="false"/>
 		<composite:attribute name="type" required="false" default=""/>
@@ -30,7 +30,6 @@
 	        },
 		</c:if>
 		<c:if test="#{not empty cc.attrs.d}">
-
 		 	<ui:repeat var="ds" value="#{cc.attrs.d}">
 		 		{
 		        <ui:fragment rendered="#{not empty ds.color}">

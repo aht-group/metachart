@@ -1,4 +1,4 @@
-package org.metachart.jsf;
+package org.metachart.jsf.chart;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
@@ -9,7 +9,7 @@ import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@FacesComponent(value="org.metachart.jsf.UiDataSet")
+@FacesComponent(value="org.metachart.jsf.chart.UiDataSet")
 public class UiDataSet extends UINamingContainer
 {
 	final static Logger logger = LoggerFactory.getLogger(UiDataSet.class);
