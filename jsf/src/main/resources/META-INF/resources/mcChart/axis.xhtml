@@ -13,6 +13,7 @@
 		<composite:attribute name="max" required="false" default="null"/>
 		<composite:attribute name="maxZoom" required="false" default="null"/>
 		<composite:attribute name="showFirstLabel" required="false" default="true"/>
+		<composite:attribute name="gridLineWidth" required="false" default="0"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -23,6 +24,7 @@
             type: '#{cc.attrs.type}',
             maxZoom: #{cc.attrs.maxZoom},
             lineWidth: 1,
+            gridLineWidth: #{cc.attrs.gridLineWidth},
             showFirstLabel: #{cc.attrs.showFirstLabel},
             #{cc.categories(cc.attrs.categories)}
             <composite:insertChildren />

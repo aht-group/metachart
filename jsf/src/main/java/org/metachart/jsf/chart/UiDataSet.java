@@ -49,10 +49,12 @@ public class UiDataSet extends UINamingContainer
 		{
 			for(Data data : ds.getData())
 			{
+				sb.append("[");
                 if(data.isSetRecord()){appendDate(data.getRecord(),sb);}
-				if(data.isSetY()){sb.append(data.getY());}
+                else if(data.isSetX()) {sb.append(data.getX()+" , ");}
+                if(data.isSetY()){sb.append(data.getY());}
                 else{sb.append("null");}
-                if(data.isSetRecord()){sb.append("]");}
+                if(data.isSetRecord() || data.isSetX()){sb.append("]");}
 				sb.append(", ");
 			}
 			return sb.substring(0, sb.length()-2);
@@ -63,7 +65,7 @@ public class UiDataSet extends UINamingContainer
     private void appendDate(XMLGregorianCalendar xmlGc, StringBuffer sb)
     {
 //        [Date.UTC(2006,  0,  1), 0.5   ]
-        sb.append("[Date.UTC(");
+        sb.append("Date.UTC(");
         sb.append(xmlGc.getYear());
         sb.append(",").append(xmlGc.getMonth()-1);
         sb.append(",").append(xmlGc.getDay());
