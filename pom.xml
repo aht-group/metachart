@@ -91,6 +91,16 @@
 		</pluginManagement>
 		<plugins>
 			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<inherited>true</inherited>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
         		<groupId>org.apache.maven.plugins</groupId>
         		<artifactId>maven-enforcer-plugin</artifactId>
         		<version>1.0.1</version>
@@ -110,18 +120,8 @@
             			</configuration>
           			</execution>
         		</executions>
-			</plugin>
-            <plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<inherited>true</inherited>
-				<version>${maven-compiler-plugin.version}</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-        </plugins>
+        	</plugin>
+		</plugins>
 	</build>
 
 	<distributionManagement>
