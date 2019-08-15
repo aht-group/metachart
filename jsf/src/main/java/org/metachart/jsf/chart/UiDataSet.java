@@ -50,12 +50,15 @@ public class UiDataSet extends UINamingContainer
 			for(Data data : ds.getData())
 			{
 				sb.append("[");
-                if(data.isSetRecord()){appendDate(data.getRecord(),sb);}
-                else if(data.isSetX()) {sb.append(data.getX()+" , ");}
-                if(data.isSetY()){sb.append(data.getY());}
+				if(data.isSetRecord() && data.isSetX()) {sb.append("x:"+data.getX()+" , "); sb.append("name:"); appendDate(data.getRecord(),sb);}
+                if(data.isSetRecord() && !data.isSetX()){appendDate(data.getRecord(),sb);}
+                else if(data.isSetX() && !data.isSetRecord()) {sb.append(data.getX()+" , ");}
+                if(data.isSetY() && data.isSetRecord() && data.isSetX()) {sb.append("y:"+data.getY());}
+                else if(data.isSetY()){sb.append(data.getY());}
                 else{sb.append("null");}
                 if(data.isSetRecord() || data.isSetX()){sb.append("]");}
 				sb.append(", ");
+				if(data.isSetRecord() && data.isSetX()) {sb = new StringBuffer(sb.toString().replaceAll("\\[", "\\{").replaceAll("\\]", "\\}"));}
 			}
 			return sb.substring(0, sb.length()-2);
 		}
