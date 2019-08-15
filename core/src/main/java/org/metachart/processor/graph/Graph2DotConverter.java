@@ -9,12 +9,9 @@ import java.util.Map;
 import org.metachart.xml.graph.Edge;
 import org.metachart.xml.graph.Graph;
 import org.metachart.xml.graph.Node;
-import org.metachart.xml.xpath.GraphXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class Graph2DotConverter
@@ -59,7 +56,7 @@ public class Graph2DotConverter
 
 		txtWriter.add(" label =<\n" +
 				"       <U><FONT FACE=\"Times New Roman\" POINT-SIZE=\"40\"> "
-				+ getCategoryLabe(subSet.get(0))
+				+ getCategoryLabel(subSet.get(0))
 				+ "</FONT></U>\n" +
 				"     >\n" +
 				"     labelloc=\"b\"");
@@ -91,10 +88,11 @@ public class Graph2DotConverter
 			sb.append(q).append(nDst.getId()).append(q);
 			sb.append(" ");
 
-			if(!e.isDirected()){sb.append("[dir=none]");}
-			else if(e.getType().equals("OneToMany")) {sb.append("[arrowhead = invempty, arrowtail=none, dir=both]");}
-			else if(e.getType().equals("ManyToOne")) {sb.append("[arrowtail = invempty, arrowhead=none, dir=both]");}
+			//if(!e.isDirected()){sb.append("[dir=none]");}
+			if(e.getType().equals("OneToMany")) {sb.append("[arrowhead = invempty, arrowtail=none, dir=both]");}
+			else if(e.getType().equals("ManyToOne")) {sb.append("[arrowtail = none, arrowhead=invempty, dir=both]");}
 			else if(e.getType().equals("ManyToMany")) {sb.append("[arrowtail = invempty, arrowhead=invempty, dir=both]");}
+			else if(!e.isDirected()){sb.append("[dir=none]");}
 
 			sb.append(";").append(ls);
 		}
@@ -107,6 +105,7 @@ public class Graph2DotConverter
 	private void buildNodeDefinition(Graph g)
 	{
 		Map<String, List<Node>>  mapNodesCategories = groupGraphNode(g);
+		logger.trace("---" + mapNodesCategories.keySet().toString() +"---");
 		int NodeCategoryId = 0;
 		for (Map.Entry<String, List<Node>> entry : mapNodesCategories.entrySet()) {
 			boolean skipCatagorization  = false;
@@ -114,13 +113,14 @@ public class Graph2DotConverter
 			if(!skipCatagorization) {
 				StringBuffer sbCatBegin = new StringBuffer();
 				sbCatBegin.append(" ").append(" subgraph ").append(" cluster_").append(NodeCategoryId).append("{ ");
+				logger.trace("--" + entry.getKey() +"--");
 				txtWriter.add(sbCatBegin.toString());
 				txtWriter.add(" fillcolor=lightgrey; ");
 				txtWriter.add(" style=\"filled,bold\"; ");
 				txtWriter.add(" color=black; ");
 				txtWriter.add(" label =<\n" +
 						"       <U><FONT FACE=\"Bookman Old Style\" POINT-SIZE=\"30\"> "
-						+ getCategoryLabe(entry.getKey())
+						+ getCategoryLabel(entry.getKey())
 						+ "</FONT></U>\n" +
 						"     >\n" +
 						"     labelloc=\"t\"");
@@ -133,18 +133,8 @@ public class Graph2DotConverter
 		}
 	}
 
-	private String getCategoryLabe(String categoryName) {
-		String categoryLabel = "";
-		try {
-			Node category = GraphXpath.getNodeForCategory(xml, categoryName);
-			categoryLabel = category.getLabel();
-		} catch (ExlpXpathNotFoundException e) {
-			categoryLabel = categoryName;
-		} catch (ExlpXpathNotUniqueException e) {
-			categoryLabel = categoryName;
-		}
-
-		return  categoryLabel;
+	private String getCategoryLabel(String categoryName) {
+		return categoryName.substring(0, 1).toUpperCase() + categoryName.substring(1).toLowerCase();
 	}
 
 	private String nodeToDot(Node n) {
