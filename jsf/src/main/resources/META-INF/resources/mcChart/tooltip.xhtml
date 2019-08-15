@@ -7,13 +7,28 @@
     
 	<composite:interface>
 		<composite:attribute name="shared" required="false" default="false"/>
-	</composite:interface>
+		<composite:attribute name="value" required="false" default="false"/>
+		<composite:attribute name="color" required="false" default="#333333"/>
+		<composite:attribute name="fontSize" required="false" default="12px"/>
+		<composite:attribute name="fontWeight" required="false" default="default"/>
+		<composite:attribute name="decimals" required="false" default="undefined"/>
+		<composite:attribute name="prefix" required="false" default=""/>
+		<composite:attribute name="suffix" required="false" default=""/>
+ 	</composite:interface>
 	        
 	<composite:implementation>
 
         tooltip:{
+        	style:{
+        		color: '#{cc.attrs.color}',
+        		fontSize: '#{cc.attrs.fontSize}',
+        		fontWeight: '#{cc.attrs.fontWeight}'
+        	},
             enabled: true,
-            shared: #{cc.attrs.shared}
+            shared: #{cc.attrs.shared},
+            valueDecimals: #{cc.attrs.decimals},
+        	valuePrefix: '#{cc.attrs.prefix}',
+        	valueSuffix: '#{cc.attrs.suffix}' ,
             <composite:insertChildren />
         },
 	</composite:implementation>
