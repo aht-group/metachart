@@ -13,6 +13,7 @@ public class XmlNodeFactory
 		return build(new Long(code.hashCode()),label);
 	}
 	
+	public static Node build(long id) {return build(id,null);}
 	public static Node build(long id, String label)
 	{
 		Node xml = new Node();

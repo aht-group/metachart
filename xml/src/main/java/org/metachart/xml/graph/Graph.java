@@ -4,6 +4,7 @@ package org.metachart.xml.graph;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -21,7 +22,9 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://www.metachart.org/graph}nodes"/&gt;
  *         &lt;element ref="{http://www.metachart.org/graph}edges"/&gt;
+ *         &lt;element ref="{http://www.metachart.org/graph}clusters"/&gt;
  *       &lt;/sequence&gt;
+ *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -32,7 +35,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "nodes",
-    "edges"
+    "edges",
+    "clusters"
 })
 @XmlRootElement(name = "graph")
 public class Graph
@@ -44,6 +48,10 @@ public class Graph
     protected Nodes nodes;
     @XmlElement(required = true)
     protected Edges edges;
+    @XmlElement(required = true)
+    protected Clusters clusters;
+    @XmlAttribute(name = "code")
+    protected String code;
 
     /**
      * Gets the value of the nodes property.
@@ -99,6 +107,62 @@ public class Graph
 
     public boolean isSetEdges() {
         return (this.edges!= null);
+    }
+
+    /**
+     * Gets the value of the clusters property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Clusters }
+     *     
+     */
+    public Clusters getClusters() {
+        return clusters;
+    }
+
+    /**
+     * Sets the value of the clusters property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Clusters }
+     *     
+     */
+    public void setClusters(Clusters value) {
+        this.clusters = value;
+    }
+
+    public boolean isSetClusters() {
+        return (this.clusters!= null);
+    }
+
+    /**
+     * Gets the value of the code property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Sets the value of the code property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCode(String value) {
+        this.code = value;
+    }
+
+    public boolean isSetCode() {
+        return (this.code!= null);
     }
 
 }

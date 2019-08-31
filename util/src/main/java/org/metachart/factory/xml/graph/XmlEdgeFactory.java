@@ -1,6 +1,7 @@
 package org.metachart.factory.xml.graph;
 
 import org.metachart.xml.graph.Edge;
+import org.metachart.xml.graph.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,5 +31,10 @@ public class XmlEdgeFactory
 		xml.setTo(to);
 		xml.setDirected(directed);
 		return xml;
+	}
+	
+	public static Edge build(Node from, Node to)
+	{
+		return build(from.getId(),to.getId(),true);
 	}
 }

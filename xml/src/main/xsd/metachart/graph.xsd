@@ -14,7 +14,9 @@
             <xsd:sequence>
                 <xsd:element ref="nodes" maxOccurs="1"/>
                 <xsd:element ref="edges" maxOccurs="1"/>
+                <xsd:element ref="clusters" maxOccurs="1"/>
             </xsd:sequence>
+            <xsd:attribute name="code" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="node">
@@ -39,6 +41,22 @@
             <xsd:sequence>
                 <xsd:element ref="node" maxOccurs="unbounded"/>
             </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="clusters">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="cluster" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+     <xsd:element name="cluster">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="node" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="code" type="xsd:string"/>
+            <xsd:attribute name="label" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="edges">

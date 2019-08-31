@@ -1,17 +1,18 @@
 package org.metachart.processor.graph;
 
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.metachart.interfaces.graph.GraphColorProvider;
 import org.metachart.xml.graph.Node;
 import org.metachart.xml.xpath.GraphXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ColorSchemeManager
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
+
+public class ColorSchemeManager implements GraphColorProvider
 {
 	final static Logger logger = LoggerFactory.getLogger(ColorSchemeManager.class);
 	
@@ -26,13 +27,7 @@ public class ColorSchemeManager
 		this.subSet=new ArrayList<String>();
 	}
 	
-	public List<String> getSubSet() {
-		return subSet;
-	}
-
-	public void setSubSet(List<String> subSet) {
-		this.subSet = subSet;
-	}
+	public List<String> getSubSet() {return subSet;} public void setSubSet(List<String> subSet) {this.subSet = subSet;}
 
 	private String buildColorString(Node category, Node entity, int colorAdjust)
 	{
@@ -40,7 +35,8 @@ public class ColorSchemeManager
 		String colorCode = category.getCode();
 		boolean isDefaultColor = true;
 		
-		if(entity.isSetNode()) {
+		if(entity.isSetNode())
+		{
 			logger.trace("Entity category : " + entity.getCategory());
 			logger.trace("Category category : " + category.getCategory());
 			logger.trace(category.toString());
@@ -61,9 +57,10 @@ public class ColorSchemeManager
 						}
 				}
 			logger.trace("------------------------------------" );
-			}
+		}
 		
-		if(isDefaultColor) {
+		if(isDefaultColor)
+		{
 			logger.trace("No subcategory color found" );
 			logger.trace("Using default category color..." + colorCode);
 		}
@@ -76,10 +73,10 @@ public class ColorSchemeManager
 	
 	public String getColor(Node node)
 	{
-		logger.info("Getting color for "+node.getLabel() + " : "+node.getCategory());
+		logger.debug("Getting color for "+node.getLabel() + " : "+node.getCategory());
 		
 		int colorAdjust = 0;
-		if(node.isSetSizeAdjustsColor() && node.isSizeAdjustsColor())
+		if(node.isSetSizeAdjustsColor() && node.isSizeAdjustsColor() && node.isSetSize())
 		{
 			if(node.isSetSizeRelative() && node.isSizeRelative()==false)
 			{
@@ -116,7 +113,6 @@ public class ColorSchemeManager
 				return "";
 			}
 		}
-		
 		return "";
 	}
 }
