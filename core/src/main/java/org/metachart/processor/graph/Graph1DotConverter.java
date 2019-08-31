@@ -157,11 +157,7 @@ public class Graph1DotConverter
 
 	
 
-	public void save(File f)
-	{
-		txtWriter.writeFile(f);
-//		StringIO.writeTxt(f, sb.toString());
-	}
+	public void save(File f) {txtWriter.writeFile(f);}
 
 	public void setRatio(double ratio) {this.ratio=ratio;}
 	public void setRanksep(double ranksep) {this.ranksep = ranksep;}

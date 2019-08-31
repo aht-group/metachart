@@ -1,5 +1,6 @@
 package org.metachart.processor.graph;
 
+import java.io.File;
 import java.util.List;
 
 import org.metachart.factory.graph.DotEdgeFactory;
@@ -26,6 +27,8 @@ public class Graph2DotConverter
 		dotEdge = new DotEdgeFactory(csm);
 	}
 	
+	public void save(File f) {txtWriter.writeFile(f);}
+	
 	public List<String> build(Graph graph)
 	{
 		txtWriter.clear();
@@ -42,7 +45,7 @@ public class Graph2DotConverter
 		}
 		
 		txtWriter.add("}");
-		txtWriter.writeStream(System.out);
+//		txtWriter.writeStream(System.out);
 		return null;
 	}
 }
