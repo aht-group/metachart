@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://www.metachart.org/graph}nodes"/&gt;
  *         &lt;element ref="{http://www.metachart.org/graph}edges"/&gt;
  *         &lt;element ref="{http://www.metachart.org/graph}clusters"/&gt;
+ *         &lt;element ref="{http://www.metachart.org/graph}dot"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
@@ -36,7 +37,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "nodes",
     "edges",
-    "clusters"
+    "clusters",
+    "dot"
 })
 @XmlRootElement(name = "graph")
 public class Graph
@@ -50,6 +52,8 @@ public class Graph
     protected Edges edges;
     @XmlElement(required = true)
     protected Clusters clusters;
+    @XmlElement(required = true)
+    protected Dot dot;
     @XmlAttribute(name = "code")
     protected String code;
 
@@ -135,6 +139,34 @@ public class Graph
 
     public boolean isSetClusters() {
         return (this.clusters!= null);
+    }
+
+    /**
+     * Gets the value of the dot property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Dot }
+     *     
+     */
+    public Dot getDot() {
+        return dot;
+    }
+
+    /**
+     * Sets the value of the dot property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Dot }
+     *     
+     */
+    public void setDot(Dot value) {
+        this.dot = value;
+    }
+
+    public boolean isSetDot() {
+        return (this.dot!= null);
     }
 
     /**

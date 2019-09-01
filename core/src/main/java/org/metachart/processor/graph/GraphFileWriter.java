@@ -35,7 +35,7 @@ public class GraphFileWriter
 		spawn.run();
 	}
 	
-	public void pdf(File src, File dst) throws IOException, ClassNotFoundException
+	public void pdf(File src, File dst) throws IOException
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("/usr/local/bin/").append(type);

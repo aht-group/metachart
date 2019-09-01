@@ -11,13 +11,22 @@ public class XmlGraphFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlGraphFactory.class);
 	
+	public static Graph build(){return new Graph();}
+	
 	public static Graph build(Nodes nodes, Edges edges){return build(nodes,edges,null);}
 	public static Graph build(Nodes nodes, Edges edges, Clusters clusters)
 	{
-		Graph g = new Graph();
+		Graph g = build();
 		g.setNodes(nodes);
 		g.setEdges(edges);
 		g.setClusters(clusters);
+		return g;
+	}
+	
+	public static Graph build(String code)
+	{
+		Graph g = build();
+		g.setCode(code);
 		return g;
 	}
 }

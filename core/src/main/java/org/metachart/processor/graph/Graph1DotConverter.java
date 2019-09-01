@@ -1,5 +1,6 @@
 package org.metachart.processor.graph;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -155,6 +156,12 @@ public class Graph1DotConverter
 		return mapNodesCategories;
 	}
 
+	public String getDot()
+	{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		txtWriter.writeStream(baos);
+		return baos.toString();
+	}
 	
 
 	public void save(File f) {txtWriter.writeFile(f);}

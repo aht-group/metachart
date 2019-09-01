@@ -93,4 +93,12 @@ public class ObjectFactory {
         return new Cluster();
     }
 
+    /**
+     * Create an instance of {@link Dot }
+     * 
+     */
+    public Dot createDot() {
+        return new Dot();
+    }
+
 }
