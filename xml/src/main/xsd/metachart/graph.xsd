@@ -9,6 +9,13 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="graphs">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="graph" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="graph">
         <xsd:complexType>
             <xsd:sequence>

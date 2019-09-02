@@ -13,16 +13,18 @@ public class GraphFileWriter
 	final static Logger logger = LoggerFactory.getLogger(GraphFileWriter.class);
 	
 	private String type;
-	
+	private String executeablePath; public String getExecuteablePath() {return executeablePath;} public void setExecuteablePath(String executeablePath) {this.executeablePath = executeablePath;}
+
 	public GraphFileWriter(String type)
 	{
 		this.type=type;
+		executeablePath = "/usr/local/bin/";
 	}
 	
 	public void svg(File src, File dst) throws IOException, ClassNotFoundException
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("/usr/local/bin/").append(type);
+		sb.append(executeablePath).append(type);
 		sb.append(" -Tsvg");
 		sb.append(" ").append(src.getAbsolutePath());
 		sb.append(" -o ");
