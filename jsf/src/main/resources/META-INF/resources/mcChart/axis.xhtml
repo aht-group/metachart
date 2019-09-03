@@ -14,6 +14,7 @@
 		<composite:attribute name="maxZoom" required="false" default="null"/>
 		<composite:attribute name="showFirstLabel" required="false" default="true"/>
 		<composite:attribute name="gridLineWidth" required="false" default="0"/>
+		<composite:attribute name="tickInterval" required="false" default="null"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -23,6 +24,7 @@
         	max: #{cc.attrs.max},
             type: '#{cc.attrs.type}',
             maxZoom: #{cc.attrs.maxZoom},
+            tickInterval: #{cc.attrs.tickInterval},
             lineWidth: 1,
             gridLineWidth: #{cc.attrs.gridLineWidth},
             showFirstLabel: #{cc.attrs.showFirstLabel},
