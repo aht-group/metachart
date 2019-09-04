@@ -16,6 +16,7 @@
 		<composite:attribute name="lineWidth" required="false" default="2"/>
 		<composite:attribute name="timeseries" required="false" default="true"/>
 		<composite:attribute name="xLabel" required="false" default=""/>
+		<composite:attribute name="pointSelect" required="false" default="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -33,6 +34,7 @@
 	            data: [ #{cc.data(cc.attrs.value)} ],
 	            enableMouseTracking: #{cc.attrs.enableMouseTracking},
 	            lineWidth: #{cc.attrs.lineWidth},
+	            allowPointSelect: #{cc.attrs.pointSelect}, 
 	            <composite:insertChildren />         
 	        },
 		</c:if>
