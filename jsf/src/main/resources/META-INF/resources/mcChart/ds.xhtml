@@ -17,6 +17,10 @@
 		<composite:attribute name="timeseries" required="false" default="true"/>
 		<composite:attribute name="xLabel" required="false" default=""/>
 		<composite:attribute name="pointSelect" required="false" default="false"/>
+		<composite:attribute name="formId" required="false" default=""/>
+		<composite:attribute name="inputId" required="false" default=""/>
+		<composite:attribute name="pointEvent" required="false" default="false"/>
+		<composite:attribute name="url" required="false" default="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -35,6 +39,25 @@
 	            enableMouseTracking: #{cc.attrs.enableMouseTracking},
 	            lineWidth: #{cc.attrs.lineWidth},
 	            allowPointSelect: #{cc.attrs.pointSelect}, 
+	        <ui:fragment rendered="#{cc.attrs.pointEvent}">
+	            point: {
+	            	events: {
+	            		select: function(){
+	            			var xhttp = new XMLHttpRequest();
+	            			var point = this.x + " " + this.y + " " + this.name + " ";
+	            			document.getElementById('#{cc.attrs.formId}:#{cc.attrs.inputId}').value = point;
+	            			xhttp.onreadystateschange = function(){
+	            				if(xhttp.readyState == 4){
+	            					document.getElementById('#{cc.attrs.formId}:#{cc.attrs.inputId}').innerHTML = point;
+	            				}
+	            					
+	            			};
+	            			xhttp.open("GET", "#{cc.attrs.url}", true);
+	            			xhttp.send();
+	            		}
+	            	}
+	            },
+	         </ui:fragment>
 	            <composite:insertChildren />         
 	        },
 		</c:if>
