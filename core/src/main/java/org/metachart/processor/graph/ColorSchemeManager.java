@@ -44,17 +44,20 @@ public class ColorSchemeManager implements GraphColorProvider
 			logger.trace("------------------------------------" );
 	
 			searchColorCode:
-				for(String subType : this.subSet) {
-					logger.trace("Searching node sub category color...subType : " + subType );
-						for(Node categorySubType: category.getNode()) {
-							logger.trace("categorySubType : " + categorySubType.getType() );
-							if(categorySubType.getType().equals(subType)) {
-								colorCode = categorySubType.getCode();
-								logger.trace("using replace color : " +colorCode +" for: "+ category.getCategory() );
-								isDefaultColor = false;
-								break searchColorCode;
-							}
+				for(String subType : this.subSet)
+				{
+					logger.trace("Searching node sub category color...subType: '"+subType+"'");
+					for(Node categorySubType : category.getNode())
+					{
+						logger.trace("categorySubType: '"+categorySubType.getType()+"'");
+						if(categorySubType.getType().equals(subType))
+						{
+							colorCode = categorySubType.getCode();
+							logger.trace("using replace color : " +colorCode +" for: "+ category.getCategory() );
+							isDefaultColor = false;
+							break searchColorCode;
 						}
+					}
 				}
 			logger.trace("------------------------------------" );
 		}
