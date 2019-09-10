@@ -1,51 +1,72 @@
 package org.metachart.processor.graph;
 
 import java.io.File;
-import java.util.List;
 
+import org.metachart.factory.graph.DotClusterFactory;
 import org.metachart.factory.graph.DotEdgeFactory;
+import org.metachart.factory.graph.DotGraphFactory;
 import org.metachart.factory.graph.DotNodeFactory;
 import org.metachart.interfaces.graph.GraphColorProvider;
+import org.metachart.xml.graph.Cluster;
 import org.metachart.xml.graph.Edge;
 import org.metachart.xml.graph.Graph;
 import org.metachart.xml.graph.Node;
 
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
-public class Graph2DotConverter 
+public class Graph2DotConverter
 {
 	private final ExlpTxtWriter txtWriter;
-	
+
 	private DotNodeFactory dotNode;
 	private DotEdgeFactory dotEdge;
-	
+	private DotClusterFactory dotCluster;
+
+	private DotGraphFactory dotGraph;
+
 	public Graph2DotConverter(GraphColorProvider csm)
 	{
 		txtWriter = new ExlpTxtWriter();
-		
+
 		dotNode = new DotNodeFactory(csm);
 		dotEdge = new DotEdgeFactory(csm);
+		dotCluster = new DotClusterFactory(txtWriter, dotNode);
+		dotGraph =  new DotGraphFactory(txtWriter);
 	}
-	
+
 	public void save(File f) {txtWriter.writeFile(f);}
-	
-	public List<String> build(Graph graph)
+
+	public void build(Graph graph)
+	{
+		build(graph, "");
+	}
+	public void build(Graph graph, String label)
 	{
 		txtWriter.clear();
-		txtWriter.add("digraph "+graph.getCode()+" { ");
-		
+		dotGraph.beginDotDiagraph(label, graph);
+		if(graph.getClusters() != null) {
+			for(Cluster c : graph.getClusters().getCluster())
+			{
+				dotCluster.clusterToDot(c);
+			}
+		}
+
 		for(Node n: graph.getNodes().getNode())
 		{
 			txtWriter.add(dotNode.nodeToDot(n));
 		}
-		
+
 		for(Edge e : graph.getEdges().getEdge())
 		{
 			txtWriter.add(dotEdge.build(e));
 		}
-		
-		txtWriter.add("}");
-//		txtWriter.writeStream(System.out);
-		return null;
+
+		dotGraph.endDotDiagraph();
+
+		//txtWriter.writeStream(System.out);
+	}
+
+	public void print() {
+		txtWriter.writeStream(System.out);
 	}
 }
