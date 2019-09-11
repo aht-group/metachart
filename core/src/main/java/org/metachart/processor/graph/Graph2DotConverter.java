@@ -1,5 +1,6 @@
 package org.metachart.processor.graph;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import org.metachart.factory.graph.DotClusterFactory;
@@ -69,4 +70,12 @@ public class Graph2DotConverter
 	public void print() {
 		txtWriter.writeStream(System.out);
 	}
+
+	public String getDot()
+	{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		txtWriter.writeStream(baos);
+		return baos.toString();
+	}
+
 }
