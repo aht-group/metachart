@@ -24,6 +24,7 @@
 		<composite:attribute name="enabled" required="false" default="false"/>
 		<composite:attribute name="xFormat" required="false" default=""/>
 		<composite:attribute name="yFormat" required="false" default=""/>
+		<composite:attribute name="dateFormat" required="false" default=""/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -41,10 +42,10 @@
 			        	valuePrefix: '#{cc.attrs.prefix}',
 			        	valueSuffix: '#{cc.attrs.suffix}' ,
 		            <ui:fragment rendered="#{not cc.attrs.timeseries}">
-		            	pointFormat: "#{cc.attrs.nameLabel}{point.name:%d-%m-%Y}<br/>#{cc.attrs.xLabel} {point.x#{cc.attrs.xFormat}} #{cc.attrs.xUnit}<br/>#{cc.attrs.yLabel} {point.y#{cc.attrs.yFormat}} #{cc.attrs.yUnit}",
+		            	pointFormat: "#{cc.attrs.nameLabel}{point.name:%d-%m-%Y}<br/>#{cc.attrs.yLabel} {point.y#{cc.attrs.yFormat}} #{cc.attrs.yUnit}<br/>#{cc.attrs.xLabel} {point.x#{cc.attrs.xFormat}} #{cc.attrs.xUnit}",
 		            </ui:fragment>
 		            <ui:fragment rendered="#{cc.attrs.timeseries}">
-		            	pointFormat: "#{cc.attrs.xLabel}{point.x:%d-%m-%Y}<br/>#{cc.attrs.yLabel}{point.y}#{cc.attrs.yUnit}",
+		            	pointFormat: "#{cc.attrs.xLabel}{point.x#{cc.attrs.dateFormat}}<br/>#{cc.attrs.yLabel}{point.y}#{cc.attrs.yUnit}",
 		            </ui:fragment>
 		            },
 		</ui:fragment>
