@@ -11,7 +11,7 @@
         <composite:attribute name="marker" required="false" default="true"/>
 		<composite:attribute name="symbol" required="false" default="circle"/>
 		<composite:attribute name="radius" required="false" default="2"/>
-		<composite:attribute name="fillColor" required="false" default=""/>
+		<composite:attribute name="fillColor" required="false" default="undefined"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -19,7 +19,7 @@
         	enabled: #{cc.attrs.marker},
         	symbol: '#{cc.attrs.symbol}',
         	radius: #{cc.attrs.radius},
-        	fillColor: '#{cc.attrs.fillColor}'
+        	fillColor: #{cc.attrs.fillColor}
         },        
 	</composite:implementation>
 </html>
