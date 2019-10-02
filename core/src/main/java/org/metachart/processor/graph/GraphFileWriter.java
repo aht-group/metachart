@@ -40,7 +40,7 @@ public class GraphFileWriter
 	public void pdf(File src, File dst) throws IOException
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("/usr/local/bin/").append(type);
+		sb.append(executeablePath).append(type);
 		sb.append(" -Tpdf");
 		sb.append(" ").append(src.getAbsolutePath());
 		sb.append(" -o ");
