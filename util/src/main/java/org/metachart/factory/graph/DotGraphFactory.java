@@ -39,11 +39,13 @@ public class DotGraphFactory {
 		if(ratio!=null){txtWriter.add("  ratio="+ratio+";");}
 		if(ranksep!=null){txtWriter.add("  ranksep="+ranksep+";");}
 		if(overlap!=null){txtWriter.add("  overlap="+overlap+";");}
-
 		txtWriter.add("  equally=true;");
-		txtWriter.add("");
-		txtWriter.add(String.format(formatedLabel, label));
-
+		
+		if(label!=null) {
+			txtWriter.add("");
+			txtWriter.add(String.format(formatedLabel, label));
+		}
+		
 		txtWriter.add("");
 	}
 
