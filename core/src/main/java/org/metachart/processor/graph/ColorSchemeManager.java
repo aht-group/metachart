@@ -125,7 +125,7 @@ public class ColorSchemeManager implements GraphColorProvider
 	{
 		try
 		{
-			Node category = GraphXpath.getNodeForCategory(xml, toCamelCaseLabel(catCode));
+			Node category = GraphXpath.getNodeForCategory(xml,catCode);
 			return category.getLabel().trim();
 		}
 		catch (ExlpXpathNotFoundException  e) {logger.error(e.getMessage());return toCamelCaseLabel(catCode);}
