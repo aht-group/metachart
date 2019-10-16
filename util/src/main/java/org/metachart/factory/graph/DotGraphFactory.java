@@ -31,7 +31,9 @@ public class DotGraphFactory {
 		txtWriter.add("");
 		if(mode!=null){txtWriter.add("  mode="+mode+";");}
 		if(model!=null){txtWriter.add("  model="+model+";");}
-		if(overlap!=null){txtWriter.add("  overlap="+overlap+";");}
+		//if(overlap!=null){txtWriter.add("  overlap="+overlap+";");}
+		txtWriter.add("  overlap=false;");
+		txtWriter.add("  remincross=true;");
 		if(nodesep!=null){txtWriter.add("  nodesep="+nodesep+";");}
 		if(pad!=null){txtWriter.add("  pad="+pad+";");}
 		if(splines!=null){txtWriter.add("  splines="+splines+";");}
@@ -40,12 +42,12 @@ public class DotGraphFactory {
 		if(ranksep!=null){txtWriter.add("  ranksep="+ranksep+";");}
 		if(overlap!=null){txtWriter.add("  overlap="+overlap+";");}
 		txtWriter.add("  equally=true;");
-		
+
 		if(label!=null) {
 			txtWriter.add("");
 			txtWriter.add(String.format(formatedLabel, label));
 		}
-		
+
 		txtWriter.add("");
 	}
 
