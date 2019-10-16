@@ -15,18 +15,18 @@ import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 public class ColorSchemeManager implements GraphColorProvider
 {
 	final static Logger logger = LoggerFactory.getLogger(ColorSchemeManager.class);
-	
+
 	private Node xml;
 	private List<String> subSet;
-	
+
 	public ColorSchemeManager(){this(null);}
-	
+
 	public ColorSchemeManager(Node xml)
 	{
 		this.xml=xml;
 		this.subSet=new ArrayList<String>();
 	}
-	
+
 	public List<String> getSubSet() {return subSet;} public void setSubSet(List<String> subSet) {this.subSet = subSet;}
 
 	private String buildColorString(Node category, Node entity, int colorAdjust)
@@ -34,15 +34,15 @@ public class ColorSchemeManager implements GraphColorProvider
 		long colorId = entity.getId() + colorAdjust;
 		String colorCode = category.getCode();
 		boolean isDefaultColor = true;
-		
+
 		if(entity.isSetNode())
 		{
 			logger.trace("Entity category : " + entity.getCategory());
 			logger.trace("Category category : " + category.getCategory());
 			logger.trace(category.toString());
-			
+
 			logger.trace("------------------------------------" );
-	
+
 			searchColorCode:
 				for(String subType : this.subSet)
 				{
@@ -61,23 +61,24 @@ public class ColorSchemeManager implements GraphColorProvider
 				}
 			logger.trace("------------------------------------" );
 		}
-		
+
 		if(isDefaultColor)
 		{
 			logger.trace("No subcategory color found" );
 			logger.trace("Using default category color..." + colorCode);
 		}
-		
+
 		StringBuffer sb = new StringBuffer();
 		sb.append(" colorscheme=").append(colorCode).append(",");
 		sb.append(" fillcolor=").append(colorId).append(",");
 		return sb.toString();
 	}
-	
+
+	@Override
 	public String getColor(Node node)
 	{
 		logger.debug("Getting color for "+node.getLabel() + " : "+node.getCategory());
-		
+
 		int colorAdjust = 0;
 		if(node.isSetSizeAdjustsColor() && node.isSizeAdjustsColor() && node.isSetSize())
 		{
@@ -90,13 +91,13 @@ public class ColorSchemeManager implements GraphColorProvider
 				colorAdjust = colorAdjust+node.getSize();
 			}
 		}
-		
+
 		if(xml!=null && node.isSetCategory())
 		{
 			try
 			{
 				Node category = GraphXpath.getNodeForCategory(xml, node.getCategory());
-				
+
 				try
 				{
 					Node entity = GraphXpath.getNodeForCode(category, node.getLabel());
@@ -117,5 +118,34 @@ public class ColorSchemeManager implements GraphColorProvider
 			}
 		}
 		return "";
+	}
+
+	@Override
+	public String getLabelForCategory(String catCode)
+	{
+		try
+		{
+			Node category = GraphXpath.getNodeForCategory(xml, toCamelCaseLabel(catCode));
+			return category.getLabel().trim();
+		}
+		catch (ExlpXpathNotFoundException  e) {logger.error(e.getMessage());return toCamelCaseLabel(catCode);}
+		catch (ExlpXpathNotUniqueException e)
+		{
+			logger.warn(e.getMessage());
+			return catCode;
+		}
+		catch (NullPointerException e) {
+			logger.error("No description for category=" + catCode);return toCamelCaseLabel(catCode);
+			// TODO: handle exception
+		}
+	}
+
+	private String toCamelCaseLabel(String categoryName)
+	{
+		try{
+			return categoryName.substring(0, 1).toUpperCase() + categoryName.substring(1).toLowerCase();
+		}catch (Exception e) {
+			return categoryName;
+		}
 	}
 }

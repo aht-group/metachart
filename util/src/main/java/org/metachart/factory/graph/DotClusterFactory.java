@@ -1,17 +1,20 @@
 package org.metachart.factory.graph;
 
+import org.metachart.interfaces.graph.GraphColorProvider;
 import org.metachart.xml.graph.Cluster;
 import org.metachart.xml.graph.Node;
 
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class DotClusterFactory {
+	private final GraphColorProvider csm;
 	private ExlpTxtWriter txtWriter;
 	private DotNodeFactory dotNode;
 	private String fillcolor, style,color;
 	private String formatedLabel;
 
-	public DotClusterFactory(ExlpTxtWriter txtWriter, DotNodeFactory dotNode) {
+	public DotClusterFactory(GraphColorProvider csm, ExlpTxtWriter txtWriter, DotNodeFactory dotNode) {
+		this.csm=csm;
 		this.txtWriter = txtWriter;
 		this.dotNode = dotNode;
 		//to-do init config
@@ -28,7 +31,8 @@ public class DotClusterFactory {
 		txtWriter.add(" fillcolor=" + fillcolor +"; ");
 		txtWriter.add(" style=\""+ style + "\"; ");
 		txtWriter.add(" color=" + color +"; ");
-		txtWriter.add(String.format(this.formatedLabel, cluster.getLabel()));
+
+		txtWriter.add(String.format(this.formatedLabel, this.csm.getLabelForCategory(cluster.getLabel())));
 		for(Node node: cluster.getNode()) {
 			txtWriter.add(dotNode.nodeToDot(node));
 		}

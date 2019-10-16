@@ -31,7 +31,7 @@ public class Graph2DotConverter
 
 		dotNode = new DotNodeFactory(csm);
 		dotEdge = new DotEdgeFactory(csm);
-		dotCluster = new DotClusterFactory(txtWriter, dotNode);
+		dotCluster = new DotClusterFactory(csm,txtWriter, dotNode);
 		dotGraph =  new DotGraphFactory(txtWriter);
 	}
 
