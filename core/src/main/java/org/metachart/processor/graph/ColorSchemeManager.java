@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.metachart.interfaces.graph.GraphColorProvider;
+import org.metachart.xml.graph.Cluster;
+import org.metachart.xml.graph.Graph;
 import org.metachart.xml.graph.Node;
 import org.metachart.xml.xpath.GraphXpath;
 import org.slf4j.Logger;
@@ -16,56 +18,53 @@ public class ColorSchemeManager implements GraphColorProvider
 {
 	final static Logger logger = LoggerFactory.getLogger(ColorSchemeManager.class);
 
-	private Node xml;
+	private Graph xml;
 	private List<String> subSet;
 
-	public ColorSchemeManager(){this(null);}
+	public ColorSchemeManager(){this(null,new ArrayList<String>());}
 
-	public ColorSchemeManager(Node xml)
+	public ColorSchemeManager(Graph xml,List<String> subSet)
 	{
 		this.xml=xml;
-		this.subSet=new ArrayList<String>();
+		this.subSet=subSet;
 	}
 
 	public List<String> getSubSet() {return subSet;} public void setSubSet(List<String> subSet) {this.subSet = subSet;}
 
-	private String buildColorString(Node category, Node entity, int colorAdjust)
+	private String buildColorString(Cluster cluster, int colorAdjust)
 	{
-		long colorId = entity.getId() + colorAdjust;
-		String colorCode = category.getCode();
+		long colorId = cluster.getId() + colorAdjust;
+		String colorCode = cluster.getCode();
 		boolean isDefaultColor = true;
 
-		if(entity.isSetNode())
+		if(cluster.isSetNode())
 		{
-			logger.trace("Entity category : " + entity.getCategory());
-			logger.trace("Category category : " + category.getCategory());
-			logger.trace(category.toString());
-
-			logger.trace("------------------------------------" );
+			logger.info("Cluster name : " + cluster.getCategory());
+			logger.info("------------------------------------" );
 
 			searchColorCode:
 				for(String subType : this.subSet)
 				{
-					logger.trace("Searching node sub category color...subType: '"+subType+"'");
-					for(Node categorySubType : category.getNode())
+					logger.info("Searching node sub cluster color...subType: '"+subType+"'");
+					for(Node clusterSubType : cluster.getNode())
 					{
-						logger.trace("categorySubType: '"+categorySubType.getType()+"'");
-						if(categorySubType.getType().equals(subType))
+						logger.info("clusterSubType: '"+clusterSubType.getType()+"'");
+						if(clusterSubType.getType().equals(subType))
 						{
-							colorCode = categorySubType.getCode();
-							logger.trace("using replace color : " +colorCode +" for: "+ category.getCategory() );
+							colorCode = clusterSubType.getCode();
+							logger.info("using replace color : " +colorCode +" for: "+ cluster.getCategory());
 							isDefaultColor = false;
 							break searchColorCode;
 						}
 					}
 				}
-			logger.trace("------------------------------------" );
+			logger.info("------------------------------------" );
 		}
 
 		if(isDefaultColor)
 		{
-			logger.trace("No subcategory color found" );
-			logger.trace("Using default category color..." + colorCode);
+			logger.info("No subcluster color found" );
+			logger.info("Using default cluster color..." + colorCode);
 		}
 
 		StringBuffer sb = new StringBuffer();
@@ -77,7 +76,8 @@ public class ColorSchemeManager implements GraphColorProvider
 	@Override
 	public String getColor(Node node)
 	{
-		logger.debug("Getting color for "+node.getLabel() + " : "+node.getCategory());
+
+		logger.debug("Getting color for node name = "+node.getLabel() + " : category="+node.getCategory());
 
 		int colorAdjust = 0;
 		if(node.isSetSizeAdjustsColor() && node.isSizeAdjustsColor() && node.isSetSize())
@@ -94,58 +94,62 @@ public class ColorSchemeManager implements GraphColorProvider
 
 		if(xml!=null && node.isSetCategory())
 		{
-			try
-			{
-				Node category = GraphXpath.getNodeForCategory(xml, node.getCategory());
-
-				try
-				{
-					Node entity = GraphXpath.getNodeForCode(category, node.getLabel());
-					return buildColorString(category, entity,colorAdjust);
-				}
-				catch (ExlpXpathNotFoundException e) {return buildColorString(category, category,colorAdjust);}
-				catch (ExlpXpathNotUniqueException e)
-				{
-					logger.warn(e.getMessage());
-					return "";
-				}
+			try{
+				Cluster cluster = GraphXpath.getClusterForName(xml,node.getCategory());
+				return buildColorString(cluster, colorAdjust);
 			}
+			catch (ExlpXpathNotUniqueException e){logger.warn(e.getMessage());return "";}
 			catch (ExlpXpathNotFoundException e) {logger.error(e.getMessage());return "";}
-			catch (ExlpXpathNotUniqueException e)
-			{
-				logger.warn(e.getMessage());
-				return "";
-			}
 		}
 		return "";
 	}
 
-	@Override
-	public String getLabelForCategory(String catCode)
+
+	public String getLabelForCluster(String name)
 	{
 		try
 		{
-			Node category = GraphXpath.getNodeForCategory(xml,catCode);
-			return category.getLabel().trim();
+			Cluster cluster = GraphXpath.getClusterForName(xml,name);
+			return cluster.getLabel().trim();
 		}
-		catch (ExlpXpathNotFoundException  e) {logger.error(e.getMessage());return toCamelCaseLabel(catCode);}
+		catch (ExlpXpathNotFoundException  e) {logger.error(e.getMessage());return toCamelCaseLabel(name);}
 		catch (ExlpXpathNotUniqueException e)
 		{
 			logger.warn(e.getMessage());
-			return catCode;
+			return name;
 		}
 		catch (NullPointerException e) {
-			logger.error("No description for category=" + catCode);return toCamelCaseLabel(catCode);
-			// TODO: handle exception
+			logger.error("No description for cluster=" + name);return toCamelCaseLabel(name);
 		}
 	}
 
-	private String toCamelCaseLabel(String categoryName)
+	public List<Node>getMergeNodesForCluster(String name)
+	{
+		try
+		{
+			Cluster cluster = GraphXpath.getClusterForName(xml,name);
+			for(String subType : this.subSet)
+			{
+				if(cluster.getMergedNodes().getType().equals(subType)) {return cluster.getMergedNodes().getNode();}
+			}
+		}
+		catch (ExlpXpathNotFoundException e) {logger.error("No cluster defined for: " + name);}
+		catch (ExlpXpathNotUniqueException e) {logger.error("Many clusters for : "+ name + " : written in xml file: ");}
+		catch (NullPointerException e) {logger.info("No merged nodes for cluster name: "+ name);}
+		return new ArrayList<Node>();
+	}
+
+	private String toCamelCaseLabel(String name)
 	{
 		try{
-			return categoryName.substring(0, 1).toUpperCase() + categoryName.substring(1).toLowerCase();
+			return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
 		}catch (Exception e) {
-			return categoryName;
+			return name;
 		}
+	}
+
+	@Override
+	public String getLabelForCategory(String catCode) {
+		return getLabelForCluster(catCode);
 	}
 }

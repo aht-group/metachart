@@ -23,7 +23,10 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://www.metachart.org/graph}node" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.metachart.org/graph}mergedNodes"/&gt;
  *       &lt;/sequence&gt;
+ *       &lt;attribute name="category" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
@@ -35,7 +38,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "node"
+    "node",
+    "mergedNodes"
 })
 @XmlRootElement(name = "cluster")
 public class Cluster
@@ -45,6 +49,12 @@ public class Cluster
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected List<Node> node;
+    @XmlElement(required = true)
+    protected MergedNodes mergedNodes;
+    @XmlAttribute(name = "category")
+    protected String category;
+    @XmlAttribute(name = "id")
+    protected Long id;
     @XmlAttribute(name = "code")
     protected String code;
     @XmlAttribute(name = "label")
@@ -85,6 +95,94 @@ public class Cluster
 
     public void unsetNode() {
         this.node = null;
+    }
+
+    /**
+     * Gets the value of the mergedNodes property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link MergedNodes }
+     *     
+     */
+    public MergedNodes getMergedNodes() {
+        return mergedNodes;
+    }
+
+    /**
+     * Sets the value of the mergedNodes property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link MergedNodes }
+     *     
+     */
+    public void setMergedNodes(MergedNodes value) {
+        this.mergedNodes = value;
+    }
+
+    public boolean isSetMergedNodes() {
+        return (this.mergedNodes!= null);
+    }
+
+    /**
+     * Gets the value of the category property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * Sets the value of the category property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCategory(String value) {
+        this.category = value;
+    }
+
+    public boolean isSetCategory() {
+        return (this.category!= null);
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setId(long value) {
+        this.id = value;
+    }
+
+    public boolean isSetId() {
+        return (this.id!= null);
+    }
+
+    public void unsetId() {
+        this.id = null;
     }
 
     /**

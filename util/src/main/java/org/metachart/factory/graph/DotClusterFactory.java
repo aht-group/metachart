@@ -34,7 +34,7 @@ public class DotClusterFactory {
 
 		txtWriter.add(String.format(this.formatedLabel, this.csm.getLabelForCategory(cluster.getLabel())));
 		for(Node node: cluster.getNode()) {
-			txtWriter.add(dotNode.nodeToDot(node));
+			txtWriter.add(dotNode.nodeToDot(node,true));
 		}
 		txtWriter.add(" } ");
 	}

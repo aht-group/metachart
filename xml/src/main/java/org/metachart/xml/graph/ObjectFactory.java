@@ -102,6 +102,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link MergedNodes }
+     * 
+     */
+    public MergedNodes createMergedNodes() {
+        return new MergedNodes();
+    }
+
+    /**
      * Create an instance of {@link Dot }
      * 
      */

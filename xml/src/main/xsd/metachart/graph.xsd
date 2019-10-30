@@ -62,7 +62,10 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="node" maxOccurs="unbounded"/>
+                <xsd:element ref="mergedNodes" maxOccurs="1"/>
             </xsd:sequence>
+            <xsd:attribute name="category" type="xsd:string"/>
+            <xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="label" type="xsd:string"/>
         </xsd:complexType>
@@ -89,6 +92,14 @@
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string"/>
             </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="mergedNodes">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="node" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="type" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
