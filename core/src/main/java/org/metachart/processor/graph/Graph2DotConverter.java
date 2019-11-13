@@ -78,4 +78,8 @@ public class Graph2DotConverter
 		return baos.toString();
 	}
 
+	public void initWorkflowDiagramSetting() {
+		dotGraph.setingsWorkflowDiagaram();
+	}
+
 }

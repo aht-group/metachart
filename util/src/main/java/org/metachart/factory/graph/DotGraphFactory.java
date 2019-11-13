@@ -51,6 +51,10 @@ public class DotGraphFactory {
 		txtWriter.add("");
 	}
 
+	public void setingsWorkflowDiagaram() {
+		this.splines = null;
+		this.overlap = "scale";
+	}
 
 
 	public void endDotDiagraph() {
