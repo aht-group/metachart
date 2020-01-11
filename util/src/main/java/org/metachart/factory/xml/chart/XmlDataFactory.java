@@ -29,11 +29,15 @@ public class XmlDataFactory
         data.setCategory(category);
         return data;
     }
-    
     public static Data category(String category,  double value)
+    {
+        return categoryLabel(category,null,value);
+    }
+    public static Data categoryLabel(String category,  String label, double value)
     {
         Data data = new Data();
         data.setCategory(category);
+        data.setLabel(label);
         data.setY(value);
         return data;
     }

@@ -24,10 +24,11 @@ public class UiDataSet extends UINamingContainer
 		{
 			for(Data data : ds.getData())
 			{
-				sb.append("[");
-				sb.append("'").append(data.getCategory()).append("'");
-				sb.append(",").append(data.getY());
-				sb.append("],");
+				sb.append("{");
+				sb.append("value: ").append(data.getY());
+				sb.append(", code: '").append(data.getCategory()).append("'");
+				if(data.isSetLabel()) {sb.append(", label:'").append(data.getLabel()).append("'");}
+				sb.append("},");
 			}
 			String result = sb.substring(0, sb.length()-1);
 			logger.info(result);

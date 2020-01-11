@@ -9,16 +9,18 @@
     
 	<composite:interface componentType="org.metachart.jsf.map.UiDataSet">
 		<composite:attribute name="value" required="false"/>
-		<composite:attribute name="joinBy" required="true"/>
+		<composite:attribute name="joinByMap" required="true"/>
+		<composite:attribute name="joinByCode" required="false" default="code"/>
 	</composite:interface>
 	        
 	<composite:implementation>
 		{
             data: [ #{cc.data(cc.attrs.value)} ],
-            keys: ['#{cc.attrs.joinBy}', 'value'],
-            joinBy: '#{cc.attrs.joinBy}',
+          
+            joinBy: ['#{cc.attrs.joinByMap}', '#{cc.attrs.joinByCode}'],
             name: '#{cc.attrs.value.label}',
-            states: {hover: {color: '#a4edba'}}
+            states: {hover: {color: '#a4edba'}},
+			tooltip: {pointFormat: '{point.label}: {point.value}'}
         }
 	</composite:implementation>
 </html>
