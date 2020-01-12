@@ -31,7 +31,7 @@ public class UiDataSet extends UINamingContainer
 				sb.append("},");
 			}
 			String result = sb.substring(0, sb.length()-1);
-			logger.info(result);
+//			logger.info(result);
 			return result;
 		}
 		return sb.toString();
