@@ -4,7 +4,7 @@
     xmlns:f="http://java.sun.com/jsp/jstl/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:mc="http://www.metachart.org/chart"
+    xmlns:mcc="http://www.metachart.org/chart"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface componentType="org.metachart.jsf.chart.UiDataSet">
@@ -63,18 +63,7 @@
 		</c:if>
 		<c:if test="#{not empty cc.attrs.d}">
 		 	<ui:repeat var="ds" value="#{cc.attrs.d}">
-		 		{
-		        <ui:fragment rendered="#{not empty ds.color}">
-		            color: '#{ds.color}',
-		        </ui:fragment>
-		        <ui:fragment empty="#{empty ds.label}">
-		            showInLegend: false,
-		        </ui:fragment>
-		            type: '#{cc.attrs.type}',
-		            step: '#{cc.attrs.step}',
-		            name: '#{ds.label}',
-		            data: [ #{cc.data(ds)} ]
-		        },
+		 		<mcc:ds value="#{ds}"/>
 		 	</ui:repeat>
 		 </c:if>
 	</composite:implementation>
