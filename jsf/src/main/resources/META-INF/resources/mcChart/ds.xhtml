@@ -42,10 +42,15 @@
 	            point: {
 	            	events: {
 	            		select: function(){
-	            			var json = [{name: 'time', value: this.name}];
-	            			//console.log(json);
-	            			selectGraphPoint(json);
-	            			console.log("selectGraphPoint()");
+	            		var json = [];
+	            		if(Boolean(this.name)){
+	            			json = [{name: 'time', value: this.name}];
+	            		}else if(Boolean(this.x)){
+	            			json = [{name: 'time', value: this.x}];
+	            		}
+	            		console.log(json);
+	            		selectGraphPoint(json);
+	            		console.log("selectGraphPoint(" + json + ")");
 	            		}
 	            	}
 	            },
