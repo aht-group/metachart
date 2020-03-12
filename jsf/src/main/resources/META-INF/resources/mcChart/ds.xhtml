@@ -48,8 +48,9 @@
 	            		}else if(Boolean(this.x)){
 	            			json = [{name: 'time', value: this.x}];
 	            		}
-	            		console.log(json);
+	            		//console.log(json);
 	            		selectGraphPoint(json);
+	            		selectElementInChart(json[0].value);
 	            		console.log("selectGraphPoint(" + json + ")");
 	            		}
 	            	}
