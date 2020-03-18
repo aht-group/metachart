@@ -6,10 +6,12 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
-		<composite:attribute name="enabled" required="false"/>
+		<composite:attribute name="enabled" required="false" default="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
-            legend: {enabled: true},
+            legend: {
+            	enabled: #{cc.attrs.enabled},
+            	},
 	</composite:implementation>
 </html>

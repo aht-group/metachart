@@ -13,6 +13,7 @@
 		<composite:attribute name="symbol" required="false" default="circle"/>
 		<composite:attribute name="radius" required="false" default="2"/>
         <composite:attribute name="markerHoverEnabled" required="false" default="true"/>
+        <composite:attribute name="legend" required="false" default="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -22,6 +23,7 @@
                 dataLabels: {
                     enabled: #{cc.attrs.dataLabel}
                 },
+                showInLegend: #{cc.attrs.legend},
                 marker: {
                     enabled: #{cc.attrs.marker},
                     symbol: '#{cc.attrs.symbol}',

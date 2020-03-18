@@ -20,6 +20,7 @@
 		<composite:attribute name="pointSelect" required="false" default="false"/>
 		<composite:attribute name="pointEvent" required="false" default="false"/>
 		<composite:attribute name="pointEventHandler" required="false" default=""/>
+		<composite:attribute name="showInLegend" required="false" default="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -29,7 +30,7 @@
 	            color: '#{cc.attrs.value.color}',
 	        </ui:fragment>
 	        <ui:fragment empty="#{empty cc.attrs.value.label}">
-	            showInLegend: false,
+	            showInLegend:'#{cc.attrs.showInLegend}',
 	        </ui:fragment>
 	            type: '#{cc.attrs.type}',
 	            step: '#{cc.attrs.step}',
