@@ -42,10 +42,10 @@
 			        	valuePrefix: '#{cc.attrs.prefix}',
 			        	valueSuffix: '#{cc.attrs.suffix}' ,
 		            <ui:fragment rendered="#{not cc.attrs.timeseries}">
-		            	pointFormat: "#{cc.attrs.nameLabel}{point.name:%d-%m-%Y}<br/>#{cc.attrs.yLabel} {point.y#{cc.attrs.yFormat}} #{cc.attrs.yUnit}<br/>#{cc.attrs.xLabel} {point.x#{cc.attrs.xFormat}} #{cc.attrs.xUnit}",
+		            	pointFormat: "#{cc.attrs.nameLabel}{point.name:%d-%m-%Y}&#60;br/&#62;#{cc.attrs.yLabel} {point.y#{cc.attrs.yFormat}} #{cc.attrs.yUnit}&#60;br/&#62;#{cc.attrs.xLabel} {point.x#{cc.attrs.xFormat}} #{cc.attrs.xUnit}",
 		            </ui:fragment>
 		            <ui:fragment rendered="#{cc.attrs.timeseries}">
-		            	pointFormat: "#{cc.attrs.xLabel}{point.x#{cc.attrs.dateFormat}}<br/>#{cc.attrs.yLabel} {point.y#{cc.attrs.yFormat}} #{cc.attrs.yUnit}",
+		            	pointFormat: "#{cc.attrs.xLabel}{point.x#{cc.attrs.dateFormat}}&#60;br/&#62;#{cc.attrs.yLabel} {point.y#{cc.attrs.yFormat}} #{cc.attrs.yUnit}",
 		            </ui:fragment>
 		            },
 		</ui:fragment>
