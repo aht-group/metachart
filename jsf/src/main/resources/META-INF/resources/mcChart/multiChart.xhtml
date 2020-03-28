@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsp/jstl/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:composite="http://java.sun.com/jsf/composite">
+    
+	<composite:interface>
+        <composite:attribute name="jquery" required="false" default="false"
+                             shortDescription="If true, jquery lib will be added by MetaChart."/>
+        <composite:attribute name="type" required="false" default="line"
+                             shortDescription="Currently tested types are: column,line"/>
+        <composite:attribute name="zoomType" required="false" default=""
+                             shortDescription="Currently tested types are: x,y"/>
+        <composite:attribute name="height" required="false" default="350"
+                             shortDescription="The height in px of the chart."/>
+	</composite:interface>
+	        
+	<composite:implementation>
+        <h:outputScript rendered="#{cc.attrs.jquery}" library="jsMetaChart" name="jquery-1.9.1.min.js" target="head" />
+        <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/highcharts.js" target="head" />
+        <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/modules/exporting.js" target="head" />
+        
+		<div id="chartContainer" style="height: #{cc.attrs.height}px; margin: 0 auto"></div>
+
+	<h:outputScript>
+       
+$(function () {
+    //<![CDATA[
+    /**
+     * In order to synchronize tooltips and crosshairs, override the
+     * built-in events with handlers defined on the parent element.
+     */
+    $('#chartContainer').bind('mousemove touchmove touchstart', function (e) {
+        var chart,
+            point,
+            i,
+            event;
+
+        for (i = 0; i < Highcharts.charts.length; i = i + 1) {
+            chart = Highcharts.charts[i];
+            event = chart.pointer.normalize(e.originalEvent); // Find coordinates within the chart
+            point = chart.series[0].searchPoint(event, true); // Get the hovered point
+            if (point) {
+                point.highlight(e);
+            }
+        }
+    });
+    /**
+     * Override the reset function, we don't need to hide the tooltips and crosshairs.
+     */
+    Highcharts.Pointer.prototype.reset = function () {
+        return undefined;
+    };
+
+    /**
+     * Highlight a point by showing tooltip, setting hover state and draw crosshair
+     */
+    Highcharts.Point.prototype.highlight = function (event) {
+        this.onMouseOver(); // Show the hover marker
+        this.series.chart.tooltip.refresh(this); // Show the tooltip
+        this.series.chart.xAxis[0].drawCrosshair(event, this); // Show the crosshair
+    };
+
+    /**
+     * Synchronize zooming through the setExtremes event handler.
+     */
+    function syncExtremes(e) {
+        var thisChart = this.chart;
+
+        if (e.trigger !== 'syncExtremes') { // Prevent feedback loop
+            Highcharts.each(Highcharts.charts, function (chart) {
+                if (chart !== thisChart) {
+                    if (chart.xAxis[0].setExtremes) { // It is null while updating
+                        chart.xAxis[0].setExtremes(e.min, e.max, undefined, false, { trigger: 'syncExtremes' });
+                    }
+                }
+            });
+        } 
+    }
+    //]]>
+  	<composite:insertChildren />
+         
+});
+
+	</h:outputScript>
+
+	</composite:implementation>
+</html>

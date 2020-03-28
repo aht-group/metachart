@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsp/jstl/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:composite="http://java.sun.com/jsf/composite">
+    
+	<composite:interface>
+        <composite:attribute name="name" required="false" default="test" shortDescription=""/>
+        <composite:attribute name="zoomType" required="false" default=""
+                             shortDescription="Currently tested types are: x,y"/>
+        <composite:attribute name="height" required="false" default="200"
+                             shortDescription="The height in px of the chart."/>
+	</composite:interface>
+	        
+	<composite:implementation>
+//<![CDATA[
+        $('<div class="chart">')
+                .appendTo('#chartContainer')
+                .highcharts({
+                    chart: {
+                        marginLeft: 40, // Keep all charts left aligned
+                        spacingTop: 20,
+                        spacingBottom: 20,
+                        height:#{cc.attrs.height},
+                        zoomType: 'x'
+                    },
+                    title: {
+                        text: '#{cc.attrs.name}',
+                        align: 'left',
+                        margin: 0,
+                        x: 30
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    legend: {
+                        enabled: true
+                    },
+                    xAxis: {
+                        crosshair: true,
+                        events: {
+                            setExtremes: syncExtremes
+                        },
+                        labels: {
+                            format: '{value:%b \'%y}'
+                        }
+                    },
+//]]>
+                  <composite:insertChildren />
+//<![CDATA[                 
+                });
+//]]>
+	</composite:implementation>
+</html>
