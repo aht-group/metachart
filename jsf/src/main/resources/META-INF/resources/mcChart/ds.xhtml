@@ -42,7 +42,7 @@
 	        <ui:fragment rendered="#{cc.attrs.pointEvent}">
 	            point: {
 	            	events: {
-	            		select: function(){
+	            		click: function(e){
 	            		var json = [];
 	            		if(Boolean(this.name)){
 	            			json = [{name: 'time', value: this.name}];
@@ -53,6 +53,8 @@
 	            		selectGraphPoint(json);
 	            		selectElementInChart(json[0].value);
 	            		console.log("selectGraphPoint(" + json + ")");
+	            		this.select(true);
+	            		e.preventDefault();
 	            		}
 	            	}
 	            },

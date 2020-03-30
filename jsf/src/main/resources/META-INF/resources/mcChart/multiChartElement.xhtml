@@ -6,13 +6,13 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
-        <composite:attribute name="name" required="false" default="test" shortDescription=""/>
+        <composite:attribute name="type" required="false" default="line"
+                             shortDescription="Currently tested types are: column,line"/>
         <composite:attribute name="zoomType" required="false" default=""
                              shortDescription="Currently tested types are: x,y"/>
-        <composite:attribute name="height" required="false" default="200"
+        <composite:attribute name="height" required="false" default="350"
                              shortDescription="The height in px of the chart."/>
 	</composite:interface>
-	        
 	<composite:implementation>
 //<![CDATA[
         $('<div class="chart">')
@@ -23,19 +23,8 @@
                         spacingTop: 20,
                         spacingBottom: 20,
                         height:#{cc.attrs.height},
-                        zoomType: 'x'
-                    },
-                    title: {
-                        text: '#{cc.attrs.name}',
-                        align: 'left',
-                        margin: 0,
-                        x: 30
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    legend: {
-                        enabled: true
+                        type: '#{cc.attrs.type}',
+                    	zoomType: '#{cc.attrs.zoomType}'
                     },
                     xAxis: {
                         crosshair: true,

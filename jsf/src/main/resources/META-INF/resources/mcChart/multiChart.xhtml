@@ -8,25 +8,21 @@
 	<composite:interface>
         <composite:attribute name="jquery" required="false" default="false"
                              shortDescription="If true, jquery lib will be added by MetaChart."/>
-        <composite:attribute name="type" required="false" default="line"
-                             shortDescription="Currently tested types are: column,line"/>
-        <composite:attribute name="zoomType" required="false" default=""
-                             shortDescription="Currently tested types are: x,y"/>
-        <composite:attribute name="height" required="false" default="350"
-                             shortDescription="The height in px of the chart."/>
 	</composite:interface>
 	        
 	<composite:implementation>
         <h:outputScript rendered="#{cc.attrs.jquery}" library="jsMetaChart" name="jquery-1.9.1.min.js" target="head" />
         <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/highcharts.js" target="head" />
         <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/modules/exporting.js" target="head" />
-        
+        <div id="buttonrow">
+		  <button id="export-png">Export to PNG</button>
+		  <button id="export-pdf">Export to PDF</button>
+		</div>
 		<div id="chartContainer" style="height: #{cc.attrs.height}px; margin: 0 auto"></div>
-
 	<h:outputScript>
        
 $(function () {
-    //<![CDATA[
+//<![CDATA[
     /**
      * In order to synchronize tooltips and crosshairs, override the
      * built-in events with handlers defined on the parent element.
@@ -78,7 +74,55 @@ $(function () {
             });
         } 
     }
-    //]]>
+    
+    Highcharts.getSVG = function(charts) {
+  		var svgArr = [],
+    	top = 0,
+   	 	width = 0;
+
+	  Highcharts.each(charts, function(chart) {
+	    var svg = chart.getSVG(),
+	    // Get width/height of SVG for export
+	    svgWidth = +svg.match(/^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/)[1],
+	    svgHeight = +svg.match(/^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
+	
+	    svg = svg.replace('<svg','<g transform="translate('+width+', 0 )" ');
+	    svg = svg.replace('</svg>', '</g>');
+	
+	    width += svgWidth;
+		top = Math.max(top, svgHeight);
+		
+	    svgArr.push(svg);
+  	});	
+
+  	return '<svg height="' + top + '" width="' + width + '" version="1.1" xmlns="http://www.w3.org/2000/svg">' + svgArr.join('') + '</svg>';
+	};
+
+	/**
+	 * Create a global exportCharts method that takes an array of charts as an
+	 * argument, and exporting options as the second argument
+	 */
+	Highcharts.exportCharts = function(charts, options) {
+	  // Merge the options
+	  options = Highcharts.merge(Highcharts.getOptions().exporting, options);
+	
+	  // Post to export server
+	  Highcharts.post(options.url, {
+	    filename: options.filename || 'chart',
+	    type: options.type,
+	    width: options.width,
+	    svg: Highcharts.getSVG(charts)
+	  });
+	};
+	
+	$('#export-png').click(function() {
+	  Highcharts.exportCharts(Highcharts.charts);
+	});
+	
+	$('#export-pdf').click(function() {
+	  Highcharts.exportCharts(Highcharts.charts, {type: 'application/pdf'});
+	  }); 
+//]]>
   	<composite:insertChildren />
          
 });
