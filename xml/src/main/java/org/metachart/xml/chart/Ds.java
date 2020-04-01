@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="color" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="symbol" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="rangeIndex" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="colorIndex" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
@@ -59,6 +60,8 @@ public class Ds
     protected String code;
     @XmlAttribute(name = "color")
     protected String color;
+    @XmlAttribute(name = "symbol")
+    protected String symbol;
     @XmlAttribute(name = "label")
     protected String label;
     @XmlAttribute(name = "rangeIndex")
@@ -226,6 +229,34 @@ public class Ds
 
     public boolean isSetColor() {
         return (this.color!= null);
+    }
+
+    /**
+     * Gets the value of the symbol property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSymbol() {
+        return symbol;
+    }
+
+    /**
+     * Sets the value of the symbol property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSymbol(String value) {
+        this.symbol = value;
+    }
+
+    public boolean isSetSymbol() {
+        return (this.symbol!= null);
     }
 
     /**
