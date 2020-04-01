@@ -1,6 +1,10 @@
 package org.metachart.js;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.stream.Stream;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -9,10 +13,54 @@ import javax.script.ScriptException;
 public class JsBackendProcessor 
 {
 	private ScriptEngine engine;
+	private static String chartJson = "{\"infile\": {\"chart\": {\"type\": \"column\"}, \"title\": {\"text\": \"Stacked column chart\"},"
+			+ " \"xAxis\": {\"categories\": [\"Apples\", \"Oranges\", \"Pears\", \"Grapes\", \"Bananas\"]},"
+			+ " \"yAxis\": {\"min\": 0,"
+			+ " \"title\": {\"text\": \"Total fruit consumption\"},"
+			+ " \"stackLabels\": {\"enabled\": true,"
+			+ " \"style\": {\"fontWeight\": \"bold\"}}},"
+			+ " \"legend\": {\"align\": \"right\", \"x\": -30, \"verticalAlign\": \"top\", \"y\": 25, \"floating\": true,"
+			+ " \"borderColor\": \"#CCC\","
+			+ " \"borderWidth\": 1, \"shadow\": false},"
+			+ " \"plotOptions\": {\"column\": {\"stacking\": \"normal\", \"dataLabels\": {\"enabled\": true}}},"
+			+ " \"series\":["
+			+ "{\"name\": \"John\", \"data\": [5, 3, 4, 7, 2]},"
+			+ " {\"name\": \"Jane\", \"data\": [2, 2, 3, 2, 1]},"
+			+ " {\"name\": \"Joe\", \"data\": [3, 4, 4, 2, 5]}"
+			+ "]},"
+			+ " \"type\": \"svg\","
+			+ " \"resources\": {\"files\": \"highcharts.js,modules/exporting.js,modules/export-data.js\"}}";
 	
 	public JsBackendProcessor() 
 	{
 	    engine = new ScriptEngineManager().getEngineByName("javascript");
+	}
+	
+	private static String[] xPut(String json) 
+	{
+	
+//		curl -H "Content-Type: application/json" -X POST -d '{"infile": {"chart": {"type": "column"}, "title": {"text": "Stacked column chart"}, "xAxis": {"categories": ["Apples", "Oranges", "Pears", "Grapes", "Bananas"]}, "yAxis": {"min": 0, "title": {"text": "Total fruit consumption"}, "stackLabels": {"enabled": true, "style": {"fontWeight": "bold"}}}, "legend": {"align": "right", "x": -30, "verticalAlign": "top", "y": 25, "floating": true, "borderColor": "#CCC", "borderWidth": 1, "shadow": false}, "plotOptions": {"column": {"stacking": "normal", "dataLabels": {"enabled": true}}}, "series": [{"name": "John", "data": [5, 3, 4, 7, 2]}, {"name": "Jane", "data": [2, 2, 3, 2, 1]}, {"name": "Joe", "data": [3, 4, 4, 2, 5]}]}, "type": "svg", "resources": {"files": "highcharts.js,modules/exporting.js,modules/export-data.js"}}' http://export.highcharts.com -o /tmp/highcharts_testchart.svg
+	
+//		http://export.highcharts.com -o /tmp/highcharts_testchart.svg
+			
+		String[] stringGet = {"curl", "-X", "POST", "http://export.highcharts.com", "-H", "accept: application/json", "-H", "content-type: application/json", "-d", json };
+		Stream.of(stringGet).forEach(s -> System.out.println("TEST: " + s ));
+		return stringGet;
+	}
+	
+	private static String runProcess(String[] strings) throws IOException, InterruptedException 
+	{
+		ProcessBuilder ps = new ProcessBuilder(strings);
+		Process pr = ps.start();
+		pr.waitFor();
+
+		BufferedReader reader2 = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+		StringBuilder sb = new StringBuilder();
+		String line2 = "";	
+		
+		while ((line2 = reader2.readLine()) != null) {sb.append(line2 + "\n");}
+		
+		return sb.toString();
 	}
 	
 	public void executeJs() throws ScriptException 
@@ -38,7 +86,15 @@ public class JsBackendProcessor
 	public static void main(String args[]) throws ScriptException, FileNotFoundException 
 	{
 		JsBackendProcessor cli = new JsBackendProcessor();
-		cli.executeJs();
+		try {
+			String response = runProcess(xPut(chartJson));
+			System.out.println(response);
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	//	cli.executeJs();
 	}
 }
 
