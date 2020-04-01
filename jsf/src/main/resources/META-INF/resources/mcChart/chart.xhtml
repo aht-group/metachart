@@ -35,8 +35,51 @@
                 title: {text: null},
                 subtitle: {text: null},
                 credits: {text: null},
-
+                
+                navigation: {
+                    buttonOptions: {
+                        theme: {
+                            // Good old text links
+                            style: {
+                                color: '#039',
+                                textDecoration: 'underline'
+                            }
+                        }
+                    }
+                },
+            
+                exporting: {
+                    buttons: {
+                        contextButton: {
+                            enabled: false
+                        },
+                        exportButton: {
+                            text: 'Download',
+                            // Use only the download related menu items from the default
+                            // context button
+                            menuItems: [
+                                'downloadPNG',
+                                'downloadJPEG',
+                                'downloadPDF',
+                                'downloadSVG'
+                            ]
+                        },
+                        printButton: {
+                            text: 'Print',
+                            onclick: function () {
+                                this.print();
+                            }
+                        }
+                    }
+                },
                 <composite:insertChildren />
+            });
+            
+             Highcharts.setOptions({
+                lang: {
+                  decimalPoint: '.',
+                  thousandsSep: ','
+                }
             });
         });
 

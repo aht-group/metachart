@@ -115,6 +115,13 @@ $(function () {
 	  });
 	};
 	
+	Highcharts.setOptions({
+                lang: {
+                  decimalPoint: '.',
+                  thousandsSep: ','
+                }
+            });
+            
 	$('#export-png').click(function() {
 	  Highcharts.exportCharts(Highcharts.charts);
 	});
