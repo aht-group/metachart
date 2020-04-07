@@ -46,13 +46,15 @@
 	            		click: function(e){
 	            		var json = [];
 	            		if(Boolean(this.name)){
-	            			json = [{name: 'time', value: this.name}];
+	            			var selectDT = new Date(this.name);
+	            			json = [{name: 'time', value: this.name + selectDT.getTimezoneOffset()*60*1000}];
 	            		}else if(Boolean(this.x)){
-	            			json = [{name: 'time', value: this.x}];
+	            			var selectDT = new Date(this.x);
+	            			json = [{name: 'time', value: this.x + selectDT.getTimezoneOffset()*60*1000}];
 	            		}
-	            		//console.log(json);
+	            		console.log(json);
 	            		selectGraphPoint(json);
-	            		selectElementInChart(json[0].value);
+	            		selectElementInChart(this.x);
 	            		console.log("selectGraphPoint(" + json + ")");
 	            		this.select(true);
 	            		e.preventDefault();
