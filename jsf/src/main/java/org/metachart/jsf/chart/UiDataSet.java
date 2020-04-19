@@ -13,14 +13,14 @@ import org.slf4j.LoggerFactory;
 public class UiDataSet extends UINamingContainer
 {
 	final static Logger logger = LoggerFactory.getLogger(UiDataSet.class);
-	
+
 /*	public String data(DataSet ds)
 	{
 		logger.info("Building data ");
-		
+
 		if(ds==null) {logger.warn("ds is NULL");}
 		else {logger.warn("size: "+ds.getData().size());}
-		
+
 		StringBuffer sb = new StringBuffer();
 		if(ds!=null && ds.getData().size()>0)
 		{
@@ -40,16 +40,16 @@ public class UiDataSet extends UINamingContainer
 	public String data(Ds ds)
 	{
 		logger.info("Building data ");
-		
+
 		if(ds==null) {logger.warn("ds is NULL");}
 		else {logger.warn("size: "+ds.getData().size());}
-		
+
 		StringBuffer sb = new StringBuffer();
 		if(ds!=null && ds.getData().size()>0)
 		{
 			for(Data data : ds.getData())
 			{
-				sb.append("[");
+				if(data.isSetRecord() || data.isSetX()){sb.append("[");}
 				if(data.isSetRecord() && data.isSetX()) {sb.append("x:"+data.getX()+" , "); sb.append("name:"); appendDate(data.getRecord(),sb);}
                 if(data.isSetRecord() && !data.isSetX()){appendDate(data.getRecord(),sb);}
                 else if(data.isSetX() && !data.isSetRecord()) {sb.append(data.getX()+" , ");}
