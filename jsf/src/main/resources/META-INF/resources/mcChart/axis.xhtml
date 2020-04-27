@@ -15,10 +15,12 @@
 		<composite:attribute name="showFirstLabel" required="false" default="true"/>
 		<composite:attribute name="gridLineWidth" required="false" default="0"/>
 		<composite:attribute name="tickInterval" required="false" default="null"/>
+		<composite:attribute name="second" required="false" default="false"/>
+		<composite:attribute name="offset" required="false" default="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
-        #{cc.attrs.code}Axis:{
+        #{cc.attrs.code}Axis:[{
         	title: {text: null},
         	min: #{cc.attrs.min},
         	max: #{cc.attrs.max},
@@ -28,8 +30,21 @@
             lineWidth: 1,
             gridLineWidth: #{cc.attrs.gridLineWidth},
             showFirstLabel: #{cc.attrs.showFirstLabel},
+            <ui:fragment rendered="#{cc.attrs.offset}">
+            labels:{
+            	align: 'left'
+            },
+            </ui:fragment>
             #{cc.categories(cc.attrs.categories)}
             <composite:insertChildren />
         },
+       	<ui:fragment rendered="#{cc.attrs.second}">
+       	{	
+       		opposite: true,
+       		lineWidth: 1,
+       		title: {text:null},
+       	}
+       	</ui:fragment>
+       	],
 	</composite:implementation>
 </html>
