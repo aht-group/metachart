@@ -3,30 +3,71 @@
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
-	<appender name="A1" class="org.apache.log4j.ConsoleAppender">
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{HH:mm:ss,SSS} [%5p] %C{1}-%L: %m%n" />
 	    </layout>
 	</appender>
 	
-	<logger name="net.sf.jmimemagic" additivity="false">
-		<level value="WARN"/>
-		<appender-ref ref="A1"/>
-	</logger>
 	
+	<appender name="FILE" class="org.apache.log4j.FileAppender">
+	   <param name="file" value="target/log.out"/>
+	   <param name="immediateFlush" value="true"/>
+	   <param name="threshold" value="audit"/>
+	   <param name="append" value="true"/>
+	   <layout class="org.apache.log4j.PatternLayout">
+	      <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} [%5p] %C{1}-%L: %m%n" />
+	   </layout>
+	</appender>
+    
 	<logger name="net.sf.exlp" additivity="false">
 		<level value="INFO"/>
-		<appender-ref ref="A1"/>
+		<appender-ref ref="CONSOLE"/>
 	</logger>
 	
-	<logger name="org.jboss.ejb.client.remoting" additivity="false">
-		<level value="WARN"/>
-		<appender-ref ref="A1"/>
+		<logger name="net.sf.ahtutils" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="CONSOLE"/>
 	</logger>
-    
+	
+	<logger name="pk.edu.niit.clarens" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+	
+	<logger name="org.apache.commons.configuration" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+	
+	<logger name="org.apache.commons.httpclient" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+	
+	<logger name="org.apache.http" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+	
+	<logger name="org.jboss.ejb.client" additivity="false">
+		<level value="WARN"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+	
+	<logger name="rw.gov.loda.meis" additivity="false">
+		<level value="DEBUG"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+	
+	<logger name="rw.gov.loda.meis.audit" additivity="false">
+		<level value="AUDIT"/>
+		<appender-ref ref="FILE"/>
+	</logger>
+        
 	<root>
 		<priority value="INFO" />
-		<appender-ref ref="A1" />
+		<appender-ref ref="CONSOLE" />
 	</root>
 
 </log4j:configuration>

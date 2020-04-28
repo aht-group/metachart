@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
-	
+	<net>
+		<rest>
+			<url>
+				<export>http://localhost:8080/metachart</export>
+				<import>http://localhost:8080/metachart</import>
+				<production>http://localhost:8080/metachart</production>
+			</url>
+		</rest>
+	</net>
+	<db>
+		<seed>metachart-showcase/config/dbseed.xml</seed>
+		<mc>
+			<ds>McDs</ds>
+			<host>localhost</host>
+			<db>metachart</db>
+			<user>test</user>
+			<pwd>test</pwd>
+			<ssl>false</ssl>
+		</mc>
+	</db>
 </config>
