@@ -13,7 +13,7 @@ import javax.script.ScriptException;
 
 
 /**
- * run against docker run -d -p 8889:8080 lpeters999/highcharts-export-npm:latest
+ * run against docker run -d -p 8889:8080 --pull always --rm lpeters999/highcharts-export-npm:latest
  */
 public class JsBackendProcessor 
 {
@@ -48,7 +48,7 @@ public class JsBackendProcessor
 	
 //		http://export.highcharts.com -o /tmp/highcharts_testchart.svg
 			
-		String[] stringGet = {"curl", "-X", "POST", "http://export.highcharts.com", "-H", "accept: application/json", "-H", "content-type: application/json", "-d", json };
+		String[] stringGet = {"curl", "-X", "POST", "localhost:8889", "-H", "accept: application/json", "-H", "content-type: application/json", "-d", json };
 		Stream.of(stringGet).forEach(s -> System.out.println("TEST: " + s ));
 		return stringGet;
 	}
