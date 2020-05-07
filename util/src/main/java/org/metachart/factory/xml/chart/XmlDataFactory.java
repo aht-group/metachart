@@ -42,10 +42,13 @@ public class XmlDataFactory
         return data;
     }
 	
-    public static Data build(double y, GregorianCalendar record)
-	{
-		return build(y,record.getTime());
-	}
+    public static Data build(long id, GregorianCalendar record, double value)
+    {
+    	Data xml = build(value,record);
+    	xml.setId(id);
+    	return xml;
+    }
+    public static Data build(double y, GregorianCalendar record) {return build(y,record.getTime());}
 	public static Data build(double y, Date date)
 	{
 		try
