@@ -16,9 +16,10 @@
         <composite:attribute name="height" required="false" default="350"
                              shortDescription="The height in px of the chart."/>
         <composite:attribute name="setJson" required="false"
-                             shortDescription="boolean value to enable and disable json as required"/>      
+                             shortDescription="boolean value to enable and disable json as required"/>
         <composite:attribute name="jsonProperty" required="false"
-                             shortDescription="Full path of bean property to set json chart"/>                             
+                             shortDescription="Full path of bean property to set json chart"/>
+		<composite:attribute name="jsonSaveListener" required="false" method-signature="void listener(javax.faces.event.AjaxBehaviorEvent)"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -92,8 +93,9 @@
     </h:outputScript>
     <h:form rendered="#{not empty cc.attrs.setJson}">
         <p:inputText type="hidden" widgetVar="chartWv#{cc.attrs.chartId}" value="#{cc.attrs.jsonProperty}"/>
-        <p:commandButton widgetVar="chartBtn#{cc.attrs.chartId}" value="save"
-            actionListener="#{dischargeComparisionBean.getTest}" process="@form" update="@none" style="display:none;" ajax="true"/>
+        <p:commandButton widgetVar="chartBtn#{cc.attrs.chartId}" value="save"  style="display:none;">
+        	<p:ajax event="click" update="@none" listener="#{cc.listener}" process="@form"/>
+        </p:commandButton>
     </h:form>    
     <h:outputScript  rendered="#{not empty cc.attrs.setJson}">
         var chartExport#{cc.attrs.chartId} = {"infile": chart#{cc.attrs.chartId},
