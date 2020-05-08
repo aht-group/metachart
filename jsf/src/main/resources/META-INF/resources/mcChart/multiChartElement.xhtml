@@ -23,15 +23,51 @@
                         type: '#{cc.attrs.type}',
                     	zoomType: '#{cc.attrs.zoomType}'
                     },
-                    xAxis: {
-                        crosshair: true,
-                        events: {
-                            setExtremes: syncExtremes
-                        },
-                        labels: {
-                            format: '{value:%b \'%y}'
+                
+                navigation: {
+                    buttonOptions: {
+                        theme: {
+                            // Good old text links
+                            style: {
+                                color: '#039',
+                                textDecoration: 'underline'
+                            }
                         }
-                    },
+                    }
+                },
+                exporting: {
+                    buttons: {
+                        contextButton: {
+                            enabled: false
+                        },
+                        exportButton: {
+                            text: 'Download',
+                            // Use only the download related menu items from the default
+                            // context button
+                            menuItems: [
+                                'downloadPNG',
+                                'downloadJPEG',
+                                'downloadPDF',
+                                'downloadSVG'
+                            ]
+                        },
+                        printButton: {
+                            text: 'Print',
+                            onclick: function () {
+                                this.print();
+                            }
+                        }
+                    }
+                },                    
+                 xAxis: {
+                     crosshair: true,
+                     events: {
+                         setExtremes: syncExtremes
+                     },
+                     labels: {
+                         format: '{value:%b \'%y}'
+                     }
+                 },
 //]]>
                   <composite:insertChildren />
 //<![CDATA[                 
