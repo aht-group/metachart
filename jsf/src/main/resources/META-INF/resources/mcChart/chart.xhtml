@@ -3,6 +3,7 @@
     xmlns:f="http://java.sun.com/jsp/jstl/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface componentType="org.metachart.jsf.Chart">
@@ -14,18 +15,20 @@
                              shortDescription="Currently tested types are: x,y"/>
         <composite:attribute name="height" required="false" default="350"
                              shortDescription="The height in px of the chart."/>
+        <composite:attribute name="setJson" required="false"
+                             shortDescription="boolean value to enable and disable json as required"/>      
+        <composite:attribute name="jsonProperty" required="false"
+                             shortDescription="Full path of bean property to set json chart"/>                             
 	</composite:interface>
 	        
 	<composite:implementation>
         <h:outputScript rendered="#{cc.attrs.jquery}" library="jsMetaChart" name="jquery-1.9.1.min.js" target="head" />
         <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/highcharts.js" target="head" />
-        <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/modules/exporting.js" target="head" />
-
+        <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/modules/exporting.js" target="head" />		
 		<div id="#{cc.attrs.chartId}" style="height: #{cc.attrs.height}px; margin: 0 auto"></div>
 
 	<h:outputScript>
-        $(function (){
-            $('##{cc.attrs.chartId}').highcharts({
+		var chart#{cc.attrs.chartId}= {
                 chart: {
                     type: '#{cc.attrs.type}',
                     zoomType: '#{cc.attrs.zoomType}',
@@ -73,7 +76,10 @@
                     }
                 },
                 <composite:insertChildren />
-            });
+            };
+            
+        $(function (){
+            $('##{cc.attrs.chartId}').highcharts(chart#{cc.attrs.chartId});
             
              Highcharts.setOptions({
                 lang: {
@@ -82,7 +88,23 @@
                 }
             });
         });
-
+        
+    </h:outputScript>
+    <h:form rendered="#{not empty cc.attrs.setJson}">
+        <p:inputText type="hidden" widgetVar="chartWv#{cc.attrs.chartId}" value="#{cc.attrs.jsonProperty}"/>
+        <p:commandButton widgetVar="chartBtn#{cc.attrs.chartId}" value="save"
+            actionListener="#{dischargeComparisionBean.getTest}" process="@form" update="@none" style="display:none;" ajax="true"/>
+    </h:form>    
+    <h:outputScript  rendered="#{not empty cc.attrs.setJson}">
+        var chartExport#{cc.attrs.chartId} = {"infile": chart#{cc.attrs.chartId},
+         "type": "svg",
+         "resources": {"files": "highcharts.js,modules/exporting.js,modules/export-data.js"}
+        };
+       
+        PF('chartWv#{cc.attrs.chartId}').jq.val(JSON.stringify(chartExport#{cc.attrs.chartId}));
+        //alert(PF('chartWv#{cc.attrs.chartId}').jq.val());
+        //var wV = PF('chartWv#{cc.attrs.chartId}');
+        PF('chartBtn#{cc.attrs.chartId}').jq.click();
 	</h:outputScript>
 
 	</composite:implementation>
