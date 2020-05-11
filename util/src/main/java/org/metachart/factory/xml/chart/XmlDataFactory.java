@@ -9,6 +9,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.joda.time.DateTime;
 import org.metachart.xml.chart.Data;
+import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -120,5 +121,11 @@ public class XmlDataFactory
 		Data xml = build(y);
 		xml.setRecord(record);
 		return xml;
+	}
+	
+	public static void append(Ds ds, boolean recursive, Date record, Double value)
+	{
+		ds.getData().add(XmlDataFactory.build(record));
+		if(recursive) {for(Ds child : ds.getDs()) {XmlDataFactory.append(child,recursive,record,value);}}
 	}
 }
