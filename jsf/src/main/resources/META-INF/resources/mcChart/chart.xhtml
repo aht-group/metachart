@@ -15,6 +15,8 @@
                              shortDescription="Currently tested types are: x,y"/>
         <composite:attribute name="height" required="false" default="350"
                              shortDescription="The height in px of the chart."/>
+		<composite:attribute name="linkDataTable" required="false"
+                             shortDescription="Id of Link table in"/>
         <composite:attribute name="setJson" required="false"
                              shortDescription="boolean value to enable and disable json as required"/>
         <composite:attribute name="jsonProperty" required="false"
@@ -27,7 +29,6 @@
         <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/highcharts.js" target="head" />
         <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/modules/exporting.js" target="head" />		
 		<div id="#{cc.attrs.chartId}" style="height: #{cc.attrs.height}px; margin: 0 auto"></div>
-
 	<h:outputScript>
 		var chart#{cc.attrs.chartId}= {
                 chart: {
@@ -39,40 +40,7 @@
                 title: {text: null},
                 subtitle: {text: null},
                 credits: {text: null},
-                
-                navigation: {
-                    buttonOptions: {
-                        theme: {
-                            // Good old text links
-                            style: {
-                                color: '#039',
-                                textDecoration: 'underline'
-                            }
-                        }
-                    }
-                },
-            
-                exporting: {
-                    buttons: {
-                        contextButton: {
-                            enabled: false
-                        },
-                        exportButton: {
-                            text: 'Download',
-                            // Use only the download related menu items from the default
-                            // context button
-                            menuItems: [
-                                'downloadPNG',
-                                'downloadJPEG',
-                                'downloadPDF',
-                                'downloadSVG'
-                            ]
-                        },
-                        printButton: {
-                            enabled: false
-                        },
-                    }
-                },
+              
                 <composite:insertChildren />
             };
             
