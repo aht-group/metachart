@@ -31,7 +31,17 @@
 			<artifactId>metachart-core</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		
+		<!-- Primefaces -->
+		<dependency>  
+   			<groupId>org.primefaces</groupId>  
+   			<artifactId>primefaces</artifactId>
+   			<scope>provided</scope>
+   		</dependency>
+   		<dependency>
+	        <groupId>org.primefaces.extensions</groupId>
+	        <artifactId>primefaces-extensions</artifactId>
+	        <scope>provided</scope>
+    	</dependency>
 		<dependency>
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>
@@ -50,7 +60,7 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 	    <plugins>
 <!--	        <plugin>

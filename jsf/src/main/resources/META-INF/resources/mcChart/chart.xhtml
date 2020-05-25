@@ -15,8 +15,12 @@
                              shortDescription="Currently tested types are: x,y"/>
         <composite:attribute name="height" required="false" default="350"
                              shortDescription="The height in px of the chart."/>
-		<composite:attribute name="linkDataTable" required="false"
+		<composite:attribute name="linkDataTableId" required="false"
                              shortDescription="Id of Link table in"/>
+		<composite:attribute name="linkBackingBean" required="false" 
+                             shortDescription="Bean Name String"/>
+         <composite:attribute name="chartAndTableHandler" required="false" default="chartAndTableHandler"
+                             shortDescription="chartAndTableHandler Name String"/>                                           
         <composite:attribute name="setJson" required="false"
                              shortDescription="boolean value to enable and disable json as required"/>
         <composite:attribute name="jsonProperty" required="false"

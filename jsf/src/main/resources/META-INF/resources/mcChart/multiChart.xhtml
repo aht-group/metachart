@@ -5,9 +5,20 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
-	<composite:interface>
+	<composite:interface componentType="org.metachart.jsf.Chart">
         <composite:attribute name="jquery" required="false" default="false"
                              shortDescription="If true, jquery lib will be added by MetaChart."/>
+		<composite:attribute name="linkDataTableId" required="false"
+                             shortDescription="Id of Link table in"/>
+		<composite:attribute name="linkBackingBean" required="false" 
+                             shortDescription="Id of Link table in"/>
+        <composite:attribute name="chartAndTableHandler" required="false" default="chartAndTableHandler"
+                             shortDescription="chartAndTableHandler Name String"/>                             
+        <composite:attribute name="setJson" required="false"
+                             shortDescription="boolean value to enable and disable json as required"/>
+        <composite:attribute name="jsonProperty" required="false"
+                             shortDescription="Full path of bean property to set json chart"/>
+		<composite:attribute name="jsonSaveListener" required="false" method-signature="void listener(javax.faces.event.AjaxBehaviorEvent)"/>
 	</composite:interface>
 	        
 	<composite:implementation>

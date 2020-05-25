@@ -41,32 +41,11 @@
 	            lineWidth: #{cc.attrs.lineWidth},
 	            allowPointSelect: #{cc.attrs.pointSelect}, 
 	        <ui:fragment rendered="#{cc.attrs.pointEvent}">
-	            point: {
+				point: {
 	            	events: {
 	            		click: function(e){
-						var json = [];
-						var selectdTime;
-						if(this.shapeType == "rect"){
-							if(this.hasOwnProperty("category")){ 
-								selectdTime = this.category;
-								var selectDT = new Date(this.category);
-								json = [{name: 'time', value: this.category + selectDT.getTimezoneOffset()*60*1000}];
-							}
-						}
-						else if(Boolean(this.name)){
-							selectdTime = this.name;
-	            			var selectDT = new Date(this.name);
-	            			json = [{name: 'time', value: this.name + selectDT.getTimezoneOffset()*60*1000}];
-	            		}else if(Boolean(this.x)){
-							selectdTime = this.x;
-	            			var selectDT = new Date(this.x);
-	            			json = [{name: 'time', value: this.x + selectDT.getTimezoneOffset()*60*1000}];
-						} 
-	            		console.log(json);
-	            		selectGraphPoint(json);
-	            		selectElementInChart(selectdTime);
-	            		console.log("selectGraphPoint(" + json + ")");
-	            		this.select(true);
+	            		console.log("select point");
+						selectRowInTable(this);
 	            		e.preventDefault();
 	            		}
 	            	}
