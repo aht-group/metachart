@@ -176,7 +176,7 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>{
 		while (it.hasNext()) {
 			index = it.nextIndex();
 			T tempPoint = it.next();
-			logger.info("index : "  + index +" date : " +tempPoint.getRecord().toString());
+			//logger.info("index : "  + index +" date : " +tempPoint.getRecord().toString());
 			//if(DateUtils.isSameInstant(tempRatingPoint.getRecord(), selectedDate)){
 			if(selectedDate.compareTo(tempPoint.getRecord())==0) {
 				selectedPointIndex=index;
