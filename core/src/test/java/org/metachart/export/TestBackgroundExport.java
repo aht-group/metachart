@@ -39,7 +39,7 @@ public class TestBackgroundExport
 	{
 		McCoreTestBootstrap.init();
 		BackgroundExportProcessor cli = new BackgroundExportProcessor();
-		logger.info(cli.exportSVG("http://192.168.1.20:8999/", chartJson, "png"));
-		logger.info(cli.exportSVG("http://192.168.1.20:8999/", chartJson, "svg"));
+//		logger.info(cli.exportSVG("http://192.168.1.20:8999/", chartJson, "png"));
+//		logger.info(cli.exportSVG("http://192.168.1.20:8999/", chartJson, "svg"));
 	}
 }

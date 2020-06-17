@@ -25,7 +25,7 @@ public class BackgroundExportProcessor
 		client = HttpClientBuilder.create().build();
 	}
 	
-	public String exportSVG(String url, String json, String type) throws ClientProtocolException, IOException
+	public byte[] exportSVG(String url, String json, String type) throws ClientProtocolException, IOException
 	{
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Content-Type", "application/json");
@@ -35,6 +35,7 @@ public class BackgroundExportProcessor
 		StringEntity stringEntity = new StringEntity(postString);
 		httpPost.setEntity(stringEntity);
 		HttpResponse httpRespnse = client.execute(httpPost);
-		return EntityUtils.toString(httpRespnse.getEntity(),"UTF-8");
+//		return EntityUtils.toString(httpRespnse.getEntity(),"UTF-8");
+		return EntityUtils.toByteArray(httpRespnse.getEntity());
 	}
 }
