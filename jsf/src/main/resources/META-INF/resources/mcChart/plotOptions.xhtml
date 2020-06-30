@@ -14,11 +14,13 @@
 		<composite:attribute name="radius" required="false" default="2"/>
         <composite:attribute name="markerHoverEnabled" required="false" default="true"/>
         <composite:attribute name="legend" required="false" default="false"/>
+        <composite:attribute name="stacking" required="false" default=""/>
 	</composite:interface>
 	        
 	<composite:implementation>
         plotOptions:{
         	#{cc.attrs.type}: {
+        		stacking: '#{cc.attrs.stacking}',
                 pionterstart: #{cc.attrs.pointerStart},
                 dataLabels: {
                     enabled: #{cc.attrs.dataLabel}
