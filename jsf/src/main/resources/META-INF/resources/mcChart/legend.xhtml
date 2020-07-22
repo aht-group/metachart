@@ -7,11 +7,27 @@
     
 	<composite:interface>
 		<composite:attribute name="enabled" required="false" default="false"/>
+		<composite:attribute name="layout" required="false" default="horizontal"/>
+		<composite:attribute name="align" required="false" default="center"/>
+		<composite:attribute name="verticalAlign" required="false" default="bottom"/>
+		<composite:attribute name="itemMarginTop" required="false" default="0"/>
+		<composite:attribute name="itemMarginBottom" required="false" default="0"/>
+		<composite:attribute name="floating" required="false" default="false"/>
+		<composite:attribute name="x" required="false" default="0" />
+		<composite:attribute name="y" required="false" default="0" />
 	</composite:interface>
 	        
 	<composite:implementation>
             legend: {
             	enabled: #{cc.attrs.enabled},
+				layout: '#{cc.attrs.layout}',
+   				align: '#{cc.attrs.align}',
+   				verticalAlign: '#{cc.attrs.verticalAlign}',
+   				itemMarginTop: #{cc.attrs.itemMarginTop},
+   				itemMarginBottom: #{cc.attrs.itemMarginBottom},
+				floating: #{cc.attrs.floating},
+				x: #{cc.attrs.x},
+				y: #{cc.attrs.y}
             	},
 	</composite:implementation>
 </html>
