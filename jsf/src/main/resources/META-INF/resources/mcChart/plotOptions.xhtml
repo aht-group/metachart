@@ -15,6 +15,7 @@
         <composite:attribute name="markerHoverEnabled" required="false" default="true"/>
         <composite:attribute name="legend" required="false" default="false"/>
         <composite:attribute name="stacking" required="false" default=""/>
+        <composite:attribute name="pointWidth" required="false" default=""/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -25,6 +26,7 @@
                 dataLabels: {
                     enabled: #{cc.attrs.dataLabel}
                 },
+				pointWidth: '#{cc.attrs.pointWidth}',
                 showInLegend: #{cc.attrs.legend},
                 marker: {
                     enabled: #{cc.attrs.marker},
