@@ -22,7 +22,7 @@
 		<composite:attribute name="pointEventHandler" required="false" default=""/>
 		<composite:attribute name="showInLegend" required="false" default="false"/>
 		<composite:attribute name="label" required="false" default=""/>
-		<composite:attribute name="pointWidth" required="false" default=""/>
+		<composite:attribute name="pointWidth" required="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -40,7 +40,9 @@
 	            data: [ #{cc.data(cc.attrs.value)} ],
 	            enableMouseTracking: #{cc.attrs.enableMouseTracking},
 	            lineWidth: #{cc.attrs.lineWidth},
+			<ui:fragment rendered="#{not empty cc.attrs.pointWidth}">
 				pointWidth: '#{cc.attrs.pointWidth}',
+			</ui:fragment>
 	            allowPointSelect: #{cc.attrs.pointSelect}, 
 	        <ui:fragment rendered="#{cc.attrs.pointEvent}">
 				point: {
