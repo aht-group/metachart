@@ -8,11 +8,19 @@
     
 	<composite:interface>
 		<composite:attribute name="value" required="false" default=""/>
+		<composite:attribute name="size" required="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
 <!-- 	subtitle: {text: '#{cc.attrs.value}'}, -->
-		subtitle: {text: '#{of:escapeJS(cc.attrs.value)}'}, 
+		subtitle: {
+			text: '#{cc.attrs.value}',
+			style: {
+		<ui:fragment rendered="#{not empty cc.attrs.size}">
+				fontSize: '#{cc.attrs.size}'
+		</ui:fragment>
+			}
+		},
 	</composite:implementation>
 	
 </html>
