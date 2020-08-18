@@ -12,6 +12,7 @@
                              shortDescription="Currently tested types are: x,y"/>
         <composite:attribute name="height" required="false" default="350"
                              shortDescription="The height in px of the chart."/>
+		<composite:attribute name="borderWidth" required="false" default="0"/>
 	</composite:interface>
 	<composite:implementation>
 //<![CDATA[
@@ -21,7 +22,8 @@
                     chart: {
                         height:#{cc.attrs.height},
                         type: '#{cc.attrs.type}',
-                    	zoomType: '#{cc.attrs.zoomType}'
+                    	zoomType: '#{cc.attrs.zoomType}',
+						borderWidth: '#{cc.attrs.borderWidth}',
                     },
                 
                  xAxis: {

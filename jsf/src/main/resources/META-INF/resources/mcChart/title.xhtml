@@ -9,12 +9,16 @@
 	<composite:interface>
 		<composite:attribute name="value" required="false" default=""/>
 		<composite:attribute name="size" required="false"/>
+		<composite:attribute name="y" required="false" />
 	</composite:interface>
 	        
 	<composite:implementation>
 		<!-- title: {text: '#{of:escapeJS(cc.attrs.value)}'},  -->
 		title: {
 			text: '#{cc.attrs.value}',
+			<ui:fragment rendered="#{not empty cc.attrs.y}">
+				y: #{cc.attrs.y},
+			</ui:fragment>
 			style: {
 		<ui:fragment rendered="#{not empty cc.attrs.size}">
 				fontSize: '#{cc.attrs.size}'
