@@ -8,7 +8,7 @@
     
 	<composite:interface>
 		<composite:attribute name="value" required="false" default=""/>
-		<composite:attribute name="size" required="false"/>
+		<composite:attribute name="fontSize" required="false"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -16,8 +16,8 @@
 		subtitle: {
 			text: '#{cc.attrs.value}',
 			style: {
-		<ui:fragment rendered="#{not empty cc.attrs.size}">
-				fontSize: '#{cc.attrs.size}'
+		<ui:fragment rendered="#{not empty cc.attrs.fontSize}">
+				fontSize: '#{cc.attrs.fontSize}'
 		</ui:fragment>
 			}
 		},
