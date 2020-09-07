@@ -20,12 +20,27 @@ import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ChartAndTableHandler <TSDATA extends EntityWithRecord>{
+public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
+{
 	final static Logger logger = LoggerFactory.getLogger(ChartAndTableHandler.class);
+	
+	private List<TSDATA> tsDataTableDatas; public List<TSDATA> getTsDataTableDatas() {return tsDataTableDatas;}
+	
+	private TSDATA selectedTsDatafromChart;
+	public TSDATA getSelectedTsDatafromChart() {return selectedTsDatafromChart;}
+	public void setSelectedTsDatafromChart(TSDATA selectedTsDatafromChart) {this.selectedTsDatafromChart = selectedTsDatafromChart;}
+	
 	private String widgetVar;
 	private String handlerName;
-	private List<TSDATA> tsDataTableDatas;
-	public ChartAndTableHandler(String beanName, String handlerName) {
+	private int selectedPointIndex;
+	
+	public ChartAndTableHandler(String beanName)
+	{
+		this(beanName,"chartAndTableHandler");
+	}
+	
+	public ChartAndTableHandler(String beanName, String handlerName)
+	{
 		this.dataTable = new DataTable();
 		this.beanName = beanName;
 		this.handlerName = handlerName;
@@ -35,16 +50,9 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>{
 
 		initDataTable(this.dataTable);
 	}
-	public ChartAndTableHandler(String beanName) {
-		this(beanName,"chartAndTableHandler");
-	}
-	public List<TSDATA> getTsDataTableDatas() {return tsDataTableDatas;}
 
-	private TSDATA selectedTsDatafromChart;
-	public TSDATA getSelectedTsDatafromChart() {return selectedTsDatafromChart;}
-	public void setSelectedTsDatafromChart(TSDATA selectedTsDatafromChart) {this.selectedTsDatafromChart = selectedTsDatafromChart;}
 
-	private int selectedPointIndex;
+	
 
 //------Binding and Initialise data table Begin-----------
 	private Object tableState;
@@ -156,7 +164,8 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>{
 	 * setting data table selection and jumping to correct page  to setDataTableSelection
 	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	public void selectPoint() throws ParseException {
+	public void selectPoint() throws ParseException
+	{
 		logger.info("Ajax call select point");
 		logger.info("data table size:" + tsDataTableDatas.size());
 		selectedTsDatafromChart = this.getSelectedPoint(tsDataTableDatas);
@@ -165,30 +174,36 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>{
 		setDataTableSelection(selectedPointIndex);
 	}
 
-	protected <T extends EntityWithRecord> T getSelectedPoint(List<T> pointsWithRecords) {
+	protected TSDATA getSelectedPoint(List<TSDATA> pointsWithRecords)
+	{
 		int index;
 		selectedPointIndex = 0;
 		String time = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("time");
 		logger.info("time:" + time);
 		Date selectedDate = Date.from(Instant.ofEpochMilli(Long.parseLong(time)));
 		logger.info(selectedDate.toString());
-		ListIterator<T> it = pointsWithRecords.listIterator();
-		while (it.hasNext()) {
+		ListIterator<TSDATA> it = pointsWithRecords.listIterator();
+		while (it.hasNext())
+		{
 			index = it.nextIndex();
-			T tempPoint = it.next();
+			Object o = it.next();
+			logger.info(o.getClass().getSimpleName()+" "+o.toString());
+			TSDATA tempPoint = (TSDATA)o;
 			//logger.info("index : "  + index +" date : " +tempPoint.getRecord().toString());
 			//if(DateUtils.isSameInstant(tempRatingPoint.getRecord(), selectedDate)){
-			if(selectedDate.compareTo(tempPoint.getRecord())==0) {
+			if(selectedDate.compareTo(tempPoint.getRecord())==0)
+			{
 				selectedPointIndex=index;
 				logger.info("Returning Point:" + tempPoint.getRecord() );
 				return tempPoint;
 			}
 		}
 		logger.info("Returning Point NULL");
-	return null;
+		return null;
 	}
 
-	protected void setDataTableSelection(int index) {
+	protected void setDataTableSelection(int index)
+	{
 		this.dataTable.setSelection(selectedTsDatafromChart);
 		//logger.info("----> index: " + index + " -->Record: " + selectedTsDatafromChart.getRecord().toString());
 		//logger.info("----> Id:" + dataTable.getId());
