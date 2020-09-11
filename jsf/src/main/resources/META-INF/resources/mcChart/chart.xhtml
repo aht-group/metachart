@@ -26,6 +26,7 @@
         <composite:attribute name="jsonProperty" required="false"
                              shortDescription="Full path of bean property to set json chart"/>
 		<composite:attribute name="jsonSaveListener" required="false" method-signature="void listener(javax.faces.event.AjaxBehaviorEvent)"/>
+		<composite:attribute name="marginRight" required="false" />
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -37,7 +38,10 @@
                 chart: {
                     type: '#{cc.attrs.type}',
                     zoomType: '#{cc.attrs.zoomType}',
-                    borderWidth : 1
+                    borderWidth : 1,
+				<ui:fragment rendered="#{not empty cc.attrs.marginRight}">
+					marginRight: #{cc.attrs.marginRight},
+				</ui:fragment>
                 },
 										
                 title: {text: null},
