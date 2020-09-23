@@ -41,6 +41,13 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 			FacesContext context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, js, "head");
 			
+			UIOutput jsMap = new UIOutput();
+			jsMap.setRendererType("javax.faces.resource.Script");
+			jsMap.getAttributes().put("library", "jsMetaChart");
+			jsMap.getAttributes().put("name", "pivot.js.map");
+			//context.getViewRoot().addComponentResource(context, jsMap, "head");
+			
+			
 			// Include FileSaver.js JavaScript
 			UIOutput jsfs = new UIOutput();
 			jsfs.setRendererType("javax.faces.resource.Script");
@@ -140,6 +147,16 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 		writer.write("     var usFmtInt = numberFormat({");
 		writer.writeText(System.getProperty("line.separator"), null);
 	    writer.write("       digitsAfterDecimal: 0");
+	    writer.writeText(System.getProperty("line.separator"), null);
+	    writer.write("     });");
+	    writer.writeText(System.getProperty("line.separator"), null);
+	    writer.write("     var usFmtPct = numberFormat({");
+	    writer.writeText(System.getProperty("line.separator"), null);
+	    writer.write("       digitsAfterDecimal: 1,");
+	    writer.writeText(System.getProperty("line.separator"), null);
+	    writer.write("       scaler: 100,");
+	    writer.writeText(System.getProperty("line.separator"), null);
+	    writer.write("       suffix: \"%\"");
 	    writer.writeText(System.getProperty("line.separator"), null);
 	    writer.write("     });");
 	    writer.writeText(System.getProperty("line.separator"), null);

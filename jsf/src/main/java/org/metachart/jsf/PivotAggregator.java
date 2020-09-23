@@ -19,7 +19,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 	
 	private static enum Attribute {type, parameters, label}
 	
-	private enum aggregatorType {SUM, AVERAGE, COUNT, MIN, MAX, INTSUM};
+	private enum aggregatorType {SUM, AVERAGE, COUNT, MIN, MAX, INTSUM, SUM_AS_FRACTION_OVER_TOTAL, SUM_AS_FRACTION_OVER_ROW, SUM_AS_FRACTION_OVER_COL};
 	private String type;
 	private String parameters;
 	private String label = "";
@@ -76,8 +76,23 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 		{
 			javascriptDefinition += "'" +label +"' :      function() { return tpl.min()(['"+parameters +"'])},";
 		}
+		if (type.equals(aggregatorType.SUM_AS_FRACTION_OVER_TOTAL.toString()))
+		{
+			javascriptDefinition += "'" +label +"' :      function() { return $.pivotUtilities.aggregatorTemplates.fractionOf($.pivotUtilities.aggregatorTemplates.sum)},";
+		}
+		if (type.equals(aggregatorType.SUM_AS_FRACTION_OVER_ROW.toString()))
+		{
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"row\", usFmt)},";
+		}
+		if (type.equals(aggregatorType.SUM_AS_FRACTION_OVER_COL.toString()))
+		{
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"col\", usFmt)},";
+		}
+		
 		logger.trace(javascriptDefinition);
+		ctx.getResponseWriter().write(System.lineSeparator());
 		ctx.getResponseWriter().write("      " +javascriptDefinition);
+		ctx.getResponseWriter().write(System.lineSeparator());
 	}
 	
 	public String getType() {return type;}
