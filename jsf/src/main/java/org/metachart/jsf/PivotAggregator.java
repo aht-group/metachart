@@ -82,11 +82,11 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 		}
 		if (type.equals(aggregatorType.SUM_AS_FRACTION_OVER_ROW.toString()))
 		{
-			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"row\", usFmt)},";
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"row\", usFmt)([\"gdp\"])},";
 		}
 		if (type.equals(aggregatorType.SUM_AS_FRACTION_OVER_COL.toString()))
 		{
-			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"col\", usFmt)},";
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"col\", usFmt)([\"gdp\"])},";
 		}
 		
 		logger.trace(javascriptDefinition);
