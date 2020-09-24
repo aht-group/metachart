@@ -78,15 +78,15 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 		}
 		if (type.equals(aggregatorType.SUM_AS_FRACTION_OVER_TOTAL.toString()))
 		{
-			javascriptDefinition += "'" +label +"' :      function() { return $.pivotUtilities.aggregatorTemplates.fractionOf($.pivotUtilities.aggregatorTemplates.sum)},";
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"total\", usFmt)(['"+parameters +"'])},";
 		}
 		if (type.equals(aggregatorType.SUM_AS_FRACTION_OVER_ROW.toString()))
 		{
-			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"row\", usFmt)([\"gdp\"])},";
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"row\", usFmt)(['"+parameters +"'])},";
 		}
 		if (type.equals(aggregatorType.SUM_AS_FRACTION_OVER_COL.toString()))
 		{
-			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"col\", usFmt)([\"gdp\"])},";
+			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"col\", usFmt)(['"+parameters +"'])},";
 		}
 		
 		logger.trace(javascriptDefinition);
