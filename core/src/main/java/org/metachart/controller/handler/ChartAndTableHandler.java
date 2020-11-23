@@ -1,5 +1,7 @@
 package org.metachart.controller.handler;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.time.Instant;
 import java.util.Date;
@@ -16,6 +18,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.behavior.ajax.AjaxBehavior;
 import org.primefaces.behavior.ajax.AjaxBehaviorListenerImpl;
 import org.primefaces.component.datatable.DataTable;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,22 +26,22 @@ import org.slf4j.LoggerFactory;
 public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 {
 	final static Logger logger = LoggerFactory.getLogger(ChartAndTableHandler.class);
-	
+
 	private List<TSDATA> tsDataTableDatas; public List<TSDATA> getTsDataTableDatas() {return tsDataTableDatas;}
-	
+
 	private TSDATA selectedTsDatafromChart;
 	public TSDATA getSelectedTsDatafromChart() {return selectedTsDatafromChart;}
 	public void setSelectedTsDatafromChart(TSDATA selectedTsDatafromChart) {this.selectedTsDatafromChart = selectedTsDatafromChart;}
-	
+
 	private String widgetVar;
 	private String handlerName;
 	private int selectedPointIndex;
-	
+
 	public ChartAndTableHandler(String beanName)
 	{
 		this(beanName,"chartAndTableHandler");
 	}
-	
+
 	public ChartAndTableHandler(String beanName, String handlerName)
 	{
 		this.dataTable = new DataTable();
@@ -52,7 +55,7 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 	}
 
 
-	
+
 
 //------Binding and Initialise data table Begin-----------
 	private Object tableState;
@@ -127,22 +130,48 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 	public void selectTsDataRow(SelectEvent event)
 	{
 		selectedTsDatafromChart =(TSDATA) event.getObject();
-		logger.info("Selected Timeseries Data Entity with record:" +selectedTsDatafromChart.getRecord().getTime());
+		//logger.info("Selected Timeseries Data Entity with record:" +selectedTsDatafromChart.getRecord().getTime());
 		selectRowExecute(selectedTsDatafromChart);
 	}
 
 	@SuppressWarnings("deprecation")
-	protected <T extends EntityWithRecord> void selectRowExecute(T ejb) {
-		logger.info(ejb.getRecord().toString());
-		logger.info("milliseconds time:" + ejb.getRecord().getTime());
-		logger.info("timezone offset:" + ejb.getRecord().getTimezoneOffset());
-		logger.info("milliseconds:" + ejb.getRecord().toInstant().toEpochMilli());
-		long timeInRecord = ejb.getRecord().toInstant().toEpochMilli() - ejb.getRecord().getTimezoneOffset()*60*1000;
+	protected <T> void selectRowExecute(T ejb) {
+		//logger.info(ejb.getRecord().toString());
+		//logger.info("milliseconds time:" + ejb.getRecord().getTime());
+		//logger.info("timezone offset:" + ejb.getRecord().getTimezoneOffset());
+		//logger.info("milliseconds:" + ejb.getRecord().toInstant().toEpochMilli());
+
+		try {
+			Method getRecordMethod = ejb.getClass().getMethod("getRecord");
+			Date recordValue;
+			recordValue = (Date)getRecordMethod.invoke(ejb);
+
+		long timeInRecord = recordValue.toInstant().toEpochMilli() - recordValue.getTimezoneOffset()*60*1000;
 		logger.info("timeInRecord:" +timeInRecord);
-		PrimeFaces.current().executeScript("selectElementInChart(" + timeInRecord + ");");
-		//RequestContext requestContext = RequestContext.getCurrentInstance();
-		//requestContext.execute("selectElementInChart(" + timeInRecord + ");");
-		//RequestContext.getCurrentInstance().execute("selectElementInChart(" + ratingPoint.getRecord().toInstant().toEpochMilli() + ");");
+		try {
+			PrimeFaces.current().executeScript("selectElementInChart(" + timeInRecord + ");");
+		}catch (NoClassDefFoundError e) {
+			RequestContext requestContext = RequestContext.getCurrentInstance();
+			requestContext.execute("selectElementInChart(" + timeInRecord + ");");
+			//RequestContext.getCurrentInstance().execute("selectElementInChart(" + ratingPoint.getRecord().toInstant().toEpochMilli() + ");");
+		}
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 //-------------Row Selection End -----------------------------------------------
@@ -169,34 +198,53 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 		logger.info("Ajax call select point");
 		logger.info("data table size:" + tsDataTableDatas.size());
 		selectedTsDatafromChart = this.getSelectedPoint(tsDataTableDatas);
-		logger.info("-->selected point with redord: " + selectedTsDatafromChart.getRecord().toString());
+		//logger.info("-->selected point with redord: " + selectedTsDatafromChart.getRecord().toString());
 		logger.info("setting PageDataTable");
 		setDataTableSelection(selectedPointIndex);
 	}
 
-	protected TSDATA getSelectedPoint(List<TSDATA> pointsWithRecords)
+	protected TSDATA getSelectedPoint(List<TSDATA>  pointsWithRecords)
 	{
 		int index;
 		selectedPointIndex = 0;
 		String time = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("time");
-		logger.info("time:" + time);
+		//logger.info("time:" + time);
 		Date selectedDate = Date.from(Instant.ofEpochMilli(Long.parseLong(time)));
-		logger.info(selectedDate.toString());
-		ListIterator<TSDATA> it = pointsWithRecords.listIterator();
+		//logger.info(selectedDate.toString());
+		ListIterator<? extends EntityWithRecord> it = pointsWithRecords.listIterator();
 		while (it.hasNext())
 		{
 			index = it.nextIndex();
 			Object o = it.next();
-			logger.info(o.getClass().getSimpleName()+" "+o.toString());
-			TSDATA tempPoint = (TSDATA)o;
-			//logger.info("index : "  + index +" date : " +tempPoint.getRecord().toString());
-			//if(DateUtils.isSameInstant(tempRatingPoint.getRecord(), selectedDate)){
-			if(selectedDate.compareTo(tempPoint.getRecord())==0)
-			{
-				selectedPointIndex=index;
-				logger.info("Returning Point:" + tempPoint.getRecord() );
-				return tempPoint;
+			//logger.info(o.getClass().getSimpleName()+" "+o.toString());
+			TSDATA tempPointWithRecord = (TSDATA) o;
+
+			//tempPoint
+			//TSDATA tempPoint =(TSDATA) o;
+			try {
+				/*
+				Method getRecordMethod = tempPoint.getClass().getMethod("getRecord");
+				Date recordValue;
+				recordValue = (Date)getRecordMethod.invoke(tempPoint);
+				*/
+
+				//logger.info("index : "  + index +" date : " +tempPoint.getRecord().toString());
+				//if(DateUtils.isSameInstant(tempRatingPoint.getRecord(), selectedDate)){
+				if(selectedDate.compareTo(tempPointWithRecord.getRecord())==0)
+				{
+					selectedPointIndex=index;
+					logger.info("Returning Point:" + tempPointWithRecord.getRecord() );
+					return (TSDATA)o;
+				}
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} //RequestContext requestContext = RequestContext.getCurrentInstance();
+			catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+
 		}
 		logger.info("Returning Point NULL");
 		return null;
@@ -227,9 +275,12 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 	    //logger.info("index :" + index*1d);
 	    //logger.info("page size:" + pageSize);
 	    //logger.info("page no: " + pageNo);
-	    PrimeFaces.current().executeScript("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
-	    //--PrimeFaces.current().executeScript("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
-	    //RequestContext.getCurrentInstance().execute("PF('" + dataTableWV +"').paginator.setPage(" + pageNo + ");");
+	    try {
+	    	PrimeFaces.current().executeScript("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
+		    //--PrimeFaces.current().executeScript("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
+		}catch (NoClassDefFoundError e) {
+			RequestContext.getCurrentInstance().execute("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
+		}
 	}
 	//-------------Point selection form a chart Ends --------------------------------
 }
