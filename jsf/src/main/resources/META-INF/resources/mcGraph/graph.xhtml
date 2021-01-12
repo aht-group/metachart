@@ -8,7 +8,8 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface componentType="org.metachart.jsf.map.UiDataSet">
-		<composite:attribute name="dotScript" required="true"/>
+        <composite:attribute name="dotScript" required="true"/>
+        <composite:attribute name="maxwidth" required="false" default="900px"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -18,7 +19,7 @@
 		<div id="target_svg" style="text-align:center;"></div>
 		
         <h:outputStylesheet>
-        #target_svg > svg {max-width: 900px; display: block; margin: auto;}
+        #target_svg > svg {max-width:#{cc.attrs.maxwidth}; display: block; margin: auto;}
         </h:outputStylesheet>
         
         <h:outputScript>
