@@ -15,15 +15,15 @@ import org.slf4j.LoggerFactory;
 @FacesComponent(value="org.metachart.jsf.PivotAggregator")
 public class PivotAggregator extends UINamingContainer
 {
-final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
-	
+	final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
+
 	private static enum Attribute {type, parameters, label}
-	
+
 	private enum aggregatorType {SUM, AVERAGE, COUNT, MIN, MAX, INTSUM, SUM_AS_FRACTION_OVER_TOTAL, SUM_AS_FRACTION_OVER_ROW, SUM_AS_FRACTION_OVER_COL};
 	private String type;
 	private String parameters;
 	private String label = "";
-	
+
 	@Override
 	public void encodeAll(FacesContext ctx) throws IOException
 	{
@@ -38,7 +38,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 		{
 			this.label    = this.type;
 		}
-		
+
 		String argument   = "";
 		ArrayList<String> parameterList = new ArrayList<String>();
 		if (parameters!=null)
@@ -50,7 +50,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 			}
 			argument = argument.substring(0, argument.lastIndexOf(","));
 		}
-		
+
 		String javascriptDefinition = "";
 		if (type.equals(aggregatorType.COUNT.toString()))
 			{
@@ -88,13 +88,13 @@ final static Logger logger = LoggerFactory.getLogger(PivotAggregator.class);
 		{
 			javascriptDefinition += "'" +label +"' :      function() { return tpl.fractionOf(tpl.sum(), \"col\", usFmt)(['"+parameters +"'])},";
 		}
-		
+
 		logger.trace(javascriptDefinition);
 		ctx.getResponseWriter().write(System.lineSeparator());
 		ctx.getResponseWriter().write("      " +javascriptDefinition);
 		ctx.getResponseWriter().write(System.lineSeparator());
 	}
-	
+
 	public String getType() {return type;}
 	public void setType(String type) {this.type = type;}
 

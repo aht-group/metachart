@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.el.ExpressionFactory;
+import javax.el.MethodExpression;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
 import javax.faces.component.UIOutput;
+import javax.faces.component.html.HtmlForm;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.AbortProcessingException;
@@ -15,6 +18,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
+import org.primefaces.component.remotecommand.RemoteCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,12 +26,16 @@ import org.slf4j.LoggerFactory;
 @ListenerFor(systemEventClass=PostAddToViewEvent.class)
 public class PivotTable extends UINamingContainer
 {
-final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
-	
-	private static enum Attribute {data}
-	
+	final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
+
+	private static enum Attribute {data,saveBean,saveMethod}
+
 	private String data;
-	
+	private String action;
+	private String saveBean;
+	private String saveMethod;
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException
 	{
@@ -40,14 +48,14 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 			js.getAttributes().put("name", "pivot.js");
 			FacesContext context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, js, "head");
-			
+
 			UIOutput jsMap = new UIOutput();
 			jsMap.setRendererType("javax.faces.resource.Script");
 			jsMap.getAttributes().put("library", "jsMetaChart");
 			jsMap.getAttributes().put("name", "pivot.js.map");
 			//context.getViewRoot().addComponentResource(context, jsMap, "head");
-			
-			
+
+
 			// Include FileSaver.js JavaScript
 			UIOutput jsfs = new UIOutput();
 			jsfs.setRendererType("javax.faces.resource.Script");
@@ -55,7 +63,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 			jsfs.getAttributes().put("name", "fileSaver.js");
 			context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, jsfs, "head");
-			
+
 			// Include Export Renderers for Excel Export JavaScript
 			UIOutput jse = new UIOutput();
 			jse.setRendererType("javax.faces.resource.Script");
@@ -63,30 +71,54 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 			jse.getAttributes().put("name", "export_renderers.js");
 			context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, jse, "head");
-			
+
 			// Include CSS
 	        UIOutput css = new UIOutput();
 			css.setRendererType("javax.faces.resource.Stylesheet");
 			css.getAttributes().put("library", "cssMetaChart");
 			css.getAttributes().put("name", "pivot.css");
 			context.getViewRoot().addComponentResource(context, css, "head");
+
+			// Include saveRowAndColumn remote command
+ 			if(context.getViewRoot().findComponent("formSaveRowAndColumn") == null)
+ 			{
+ 	 			//logger.info("--- creating saveRowAndColumnCommand ---");
+ 	 			Map<String,Object> map = this.getAttributes();
+ 	 			this.saveBean = (String) map.get(Attribute.saveBean.toString());
+ 	 			this.saveMethod = (String) map.get(Attribute.saveMethod.toString());
+ 	 			this.action= this.saveBean + "." + this.saveMethod;
+ 	 			//logger.info(this.action);
+ 	 			ExpressionFactory factory = context.getApplication().getExpressionFactory();
+	 			UIComponent formSaveRowAndColumn = new HtmlForm();
+	 			formSaveRowAndColumn.setId("formSaveRowAndColumn");
+	 			RemoteCommand saveRowAndColumnCommand = new RemoteCommand();
+	 			//saveRowAndColumnCommand.setId("saveRowAndColumnCommand");
+	 			saveRowAndColumnCommand.setName("saveRowAndColumnCommand");
+	 			saveRowAndColumnCommand.setUpdate("msgs");
+	 	        MethodExpression actionExpression = factory.createMethodExpression(context.getELContext(),"#{"+action+"}",null, new Class<?>[]{});
+	 	        saveRowAndColumnCommand.setActionExpression(actionExpression);
+	 	        formSaveRowAndColumn.getChildren().add(saveRowAndColumnCommand);
+	 	        context.getViewRoot().addComponentResource(context, formSaveRowAndColumn);
+ 			}
 		}
 		super.processEvent(event);
 	}
-	
+
+
+
 	@Override
 	public void encodeAll(FacesContext ctx) throws IOException
 	{
 		Map<String,Object> map = this.getAttributes();
-		this.data         = (String) map.get(Attribute.data.toString());
-		
+		this.data = (String) map.get(Attribute.data.toString());
+
 		ResponseWriter writer = ctx.getResponseWriter();
 		writer.startElement("script", this);
 		// Prepare the column and row default configurations
 		ArrayList<String> columns    = new ArrayList<String>();
 		ArrayList<String> rows       = new ArrayList<String>();
                 ArrayList<String> renderers  = new ArrayList<String>();
-                
+
 		String            colDef  = "";
 		String            rowDef  = "";
 		Boolean           hasAgg  = false;
@@ -110,7 +142,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 				hasAgg = true;
 			}
 		}
-		
+
 		if (!columns.isEmpty())
 		{
 			for (String parameter : columns)
@@ -119,7 +151,7 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 			}
 			colDef = colDef.substring(0, colDef.lastIndexOf(","));
 		}
-		
+
 		if (!rows.isEmpty())
 		{
 			for (String parameter : rows)
@@ -128,18 +160,18 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 			}
 			rowDef = rowDef.substring(0, rowDef.lastIndexOf(","));
 		}
-		
-		
+
+
 		writer.write("$(function(){");
 		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("     var derivers =     $.pivotUtilities.derivers;");
 		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("     var renderers =    $.extend($.pivotUtilities.renderers, $.pivotUtilities.export_renderers);");
 		writer.writeText(System.getProperty("line.separator"), null);
-		
+
 		writer.write("     var tpl =          $.pivotUtilities.aggregatorTemplates;");
 		writer.writeText(System.getProperty("line.separator"), null);
-		
+
 		writer.write("     var numberFormat = $.pivotUtilities.numberFormat;");
 		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("     var usFmt = numberFormat();");
@@ -162,14 +194,14 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 	    writer.writeText(System.getProperty("line.separator"), null);
 
 	    writer.write("$('#output').pivotUI(");
-        writer.write("    " +data +","); 
+        writer.write("    " +data +",");
         writer.writeText(System.getProperty("line.separator"), null);
         writer.write("    {");
         writer.writeText(System.getProperty("line.separator"), null);
-        
-        
-        
-        
+
+
+
+
         // Aggregators can be inserted here
         if (hasAgg)
         {
@@ -199,11 +231,11 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
             // Add the renderers incl Exporter
             writer.write("    renderers:   renderers," );
             writer.writeText(System.getProperty("line.separator"), null);
-        
-        
+
+
             writer.writeText(System.getProperty("line.separator"), null);
         }
-        
+
         // Columns and row setup need to be done here because they are not standalone renderable
 		writer.write("    cols:        [" +colDef +"]," );
 		writer.writeText(System.getProperty("line.separator"), null);
@@ -211,9 +243,9 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 		writer.writeText(System.getProperty("line.separator"), null);
         writer.write("    });");
         writer.writeText(System.getProperty("line.separator"), null);
-        writer.write("  });");   
+        writer.write("  });");
         writer.writeText(System.getProperty("line.separator"), null);
-        
+
 		// Now add some Excel export magic
 		writer.write("function exportToTSVFile() {");
 		writer.writeText(System.getProperty("line.separator"), null);
@@ -233,19 +265,42 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 		writer.writeText(System.getProperty("line.separator"), null);
 		writer.write("};");
 		writer.writeText(System.getProperty("line.separator"), null);
-		
+
 		// Connect this logic to the selection of the TSV export
 		writer.write("$('.pvtRenderer').on('change',exportToTSVFile);");
 		writer.writeText(System.getProperty("line.separator"), null);
-		
+
+		// Now add some save row and column configuration
+		writer.write("function saveRowColumnConfig() {");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("     var config = $('#output').data('pivotUIOptions');");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("     var rows = config.rows.toString();");
+		writer.write("    console.log('Selected Row:' + rows);");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("     var cols = config.cols.toString();");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("    console.log('Selected Column:' + cols);");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.write("	saveRowAndColumnCommand([{name: 'rows', value: rows}, {name: 'cols', value: cols}]);");
+		writer.writeText(System.getProperty("line.separator"), null);
+
+		writer.write("};");
+		writer.writeText(System.getProperty("line.separator"), null);
+		writer.writeText(System.getProperty("line.separator"), null);
+
+
         writer.endElement("script");
         writer.writeText(System.getProperty("line.separator"), null);
         writer.startElement("div", this);
         writer.write("<div id='output' style='margin: 10px;'></div>");
-		
-		
+        writer.write("<div>");
+        writer.write("<input type='button' value='Save' id='save'onclick=\"saveRowColumnConfig()\"/>");
+        writer.write("</div>");
+
+        writer.writeText(System.getProperty("line.separator"), null);
 	}
-	
+
 	public String getData() {return data;}
 	public void setData(String data) {this.data = data;}
 
@@ -253,4 +308,5 @@ final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 	public String getFamily() {
 		return null;
 	}
+
 }
