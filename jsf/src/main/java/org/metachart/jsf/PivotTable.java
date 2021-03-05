@@ -2,15 +2,16 @@ package org.metachart.jsf;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
-import javax.el.ExpressionFactory;
-import javax.el.MethodExpression;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
 import javax.faces.component.UIOutput;
-import javax.faces.component.html.HtmlForm;
+import javax.faces.component.behavior.ClientBehavior;
+import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.AbortProcessingException;
@@ -18,24 +19,19 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
-import org.primefaces.component.remotecommand.RemoteCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @FacesComponent(value="org.metachart.jsf.PivotTable")
 @ListenerFor(systemEventClass=PostAddToViewEvent.class)
-public class PivotTable extends UINamingContainer
+public class PivotTable extends UINamingContainer implements ClientBehaviorHolder
 {
 	final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 
 	private static enum Attribute {data,saveBean,saveMethod}
 
-	private String data;
-	private String action;
-	private String saveBean;
-	private String saveMethod;
+	private String data; public String getData() {return data;} public void setData(String data) {this.data = data;}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException
 	{
@@ -72,43 +68,28 @@ public class PivotTable extends UINamingContainer
 			context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, jse, "head");
 
+			// Include Aht Pivot functions.js JavaScript
+			UIOutput ahtPivotJs = new UIOutput();
+			ahtPivotJs.setRendererType("javax.faces.resource.Script");
+			ahtPivotJs.getAttributes().put("library", "jsMetaChart");
+			ahtPivotJs.getAttributes().put("name", "pivot_aht_functions.js");
+			context = this.getFacesContext();
+			context.getViewRoot().addComponentResource(context, ahtPivotJs, "head");
 			// Include CSS
 	        UIOutput css = new UIOutput();
 			css.setRendererType("javax.faces.resource.Stylesheet");
 			css.getAttributes().put("library", "cssMetaChart");
 			css.getAttributes().put("name", "pivot.css");
 			context.getViewRoot().addComponentResource(context, css, "head");
-
-			// Include saveRowAndColumn remote command
- 			if(context.getViewRoot().findComponent("formSaveRowAndColumn") == null)
- 			{
- 	 			//logger.info("--- creating saveRowAndColumnCommand ---");
- 	 			Map<String,Object> map = this.getAttributes();
- 	 			this.saveBean = (String) map.get(Attribute.saveBean.toString());
- 	 			this.saveMethod = (String) map.get(Attribute.saveMethod.toString());
- 	 			this.action= this.saveBean + "." + this.saveMethod;
- 	 			//logger.info(this.action);
- 	 			ExpressionFactory factory = context.getApplication().getExpressionFactory();
-	 			UIComponent formSaveRowAndColumn = new HtmlForm();
-	 			formSaveRowAndColumn.setId("formSaveRowAndColumn");
-	 			RemoteCommand saveRowAndColumnCommand = new RemoteCommand();
-	 			//saveRowAndColumnCommand.setId("saveRowAndColumnCommand");
-	 			saveRowAndColumnCommand.setName("saveRowAndColumnCommand");
-	 			saveRowAndColumnCommand.setUpdate("msgs");
-	 	        MethodExpression actionExpression = factory.createMethodExpression(context.getELContext(),"#{"+action+"}",null, new Class<?>[]{});
-	 	        saveRowAndColumnCommand.setActionExpression(actionExpression);
-	 	        formSaveRowAndColumn.getChildren().add(saveRowAndColumnCommand);
-	 	        context.getViewRoot().addComponentResource(context, formSaveRowAndColumn);
- 			}
 		}
 		super.processEvent(event);
 	}
 
-
-
 	@Override
 	public void encodeAll(FacesContext ctx) throws IOException
 	{
+		if (this.isRendered())
+		{
 		Map<String,Object> map = this.getAttributes();
 		this.data = (String) map.get(Attribute.data.toString());
 
@@ -270,39 +251,80 @@ public class PivotTable extends UINamingContainer
 		writer.write("$('.pvtRenderer').on('change',exportToTSVFile);");
 		writer.writeText(System.getProperty("line.separator"), null);
 
-		// Now add some save row and column configuration
-		writer.write("function saveRowColumnConfig() {");
-		writer.writeText(System.getProperty("line.separator"), null);
-		writer.write("     var config = $('#output').data('pivotUIOptions');");
-		writer.writeText(System.getProperty("line.separator"), null);
-		writer.write("     var rows = config.rows.toString();");
-		writer.write("    console.log('Selected Row:' + rows);");
-		writer.writeText(System.getProperty("line.separator"), null);
-		writer.write("     var cols = config.cols.toString();");
-		writer.writeText(System.getProperty("line.separator"), null);
-		writer.write("    console.log('Selected Column:' + cols);");
-		writer.writeText(System.getProperty("line.separator"), null);
-		writer.write("	saveRowAndColumnCommand([{name: 'rows', value: rows}, {name: 'cols', value: cols}]);");
-		writer.writeText(System.getProperty("line.separator"), null);
-
-		writer.write("};");
-		writer.writeText(System.getProperty("line.separator"), null);
-		writer.writeText(System.getProperty("line.separator"), null);
-
-
         writer.endElement("script");
         writer.writeText(System.getProperty("line.separator"), null);
         writer.startElement("div", this);
+        writer.writeAttribute("id", this.getClientId(), null);
         writer.write("<div id='output' style='margin: 10px;'></div>");
         writer.write("<div>");
-        writer.write("<input type='button' value='Save' id='save'onclick=\"saveRowColumnConfig()\"/>");
+        writer.write("<input type='button' value='Save' id='save' onclick=\"saveRowColumnConfig('" + this.getClientId() + "')\"/>");
         writer.write("</div>");
 
         writer.writeText(System.getProperty("line.separator"), null);
+		}
 	}
 
-	public String getData() {return data;}
-	public void setData(String data) {this.data = data;}
+	// --------------------------
+	// JSF Decode Phase method
+	// --------------------------
+	@Override
+	public void decode(FacesContext context)
+	{
+		logger.info("Current Phase: " +context.getCurrentPhaseId().toString());
+
+		if (this.isRendered())
+		{
+			java.util.Map<String,String> params = context.getExternalContext().getRequestParameterMap();
+			String behaviorEvent = params.get("javax.faces.behavior.event");
+		    logger.info("Handling event of type: " +behaviorEvent +" in decode phase.");
+
+		    Boolean isPivotSaveEvent     = false;
+
+		    if (null!=behaviorEvent)
+		    {
+			    isPivotSaveEvent    = behaviorEvent.equals("pivotSave");
+		    }
+
+	     // Handling of pivotSave event fired by JavaScript API
+	        if (null!= behaviorEvent && isPivotSaveEvent)
+	        {
+	        	java.util.Map<String, List<ClientBehavior>> behaviors = getClientBehaviors();
+	     		if (behaviors.isEmpty())
+	     		{
+	     			logger.info("no behaviors.exiting.");
+	     			return;
+	     		}
+	            List<ClientBehavior> behaviorsForEvent = behaviors.get(behaviorEvent);
+
+	            if (null != behaviorsForEvent)
+	            {
+	            	String behaviorSource = params.get("javax.faces.source");
+	            	String clientId = getClientId(context);
+	            	if (behaviorSource != null && behaviorSource.equals(clientId))
+	            	{
+	            		for (ClientBehavior behavior: behaviorsForEvent)
+	            		{
+	            			logger.trace("Found " +behavior.getClass().toString());
+	            			PivotAjaxEvent ajaxEvent = new PivotAjaxEvent(this, behavior);
+	            			ajaxEvent.setRowAndColumn(params);
+	            			behavior.broadcast(ajaxEvent);
+	            		}
+	            	}
+	            }
+	        }
+		}
+	}
+
+	@Override
+	public Collection<String> getEventNames()
+	{
+		ArrayList<String> events = new ArrayList<String>();
+		events.add("pivotSave");
+		return events;
+	}
+
+	@Override
+	public String getDefaultEventName() {return "pivotSave";}
 
 	@Override
 	public String getFamily() {
