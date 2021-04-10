@@ -18,7 +18,7 @@ public class XmlDataSetFactory
 	public static Ds build(List<Data> datas)
 	{
 		Ds xml = build();
-		xml.getData().addAll(datas);
+		if(datas!=null) {xml.getData().addAll(datas);}
 		return xml;
 	}
 	
