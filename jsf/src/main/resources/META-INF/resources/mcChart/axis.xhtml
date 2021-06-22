@@ -17,6 +17,7 @@
 		<composite:attribute name="tickInterval" required="false" default="null"/>
 		<composite:attribute name="second" required="false" default="false"/>
 		<composite:attribute name="offset" required="false" default="false"/>
+		<composite:attribute name="dateTimeFormatter" required="false" default=""/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -35,6 +36,13 @@
             	align: 'left'
             },
             </ui:fragment>
+			<ui:fragment rendered="#{cc.attrs.dateTimeFormatter ne ''}">
+			labels: {
+				formatter: function() {
+				  return Highcharts.dateFormat('#{cc.attrs.dateTimeFormatter}', this.value);
+				}
+			  },
+			</ui:fragment>
             #{cc.categories(cc.attrs.categories)}
             <composite:insertChildren />
         },
