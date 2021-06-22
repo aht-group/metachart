@@ -23,6 +23,7 @@
 		<composite:attribute name="showInLegend" required="false" default="false"/>
 		<composite:attribute name="label" required="false" default=""/>
 		<composite:attribute name="pointWidth" required="false"/>
+		<composite:attribute name="gapSize" required="false" default="0"/>
 	</composite:interface>
 	        
 	<composite:implementation>
@@ -34,7 +35,7 @@
 	        <ui:fragment empty="#{empty cc.attrs.value.label}">
 	            showInLegend:'#{cc.attrs.showInLegend}',
 	        </ui:fragment>
-	        	gapSize: 1,
+	        	gapSize: #{cc.attrs.gapSize},
 	            type: '#{cc.attrs.type}',
 	            step: '#{cc.attrs.step}',
 	            name: '#{cc.attrs.value.label}',
