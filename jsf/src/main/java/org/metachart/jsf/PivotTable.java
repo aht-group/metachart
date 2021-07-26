@@ -28,15 +28,17 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
 {
 	final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 
-	private static enum Attribute {data,saveBean,saveMethod}
+	private static enum Attribute {data,locale,saveBean,saveMethod}
 
 	private String data; public String getData() {return data;} public void setData(String data) {this.data = data;}
+	private String locale; public String getLocale() {return locale;} public void setLocale(String locale) {this.locale = locale;}
 
 	@Override
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException
 	{
 		if(event instanceof PostAddToViewEvent)
 		{
+
 			// Include Pivot.js JavaScript
 			UIOutput js = new UIOutput();
 			js.setRendererType("javax.faces.resource.Script");
@@ -75,6 +77,7 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
 			ahtPivotJs.getAttributes().put("name", "pivot_aht_functions.js");
 			context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, ahtPivotJs, "head");
+
 			// Include CSS
 	        UIOutput css = new UIOutput();
 			css.setRendererType("javax.faces.resource.Stylesheet");
@@ -92,13 +95,14 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
 		{
 		Map<String,Object> map = this.getAttributes();
 		this.data = (String) map.get(Attribute.data.toString());
+		this.locale = (String) map.get(Attribute.locale.toString());
 
 		ResponseWriter writer = ctx.getResponseWriter();
 		writer.startElement("script", this);
 		// Prepare the column and row default configurations
 		ArrayList<String> columns    = new ArrayList<String>();
 		ArrayList<String> rows       = new ArrayList<String>();
-                ArrayList<String> renderers  = new ArrayList<String>();
+        ArrayList<String> renderers  = new ArrayList<String>();
 
 		String            colDef  = "";
 		String            rowDef  = "";
@@ -155,12 +159,37 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
 
 		writer.write("     var numberFormat = $.pivotUtilities.numberFormat;");
 		writer.writeText(System.getProperty("line.separator"), null);
-		writer.write("     var usFmt = numberFormat();");
-		writer.writeText(System.getProperty("line.separator"), null);
+
+		//Override default local (default EN number format with DE)
+		if(this.locale !=null &&  this.locale.equals("de"))
+		{
+			writer.write("     var usFmt = numberFormat({");
+			writer.writeText(System.getProperty("line.separator"), null);
+		    writer.write("       thousandsSep: \".\",");
+		    writer.writeText(System.getProperty("line.separator"), null);
+		    writer.write("       decimalSep: \",\",");
+		    writer.writeText(System.getProperty("line.separator"), null);
+		    writer.write("     });");
+			writer.writeText(System.getProperty("line.separator"), null);
+		}
+		else
+		{
+			writer.write("     var usFmt = numberFormat();");
+			writer.writeText(System.getProperty("line.separator"), null);
+		}
+
 		writer.write("     var usFmtInt = numberFormat({");
 		writer.writeText(System.getProperty("line.separator"), null);
-	    writer.write("       digitsAfterDecimal: 0");
+	    writer.write("       digitsAfterDecimal: 0,");
 	    writer.writeText(System.getProperty("line.separator"), null);
+	  //Override default local (default EN number format with DE)
+	    if(this.locale !=null &&  this.locale.equals("de"))
+		{
+	    	writer.write("       thousandsSep: \".\",");
+		    writer.writeText(System.getProperty("line.separator"), null);
+		    writer.write("       decimalSep: \",\",");
+		    writer.writeText(System.getProperty("line.separator"), null);
+		}
 	    writer.write("     });");
 	    writer.writeText(System.getProperty("line.separator"), null);
 	    writer.write("     var usFmtPct = numberFormat({");
@@ -169,8 +198,18 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
 	    writer.writeText(System.getProperty("line.separator"), null);
 	    writer.write("       scaler: 100,");
 	    writer.writeText(System.getProperty("line.separator"), null);
-	    writer.write("       suffix: \"%\"");
+	    writer.write("       suffix: \"%\",");
 	    writer.writeText(System.getProperty("line.separator"), null);
+
+	    //Override default local (default EN number format with DE)
+	    if(this.locale !=null &&  this.locale.equals("de"))
+		{
+	    	writer.write("       thousandsSep: \".\",");
+		    writer.writeText(System.getProperty("line.separator"), null);
+		    writer.write("       decimalSep: \",\",");
+		    writer.writeText(System.getProperty("line.separator"), null);
+		}
+
 	    writer.write("     });");
 	    writer.writeText(System.getProperty("line.separator"), null);
 
@@ -179,8 +218,6 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
         writer.writeText(System.getProperty("line.separator"), null);
         writer.write("    {");
         writer.writeText(System.getProperty("line.separator"), null);
-
-
 
 
         // Aggregators can be inserted here
