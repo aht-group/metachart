@@ -25,11 +25,16 @@
 	</dependencyManagement>
 
 	<dependencies>
-		
+		<!-- Metachart -->
 		<dependency>
 			<groupId>org.metachart</groupId>
 			<artifactId>metachart-core</artifactId>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.metachart</groupId>
+			<artifactId>metachart-xml</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- Primefaces -->
