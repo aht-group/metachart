@@ -49,10 +49,6 @@
 					<groupId>org.jdom</groupId>
 				</exclusion>
 				<exclusion>
-					<artifactId>exlp-xml</artifactId>
-					<groupId>net.sf.exlp</groupId>
-				</exclusion>
-				<exclusion>
 					<artifactId>commons-lang</artifactId>
 					<groupId>commons-lang</groupId>
 				</exclusion>
@@ -73,8 +69,8 @@
 					<groupId>commons-codec</groupId>
 				</exclusion>
 				<exclusion>
-					<artifactId>exlp-interfaces</artifactId>
 					<groupId>net.sf.exlp</groupId>
+					<artifactId>exlp-interfaces</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
