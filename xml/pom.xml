@@ -41,19 +41,9 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>net.sf.exlp</groupId>
-			<artifactId>exlp-util</artifactId>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
+
 		
-		<!-- JAXB -->
-		<dependency>
-			<groupId>commons-jxpath</groupId>
-			<artifactId>commons-jxpath</artifactId>
-			<scope>provided</scope>
-		</dependency>
+		<!-- JDOM -->
 		<dependency>
 			<groupId>org.jdom</groupId>
 			<artifactId>jdom</artifactId>
@@ -87,6 +77,12 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-util</artifactId>
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>

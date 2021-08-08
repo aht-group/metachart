@@ -1,4 +1,4 @@
-package org.metachart.xml.xpath;
+package org.metachart.util.query;
 
 import java.util.List;
 

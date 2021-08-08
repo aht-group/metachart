@@ -41,6 +41,12 @@
 		
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-interfaces</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
 			<scope>compile</scope>
 			<exclusions>
@@ -80,6 +86,11 @@
 			<artifactId>joda-time</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>commons-jxpath</groupId>
+			<artifactId>commons-jxpath</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<artifactId>jdom</artifactId>
 			<groupId>org.jdom</groupId>

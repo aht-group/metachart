@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.metachart.interfaces.graph.GraphColorProvider;
+import org.metachart.util.query.GraphXpath;
 import org.metachart.xml.graph.Cluster;
 import org.metachart.xml.graph.Graph;
 import org.metachart.xml.graph.Node;
-import org.metachart.xml.xpath.GraphXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
