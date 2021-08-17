@@ -1,7 +1,6 @@
 package org.metachart.model.json.pivot;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
