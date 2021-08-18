@@ -3,7 +3,6 @@ package org.metachart.chart.renderer.ts;
 import java.util.Date;
 import java.util.List;
 
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
@@ -18,7 +17,6 @@ import org.metachart.processor.ds.DsAccumulatorProcessor;
 import org.metachart.processor.ds.date.DsDateAccumulationProcessor;
 import org.metachart.processor.ds.date.DsRecordOrdererProcessor;
 import org.metachart.processor.timeseries.TimeSeriesGapNullifier;
-import org.metachart.util.ChartLabelResolver;
 import org.metachart.util.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;

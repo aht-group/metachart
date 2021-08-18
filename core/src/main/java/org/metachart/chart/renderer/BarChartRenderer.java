@@ -3,14 +3,11 @@ package org.metachart.chart.renderer;
 import java.awt.Dimension;
 import java.util.List;
 
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.metachart.chart.renderer.generic.AbstractChartRenderer;
 import org.metachart.interfaces.ChartRenderer;
-import org.metachart.util.ChartLabelResolver;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;

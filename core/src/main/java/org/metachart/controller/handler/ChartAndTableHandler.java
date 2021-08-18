@@ -54,9 +54,6 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 		initDataTable(this.dataTable);
 	}
 
-
-
-
 //------Binding and Initialise data table Begin-----------
 	private Object tableState;
 	private String beanName;
