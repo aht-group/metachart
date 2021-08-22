@@ -8,16 +8,13 @@ import java.util.stream.Stream;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
-import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.metachart.graph.TestGraph2DotFactory;
 import org.metachart.test.McCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -29,12 +29,11 @@
 		<dependency>
 			<groupId>org.metachart</groupId>
 			<artifactId>metachart-jsf</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
-			<version>0.1.9-SNAPSHOT</version>
+		
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
