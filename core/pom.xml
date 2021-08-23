@@ -126,5 +126,18 @@
 	        <scope>provided</scope>
     	</dependency>
     	
+    	<dependency>
+	 		<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+			<exclusions>
+        		<exclusion>
+        			<artifactId>commons-logging</artifactId>
+        			<groupId>commons-logging</groupId>
+        		</exclusion>
+        	</exclusions>
+		</dependency>
+    	
 	</dependencies>
 </project>
