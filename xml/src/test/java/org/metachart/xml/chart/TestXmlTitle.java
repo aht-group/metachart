@@ -1,33 +1,17 @@
 package org.metachart.xml.chart;
 
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.metachart.test.McXmlTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlTitle extends AbstractXmlChartTest
+public class TestXmlTitle extends AbstractXmlChartTest<Title>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlTitle.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-        setXmlFile(dirSuffix, Title.class);
-	}
+	public TestXmlTitle(){super(Title.class);}
+	public static Title create(boolean withChildren){return (new TestXmlTitle()).build(withChildren);}
     
-    @Test
-    public void testAclContainer() throws FileNotFoundException
-    {
-    	Title actual = create(true);
-    	Title expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Title.class);
-    	assertJaxbEquals(expected, actual);
-    }
-    
-    public static Title create(boolean withChilds)
+    public Title build(boolean withChilds)
     {
     	Title xml = new Title();
     	xml.setKey("myKey");
@@ -35,15 +19,11 @@ public class TestXmlTitle extends AbstractXmlChartTest
     	
     	return xml;
     }
-    
-    public void save() {save(create(true),fXml);}
 	
 	public static void main(String[] args)
     {
-//		UtilsXmlTstBootstrap.init();
-			
-		TestXmlTitle.initFiles();
+		McXmlTestBootstrap.init();
 		TestXmlTitle test = new TestXmlTitle();
-		test.save();
+		test.saveReferenceXml();
     }
 }

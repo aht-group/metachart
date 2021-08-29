@@ -1,9 +1,8 @@
 package org.metachart.factory.json.pivot;
 
-import org.metachart.model.json.pivot.PivotSettings;
 import org.metachart.model.json.pivot.PivotField;
-import org.metachart.model.json.pivot.PivotFieldList;
 import org.metachart.model.json.pivot.PivotFields;
+import org.metachart.model.json.pivot.PivotSettings;
 import org.metachart.model.json.pivot.PivotValue;
 
 public class McPivotFactory

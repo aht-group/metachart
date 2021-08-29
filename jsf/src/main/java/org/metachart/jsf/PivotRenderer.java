@@ -17,10 +17,10 @@ final static Logger logger = LoggerFactory.getLogger(PivotRenderer.class);
 	
 	private static enum Attribute {type, parameters, label}
 	
-	private enum aggregatorType {SUM, AVERAGE, COUNT, MIN, MAX, INTSUM};
+//	private enum aggregatorType {SUM, AVERAGE, COUNT, MIN, MAX, INTSUM};
 	private String type;
 	private String parameters;
-	private String label = "";
+//	private String label = "";
 	
 	@Override
 	public void encodeAll(FacesContext ctx) throws IOException
@@ -28,17 +28,18 @@ final static Logger logger = LoggerFactory.getLogger(PivotRenderer.class);
 		Map<String,Object> map = this.getAttributes();
 		this.type         = (String) map.get(Attribute.type.toString());
 		this.parameters   = (String) map.get(Attribute.parameters.toString());
-		if (map.get(Attribute.label.toString())!=null)
-		{
-			this.label    = (String) map.get(Attribute.label.toString());
-		}
-		else
-		{
-			this.label    = this.type;
-		}
 		
-		
+//		if (map.get(Attribute.label.toString())!=null)
+//		{
+//			this.label    = (String) map.get(Attribute.label.toString());
+//		}
+//		else
+//		{
+//			this.label    = this.type;
+//		}		
 	}
+	
+	@Override public String getFamily() {return null;}
 	
 	public String getType() {return type;}
 	public void setType(String type) {this.type = type;}
@@ -46,8 +47,4 @@ final static Logger logger = LoggerFactory.getLogger(PivotRenderer.class);
 	public String getParameters() {return parameters;}
 	public void setParameters(String parameters) {this.parameters = parameters;}
 
-	@Override
-	public String getFamily() {
-		return null;
-	}
 }
