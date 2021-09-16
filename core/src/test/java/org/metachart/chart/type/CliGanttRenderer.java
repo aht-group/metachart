@@ -22,11 +22,11 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class TstGanttRenderer
+public class CliGanttRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(TstGanttRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(CliGanttRenderer.class);
 	
-	public TstGanttRenderer()
+	public CliGanttRenderer()
 	{
 		
 	}
@@ -74,7 +74,7 @@ public class TstGanttRenderer
 		return type;
 	}
 	
-	private Ds getX(String label)
+	protected Ds getX(String label)
 	{
 		Ds c = new Ds();
 		c.setLabel(label);

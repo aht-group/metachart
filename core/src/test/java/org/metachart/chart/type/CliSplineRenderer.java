@@ -10,7 +10,6 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.metachart.chart.OfxChartRenderer;
 import org.metachart.factory.pojo.ChartColorFactory;
-import org.metachart.test.McCoreTestBootstrap;
 import org.metachart.util.TimePeriodFactory;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
@@ -21,13 +20,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.DateUtil;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class TstTimeSeriesGapFiller
+public class CliSplineRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(TstTimeSeriesGapFiller.class);
+	final static Logger logger = LoggerFactory.getLogger(CliSplineRenderer.class);
 	
-	public TstTimeSeriesGapFiller()
+	public CliSplineRenderer()
 	{
 		
 	}
@@ -40,7 +40,7 @@ public class TstTimeSeriesGapFiller
 		chart.setRenderer(getType());
 		chart.setColors(getColors());
 		
-//		chart.getDs().add(getX("a"));
+//		chart.getDataSet().add(getX("a"));
 //		chart.getContainer().add(getX("b"));
 		return chart;
 	}
@@ -63,7 +63,7 @@ public class TstTimeSeriesGapFiller
 		return colors;
 	}
 	
-	private Ds getX(String label)
+	protected Ds getX(String label)
 	{
 		Random rnd = new Random();
 		Ds x = new Ds();
@@ -86,14 +86,15 @@ public class TstTimeSeriesGapFiller
 	
 	public static void main (String[] args) throws Exception
 	{
-		McCoreTestBootstrap.init();
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("resources/config");
+			loggerInit.init();
 		
-		TstTimeSeriesGapFiller test = new TstTimeSeriesGapFiller();
+		CliSplineRenderer test = new CliSplineRenderer();
 		Chart chart;
-//		chart = test.getTimeSeries();
 		chart = test.load(args[0]);
 		
-		JaxbUtil.debug(chart);
+//		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
 		OfxChartRenderer ofxRenderer = new OfxChartRenderer();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
