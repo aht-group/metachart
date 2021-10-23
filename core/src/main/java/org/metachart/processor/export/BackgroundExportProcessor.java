@@ -35,6 +35,8 @@ public class BackgroundExportProcessor
 		StringEntity stringEntity = new StringEntity(postString);
 		httpPost.setEntity(stringEntity);
 		HttpResponse httpRespnse = client.execute(httpPost);
+		logger.info("Respnse Status Code: "+httpRespnse.getStatusLine().getStatusCode());
+		logger.info("Respnse Content: \n"+EntityUtils.toString(httpRespnse.getEntity(),"UTF-8"));
 //		return EntityUtils.toString(httpRespnse.getEntity(),"UTF-8");
 		return EntityUtils.toByteArray(httpRespnse.getEntity());
 	}
