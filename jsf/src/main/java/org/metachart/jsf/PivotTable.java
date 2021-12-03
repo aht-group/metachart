@@ -296,6 +296,7 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
         writer.write("<div>");
         writer.write("<input type='button' value='Save' id='save' onclick=\"saveRowColumnConfig('" + this.getClientId() + "')\"/>");
         writer.write("</div>");
+        writer.endElement("div");
 
         writer.writeText(System.getProperty("line.separator"), null);
 		}
