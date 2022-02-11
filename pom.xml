@@ -4,7 +4,7 @@
 	     
 	<groupId>org.metachart</groupId>
 	<artifactId>metachart</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.4</version>
 	<packaging>pom</packaging>
 	<name>MetaChart</name>
 	<url>https://github.com/aht-group/metachart</url>
@@ -47,7 +47,7 @@
 		<url>https://github.com/aht-group/metachart.git</url>
 		<connection>scm:git:ssh://git@github.com/aht-group/metachart.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/aht-group/metachart.git</developerConnection>
-	  <tag>metachart-0.0.3</tag>
+	  <tag>metachart-0.0.4</tag>
   </scm>
 	
 	<developers>
