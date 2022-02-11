@@ -4,7 +4,7 @@
 	     
 	<groupId>org.metachart</groupId>
 	<artifactId>metachart</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>MetaChart</name>
 	<url>https://github.com/aht-group/metachart</url>
