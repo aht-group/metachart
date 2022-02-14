@@ -12,19 +12,19 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BackgroundExportProcessor 
-{	
+public class BackgroundExportProcessor
+{
 	final static Logger logger = LoggerFactory.getLogger(BackgroundExportProcessor.class);
 
 	private HttpClient client;
 
 	private static String resources = "\"resources\": {\"files\": \"highcharts.js,modules/exporting.js,modules/export-data.js\"}}";
-	
-	public BackgroundExportProcessor() 
+
+	public BackgroundExportProcessor()
 	{
 		client = HttpClientBuilder.create().build();
 	}
-	
+
 	public byte[] exportSVG(String url, String json, String type) throws ClientProtocolException, IOException
 	{
 		HttpPost httpPost = new HttpPost(url);
@@ -35,8 +35,8 @@ public class BackgroundExportProcessor
 		StringEntity stringEntity = new StringEntity(postString);
 		httpPost.setEntity(stringEntity);
 		HttpResponse httpRespnse = client.execute(httpPost);
-		logger.info("Respnse Status Code: "+httpRespnse.getStatusLine().getStatusCode());
-		logger.info("Respnse Content: \n"+EntityUtils.toString(httpRespnse.getEntity(),"UTF-8"));
+//		logger.info("Respnse Status Code: "+httpRespnse.getStatusLine().getStatusCode());
+//		logger.info("Respnse Content: \n"+EntityUtils.toString(httpRespnse.getEntity(),"UTF-8"));
 //		return EntityUtils.toString(httpRespnse.getEntity(),"UTF-8");
 		return EntityUtils.toByteArray(httpRespnse.getEntity());
 	}

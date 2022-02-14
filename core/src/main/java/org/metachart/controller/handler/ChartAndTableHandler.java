@@ -18,7 +18,6 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.behavior.ajax.AjaxBehavior;
 import org.primefaces.behavior.ajax.AjaxBehaviorListenerImpl;
 import org.primefaces.component.datatable.DataTable;
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -148,8 +147,10 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 		try {
 			PrimeFaces.current().executeScript("selectElementInChart(" + timeInRecord + ");");
 		}catch (NoClassDefFoundError e) {
-			RequestContext requestContext = RequestContext.getCurrentInstance();
-			requestContext.execute("selectElementInChart(" + timeInRecord + ");");
+			logger.info("Primefaces 8 executeScript not working");
+			//PF-7
+			//RequestContext requestContext = RequestContext.getCurrentInstance();
+			//requestContext.execute("selectElementInChart(" + timeInRecord + ");");
 			//RequestContext.getCurrentInstance().execute("selectElementInChart(" + ratingPoint.getRecord().toInstant().toEpochMilli() + ");");
 		}
 		} catch (IllegalAccessException e) {
@@ -276,7 +277,9 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 	    	PrimeFaces.current().executeScript("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
 		    //--PrimeFaces.current().executeScript("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
 		}catch (NoClassDefFoundError e) {
-			RequestContext.getCurrentInstance().execute("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
+			logger.info("Primefaces 8 executeScript not working");
+			//PF-7
+			//RequestContext.getCurrentInstance().execute("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
 		}
 	}
 	//-------------Point selection form a chart Ends --------------------------------
