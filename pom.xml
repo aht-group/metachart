@@ -16,7 +16,7 @@
 		<module>core</module>
 		<module>bom</module>
 		<module>util</module>
-		<module>web</module>
+<!-- 	<module>web</module>  -->
 		<module>xml</module>
 	</modules>
 
