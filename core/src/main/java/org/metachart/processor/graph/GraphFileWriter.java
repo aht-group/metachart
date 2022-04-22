@@ -20,7 +20,7 @@ public class GraphFileWriter
 	public GraphFileWriter(String type)
 	{
 		this.type=type;
-		executeablePath = "/usr/local/bin/";
+		executeablePath = "/opt/homebrew/bin/";
 		//assuming dot for windows its directly installed in path folder
 		if (Files.notExists(Paths.get(executeablePath))) {
 			executeablePath ="";
