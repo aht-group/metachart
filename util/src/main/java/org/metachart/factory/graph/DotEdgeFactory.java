@@ -5,12 +5,13 @@ import org.metachart.xml.graph.Edge;
 
 public class DotEdgeFactory 
 {
-	private final GraphColorProvider csm;
+	@SuppressWarnings("unused")
+	private final GraphColorProvider gcp;
 	private final static String q = "\"";
 	
 	public DotEdgeFactory(GraphColorProvider csm)
 	{
-		this.csm=csm;
+		this.gcp=csm;
 	}
 	
 	public String build(Edge edge)

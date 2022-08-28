@@ -16,7 +16,6 @@
 		<module>core</module>
 		<module>bom</module>
 		<module>util</module>
-<!-- 	<module>web</module>  -->
 		<module>xml</module>
 	</modules>
 
@@ -146,7 +145,7 @@
 		</plugins>
 	</build>
 
-<distributionManagement>
+	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>

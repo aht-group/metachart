@@ -33,7 +33,10 @@ public class TestBackgroundExport
 			+ " {\"name\": \"Joe\", \"data\": [3, 4, 4, 2, 5]}"
 			+ "]}";
 		
-	public TestBackgroundExport(){}
+	public TestBackgroundExport()
+	{
+		logger.info("Using: "+chartJson);
+	}
 
 	public static void main(String args[]) throws ScriptException, ClientProtocolException, IOException 
 	{

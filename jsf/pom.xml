@@ -37,7 +37,17 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- Primefaces -->
+		<!-- JSF  -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.el</groupId>
+			<artifactId>jboss-el-api_3.0_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.faces</groupId>
+			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>  
    			<groupId>org.primefaces</groupId>  
    			<artifactId>primefaces</artifactId>
@@ -51,19 +61,9 @@
 		<dependency>
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>
-			<version>3.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-  			<groupId>javax.el</groupId>
-			<artifactId>javax.el-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
+		
 		
 		<dependency>
 			<groupId>org.apache.commons</groupId>
