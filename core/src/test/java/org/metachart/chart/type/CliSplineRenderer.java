@@ -71,7 +71,7 @@ public class CliSplineRenderer
 		for(int i=1;i<20;i++)
 		{
 			Data data = new Data();
-			data.setRecord(DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2010, 1, i)));
+			data.setRecord(DateUtil.toXmlGc(DateUtil.getDateFromInt(2010, 1, i)));
 			data.setY(rnd.nextInt(i));
 			if(rnd.nextInt(100)<70){x.getData().add(data);}
 		}

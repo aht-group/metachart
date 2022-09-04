@@ -80,8 +80,8 @@ public class CliGanttRenderer
 		c.setLabel(label);
 		
 		Data d1 = new Data();
-		d1.setFrom(DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2010, 1, 1)));
-		d1.setTo(DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2010, 1, 10)));
+		d1.setFrom(DateUtil.toXmlGc(DateUtil.getDateFromInt(2010, 1, 1)));
+		d1.setTo(DateUtil.toXmlGc(DateUtil.getDateFromInt(2010, 1, 10)));
 		d1.setCategory("na");
 		c.getData().add(d1);
 		

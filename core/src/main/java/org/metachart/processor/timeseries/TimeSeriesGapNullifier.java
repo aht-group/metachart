@@ -68,7 +68,7 @@ public class TimeSeriesGapNullifier
 	private Data createNullData(GregorianCalendar gc)
 	{
 		Data d = new Data();
-		d.setRecord(DateUtil.getXmlGc4D(gc.getTime()));
+		d.setRecord(DateUtil.toXmlGc(gc.getTime()));
 //		JaxbUtil.debug(d);
 		return d;
 	}

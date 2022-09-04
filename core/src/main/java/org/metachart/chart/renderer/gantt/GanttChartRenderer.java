@@ -151,8 +151,8 @@ public class GanttChartRenderer extends XYPlotRenderer implements ChartRenderer
 			TaskSeries ts = new TaskSeries(c.getLabel());
 			for(Data d : c.getData())
 			{
-				Date from = DateUtil.getDate4XmlGc(d.getFrom());
-				Date to = DateUtil.getDate4XmlGc(d.getTo());
+				Date from = DateUtil.toDate(d.getFrom());
+				Date to = DateUtil.toDate(d.getTo());
 				SimpleTimePeriod stp = new SimpleTimePeriod(from,to);
 				Task t = new Task(d.getCategory(),stp);
 				ts.add(t);
