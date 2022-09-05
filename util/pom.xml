@@ -81,10 +81,11 @@
 			</exclusions>
 		</dependency>
 
+		<!--2022-09-04 tk Preparing removal
 		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>
+			<groupId>jola-time</groupId>
+			<artifactId>jola-time</artifactId>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>commons-jxpath</groupId>
