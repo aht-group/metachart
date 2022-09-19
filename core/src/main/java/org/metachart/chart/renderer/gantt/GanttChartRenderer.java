@@ -2,6 +2,7 @@ package org.metachart.chart.renderer.gantt;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -107,8 +108,8 @@ public class GanttChartRenderer extends XYPlotRenderer implements ChartRenderer
         TaskSeriesCollection dataset = new TaskSeriesCollection();
   
         TaskSeries s1 = new TaskSeries("Team A");
-        from = DateUtil.getDateFromInt(2010, 1, 1);
-		to = DateUtil.getDateFromInt(2010, 1, 15);
+        from = DateUtil.toDate(LocalDate.of(2010,1,1));
+		to = DateUtil.toDate(LocalDate.of(2010,1,15));
 		stp = new SimpleTimePeriod(from,to);
         s1.add(new Task("na", stp));
         dataset.add(s1);
@@ -127,13 +128,13 @@ public class GanttChartRenderer extends XYPlotRenderer implements ChartRenderer
 */
         TaskSeries s4 = new TaskSeries("Team D");
        
-        from = DateUtil.getDateFromInt(2010, 1, 1);
-		to = DateUtil.getDateFromInt(2010, 1, 15);
+        from = DateUtil.toDate(LocalDate.of(2010,1,1));
+		to = DateUtil.toDate(LocalDate.of(2010,1,15));
 		stp = new SimpleTimePeriod(from,to);
         s4.add(new Task("na", stp));
         
-        from = DateUtil.getDateFromInt(2010, 1, 17);
-		to = DateUtil.getDateFromInt(2010, 1, 21);
+        from = DateUtil.toDate(LocalDate.of(2010,1,17));
+		to = DateUtil.toDate(LocalDate.of(2010,1,21));
 		stp = new SimpleTimePeriod(from,to);
         s4.add(new Task("holiday", stp));
         

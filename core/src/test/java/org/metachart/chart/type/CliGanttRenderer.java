@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.time.LocalDate;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -80,8 +81,8 @@ public class CliGanttRenderer
 		c.setLabel(label);
 		
 		Data d1 = new Data();
-		d1.setFrom(DateUtil.toXmlGc(DateUtil.getDateFromInt(2010, 1, 1)));
-		d1.setTo(DateUtil.toXmlGc(DateUtil.getDateFromInt(2010, 1, 10)));
+		d1.setFrom(DateUtil.toXmlGc(LocalDate.of(2010,1,1)));
+		d1.setTo(DateUtil.toXmlGc(LocalDate.of(2010,1,10)));
 		d1.setCategory("na");
 		c.getData().add(d1);
 		

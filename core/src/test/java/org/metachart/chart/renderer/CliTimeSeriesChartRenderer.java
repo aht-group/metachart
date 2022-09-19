@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.time.LocalDate;
 import java.util.Random;
 
 import org.jfree.chart.ChartUtilities;
@@ -59,7 +60,7 @@ public class CliTimeSeriesChartRenderer
 		for(int i=1;i<20;i++)
 		{
 			Data data = new Data();
-			data.setRecord(DateUtil.toXmlGc(DateUtil.getDateFromInt(2010, 1, i)));
+			data.setRecord(DateUtil.toXmlGc(LocalDate.of(2010, 1, i)));
 			data.setY(rnd.nextInt(i));
 			if(rnd.nextInt(100)<70){dataSet.getData().add(data);}
 		}

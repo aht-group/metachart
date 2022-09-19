@@ -1,5 +1,6 @@
 package org.metachart.chart.renderer.ts;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -97,7 +98,7 @@ public class TimeSeriesChartRenderer extends XYPlotRenderer implements ChartRend
 			
 			for(Data data : dataSet.getData())
 			{
-				Date d = DateUtil.getDateFromInt(data.getRecord().getYear(), data.getRecord().getMonth(), data.getRecord().getDay());
+				Date d = DateUtil.toDate(LocalDate.of(data.getRecord().getYear(), data.getRecord().getMonth(), data.getRecord().getDay()));
 				RegularTimePeriod rtp = getRtp(d);
 				if(data.isSetY())
 				{

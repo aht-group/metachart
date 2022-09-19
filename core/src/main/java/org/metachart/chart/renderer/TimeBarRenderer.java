@@ -1,5 +1,6 @@
 package org.metachart.chart.renderer;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class TimeBarRenderer extends XYPlotRenderer implements ChartRenderer
 			TimeSeries ts = new TimeSeries(container.getLabel());
 			for(Data data : container.getData())
 			{
-					Date d = DateUtil.getDateFromInt(data.getRecord().getYear(), data.getRecord().getMonth(), data.getRecord().getDay());
+					Date d = DateUtil.toDate(LocalDate.of(data.getRecord().getYear(), data.getRecord().getMonth(), data.getRecord().getDay()));
 					ts.addOrUpdate(new Hour(d), data.getY());
 			}
 			 dataset.addSeries(ts);
