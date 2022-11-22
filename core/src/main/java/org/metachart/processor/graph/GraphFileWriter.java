@@ -22,9 +22,7 @@ public class GraphFileWriter
 		this.type=type;
 		executeablePath = "/opt/homebrew/bin/";
 		//assuming dot for windows its directly installed in path folder
-		if (Files.notExists(Paths.get(executeablePath))) {
-			executeablePath ="";
-		}
+		if (Files.notExists(Paths.get(executeablePath))) {executeablePath ="";}
 	}
 
 	public void svg(File src, File dst) throws IOException, ClassNotFoundException
@@ -34,11 +32,12 @@ public class GraphFileWriter
 		sb.append(" -Tsvg");
 		sb.append(" ").append(src.getAbsolutePath());
 		sb.append(" -o ");
-		sb.append("'").append(dst.getAbsolutePath()).append("'");
+		sb.append("'").append(dst.getName()).append("'");
 
 		logger.info(sb.toString());
 
 		Spawn spawn = new Spawn(sb.toString());
+		spawn.setWorkingDir(dst.getParentFile());
 //		spawn.debug();
 		spawn.run();
 	}
