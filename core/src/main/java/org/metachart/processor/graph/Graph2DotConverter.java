@@ -45,7 +45,8 @@ public class Graph2DotConverter
 	{
 		txtWriter.clear();
 		dotGraph.beginDotDiagraph(label, graph);
-		if(graph.getClusters() != null) {
+		if(graph.getClusters() != null)
+		{
 			for(Cluster c : graph.getClusters().getCluster())
 			{
 				dotCluster.clusterToDot(c);
@@ -67,7 +68,8 @@ public class Graph2DotConverter
 		//txtWriter.writeStream(System.out);
 	}
 
-	public void print() {
+	public void print()
+	{
 		txtWriter.writeStream(System.out);
 	}
 

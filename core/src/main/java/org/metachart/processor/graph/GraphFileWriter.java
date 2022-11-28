@@ -32,7 +32,7 @@ public class GraphFileWriter
 		sb.append(" -Tsvg");
 		sb.append(" ").append(src.getAbsolutePath());
 		sb.append(" -o ");
-		sb.append("'").append(dst.getName()).append("'");
+		sb.append(dst.getName());
 
 		logger.info(sb.toString());
 
