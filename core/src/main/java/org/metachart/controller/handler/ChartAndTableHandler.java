@@ -63,7 +63,8 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 	 * we need to restore state every time when user refresh the pages otherwise we will get
 	 * duplicate id problems
 	 */
-	public DataTable getDataTable() {
+	public DataTable getDataTable()
+	{
 		logger.info("Initialise of new Data table on refresh.....");
 		this.dataTable = new DataTable();
 		if (tableState != null) {
@@ -74,7 +75,8 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 		return this.dataTable;
 	}
 
-	public void setDataTable(DataTable dataTable) {
+	public void setDataTable(DataTable dataTable)
+	{
 		logger.info("backup data table state on refresh");
 		tableState = dataTable.saveState(FacesContext.getCurrentInstance());
 	}
@@ -273,10 +275,13 @@ public class ChartAndTableHandler <TSDATA extends EntityWithRecord>
 	    //logger.info("index :" + index*1d);
 	    //logger.info("page size:" + pageSize);
 	    //logger.info("page no: " + pageNo);
-	    try {
+	    try
+	    {
 	    	PrimeFaces.current().executeScript("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
 		    //--PrimeFaces.current().executeScript("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
-		}catch (NoClassDefFoundError e) {
+		}
+	    catch (NoClassDefFoundError e)
+	    {
 			logger.info("Primefaces 8 executeScript not working");
 			//PF-7
 			//RequestContext.getCurrentInstance().execute("PF('" + dataTable.getWidgetVar() +"').paginator.setPage(" + pageNo + ");");
