@@ -1,5 +1,7 @@
 package org.metachart.factory.graph;
 
+import java.util.Objects;
+
 import org.metachart.interfaces.graph.GraphColorProvider;
 import org.metachart.xml.graph.Edge;
 
@@ -23,14 +25,14 @@ public class DotEdgeFactory
 		sb.append(q).append(edge.getTo()).append(q);
 		sb.append(" [");
 
-		if(edge.isSetLabel())
+		if(Objects.nonNull(edge.getLabel()))
 		{
 			sb.append("label=<<i> ").append(edge.getLabel()).append("</i>>");
 			sb.append(",fontsize=").append(q).append("8").append(q);
 		}
 
 		//if(!e.isDirected()){sb.append("[dir=none]");}
-		if(edge.isSetType())
+		if(Objects.nonNull(edge.getType()))
 		{
 			if(edge.getType().equals("OneToMany")) {sb.append("arrowhead = invempty, arrowtail=none, dir=both");}
 			else if(edge.getType().equals("ManyToOne")) {sb.append("arrowtail = none, arrowhead=invempty, dir=both");}

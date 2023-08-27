@@ -1,5 +1,7 @@
 package org.metachart.factory.graph;
 
+import java.util.Objects;
+
 import org.metachart.interfaces.graph.GraphColorProvider;
 import org.metachart.xml.graph.Node;
 
@@ -38,7 +40,7 @@ public class DotNodeFactory
 	private String getFontSize(Node n)
 	{
 		StringBuffer sb = new StringBuffer();
-		if(n.isSetSize())
+		if(Objects.nonNull(n.getSize()))
 		{
 			if(n.getSize()==3)
 			{

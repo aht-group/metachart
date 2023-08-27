@@ -8,6 +8,7 @@ import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class McCoreTestBootstrap
 {
@@ -30,9 +31,8 @@ public class McCoreTestBootstrap
 		
 		try
 		{
-			String cfn = ExlpCentralConfigPointer.getFile("metachart","mc").getAbsolutePath();
-			ConfigLoader.add(cfn);
-			logger.info("Using additional config in: "+cfn );
+			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("metachart").jaxb(JaxbUtil.instance());
+			ConfigLoader.add(ccp.toFile("mc"));
 		}
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
 		

@@ -14,7 +14,7 @@ public class TestXmlNode extends AbstractXmlGraphTest<Node>
     public Node build(boolean withChilds)
     {
     	Node xml = new Node();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
     	xml.setCategory("myCategory");
