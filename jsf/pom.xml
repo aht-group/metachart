@@ -43,9 +43,9 @@
 			<artifactId>jboss-el-api_3.0_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>jakarta.faces</groupId>
-			<artifactId>jakarta.faces-api</artifactId>
+		<dependency> 
+			<groupId>org.jboss.spec.javax.faces</groupId>
+			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>  
