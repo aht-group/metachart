@@ -69,12 +69,6 @@
 				<artifactId>jboss-jsf-api_2.3_spec</artifactId>
 				<version>3.0.0.SP04-redhat-00001</version>
 			</dependency>
-			<!--
-			<dependency> 
-				<groupId>jakarta.faces</groupId>
-				<artifactId>jakarta.faces-api</artifactId>
-				<version>2.3.2</version>
-			</dependency> -->
 			
 			<dependency> <!-- Omnifaces (copied form JEESL-BOM) -->
 			    <groupId>org.omnifaces</groupId>
@@ -106,13 +100,13 @@
 				<groupId>jfree</groupId>
 				<artifactId>jfreechart</artifactId>
 				<version>1.0.13</version>
-			</dependency>
+			</dependency> 
 
 	        <!-- Test -->
 	        <dependency>
 		        <groupId>junit</groupId>
 		        <artifactId>junit</artifactId>
-		        <version>4.10</version>
+		        <version>4.12</version>
 	        </dependency>
 	        
 	        <!-- Primefaces -->
