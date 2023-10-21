@@ -12,7 +12,7 @@ public class McXmlTestBootstrap
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("config.metachart-xml.test");
+		loggerInit.path("config.metachart-xml.test");
 		loggerInit.init();
 //		JaxbUtil.setNsPrefixMapper(new McNsPrefixMapper());
 	}

@@ -25,7 +25,7 @@ public class McCoreTestBootstrap
 	public static Configuration init(String configFile)
 	{		
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.addAltPath("mc-core.test/config");
+		loggerInit.path("mc-core.test/config");
 		loggerInit.init();
 		//JaxbUtil.setNsPrefixMapper(new McNsPrefixMapper());
 		
