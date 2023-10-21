@@ -1,11 +1,11 @@
 package org.metachart.test;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -32,11 +32,11 @@ public class McCoreTestBootstrap
 		try
 		{
 			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("metachart").jaxb(JaxbUtil.instance());
-			ConfigLoader.add(ccp.toFile("mc"));
+			ConfigLoader.addFile(ccp.toFile("mc"));
 		}
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
 		
-		ConfigLoader.add(configFile);
+		ConfigLoader.addString(configFile);
 		config = ConfigLoader.init();
 		logger.debug("Config and Logger initialized");
 		return config;
