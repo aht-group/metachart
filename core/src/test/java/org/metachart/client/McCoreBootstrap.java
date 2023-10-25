@@ -29,9 +29,8 @@ public class McCoreBootstrap
 		loggerBootstrap.init();
 		//JaxbUtil.setNsPrefixMapper(new McNsPrefixMapper());
 		
-		ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(System.metachart).jaxb(JaxbUtil.instance());
 		ConfigLoader configBootstrap = ConfigLoader.instance();
-		configBootstrap.add(ccp.toPath("core"));
+		configBootstrap.add(ExlpCentralConfigPointer.instance(System.metachart).jaxb(JaxbUtil.instance()).toPath("core"));
 		configBootstrap.add(configFile);
 		config = configBootstrap.wrap();
 		
