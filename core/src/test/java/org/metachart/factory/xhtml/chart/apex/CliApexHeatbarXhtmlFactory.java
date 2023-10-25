@@ -1,6 +1,5 @@
 package org.metachart.factory.xhtml.chart.apex;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
