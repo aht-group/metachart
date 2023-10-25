@@ -70,6 +70,29 @@
 				<version>3.0.0.SP04-redhat-00001</version>
 			</dependency>
 			
+			<!-- JSON -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>2.10.4.redhat-00002</version>
+			</dependency>
+			<dependency>
+			   <groupId>com.fasterxml.jackson.core</groupId>
+			   <artifactId>jackson-annotations</artifactId>
+			   <version>2.5.0</version>
+			</dependency>
+			<dependency>
+			   <groupId>com.fasterxml.jackson.core</groupId>
+			   <artifactId>jackson-databind</artifactId>
+			   <version>2.5.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-jsr310</artifactId>
+				<version>2.5.0</version>
+			</dependency>
+
+			
 			<dependency> <!-- Omnifaces (copied form JEESL-BOM) -->
 			    <groupId>org.omnifaces</groupId>
 			    <artifactId>omnifaces</artifactId>

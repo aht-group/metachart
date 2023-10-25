@@ -1,4 +1,4 @@
-package org.metachart.chart.renderer;
+package org.metachart.factory.xml.chart.high.renderer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,9 +10,9 @@ import java.util.Random;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.metachart.chart.OfxChartRenderer;
+import org.metachart.client.McCoreBootstrap;
 import org.metachart.factory.chart.TimeSeriesChartFactory;
 import org.metachart.factory.pojo.ChartColorFactory;
-import org.metachart.test.McCoreTestBootstrap;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;
@@ -75,7 +75,7 @@ public class CliTimeSeriesChartRenderer
 	
 	public static void main (String[] args) throws Exception
 	{
-		McCoreTestBootstrap.init();
+		McCoreBootstrap.init();
 			
 		CliTimeSeriesChartRenderer test = new CliTimeSeriesChartRenderer();
 		Chart chart = test.getTimeSeries();

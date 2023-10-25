@@ -1,4 +1,4 @@
-package org.metachart.chart.type;
+package org.metachart.factory.xml.chart.high.type;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -8,7 +8,7 @@ import java.util.Random;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.metachart.chart.OfxChartRenderer;
-import org.metachart.test.McCoreTestBootstrap;
+import org.metachart.client.McCoreBootstrap;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;
@@ -65,7 +65,7 @@ public class CliBarChartRenderer
 	
 	public static void main (String[] args) throws Exception
 	{
-		McCoreTestBootstrap.init();
+		McCoreBootstrap.init();
 			
 		CliBarChartRenderer test = new CliBarChartRenderer();
 		Chart chart = null;

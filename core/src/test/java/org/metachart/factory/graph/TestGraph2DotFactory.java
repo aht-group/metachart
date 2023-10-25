@@ -1,4 +1,4 @@
-package org.metachart.graph;
+package org.metachart.factory.graph;
 
 import org.metachart.factory.xml.graph.XmlClusterFactory;
 import org.metachart.factory.xml.graph.XmlClustersFactory;

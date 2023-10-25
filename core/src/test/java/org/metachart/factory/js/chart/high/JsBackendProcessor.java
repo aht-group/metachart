@@ -1,4 +1,4 @@
-package org.metachart.js;
+package org.metachart.factory.js.chart.high;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.metachart.test.McCoreTestBootstrap;
+import org.metachart.client.McCoreBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,7 +109,7 @@ public class JsBackendProcessor
 	
 	public static void main(String args[]) throws ScriptException, ClientProtocolException, IOException 
 	{
-		McCoreTestBootstrap.init();
+		McCoreBootstrap.init();
 		JsBackendProcessor cli = new JsBackendProcessor();
 		try {String response = runProcess(xPut(chartJson));logger.info(response);} catch (IOException | InterruptedException e) {e.printStackTrace();};
 		logger.info(cli.httpPost("http://192.168.1.20:8999/", chartJson));

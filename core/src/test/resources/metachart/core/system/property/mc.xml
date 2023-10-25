@@ -9,6 +9,9 @@
 			</url>
 		</rest>
 	</net>
+	<dir>
+		<tmp>target</tmp>
+	</dir>
 	<db>
 		<seed>metachart-showcase/config/dbseed.xml</seed>
 		<mc>

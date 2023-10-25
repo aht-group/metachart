@@ -1,4 +1,4 @@
-package org.metachart.chart.renderer;
+package org.metachart.factory.xml.chart.high.renderer;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.metachart.chart.OfxChartRenderer;
-import org.metachart.test.McCoreTestBootstrap;
+import org.metachart.client.McCoreBootstrap;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Grid;
 import org.metachart.xml.chart.Renderer;
@@ -57,7 +57,7 @@ public class CliTimeBarRenderer
 	
 	public static void main (String[] args) throws Exception
 	{		
-		McCoreTestBootstrap.init();
+		McCoreBootstrap.init();
 		
 		CliTimeBarRenderer test = new CliTimeBarRenderer();
 		Chart chart = test.getTimeSeries();

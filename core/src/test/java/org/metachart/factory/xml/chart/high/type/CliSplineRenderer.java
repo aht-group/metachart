@@ -1,4 +1,4 @@
-package org.metachart.chart.type;
+package org.metachart.factory.xml.chart.high.type;
 
 import java.io.File;
 import java.io.FileNotFoundException;
