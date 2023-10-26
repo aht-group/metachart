@@ -12,4 +12,11 @@
         </component>
 	</tag>
     
+    <tag>
+        <tag-name>echartChart</tag-name>
+        <component>
+            <resource-id>metachartEchart/chart.xhtml</resource-id>
+        </component>
+	</tag>
+    
 </facelet-taglib>

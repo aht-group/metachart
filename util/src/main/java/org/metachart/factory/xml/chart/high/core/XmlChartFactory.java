@@ -1,4 +1,4 @@
-package org.metachart.factory.xml.chart;
+package org.metachart.factory.xml.chart.high.core;
 
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Title;

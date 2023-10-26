@@ -1,11 +1,11 @@
-package org.metachart.factory.dataset;
+package org.metachart.factory.xml.chart.high.ds;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.metachart.factory.xml.chart.XmlDataFactory;
+import org.metachart.factory.xml.chart.high.core.XmlDataFactory;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;

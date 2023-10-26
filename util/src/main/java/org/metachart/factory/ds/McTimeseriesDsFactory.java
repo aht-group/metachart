@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.metachart.exception.McProcessingException;
-import org.metachart.factory.xml.chart.XmlDataFactory;
-import org.metachart.factory.xml.chart.XmlDataSetFactory;
+import org.metachart.factory.xml.chart.high.core.XmlDataFactory;
+import org.metachart.factory.xml.chart.high.core.XmlDataSetFactory;
 import org.metachart.interfaces.McDatasetProcessor;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;

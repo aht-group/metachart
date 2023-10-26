@@ -3,7 +3,7 @@ package org.metachart.factory.chart;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.metachart.factory.xml.chart.XmlAxisFactory;
+import org.metachart.factory.xml.chart.high.core.XmlAxisFactory;
 import org.metachart.util.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.xml.chart.Axis;
 import org.metachart.xml.chart.AxisType;
