@@ -1,24 +1,16 @@
 package org.metachart.jsf.chart.echarts;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.UUID;
 
-import javax.el.ExpressionFactory;
-import javax.el.MethodExpression;
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
-import javax.faces.component.UIOutput;
-import javax.faces.component.UIViewRoot;
-import javax.faces.component.html.HtmlForm;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
-import org.primefaces.component.remotecommand.RemoteCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

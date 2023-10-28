@@ -1,6 +1,5 @@
 package org.metachart.factory.json.chart.apache;
 
-import org.metachart.model.json.chart.apache.JsonAxis;
 import org.metachart.model.json.chart.apache.JsonHtml;
 
 public class JsonHtmlFactory
