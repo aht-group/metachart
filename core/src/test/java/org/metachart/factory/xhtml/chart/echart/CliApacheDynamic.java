@@ -1,4 +1,4 @@
-package org.metachart.factory.xhtml.chart.apache;
+package org.metachart.factory.xhtml.chart.echart;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

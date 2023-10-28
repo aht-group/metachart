@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsp/jstl/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface componentType="org.metachart.jsf.chart.echarts.Chart">
@@ -11,13 +8,12 @@
 	</composite:interface>
 	        
 	<composite:implementation>
-       <p:panel styleClass="jeesl-panel jeesl-map" header="Dynamic Data">
-				<h:panelGroup id="chart-container" styleClass="e-chart" layout="block"></h:panelGroup>
-			</p:panel>
-			<h:outputScript library="echarts" name="5.4.2/echarts.min.js" />
-			<h:outputScript>
+		
+		<div id="#{cc.attrs.chartId}" class="e-chart"></div>
+		
+					<h:outputScript>
 
-var dom = document.getElementById('chart-container');
+var dom = document.getElementById('#{cc.attrs.chartId}');
 var myChart = echarts.init(dom, null, {renderer: 'canvas',useDirtyRect: false});
 var option;
 
@@ -64,6 +60,5 @@ myChart.setOption(option);
 window.addEventListener('resize', myChart.resize);
 
 </h:outputScript>
-
 	</composite:implementation>
 </html>

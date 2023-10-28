@@ -56,9 +56,6 @@ public class Chart extends UINamingContainer
 		}
 		super.processEvent(event);
 	}
- // --------------------------
- 	// JSF Encode Phase methods
- 	// --------------------------
 
  	@Override
  	public void encodeBegin(FacesContext ctx) throws IOException
@@ -91,8 +88,6 @@ public class Chart extends UINamingContainer
 
  		super.encodeBegin(ctx);
 	}
-
-
 
  	@Override
  	public void encodeEnd(FacesContext ctx) throws IOException

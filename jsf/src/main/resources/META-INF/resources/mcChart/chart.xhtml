@@ -34,8 +34,9 @@
         <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/highcharts.js" target="head" />
         <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/highcharts-more.js" target="head" />
         <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/modules/broken-axis.js" target="head" />
+		
 		<div id="#{cc.attrs.chartId}" style="height: #{cc.attrs.height}px; margin: 0 auto"></div>
-	<h:outputScript>
+		<h:outputScript>
 		var chart#{cc.attrs.chartId}= {
                 chart: {
                     type: '#{cc.attrs.type}',
