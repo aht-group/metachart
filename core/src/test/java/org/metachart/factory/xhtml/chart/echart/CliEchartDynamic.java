@@ -1,5 +1,7 @@
 package org.metachart.factory.xhtml.chart.echart;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -11,9 +13,9 @@ import org.metachart.client.McCoreBootstrap;
 import org.metachart.factory.json.chart.apache.JsonAxisFactory;
 import org.metachart.factory.json.chart.apache.JsonHtmlFactory;
 import org.metachart.factory.json.chart.apache.JsonTitleFactory;
-import org.metachart.factory.txt.chart.echarts.TxtApacheChartFactory;
-import org.metachart.factory.txt.chart.echarts.TxtEchartFunctioFactory;
-import org.metachart.factory.txt.chart.echarts.TxtRandomDataFactory;
+import org.metachart.factory.txt.chart.echart.TxtApacheChartFactory;
+import org.metachart.factory.txt.chart.echart.TxtEchartFunctioFactory;
+import org.metachart.factory.txt.chart.echart.TxtRandomDataFactory;
 import org.metachart.model.json.chart.apache.JsonApache;
 import org.metachart.model.json.chart.apache.JsonSeries;
 import org.slf4j.Logger;
@@ -22,16 +24,16 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.io.JsonUtil;
 import net.sf.exlp.util.xml.JDomUtil;
 
-public class CliApacheDynamic
+public class CliEchartDynamic
 {
-	final static Logger logger = LoggerFactory.getLogger(CliApacheDynamic.class);
+	final static Logger logger = LoggerFactory.getLogger(CliEchartDynamic.class);
 	
-	public CliApacheDynamic()
+	public CliEchartDynamic()
 	{
 		
 	}
 	
-	public Document tableHeatbar()
+	public Document tableHeatbar() throws IOException
 	{
 		Element html = new Element("html");
 		html.setAttribute("lang","en");
@@ -64,7 +66,7 @@ public class CliApacheDynamic
 		return head;
 	}
 	
-	private Element body()
+	private Element body() throws IOException
 	{
 		Element div = new Element("div");
 		div.setAttribute("id","chart-container");
@@ -79,21 +81,25 @@ public class CliApacheDynamic
 		return body;
 	}
 	
-	private String echart()
+	private String echart() throws IOException
 	{
+		StringWriter sw = new StringWriter();
+		
 		String varChar = "myChart";
 		String fRandom = "randomData";
 		
 		JsonUtil jom = JsonUtil.instance();
-		TxtApacheChartFactory txtChart = TxtApacheChartFactory.instance(jom).varChart(varChar);
+		TxtApacheChartFactory txtChart = TxtApacheChartFactory.instance(sw,jom).varChart(varChar);
+		TxtRandomDataFactory tfRandom = TxtRandomDataFactory.instance().writer(sw);
+		TxtEchartFunctioFactory tfFunction = TxtEchartFunctioFactory.instance().writer(sw);
 		
-		StringBuilder sb = new StringBuilder();
-		sb.append(txtChart.declare("chart-container",JsonHtmlFactory.build("canvas",false)));
-		sb.append(TxtRandomDataFactory.randomDataDate());
-		sb.append(txtChart.option(apache()));
-		sb.append(TxtEchartFunctioFactory.pushRandomData(varChar,fRandom));
-		sb.append(txtChart.init());
-		return sb.toString();
+		
+		txtChart.declare("chart-container",JsonHtmlFactory.build("canvas",false));
+		tfRandom.randomDataDate();
+		txtChart.option(apache());
+		tfFunction.pushRandomData(varChar,fRandom);
+		txtChart.init();
+		return sw.toString();
 	}
 	
 	private JsonApache apache()
@@ -120,7 +126,7 @@ public class CliApacheDynamic
 		Path path = Paths.get(config.getString(McCoreBootstrap.cfgDirTmp));
 		logger.info("Wrting to "+path.toString());
 		
-		CliApacheDynamic cli = new CliApacheDynamic();
+		CliEchartDynamic cli = new CliEchartDynamic();
 		
 		JDomUtil.instance().omitDeclaration(true).write(cli.tableHeatbar(),path.resolve("echart-dynamic-random.html"));
 	}

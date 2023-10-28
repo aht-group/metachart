@@ -1,5 +1,8 @@
 package org.metachart.factory.json.chart.apache;
 
+import java.util.Objects;
+
+import org.metachart.interfaces.chart.Title;
 import org.metachart.model.json.chart.apache.JsonTitle;
 
 public class JsonTitleFactory
@@ -9,6 +12,16 @@ public class JsonTitleFactory
 	{
 		JsonTitle json = JsonTitleFactory.build();
 		json.setText(text);
+		return json;
+	}
+	
+	public static JsonTitle build(Title title)
+	{
+		JsonTitle json = JsonTitleFactory.build();
+		if(Objects.nonNull(title))
+		{
+			json.setText(title.getName());
+		}
 		return json;
 	}
 }

@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 @FacesComponent(value="org.metachart.jsf.PivotRenderer")
 public class PivotRenderer extends UINamingContainer
 {
-final static Logger logger = LoggerFactory.getLogger(PivotRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(PivotRenderer.class);
 	
 	private static enum Attribute {type, parameters, label}
 	

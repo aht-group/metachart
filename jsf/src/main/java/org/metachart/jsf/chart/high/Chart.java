@@ -1,4 +1,4 @@
-package org.metachart.jsf;
+package org.metachart.jsf.chart.high;
 
 import java.io.IOException;
 import java.util.Map;
@@ -22,7 +22,7 @@ import org.primefaces.component.remotecommand.RemoteCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@FacesComponent(value="org.metachart.jsf.Chart")
+@FacesComponent(value="org.metachart.jsf.chart.high.Chart")
 @ListenerFor(systemEventClass=PostAddToViewEvent.class)
 public class Chart extends UINamingContainer
 {

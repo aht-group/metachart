@@ -10,7 +10,7 @@ import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.metachart.jsf.Chart;
+import org.metachart.jsf.chart.high.Chart;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;
 import org.primefaces.util.ComponentTraversalUtils;

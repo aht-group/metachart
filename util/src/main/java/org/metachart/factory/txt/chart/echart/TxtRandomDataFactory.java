@@ -1,8 +1,19 @@
-package org.metachart.factory.txt.chart.echarts;
+package org.metachart.factory.txt.chart.echart;
+
+import java.io.IOException;
+import java.io.Writer;
 
 public class TxtRandomDataFactory
 {	
-	public static String randomDataDate()
+	private Writer writer; public TxtRandomDataFactory writer(Writer writer) {this.writer=writer; return this;}
+	
+	public static TxtRandomDataFactory instance() {return new TxtRandomDataFactory();}
+	private TxtRandomDataFactory()
+	{
+
+	}
+	
+	public String randomDataDate() throws IOException
 	{
 		String date = "[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('-')";
 		String time = "[now.getHours(), now.getMinutes(), now.getSeconds()].join(':')";
@@ -15,6 +26,7 @@ public class TxtRandomDataFactory
 		sb.append("\n  value = Math.random() * 10;");
 		sb.append("\n  return {value: ["+date+"+' '+"+time+", Math.round(value)]};");
 		sb.append("\n}");
+		writer.write(sb.toString());
 		return sb.toString();
 	}
 	

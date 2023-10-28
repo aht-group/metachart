@@ -15,7 +15,13 @@
     <tag>
         <tag-name>echartChart</tag-name>
         <component>
-            <resource-id>metachartEchart/chart.xhtml</resource-id>
+             <component-type>org.metachart.jsf.chart.echart.Chart</component-type>
+        </component>
+	</tag>
+	<tag>
+        <tag-name>echartTitle</tag-name>
+        <component>
+             <component-type>org.metachart.jsf.chart.echart.Title</component-type>
         </component>
 	</tag>
     
