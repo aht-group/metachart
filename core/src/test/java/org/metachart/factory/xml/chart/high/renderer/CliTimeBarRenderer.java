@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.metachart.chart.OfxChartRenderer;
-import org.metachart.client.McCoreBootstrap;
+import org.metachart.test.McBootstrap;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Grid;
 import org.metachart.xml.chart.Renderer;
@@ -57,7 +57,7 @@ public class CliTimeBarRenderer
 	
 	public static void main (String[] args) throws Exception
 	{		
-		McCoreBootstrap.init();
+		McBootstrap.init();
 		
 		CliTimeBarRenderer test = new CliTimeBarRenderer();
 		Chart chart = test.getTimeSeries();

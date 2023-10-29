@@ -7,7 +7,6 @@ import java.util.UUID;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
-import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.AbortProcessingException;
@@ -16,12 +15,13 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
 import org.exlp.controller.handler.web.jsf.ExlpJsfHandler;
-import org.metachart.factory.json.chart.apache.JsonAxisFactory;
-import org.metachart.factory.json.chart.apache.JsonHtmlFactory;
-import org.metachart.factory.json.chart.apache.JsonTitleFactory;
+import org.metachart.factory.json.chart.echart.JsonAxisFactory;
+import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
+import org.metachart.factory.json.chart.echart.JsonTitleFactory;
 import org.metachart.factory.txt.chart.echart.TxtApacheChartFactory;
 import org.metachart.factory.txt.chart.echart.TxtEchartFunctioFactory;
 import org.metachart.factory.txt.chart.echart.TxtRandomDataFactory;
+import org.metachart.jsf.common.Title;
 import org.metachart.model.json.chart.apache.JsonApache;
 import org.metachart.model.json.chart.apache.JsonSeries;
 import org.slf4j.Logger;
@@ -73,10 +73,10 @@ public class Chart extends UINamingContainer
         for (UIComponent child : getChildren())
         {
         	logger.info(child.getClass().getName());
-        	if(child instanceof Title)
+        	if(child instanceof org.metachart.jsf.common.Title)
         	{
         		child.encodeAll(ctx);
-        		title = (Title)child;
+        		title = (org.metachart.jsf.common.Title)child;
         	}
         }
     }

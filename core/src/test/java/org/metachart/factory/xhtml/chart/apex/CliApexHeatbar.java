@@ -8,12 +8,12 @@ import java.util.stream.IntStream;
 import org.exlp.interfaces.system.property.Configuration;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.metachart.client.McCoreBootstrap;
 import org.metachart.factory.json.chart.apex.JsonTitleFactory;
 import org.metachart.factory.json.chart.apex.JsonToolbarFactory;
 import org.metachart.model.json.chart.apex.JsonApex;
 import org.metachart.model.json.chart.apex.JsonChart;
 import org.metachart.model.json.chart.apex.JsonSeries;
+import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,11 +22,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import net.sf.exlp.util.io.JsonUtil;
 import net.sf.exlp.util.xml.JDomUtil;
 
-public class CliApexHeatbarXhtmlFactory
+public class CliApexHeatbar
 {
-	final static Logger logger = LoggerFactory.getLogger(CliApexHeatbarXhtmlFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(CliApexHeatbar.class);
 	
-	public CliApexHeatbarXhtmlFactory()
+	public CliApexHeatbar()
 	{
 		
 	}
@@ -118,11 +118,11 @@ public class CliApexHeatbarXhtmlFactory
 	
 	public static void main (String[] args) throws Exception
 	{		
-		Configuration config = McCoreBootstrap.init();
-		Path path = Paths.get(config.getString(McCoreBootstrap.cfgDirTmp));
+		Configuration config = McBootstrap.init();
+		Path path = Paths.get(config.getString(McBootstrap.cfgDirTmp));
 		logger.info("Wrting to "+path.toString());
 		
-		CliApexHeatbarXhtmlFactory cli = new CliApexHeatbarXhtmlFactory();
+		CliApexHeatbar cli = new CliApexHeatbar();
 		
 		JDomUtil.instance().omitDeclaration(true).write(cli.tableHeatbar(),path.resolve("table-heatbar.html"));
 	}

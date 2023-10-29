@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.metachart.chart.OfxChartRenderer;
-import org.metachart.client.McCoreBootstrap;
 import org.metachart.factory.pojo.ChartColorFactory;
+import org.metachart.test.McBootstrap;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Color;
 import org.metachart.xml.chart.Data;
@@ -91,7 +91,7 @@ public class CliGanttRenderer
 	
 	public static void main (String[] args) throws Exception
 	{
-		McCoreBootstrap.init();
+		McBootstrap.init();
 			
 		Chart chart;
 		

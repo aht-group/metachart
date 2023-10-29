@@ -1,4 +1,4 @@
-package org.metachart.client;
+package org.metachart.test;
 
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.interfaces.system.property.Configuration;
@@ -9,9 +9,9 @@ import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class McCoreBootstrap
+public class McBootstrap
 {
-	final static Logger logger = LoggerFactory.getLogger(McCoreBootstrap.class);
+	final static Logger logger = LoggerFactory.getLogger(McBootstrap.class);
 	
 	private enum System {metachart}
 	

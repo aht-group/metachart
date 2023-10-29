@@ -10,9 +10,9 @@ import java.util.Random;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.metachart.chart.OfxChartRenderer;
-import org.metachart.client.McCoreBootstrap;
+import org.metachart.factory.chart.high.TimePeriodFactory;
 import org.metachart.factory.pojo.ChartColorFactory;
-import org.metachart.util.TimePeriodFactory;
+import org.metachart.test.McBootstrap;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;
@@ -87,7 +87,7 @@ public class CliTimeSeriesGapFiller
 	
 	public static void main (String[] args) throws Exception
 	{
-		McCoreBootstrap.init();
+		McBootstrap.init();
 		
 		CliTimeSeriesGapFiller test = new CliTimeSeriesGapFiller();
 		Chart chart;

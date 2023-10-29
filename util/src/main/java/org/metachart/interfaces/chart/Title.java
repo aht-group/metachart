@@ -7,6 +7,5 @@ public interface Title
 {
 	final static Logger logger = LoggerFactory.getLogger(Title.class);
 
-	String getName();
-	
+	String getValue();
 }

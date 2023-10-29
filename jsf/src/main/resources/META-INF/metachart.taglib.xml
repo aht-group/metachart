@@ -19,9 +19,9 @@
         </component>
 	</tag>
 	<tag>
-        <tag-name>echartTitle</tag-name>
+        <tag-name>title</tag-name>
         <component>
-             <component-type>org.metachart.jsf.chart.echart.Title</component-type>
+             <component-type>org.metachart.jsf.common.Title</component-type>
         </component>
 	</tag>
     

@@ -1,4 +1,4 @@
-package org.metachart.util;
+package org.metachart.factory.chart.high;
 
 import org.metachart.xml.chart.AxisType;
 import org.metachart.xml.chart.Renderer;

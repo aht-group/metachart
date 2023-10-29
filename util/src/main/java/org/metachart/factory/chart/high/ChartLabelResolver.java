@@ -1,6 +1,6 @@
-package org.metachart.util;
+package org.metachart.factory.chart.high;
 
-import org.metachart.util.OfxChartTypeResolver.AxisOrientation;
+import org.metachart.factory.chart.high.OfxChartTypeResolver.AxisOrientation;
 import org.metachart.xml.chart.Axis;
 import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;

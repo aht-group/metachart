@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import org.exlp.interfaces.system.property.Configuration;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.metachart.client.McCoreBootstrap;
-import org.metachart.factory.json.chart.apache.JsonAxisFactory;
-import org.metachart.factory.json.chart.apache.JsonHtmlFactory;
-import org.metachart.factory.json.chart.apache.JsonTitleFactory;
+import org.metachart.factory.json.chart.echart.JsonAxisFactory;
+import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
+import org.metachart.factory.json.chart.echart.JsonTitleFactory;
 import org.metachart.factory.txt.chart.echart.TxtApacheChartFactory;
 import org.metachart.factory.txt.chart.echart.TxtEchartFunctioFactory;
 import org.metachart.factory.txt.chart.echart.TxtRandomDataFactory;
 import org.metachart.model.json.chart.apache.JsonApache;
 import org.metachart.model.json.chart.apache.JsonSeries;
+import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -122,8 +122,8 @@ public class CliEchartDynamic
 	
 	public static void main (String[] args) throws Exception
 	{		
-		Configuration config = McCoreBootstrap.init();
-		Path path = Paths.get(config.getString(McCoreBootstrap.cfgDirTmp));
+		Configuration config = McBootstrap.init();
+		Path path = Paths.get(config.getString(McBootstrap.cfgDirTmp));
 		logger.info("Wrting to "+path.toString());
 		
 		CliEchartDynamic cli = new CliEchartDynamic();

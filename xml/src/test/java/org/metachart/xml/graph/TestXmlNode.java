@@ -1,6 +1,6 @@
 package org.metachart.xml.graph;
 
-import org.metachart.test.McXmlTestBootstrap;
+import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public class TestXmlNode extends AbstractXmlGraphTest<Node>
 	
 	public static void main(String[] args)
     {
-		McXmlTestBootstrap.init();
+		McBootstrap.init();
 		TestXmlNode test = new TestXmlNode();
 		test.saveReferenceXml();
     }

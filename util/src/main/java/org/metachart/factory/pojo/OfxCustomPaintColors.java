@@ -1,4 +1,4 @@
-package org.metachart.util;
+package org.metachart.factory.pojo;
 
 import java.awt.Color;
 import java.awt.Paint;

@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.apache;
+package org.metachart.factory.json.chart.echart;
 
 import org.metachart.model.json.chart.apache.JsonAxis;
 

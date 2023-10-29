@@ -1,4 +1,4 @@
-package org.metachart.util;
+package org.metachart.factory.chart.jfree;
 
 import java.awt.Font;
 import java.text.SimpleDateFormat;
@@ -12,8 +12,10 @@ import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.Year;
-import org.metachart.util.OfxChartTypeResolver.AxisOrientation;
-import org.metachart.util.TimePeriodFactory.OfxChartTimePeriod;
+import org.metachart.factory.chart.high.OfxChartTypeResolver;
+import org.metachart.factory.chart.high.TimePeriodFactory;
+import org.metachart.factory.chart.high.OfxChartTypeResolver.AxisOrientation;
+import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.xml.chart.AxisType;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Label;

@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.script.ScriptException;
 
 import org.apache.http.client.ClientProtocolException;
-import org.metachart.client.McCoreBootstrap;
 import org.metachart.processor.export.BackgroundExportProcessor;
+import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +40,7 @@ public class TestBackgroundExport
 
 	public static void main(String args[]) throws ScriptException, ClientProtocolException, IOException 
 	{
-		McCoreBootstrap.init();
+		McBootstrap.init();
 		BackgroundExportProcessor cli = new BackgroundExportProcessor();
 //		logger.info(cli.exportSVG("http://192.168.1.20:8999/", chartJson, "png"));
 //		logger.info(cli.exportSVG("http://192.168.1.20:8999/", chartJson, "svg"));

@@ -3,7 +3,7 @@ package org.metachart.chart.renderer.xy;
 import java.awt.Paint;
 
 import org.jfree.chart.renderer.xy.XYSplineRenderer;
-import org.metachart.util.OfxCustomPaintColors;
+import org.metachart.factory.pojo.OfxCustomPaintColors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

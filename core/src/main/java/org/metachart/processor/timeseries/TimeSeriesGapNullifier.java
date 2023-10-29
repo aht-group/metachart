@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.metachart.util.TimePeriodFactory.OfxChartTimePeriod;
+import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;
 import org.metachart.xml.chart.RendererTimeseries;

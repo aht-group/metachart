@@ -1,4 +1,4 @@
-package org.metachart.util;
+package org.metachart.factory.chart.high;
 
 import java.util.Date;
 

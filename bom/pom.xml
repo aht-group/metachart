@@ -41,6 +41,12 @@
 				<artifactId>metachart-xml</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.metachart</groupId>
+				<artifactId>metachart-xml</artifactId>
+				<classifier>tests</classifier>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- Manages BOMs -->
 			<dependency>
