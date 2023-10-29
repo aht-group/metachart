@@ -14,7 +14,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
-import org.exlp.controller.handler.web.jsf.ExlpJsfHandler;
+import org.exlp.util.jsf.JsfUtil;
 import org.metachart.factory.json.chart.echart.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.JsonTitleFactory;
@@ -49,7 +49,7 @@ public class Chart extends UINamingContainer
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException
 	{
 		super.processEvent(event);
-		ExlpJsfHandler.pushJsToHead(this.getFacesContext(), "echarts", "5.4.2/echarts.min.js");
+		JsfUtil.pushJsToHead(this.getFacesContext(), "echarts", "5.4.2/echarts.min.js");
 	}
 	
 	@Override
