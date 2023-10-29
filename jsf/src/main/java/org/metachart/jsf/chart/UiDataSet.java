@@ -54,14 +54,13 @@ public class UiDataSet extends UINamingContainer
 	@Override
  	public void encodeBegin(FacesContext ctx) throws IOException
  	{
-
-		try {
+		try
+		{
 			UIComponent parentChart = ComponentTraversalUtils.closest(Chart.class, this);
 			chartAttrs = parentChart.getAttributes();
-			}
-			catch (Exception e) {
-				logger.info("Did not found a parent component of type chart chart");
-			}
+		}
+		catch (Exception e) {logger.info("Did not found a parent component of type chart chart");
+		}
 		if(chartAttrs.containsKey("linkDataTableId")) {
 			Map<String, Object> attrs = this.getAttributes();
 			attrs.put("pointSelect","true");

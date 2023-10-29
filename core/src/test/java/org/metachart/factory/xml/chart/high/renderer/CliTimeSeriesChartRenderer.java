@@ -52,7 +52,7 @@ public class CliTimeSeriesChartRenderer
 		return colors;
 	}
 	
-	private Ds getX(String label)
+	protected Ds getX(String label)
 	{
 		Random rnd = new Random();
 		Ds dataSet = new Ds();
