@@ -1,14 +1,14 @@
-package org.metachart.factory.txt.chart.echart;
+package org.metachart.factory.json.function;
 
 import java.io.IOException;
 import java.io.Writer;
 
-public class TxtEchartFunctioFactory
+public class TxtEchartFunctionFactory
 {
-	private Writer writer; public TxtEchartFunctioFactory writer(Writer writer) {this.writer=writer; return this;}
+	private Writer writer; public TxtEchartFunctionFactory writer(Writer writer) {this.writer=writer; return this;}
 	
-	public static TxtEchartFunctioFactory instance() {return new TxtEchartFunctioFactory();}
-	private TxtEchartFunctioFactory()
+	public static TxtEchartFunctionFactory instance() {return new TxtEchartFunctionFactory();}
+	private TxtEchartFunctionFactory()
 	{
 
 	}

@@ -12,9 +12,9 @@ import org.jdom2.Element;
 import org.metachart.factory.json.chart.echart.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.JsonTitleFactory;
-import org.metachart.factory.txt.chart.echart.TxtApacheChartFactory;
-import org.metachart.factory.txt.chart.echart.TxtEchartFunctioFactory;
-import org.metachart.factory.txt.chart.echart.TxtRandomDataFactory;
+import org.metachart.factory.json.chart.echart.TxtApacheChartFactory;
+import org.metachart.factory.json.function.TxtEchartFunctionFactory;
+import org.metachart.factory.json.function.TxtRandomDataFactory;
 import org.metachart.model.json.chart.apache.JsonApache;
 import org.metachart.model.json.chart.apache.JsonSeries;
 import org.metachart.test.McBootstrap;
@@ -91,7 +91,7 @@ public class CliEchartDynamic
 		JsonUtil jom = JsonUtil.instance();
 		TxtApacheChartFactory txtChart = TxtApacheChartFactory.instance(sw,jom).varChart(varChar);
 		TxtRandomDataFactory tfRandom = TxtRandomDataFactory.instance().writer(sw);
-		TxtEchartFunctioFactory tfFunction = TxtEchartFunctioFactory.instance().writer(sw);
+		TxtEchartFunctionFactory tfFunction = TxtEchartFunctionFactory.instance().writer(sw);
 		
 		txtChart.declare("chart-container",JsonHtmlFactory.build("canvas",false));
 		tfRandom.randomDataDate();

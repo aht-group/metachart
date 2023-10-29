@@ -1,4 +1,4 @@
-package org.metachart.factory.txt.chart.echart;
+package org.metachart.factory.json.chart.echart;
 
 import java.io.IOException;
 import java.io.Writer;

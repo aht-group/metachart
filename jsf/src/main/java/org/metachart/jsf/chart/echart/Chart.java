@@ -18,9 +18,9 @@ import org.exlp.util.jsf.JsfUtil;
 import org.metachart.factory.json.chart.echart.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.JsonTitleFactory;
-import org.metachart.factory.txt.chart.echart.TxtApacheChartFactory;
-import org.metachart.factory.txt.chart.echart.TxtEchartFunctioFactory;
-import org.metachart.factory.txt.chart.echart.TxtRandomDataFactory;
+import org.metachart.factory.json.chart.echart.TxtApacheChartFactory;
+import org.metachart.factory.json.function.TxtEchartFunctionFactory;
+import org.metachart.factory.json.function.TxtRandomDataFactory;
 import org.metachart.jsf.common.Title;
 import org.metachart.model.json.chart.apache.JsonApache;
 import org.metachart.model.json.chart.apache.JsonSeries;
@@ -95,7 +95,7 @@ public class Chart extends UINamingContainer
 		JsonUtil jom = JsonUtil.instance();
 		TxtApacheChartFactory txtChart = TxtApacheChartFactory.instance(writer,jom).varChart(varChar);
 		TxtRandomDataFactory tfRandom = TxtRandomDataFactory.instance().writer(writer);
-		TxtEchartFunctioFactory tfFunction = TxtEchartFunctioFactory.instance().writer(writer);
+		TxtEchartFunctionFactory tfFunction = TxtEchartFunctionFactory.instance().writer(writer);
 		
 		txtChart.declare(chartId,JsonHtmlFactory.build("canvas",false));
 		tfRandom.randomDataDate();
