@@ -1,7 +1,7 @@
 package org.metachart.jsf.chart.echart;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.faces.component.FacesComponent;
@@ -15,30 +15,32 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
 import org.exlp.util.JsfUtil;
-import org.exlp.util.jx.ComponentAttribute;
-import org.metachart.factory.json.chart.EchartProvider;
+import org.metachart.factory.json.chart.echart.JsonAxisFactory;
+import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
+import org.metachart.factory.json.chart.echart.JsonTitleFactory;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
+import org.metachart.factory.json.function.TxtEchartFunctionFactory;
+import org.metachart.factory.json.function.TxtRandomDataFactory;
 import org.metachart.jsf.common.Title;
+import org.metachart.model.json.chart.echart.JsonOption;
+import org.metachart.model.json.chart.echart.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@FacesComponent(value="org.metachart.jsf.chart.echart.Chart")
-@ListenerFor(systemEventClass=PostAddToViewEvent.class)
-public class Chart extends UINamingContainer
-{
-	final static Logger logger = LoggerFactory.getLogger(Chart.class);
+import net.sf.exlp.util.io.JsonUtil;
 
-	private static enum Attribute {scope,type}
-	
+@FacesComponent(value="org.metachart.jsf.chart.echart.ChartHello")
+@ListenerFor(systemEventClass=PostAddToViewEvent.class)
+public class ChartHello extends UINamingContainer
+{
+	final static Logger logger = LoggerFactory.getLogger(ChartHello.class);
+
 	private String chartId; public String getChartId() {return chartId;}
 	public void setCodeId(String chartId) {this.chartId = chartId;}
 	
-	private String type;
-	private String scope;
-	
 	private Title title;
 
-	public Chart()
+	public ChartHello()
 	{
 		chartId = UUID.randomUUID().toString().replaceAll("-","");
 	}
@@ -54,12 +56,12 @@ public class Chart extends UINamingContainer
  	public void encodeBegin(FacesContext ctx) throws IOException
  	{
 		logger.info("encodeBegin: "+chartId);
-		
-		type = ComponentAttribute.toString(ctx,this,Attribute.type);
-		scope = ComponentAttribute.toString(ctx,this,Attribute.scope);
-		
 		ResponseWriter writer = ctx.getResponseWriter();
         writer.write("<div id=\""+chartId+"\" class=\"e-chart\"></div>");
+
+//		Map<String,Object> map = this.getAttributes();
+//		this.data         = (String) map.get(Attribute.data.toString());
+//		this.container    = (PivotSettings) map.get(Attribute.container.toString());
 		
 		this.encodeChildren(ctx);
 	}
@@ -87,16 +89,39 @@ public class Chart extends UINamingContainer
 		
 		writer.startElement("script", this);
 		
-		if(Objects.nonNull(type))
-		{
-			if(Objects.nonNull(scope) && scope.equals("demo")) {EchartProvider.demo(writer, JsonEchartFactory.Type.sankey, chartId);}
-			else
-			{
-				
-			}
-		}
+		String fRandom = "randomData";
+		
+		JsonUtil jom = JsonUtil.instance();
+		JsonEchartFactory txtChart = JsonEchartFactory.instance(writer,jom);
+		TxtRandomDataFactory tfRandom = TxtRandomDataFactory.instance().writer(writer);
+		TxtEchartFunctionFactory tfFunction = TxtEchartFunctionFactory.instance().writer(writer);
+		
+		txtChart.declare(chartId,JsonHtmlFactory.build("canvas",false));
+		txtChart.letData();
+		
+		tfRandom.randomDataDate();
+		txtChart.option(apache());
+		tfFunction.pushRandomData(txtChart.getVarChart(),fRandom);
+		txtChart.init();
 		
 		writer.endElement("script");
         writer.writeText(System.getProperty("line.separator"), null);
  	}
+	
+	private JsonOption apache()
+	{
+		JsonSeries series = new JsonSeries();
+		series.setName("Fake Data");
+		series.setType("line");
+		series.setShowSymbol(false);
+		series.setData("data");
+		
+		JsonOption apache = new JsonOption();
+		apache.setTitle(JsonTitleFactory.build(title));
+		apache.setAxisX(JsonAxisFactory.build("time"));
+		apache.setAxisY(JsonAxisFactory.build("value"));
+		apache.setSeries(new ArrayList<>());
+		apache.getSeries().add(series);
+		return apache;
+	}
 }

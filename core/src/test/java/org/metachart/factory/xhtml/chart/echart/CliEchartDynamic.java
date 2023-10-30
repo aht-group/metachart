@@ -12,11 +12,12 @@ import org.jdom2.Element;
 import org.metachart.factory.json.chart.echart.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.JsonTitleFactory;
-import org.metachart.factory.json.chart.echart.TxtApacheChartFactory;
+import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.metachart.factory.json.function.TxtRandomDataFactory;
-import org.metachart.model.json.chart.apache.JsonApache;
-import org.metachart.model.json.chart.apache.JsonSeries;
+import org.metachart.factory.txt.chart.XhtmlEchartFactory;
+import org.metachart.model.json.chart.echart.JsonOption;
+import org.metachart.model.json.chart.echart.JsonSeries;
 import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +29,12 @@ public class CliEchartDynamic
 {
 	final static Logger logger = LoggerFactory.getLogger(CliEchartDynamic.class);
 	
+	private final XhtmlEchartFactory xhfEchart;
+	
+	
 	public CliEchartDynamic()
 	{
-		
+		xhfEchart = XhtmlEchartFactory.instance();
 	}
 	
 	public Document tableHeatbar() throws IOException
@@ -38,70 +42,37 @@ public class CliEchartDynamic
 		Element html = new Element("html");
 		html.setAttribute("lang","en");
 		
-		html.getChildren().add(head());
-		html.getChildren().add(body());
+		html.getChildren().add(xhfEchart.head("Demo: "));
+		html.getChildren().add(xhfEchart.body(echart()));
 
         Document doc = new Document(html);
         doc.setDocType(new org.jdom2.DocType("html"));
 		
 		JDomUtil.instance().omitDeclaration(true).info(doc);
 		return doc;
-	}
-	
-	private Element head()
-	{
-		Element metaCharset = new Element("meta"); metaCharset.setAttribute("charset","UTF-8");
-		Element title = new Element("title"); title.addContent("Dynamic Data + Time Axis");
-		Element script = new Element("script"); script.setText("cx"); script.setAttribute("src","https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js");
-		
-		Element css = new Element("style");
-		css.setText("* {margin: 0; padding: 0;}"
-				+ "\n#chart-container {position: relative; height: 100vh; overflow: hidden;}");
-		
-		Element head = new Element("head");
-		head.getChildren().add(metaCharset);
-		head.getChildren().add(title);
-		head.getChildren().add(script);
-		head.getChildren().add(css);
-		return head;
-	}
-	
-	private Element body() throws IOException
-	{
-		Element div = new Element("div");
-		div.setAttribute("id","chart-container");
-		div.setAttribute("class","metachart-apache-dynamic");
-		
-		Element script = new Element("script");
-		script.addContent(echart());
-		
-		Element body = new Element("body");
-		body.getChildren().add(div);
-		body.getChildren().add(script);
-		return body;
-	}
+	}	
 	
 	private String echart() throws IOException
 	{
 		StringWriter sw = new StringWriter();
 		
-		String varChar = "myChart";
 		String fRandom = "randomData";
 		
 		JsonUtil jom = JsonUtil.instance();
-		TxtApacheChartFactory txtChart = TxtApacheChartFactory.instance(sw,jom).varChart(varChar);
+		JsonEchartFactory txtChart = JsonEchartFactory.instance(sw,jom);
 		TxtRandomDataFactory tfRandom = TxtRandomDataFactory.instance().writer(sw);
 		TxtEchartFunctionFactory tfFunction = TxtEchartFunctionFactory.instance().writer(sw);
 		
-		txtChart.declare("chart-container",JsonHtmlFactory.build("canvas",false));
+		txtChart.declare(xhfEchart.getDivCntainerId(),JsonHtmlFactory.build("canvas",false));
+		txtChart.letData();
 		tfRandom.randomDataDate();
 		txtChart.option(apache());
-		tfFunction.pushRandomData(varChar,fRandom);
+		tfFunction.pushRandomData(txtChart.getVarChart(),fRandom);
 		txtChart.init();
 		return sw.toString();
 	}
 	
-	private JsonApache apache()
+	private JsonOption apache()
 	{
 		JsonSeries series = new JsonSeries();
 		series.setName("Fake Data");
@@ -109,7 +80,7 @@ public class CliEchartDynamic
 		series.setShowSymbol(false);
 		series.setData("data");
 		
-		JsonApache apache = new JsonApache();
+		JsonOption apache = new JsonOption();
 		apache.setTitle(JsonTitleFactory.build("Time Axis"));
 		apache.setAxisX(JsonAxisFactory.build("time"));
 		apache.setAxisY(JsonAxisFactory.build("value"));
@@ -117,7 +88,6 @@ public class CliEchartDynamic
 		apache.getSeries().add(series);
 		return apache;
 	}
-	
 	
 	public static void main (String[] args) throws Exception
 	{		

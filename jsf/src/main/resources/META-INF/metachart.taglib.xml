@@ -13,7 +13,14 @@
 	</tag>
     
     <tag>
-        <tag-name>echartChart</tag-name>
+        <tag-name>echartHello</tag-name>
+        <component>
+             <component-type>org.metachart.jsf.chart.echart.ChartHello</component-type>
+        </component>
+	</tag>
+	
+	<tag>
+        <tag-name>echart</tag-name>
         <component>
              <component-type>org.metachart.jsf.chart.echart.Chart</component-type>
         </component>

@@ -1,11 +1,11 @@
-package org.metachart.model.json.chart.apache;
+package org.metachart.model.json.chart.echart;
 
 import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JsonApache implements Serializable
+public class JsonOption implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
@@ -25,6 +25,11 @@ public class JsonApache implements Serializable
 	public JsonAxis getAxisY() {return axisY;}
 	public void setAxisY(JsonAxis axisY) {this.axisY = axisY;}
 	
+	@JsonProperty("tooltip")
+	private JsonTooltip tooltip;
+	public JsonTooltip getTooltip() {return tooltip;}
+	public void setTooltip(JsonTooltip tooltip) {this.tooltip = tooltip;}
+
 	@JsonProperty("series")
 	private List<JsonSeries> series;
 	public List<JsonSeries> getSeries() {return series;}

@@ -3,7 +3,7 @@ package org.metachart.factory.json.chart.echart;
 import java.util.Objects;
 
 import org.metachart.interfaces.chart.Title;
-import org.metachart.model.json.chart.apache.JsonTitle;
+import org.metachart.model.json.chart.echart.JsonTitle;
 
 public class JsonTitleFactory
 {	

@@ -64,7 +64,7 @@ public class CliMcGradientBar
 		Element canvas = new Element("canvas");
 		canvas.setAttribute("id","cont");
 		canvas.setAttribute("width","400");
-		canvas.setAttribute("height","50");
+		canvas.setAttribute("height","12");
 		
 		Element script = new Element("script");
 		script.addContent(echart());

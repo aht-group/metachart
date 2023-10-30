@@ -6,7 +6,7 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 
-import org.exlp.util.jsf.jx.ComponentAttribute;
+import org.exlp.util.jx.ComponentAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +25,6 @@ final static Logger logger = LoggerFactory.getLogger(Title.class);
 	public void encodeAll(FacesContext ctx) throws IOException
 	{
 		logger.info("encodeAll");
-		value = ComponentAttribute.toString(ctx,this,Attribute.value);	
+		value = ComponentAttribute.toString(ctx,this,Attribute.value);
 	}
 }
