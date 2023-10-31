@@ -51,13 +51,12 @@ public class CliEchartType
 		return doc;
 	}
 	
-
-	
 	public static void main (String[] args) throws Exception
 	{		
 		Configuration config = McBootstrap.init();
 		CliEchartType cli = new CliEchartType(config);
 		
-		cli.html(JsonEchartFactory.Type.sankey);
+//		cli.html(JsonEchartFactory.Type.sankey);
+		cli.html(JsonEchartFactory.Type.heatmap);
 	}
 }

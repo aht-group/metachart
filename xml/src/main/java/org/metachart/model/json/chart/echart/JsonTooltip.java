@@ -10,14 +10,15 @@ public class JsonTooltip implements Serializable
 	
 	@JsonProperty("trigger")
 	private String trigger;
+	public String getTrigger() {return trigger;}
+	public void setTrigger(String trigger) {this.trigger = trigger;}
 
-	public String getTrigger() {
-		return trigger;
+	@JsonProperty("position")
+	private String position;
+	public String getPosition() {
+		return position;
 	}
-
-	public void setTrigger(String trigger) {
-		this.trigger = trigger;
+	public void setPosition(String position) {
+		this.position = position;
 	}
-
-
 }

@@ -5,6 +5,7 @@ import org.metachart.model.json.chart.echart.JsonTooltip;
 public class JsonTooltipFactory
 {	
 	private JsonTooltip json;
+	
 	public static JsonTooltipFactory instance() {return new JsonTooltipFactory();}
 	private JsonTooltipFactory()
 	{
@@ -13,9 +14,6 @@ public class JsonTooltipFactory
 	
 	public JsonTooltip build() {return json;}
 	
-	public JsonTooltipFactory trigger(String trigger)
-	{
-		json.setTrigger(trigger);
-		return this;
-	}
+	public JsonTooltipFactory trigger(String trigger) {json.setTrigger(trigger);return this;}
+	public JsonTooltipFactory position(String position) {json.setPosition(position); return this;}
 }

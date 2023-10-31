@@ -1,14 +1,22 @@
 package org.metachart.factory.json.chart.echart;
 
+import org.exlp.util.JsUtil;
 import org.metachart.model.json.chart.echart.JsonAxis;
 
 public class JsonAxisFactory
 {	
-	public static JsonAxis build() {return new JsonAxis();}
-	public static JsonAxis build(String type)
+	private JsonAxis json;
+	
+	public static JsonAxisFactory instance() {return new JsonAxisFactory();}
+	private JsonAxisFactory()
 	{
-		JsonAxis json = JsonAxisFactory.build();
-		json.setType(type);
-		return json;
+		json = new JsonAxis();
 	}
+	
+	public static JsonAxis create() {return new JsonAxis();}
+	
+	public JsonAxisFactory type(String type) {json.setType(type); return this;}
+	public JsonAxisFactory data(String data) {json.setData(JsUtil.magicField(data)); return this;}
+	
+	public JsonAxis build() {return json;}
 }

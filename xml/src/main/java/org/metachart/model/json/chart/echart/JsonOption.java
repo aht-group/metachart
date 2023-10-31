@@ -29,6 +29,11 @@ public class JsonOption implements Serializable
 	private JsonTooltip tooltip;
 	public JsonTooltip getTooltip() {return tooltip;}
 	public void setTooltip(JsonTooltip tooltip) {this.tooltip = tooltip;}
+	
+	@JsonProperty("visualMap")
+	private JsonVisualMap visualMap;
+	public JsonVisualMap getVisualMap() {return visualMap;}
+	public void setVisualMap(JsonVisualMap visualMap) {this.visualMap = visualMap;}
 
 	@JsonProperty("series")
 	private List<JsonSeries> series;

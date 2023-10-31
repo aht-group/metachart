@@ -14,7 +14,7 @@ import net.sf.exlp.util.io.JsonUtil;
 
 public class JsonEchartFactory
 {
-	public enum Type{sankey}
+	public enum Type{sankey,heatmap}
 	
 	private final Writer writer;
 	private final JsonUtil jom;
@@ -40,16 +40,10 @@ public class JsonEchartFactory
 		return sb.toString();
 	}
 	
-	public JsonEchartFactory letData() throws IOException
-	{
-		writer.write("\nlet data = [];");
-		return this;
-	}
-	public JsonEchartFactory letLinks() throws IOException
-	{
-		writer.write("\nlet links = [];");
-		return this;
-	}
+	public JsonEchartFactory letData() throws IOException {writer.write("\nlet data = [];"); return this;}
+	public JsonEchartFactory letLinks() throws IOException {writer.write("\nlet links = [];");return this;}
+	public JsonEchartFactory letCategoriesX() throws IOException {writer.write("\nlet xCategories = [];");return this;}
+	public JsonEchartFactory letCategoriesY() throws IOException {writer.write("\nlet yCategories = [];");return this;}
 	
 	public String option(JsonOption echart) throws IOException
 	{
@@ -65,6 +59,35 @@ public class JsonEchartFactory
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
 		sb.append("\ndata = ").append(jom.toFormattedString(list));
+		writer.write(sb.toString());
+		return sb.toString();
+	}
+	public String dataDoubles1(JsonData data) throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\ndata = ").append(jom.toFormattedString(data.getDoubles1()));
+		sb.append(";");
+		writer.write(sb.toString());
+		return sb.toString();
+	}
+	public String dataDoubles2(JsonData data) throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\ndata = ").append(jom.toFormattedString(data.getDoubles2()));
+		sb.append(";");
+		writer.write(sb.toString());
+		return sb.toString();
+	}
+	
+	public String categories(String axis, JsonData data) throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\n").append(axis.toLowerCase());
+		sb.append("Categories = ").append(jom.toFormattedString(data.getStrings()));
+		sb.append(";");
 		writer.write(sb.toString());
 		return sb.toString();
 	}

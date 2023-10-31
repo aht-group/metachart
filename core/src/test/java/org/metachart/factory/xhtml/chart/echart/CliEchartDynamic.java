@@ -82,8 +82,8 @@ public class CliEchartDynamic
 		
 		JsonOption apache = new JsonOption();
 		apache.setTitle(JsonTitleFactory.build("Time Axis"));
-		apache.setAxisX(JsonAxisFactory.build("time"));
-		apache.setAxisY(JsonAxisFactory.build("value"));
+		apache.setAxisX(JsonAxisFactory.instance().type("time").build());
+		apache.setAxisY(JsonAxisFactory.instance().type("value").build());
 		apache.setSeries(new ArrayList<>());
 		apache.getSeries().add(series);
 		return apache;

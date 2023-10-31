@@ -118,8 +118,8 @@ public class ChartHello extends UINamingContainer
 		
 		JsonOption apache = new JsonOption();
 		apache.setTitle(JsonTitleFactory.build(title));
-		apache.setAxisX(JsonAxisFactory.build("time"));
-		apache.setAxisY(JsonAxisFactory.build("value"));
+		apache.setAxisX(JsonAxisFactory.instance().type("time").build());
+		apache.setAxisY(JsonAxisFactory.instance().type("value").build());
 		apache.setSeries(new ArrayList<>());
 		apache.getSeries().add(series);
 		return apache;

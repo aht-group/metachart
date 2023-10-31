@@ -5,6 +5,7 @@ import java.io.Writer;
 
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
+import org.metachart.factory.json.chart.echart.type.JsonEchartHeatmapFactory;
 import org.metachart.factory.json.chart.echart.type.JsonEchartSankeyFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ public class EchartProvider
 		switch(type)
 		{
 			case sankey: sankey(txtChart); break;
+			case heatmap: heatmap(txtChart); break;
 		}
 		
 		txtChart.init();
@@ -37,11 +39,22 @@ public class EchartProvider
 	
 	private static void sankey(JsonEchartFactory echartFactory) throws IOException
 	{
-		JsonEchartSankeyFactory sankeyFactory = JsonEchartSankeyFactory.instance();
+		JsonEchartSankeyFactory f = JsonEchartSankeyFactory.instance();
 		
 		echartFactory.letData().letLinks();
-		echartFactory.data(sankeyFactory.demoData());
-		echartFactory.links(sankeyFactory.demoLinks());
-		echartFactory.option(sankeyFactory.demoOption());
+		echartFactory.data(f.demoData());
+		echartFactory.links(f.demoLinks());
+		echartFactory.option(f.demoOption());
+	}
+	
+	private static void heatmap(JsonEchartFactory echartFactory) throws IOException
+	{
+		JsonEchartHeatmapFactory f = JsonEchartHeatmapFactory.instance();
+		
+		echartFactory.letData().letCategoriesX().letCategoriesY();
+		echartFactory.categories("x",f.demoCategoriesX());
+		echartFactory.categories("y",f.demoCategoriesY());
+		echartFactory.dataDoubles2(f.demoData());
+		echartFactory.option(f.demoOption());
 	}
 }
