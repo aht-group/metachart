@@ -28,5 +28,16 @@ public class TxtEchartFunctionFactory
 		return sb.toString();
 	}
 	
-
+	public static String nullify(int dimension) throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(".map(function (item) {return [");
+		for(int i=0;i<dimension;i++)
+		{
+			sb.append("item[").append(i).append("]");
+			if(i<(dimension-1)) {sb.append(", ");}
+		}
+		sb.append(" || '-'];})");
+		return sb.toString();
+	}
 }

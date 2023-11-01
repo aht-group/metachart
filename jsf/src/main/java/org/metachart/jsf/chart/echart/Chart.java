@@ -71,11 +71,8 @@ public class Chart extends UINamingContainer
         for (UIComponent child : getChildren())
         {
         	logger.info(child.getClass().getName());
-        	if(child instanceof org.metachart.jsf.common.Title)
-        	{
-        		child.encodeAll(ctx);
-        		title = (org.metachart.jsf.common.Title)child;
-        	}
+        	child.encodeAll(ctx);
+        	if(child instanceof org.metachart.jsf.common.Title) {title = (org.metachart.jsf.common.Title)child;}
         }
     }
 	
@@ -89,7 +86,7 @@ public class Chart extends UINamingContainer
 		
 		if(Objects.nonNull(type))
 		{
-			if(Objects.nonNull(scope) && scope.equals("demo")) {EchartProvider.demo(writer, JsonEchartFactory.Type.sankey, chartId);}
+			if(Objects.nonNull(scope) && scope.equals("demo")) {EchartProvider.demo(writer,type,chartId);}
 			else
 			{
 				

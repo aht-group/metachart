@@ -1,6 +1,5 @@
 package org.metachart.factory.json.chart.echart.type;
 
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,16 +9,17 @@ import org.metachart.factory.json.chart.echart.JsonTooltipFactory;
 import org.metachart.factory.json.chart.echart.JsonVisualMapFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
+import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
 import org.metachart.model.json.chart.echart.JsonData;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
 
-public class JsonEchartHeatmapFactory
+public class JsonEchartHeatbarFactory
 {
-	public static JsonEchartHeatmapFactory instance() {return new JsonEchartHeatmapFactory();}
-	private JsonEchartHeatmapFactory()
+	public static JsonEchartHeatbarFactory instance() {return new JsonEchartHeatbarFactory();}
+	private JsonEchartHeatbarFactory()
 	{
 		
 	}
@@ -27,19 +27,19 @@ public class JsonEchartHeatmapFactory
 	public JsonOption demoOption()
 	{
 		JsonOption option = new JsonOption();
+		option.setGrid(JsonGridFactory.instance().maring(5,5,5,5).build());
 		
 		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
-		option.setAxisX(JsonAxisFactory.instance().type("category").data("xCategories").splitArea(splitArea).build());
-		option.setAxisY(JsonAxisFactory.instance().type("category").data("yCategories").splitArea(splitArea).build());
+		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories").splitArea(splitArea).build());
+		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories").splitArea(splitArea).build());
 		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
-		
 		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
 		
 		option.setSeries(new ArrayList<>());
-		JsonSeries series = new JsonSeries();	
+		JsonSeries series = new JsonSeries();
+		series.setData(JsUtil.magicField("data"));
 		series.setType(JsonEchartFactory.Type.heatmap.toString());
 		
-		series.setData(JsUtil.magicField("data"));
 		option.getSeries().add(series);
 		return option;
 	}
@@ -56,10 +56,7 @@ public class JsonEchartHeatmapFactory
 	public JsonData demoCategoriesY()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
-		for (DayOfWeek day : DayOfWeek.values())
-		{
-			jf.string(day.getDisplayName(java.time.format.TextStyle.FULL, java.util.Locale.ENGLISH));
-        }
+		jf.string("A");
 		return jf.build();
 	}
 	public JsonData demoData()
@@ -68,12 +65,9 @@ public class JsonEchartHeatmapFactory
 		JsonDataFactory jf = JsonDataFactory.instance();
 		for(int x=0;x<24;x++)
 		{
-			for(int y=0;y<7;y++)
-			{
-				int value = rnd.nextInt(15)-5;
-				if(value<0) {value=0;}
-				jf.double2(new double[] {x,y,value});
-			}
+			int value = rnd.nextInt(15)-5;
+			if(value<0) {value=0;}
+			jf.double2(new double[] {x,0,value});
 		}
 		return jf.build();
 	}

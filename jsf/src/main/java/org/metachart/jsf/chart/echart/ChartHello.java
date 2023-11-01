@@ -15,9 +15,9 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
 import org.exlp.util.JsfUtil;
-import org.metachart.factory.json.chart.echart.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.JsonTitleFactory;
+import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.metachart.factory.json.function.TxtRandomDataFactory;

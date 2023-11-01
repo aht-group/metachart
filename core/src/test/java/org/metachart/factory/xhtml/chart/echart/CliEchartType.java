@@ -57,6 +57,7 @@ public class CliEchartType
 		CliEchartType cli = new CliEchartType(config);
 		
 //		cli.html(JsonEchartFactory.Type.sankey);
-		cli.html(JsonEchartFactory.Type.heatmap);
+//		cli.html(JsonEchartFactory.Type.heatmap);
+		cli.html(JsonEchartFactory.Type.heatbar);
 	}
 }

@@ -3,6 +3,9 @@ package org.metachart.model.json.chart.echart;
 import java.io.Serializable;
 import java.util.List;
 
+import org.metachart.model.json.chart.echart.grid.JsonAxis;
+import org.metachart.model.json.chart.echart.grid.JsonGrid;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JsonOption implements Serializable
@@ -15,6 +18,11 @@ public class JsonOption implements Serializable
 	public JsonTitle getTitle() {return title;}
 	public void setTitle(JsonTitle title) {this.title = title;}
 	
+	@JsonProperty("grid")
+	private JsonGrid grid;
+	public JsonGrid getGrid() {return grid;}
+	public void setGrid(JsonGrid grid) {this.grid = grid;}
+
 	@JsonProperty("xAxis")
 	private JsonAxis axisX;
 	public JsonAxis getAxisX() {return axisX;}

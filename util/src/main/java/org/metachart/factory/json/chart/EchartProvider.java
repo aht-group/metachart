@@ -5,8 +5,10 @@ import java.io.Writer;
 
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
+import org.metachart.factory.json.chart.echart.type.JsonEchartHeatbarFactory;
 import org.metachart.factory.json.chart.echart.type.JsonEchartHeatmapFactory;
 import org.metachart.factory.json.chart.echart.type.JsonEchartSankeyFactory;
+import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,37 +26,47 @@ public class EchartProvider
 	public static void demo(Writer w, JsonEchartFactory.Type type, String divId) throws IOException
 	{				
 		JsonUtil jom = JsonUtil.instance();
-		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,jom);
-	
-		txtChart.declare(divId,JsonHtmlFactory.build("canvas",false));
+		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,jom).declare(divId,JsonHtmlFactory.build("canvas",false));
 		
 		switch(type)
 		{
 			case sankey: sankey(txtChart); break;
 			case heatmap: heatmap(txtChart); break;
+			case heatbar: heatbar(txtChart); break;
 		}
 		
 		txtChart.init();
 	}
 	
-	private static void sankey(JsonEchartFactory echartFactory) throws IOException
+	private static void sankey(JsonEchartFactory fEchart) throws IOException
 	{
 		JsonEchartSankeyFactory f = JsonEchartSankeyFactory.instance();
 		
-		echartFactory.letData().letLinks();
-		echartFactory.data(f.demoData());
-		echartFactory.links(f.demoLinks());
-		echartFactory.option(f.demoOption());
+		fEchart.letData().letLinks();
+		fEchart.data(f.demoData());
+		fEchart.links(f.demoLinks());
+		fEchart.option(f.demoOption());
 	}
 	
-	private static void heatmap(JsonEchartFactory echartFactory) throws IOException
+	private static void heatmap(JsonEchartFactory fEchart) throws IOException
 	{
 		JsonEchartHeatmapFactory f = JsonEchartHeatmapFactory.instance();
 		
-		echartFactory.letData().letCategoriesX().letCategoriesY();
-		echartFactory.categories("x",f.demoCategoriesX());
-		echartFactory.categories("y",f.demoCategoriesY());
-		echartFactory.dataDoubles2(f.demoData());
-		echartFactory.option(f.demoOption());
+		fEchart.letData().letCategoriesX().letCategoriesY();
+		fEchart.categories("x",f.demoCategoriesX());
+		fEchart.categories("y",f.demoCategoriesY());
+		fEchart.dataDoubles2(f.demoData(),TxtEchartFunctionFactory.nullify(3));
+		fEchart.option(f.demoOption());
+	}
+	
+	private static void heatbar(JsonEchartFactory fEchart) throws IOException
+	{
+		JsonEchartHeatbarFactory f = JsonEchartHeatbarFactory.instance();
+		
+		fEchart.letData().letCategoriesX().letCategoriesY();
+		fEchart.categories("x",f.demoCategoriesX());
+		fEchart.categories("y",f.demoCategoriesY());
+		fEchart.dataDoubles2(f.demoData(),TxtEchartFunctionFactory.nullify(3));
+		fEchart.option(f.demoOption());
 	}
 }

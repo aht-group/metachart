@@ -24,7 +24,6 @@ final static Logger logger = LoggerFactory.getLogger(Title.class);
 	@Override
 	public void encodeAll(FacesContext ctx) throws IOException
 	{
-		logger.info("encodeAll");
 		value = ComponentAttribute.toString(ctx,this,Attribute.value);
 	}
 }

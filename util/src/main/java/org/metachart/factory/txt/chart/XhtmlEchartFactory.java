@@ -20,9 +20,11 @@ public class XhtmlEchartFactory
 		Element eTitle = new Element("title"); eTitle.addContent(title);
 		Element script = new Element("script"); script.setText("cx"); script.setAttribute("src","https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js");
 		
+		
 		Element css = new Element("style");
 		css.setText("* {margin: 0; padding: 0;}"
-				+ "\n#chart-container {position: relative; height: 100vh; overflow: hidden;}");
+				+ "\n#chart-container {position: relative; height: 100vh; overflow: hidden;}"
+				+ "\n.metachart-echart {border: 1px dotted blue;}");
 		
 		Element head = new Element("head");
 		head.getChildren().add(metaCharset);
@@ -36,7 +38,7 @@ public class XhtmlEchartFactory
 	{
 		Element div = new Element("div");
 		div.setAttribute("id",divCntainerId);
-		div.setAttribute("class","metachart-apache-dynamic");
+		div.setAttribute("class","metachart-echart");
 		
 		Element eScript = new Element("script");
 		eScript.addContent(script);
