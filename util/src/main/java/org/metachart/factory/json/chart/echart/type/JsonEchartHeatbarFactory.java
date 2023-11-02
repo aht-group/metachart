@@ -1,49 +1,111 @@
 package org.metachart.factory.json.chart.echart.type;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import org.exlp.util.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
+import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonVisualMapFactory;
+import org.metachart.factory.json.function.TxtEchartFunctionFactory;
+import org.metachart.interfaces.chart.Data;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
+import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.JsonUtil;
 
 public class JsonEchartHeatbarFactory
 {
-	public static JsonEchartHeatbarFactory instance() {return new JsonEchartHeatbarFactory();}
-	private JsonEchartHeatbarFactory()
+	final static Logger logger = LoggerFactory.getLogger(JsonEchartHeatbarFactory.class);
+	
+	private final Writer w;
+	private String id; public JsonEchartHeatbarFactory id(String id) {this.id=id; return this;}
+	
+	public static JsonEchartHeatbarFactory instance() {return new JsonEchartHeatbarFactory(null);}
+	public static JsonEchartHeatbarFactory instance(Writer w) {return new JsonEchartHeatbarFactory(w);}
+	private JsonEchartHeatbarFactory(Writer w)
 	{
-		
+		this.w=w;
+		id="";
 	}
 	
-	public JsonOption demoOption()
+	public void jsf(String div, JsonGrid jsfGrid, Data data) throws IOException
 	{
+		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
+		
+		txtChart.declare(div,JsonHtmlFactory.build("canvas",false));
+		txtChart.letData().letCategoriesX().letCategoriesY();
+		txtChart.categories("x",this.xCategories(data));
+		txtChart.categories("y",this.yCategories());
+		txtChart.dataDoubles2(this.demoData(),TxtEchartFunctionFactory.nullify(3));
+		txtChart.option(this.jsfOption(jsfGrid,data));
+		
+		txtChart.init();
+	}
+	
+	private JsonOption jsfOption(JsonGrid jsfGrid, Data data)
+	{
+		if(Objects.nonNull(jsfGrid.getHeight()))
+		{
+			Double d = Double.valueOf(jsfGrid.getHeight());
+			jsfGrid.setWidth(""+d*data.getValue().getDoubles2().length);
+		}
+		
 		JsonOption option = new JsonOption();
-		option.setGrid(JsonGridFactory.instance().maring(5,5,5,5).build());
+		
+		option.setGrid(JsonGridFactory.instance().size(jsfGrid).margin(0,0,0,0).build());
 		
 		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
-		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories").splitArea(splitArea).build());
-		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories").splitArea(splitArea).build());
+		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).build());
+		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).build());
 		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
 		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
 		
 		option.setSeries(new ArrayList<>());
 		JsonSeries series = new JsonSeries();
-		series.setData(JsUtil.magicField("data"));
+		series.setData(JsUtil.magicField("data"+id));
 		series.setType(JsonEchartFactory.Type.heatmap.toString());
 		
 		option.getSeries().add(series);
 		return option;
 	}
 	
+	public JsonData yCategories() {return JsonDataFactory.instance().string("A").build();}
+	public JsonData xCategories(Data data) {return JsonDataFactory.instance().repeat(data.getValue().getDoubles2().length).build();}
+	
+	// Demo Methods
+	public JsonOption demoOption()
+	{
+		JsonOption option = new JsonOption();
+		option.setGrid(JsonGridFactory.instance().size(12,(12*24)).margin(5,5,5,5).build());
+		
+		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
+		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).build());
+		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).build());
+		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
+		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
+		
+		option.setSeries(new ArrayList<>());
+		JsonSeries series = new JsonSeries();
+		series.setData(JsUtil.magicField("data"+id));
+		series.setType(JsonEchartFactory.Type.heatmap.toString());
+		
+		option.getSeries().add(series);
+		return option;
+	}
 	public JsonData demoCategoriesX()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
@@ -51,12 +113,6 @@ public class JsonEchartHeatbarFactory
 		{
 			jf.string(""+i);
         }
-		return jf.build();
-	}
-	public JsonData demoCategoriesY()
-	{
-		JsonDataFactory jf = JsonDataFactory.instance();
-		jf.string("A");
 		return jf.build();
 	}
 	public JsonData demoData()

@@ -18,23 +18,24 @@ public class EchartProvider
 {
 	final static Logger logger = LoggerFactory.getLogger(EchartProvider.class);
 	
-	public static void demo(Writer w, String type, String divId) throws IOException
+	private Writer w;
+	
+	public static EchartProvider instance(Writer w) {return new EchartProvider(w);}
+	public EchartProvider(Writer w)
 	{
-		JsonEchartFactory.Type t = JsonEchartFactory.Type.valueOf(type);
-		EchartProvider.demo(w,t,divId);
+		this.w=w;
 	}
-	public static void demo(Writer w, JsonEchartFactory.Type type, String divId) throws IOException
-	{				
-		JsonUtil jom = JsonUtil.instance();
-		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,jom).declare(divId,JsonHtmlFactory.build("canvas",false));
-		
+	
+	public void demo(String type, String divId) throws IOException {demo(JsonEchartFactory.Type.valueOf(type),divId);}
+	public void demo(JsonEchartFactory.Type type, String divId) throws IOException
+	{	
+		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(divId,JsonHtmlFactory.build("canvas",false));
 		switch(type)
 		{
 			case sankey: sankey(txtChart); break;
 			case heatmap: heatmap(txtChart); break;
 			case heatbar: heatbar(txtChart); break;
 		}
-		
 		txtChart.init();
 	}
 	
@@ -65,7 +66,7 @@ public class EchartProvider
 		
 		fEchart.letData().letCategoriesX().letCategoriesY();
 		fEchart.categories("x",f.demoCategoriesX());
-		fEchart.categories("y",f.demoCategoriesY());
+		fEchart.categories("y",f.yCategories());
 		fEchart.dataDoubles2(f.demoData(),TxtEchartFunctionFactory.nullify(3));
 		fEchart.option(f.demoOption());
 	}

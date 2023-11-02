@@ -31,5 +31,17 @@
              <component-type>org.metachart.jsf.common.Title</component-type>
         </component>
 	</tag>
+	<tag>
+        <tag-name>data</tag-name>
+        <component>
+             <component-type>org.metachart.jsf.common.Data</component-type>
+        </component>
+	</tag>
+	<tag>
+        <tag-name>axis</tag-name>
+        <component>
+             <component-type>org.metachart.jsf.common.Axis</component-type>
+        </component>
+	</tag>
     
 </facelet-taglib>

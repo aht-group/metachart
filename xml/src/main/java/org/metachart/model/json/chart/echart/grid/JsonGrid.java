@@ -13,6 +13,16 @@ public class JsonGrid implements Serializable
 	public Boolean getShow() {return show;}
 	public void setShow(Boolean show) {this.show = show;}
 	
+	@JsonProperty("height")
+	private String height;
+	public String getHeight() {return height;}
+	public void setHeight(String height) {this.height = height;}
+	
+	@JsonProperty("width")
+	private String width;
+	public String getWidth() {return width;}
+	public void setWidth(String width) {this.width = width;}
+
 	@JsonProperty("top")
 	private String top;
 	public String getTop() {return top;}

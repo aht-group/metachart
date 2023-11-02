@@ -39,7 +39,7 @@ public class CliEchartType
 		html.getChildren().add(xhfEchart.head("Demo: "+type));
 		
 		StringWriter sw = new StringWriter();
-		EchartProvider.demo(sw,type,xhfEchart.getDivCntainerId());
+		EchartProvider.instance(sw).demo(type,xhfEchart.getDivCntainerId());
 		
 		html.getChildren().add(xhfEchart.body(sw.toString()));
 
@@ -56,8 +56,8 @@ public class CliEchartType
 		Configuration config = McBootstrap.init();
 		CliEchartType cli = new CliEchartType(config);
 		
-		cli.html(JsonEchartFactory.Type.sankey);
-		cli.html(JsonEchartFactory.Type.heatmap);
+//		cli.html(JsonEchartFactory.Type.sankey);
+//		cli.html(JsonEchartFactory.Type.heatmap);
 		cli.html(JsonEchartFactory.Type.heatbar);
 	}
 }

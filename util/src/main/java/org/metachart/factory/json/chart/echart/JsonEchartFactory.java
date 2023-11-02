@@ -20,44 +20,47 @@ public class JsonEchartFactory
 	private final Writer w;
 	private final JsonUtil jom;
 	private String varChart; public String getVarChart() {return varChart;}	
+	private String id; public JsonEchartFactory id(String id) {this.id=id ;return this;}
 	
 	public static JsonEchartFactory instance(Writer writer, JsonUtil jom) {return new JsonEchartFactory(writer,jom);}
 	private JsonEchartFactory(Writer writer, JsonUtil jom)
 	{
 		this.w=writer;
 		this.jom=jom;
-		varChart = "myChart";
+		id="";
+		varChart = "metaChart";
 	}
 	
-	public JsonEchartFactory varChart(String varChart) {this.varChart=varChart; return this;}
-	
-	public JsonEchartFactory declare(String divId, JsonHtml html) throws IOException
+	public JsonEchartFactory declare(String div, JsonHtml html) throws IOException
 	{
-		w.write("var dom = document.getElementById('"); w.write(divId); w.write("');");
-		w.write("\n"); w.write("var "+varChart+" = echarts.init(dom, null, "+jom.toCompactString(html)+");");
-		w.write("\n"); w.write("var option;");
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n").append("var ").append(varChart).append(id).append(" = ");
+		sb.append("echarts.init(").append("document.getElementById('").append(div).append("'), null, "+jom.toCompactString(html)+");");
+		sb.append("\n").append("var option").append(id).append(";");
+		w.write(sb.toString());
 		return this;
 	}
 	
-	public JsonEchartFactory letData() throws IOException {w.write("\nlet data = [];"); return this;}
-	public JsonEchartFactory letLinks() throws IOException {w.write("\nlet links = [];");return this;}
-	public JsonEchartFactory letCategoriesX() throws IOException {w.write("\nlet xCategories = [];");return this;}
-	public JsonEchartFactory letCategoriesY() throws IOException {w.write("\nlet yCategories = [];");return this;}
+	public JsonEchartFactory letData() throws IOException {w.write("\nlet data"+id+" = [];"); return this;}
+	public JsonEchartFactory letLinks() throws IOException {w.write("\nlet links"+id+" = [];");return this;}
+	public JsonEchartFactory letCategoriesX() throws IOException {w.write("\nlet xCategories"+id+" = [];");return this;}
+	public JsonEchartFactory letCategoriesY() throws IOException {w.write("\nlet yCategories"+id+" = [];");return this;}
 	
-	public String option(JsonOption echart) throws IOException
+	public void option(JsonOption echart) throws IOException
 	{
-		StringBuilder sb = new StringBuilder();
-		sb.append("\n");
-		sb.append("\noption = ").append(JsUtil.unQuote(jom.toFormattedString(echart)));
-		w.write(sb.toString());
-		return sb.toString();
+		w.write("\n");
+		w.write("\noption");
+		w.write(id);
+		w.write("= ");
+		w.write(JsUtil.unQuote(jom.toFormattedString(echart)));
 	}
 	
 	public String data(List<JsonData> list) throws IOException
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\ndata = ").append(jom.toFormattedString(list));
+		sb.append("\ndata").append(id).append(" = ");
+		sb.append(jom.toFormattedString(list));
 		w.write(sb.toString());
 		return sb.toString();
 	}
@@ -65,7 +68,8 @@ public class JsonEchartFactory
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\ndata = ").append(jom.toFormattedString(data.getDoubles1()));
+		sb.append("\ndata").append(id).append(" = ");
+		sb.append(jom.toFormattedString(data.getDoubles1()));
 		sb.append(";");
 		w.write(sb.toString());
 		return sb.toString();
@@ -74,23 +78,24 @@ public class JsonEchartFactory
 	public void dataDoubles2(JsonData data) throws IOException {this.dataDoubles2(data,null);}
 	public void dataDoubles2(JsonData data, String transform) throws IOException
 	{
-		w.write("\n");
-		w.write("\ndata = ");
-		w.write(jom.toFormattedString(data.getDoubles2()));
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\ndata").append(id).append(" = ");
+		sb.append(jom.toFormattedString(data.getDoubles2()));
 		if(Objects.nonNull(transform))
 		{
-			w.write("\n");
-			w.write(transform);
+			sb.append("\n").append(transform);
 		}
-		w.write(";");
+		sb.append(";");
+		w.write(sb.toString());
 	}
 	
 	public String categories(String axis, JsonData data) throws IOException
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\n").append(axis.toLowerCase());
-		sb.append("Categories = ").append(jom.toFormattedString(data.getStrings()));
+		sb.append("\n").append(axis.toLowerCase()).append("Categories").append(id);
+		sb.append(" = ").append(jom.toFormattedString(data.getStrings()));
 		sb.append(";");
 		w.write(sb.toString());
 		return sb.toString();
@@ -105,13 +110,12 @@ public class JsonEchartFactory
 		return sb.toString();
 	}
 	
-	public String init() throws IOException
+	public void init() throws IOException
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\n").append(varChart).append(".setOption(option)");
-		sb.append("\nwindow.addEventListener('resize', ").append(varChart).append(".resize);");
+		sb.append("\n").append(varChart).append(id).append(".setOption(option").append(id).append(");");
+		sb.append("\nwindow.addEventListener('resize', ").append(varChart).append(id).append(".resize);");
 		w.write(sb.toString());
-		return sb.toString();
 	}
 }

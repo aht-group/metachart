@@ -27,6 +27,12 @@ public class JsonDataFactory
 		return json;
 	}
 	
+	public JsonDataFactory repeat(int number)
+	{
+		if(Objects.isNull(strings)) {strings = new ArrayList<>();}
+		for(int i=0;i<number;i++) {strings.add(""+i);}
+		return this;
+	}
 	public JsonDataFactory string(String value)
 	{
 		if(Objects.isNull(strings)) {strings = new ArrayList<>();}
