@@ -2,7 +2,7 @@ package org.metachart.factory.json.chart.echart.data;
 
 import java.util.Objects;
 
-import org.metachart.model.json.chart.echart.JsonLink;
+import org.metachart.model.json.chart.echart.data.JsonLink;
 
 public class JsonLinkFactory
 {	

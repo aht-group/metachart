@@ -1,6 +1,6 @@
-package org.metachart.factory.json.chart.echart;
+package org.metachart.factory.json.chart.echart.ui;
 
-import org.metachart.model.json.chart.echart.JsonVisualMap;
+import org.metachart.model.json.chart.echart.ui.JsonVisualMap;
 
 public class JsonVisualMapFactory
 {	

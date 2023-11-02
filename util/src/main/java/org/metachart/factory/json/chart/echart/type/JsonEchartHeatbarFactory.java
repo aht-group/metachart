@@ -5,15 +5,15 @@ import java.util.Random;
 
 import org.exlp.util.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
-import org.metachart.factory.json.chart.echart.JsonTooltipFactory;
-import org.metachart.factory.json.chart.echart.JsonVisualMapFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
-import org.metachart.model.json.chart.echart.JsonData;
+import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonVisualMapFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
-import org.metachart.model.json.chart.echart.JsonSeries;
+import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
 
 public class JsonEchartHeatbarFactory

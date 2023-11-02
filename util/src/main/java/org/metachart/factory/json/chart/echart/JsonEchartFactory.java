@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Objects;
 
 import org.exlp.util.JsUtil;
-import org.metachart.model.json.chart.echart.JsonData;
 import org.metachart.model.json.chart.echart.JsonHtml;
-import org.metachart.model.json.chart.echart.JsonLink;
 import org.metachart.model.json.chart.echart.JsonOption;
+import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonLink;
 
 import net.sf.exlp.util.io.JsonUtil;
 

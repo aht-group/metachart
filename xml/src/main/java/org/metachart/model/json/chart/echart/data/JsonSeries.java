@@ -1,6 +1,10 @@
-package org.metachart.model.json.chart.echart;
+package org.metachart.model.json.chart.echart.data;
 
 import java.io.Serializable;
+
+import org.metachart.model.json.chart.echart.ui.JsonEmphasis;
+import org.metachart.model.json.chart.echart.ui.JsonLabel;
+import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,6 +36,11 @@ public class JsonSeries implements Serializable
 	private JsonLabel label;
 	public JsonLabel getLabel() {return label;}
 	public void setLabel(JsonLabel label) {this.label = label;}
+	
+	@JsonProperty("emphasis")
+	private JsonEmphasis emphasis;
+	public JsonEmphasis getEmphasis() {return emphasis;}
+	public void setEmphasis(JsonEmphasis emphasis) {this.emphasis = emphasis;}
 
 	@JsonProperty("data")
 	private String data;

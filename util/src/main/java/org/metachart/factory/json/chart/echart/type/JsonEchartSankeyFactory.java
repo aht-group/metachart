@@ -5,15 +5,17 @@ import java.util.List;
 
 import org.exlp.util.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
-import org.metachart.factory.json.chart.echart.JsonLabelFactory;
-import org.metachart.factory.json.chart.echart.JsonLineStyleFactory;
-import org.metachart.factory.json.chart.echart.JsonTooltipFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonLinkFactory;
-import org.metachart.model.json.chart.echart.JsonData;
-import org.metachart.model.json.chart.echart.JsonLink;
+import org.metachart.factory.json.chart.echart.ui.JsonEmphasisFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonLabelFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonLineStyleFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonEmphasisFactory.Focus;
 import org.metachart.model.json.chart.echart.JsonOption;
-import org.metachart.model.json.chart.echart.JsonSeries;
+import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonLink;
+import org.metachart.model.json.chart.echart.data.JsonSeries;
 
 public class JsonEchartSankeyFactory
 {
@@ -29,6 +31,7 @@ public class JsonEchartSankeyFactory
 		series.setType(JsonEchartFactory.Type.sankey.toString());
 		series.setLineStyle(JsonLineStyleFactory.instance().colorSource().curveness(0.5).build());
 		series.setLabel(JsonLabelFactory.instance().colorGrey().fontArial().fontSize(11).build());
+		series.setEmphasis(JsonEmphasisFactory.instance().focus(Focus.adjacency).build());
 		series.setData(JsUtil.magicField("data"));
 		series.setLinks(JsUtil.magicField("links"));
 		

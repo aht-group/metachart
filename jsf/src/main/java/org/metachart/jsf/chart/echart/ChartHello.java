@@ -16,14 +16,14 @@ import javax.faces.event.PostAddToViewEvent;
 
 import org.exlp.util.JsfUtil;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
-import org.metachart.factory.json.chart.echart.JsonTitleFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
+import org.metachart.factory.json.chart.echart.grid.JsonTitleFactory;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.metachart.factory.json.function.TxtRandomDataFactory;
 import org.metachart.jsf.common.Title;
 import org.metachart.model.json.chart.echart.JsonOption;
-import org.metachart.model.json.chart.echart.JsonSeries;
+import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

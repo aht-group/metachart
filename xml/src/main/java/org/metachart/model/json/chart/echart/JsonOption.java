@@ -3,8 +3,12 @@ package org.metachart.model.json.chart.echart;
 import java.io.Serializable;
 import java.util.List;
 
+import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonAxis;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
+import org.metachart.model.json.chart.echart.grid.JsonTitle;
+import org.metachart.model.json.chart.echart.ui.JsonTooltip;
+import org.metachart.model.json.chart.echart.ui.JsonVisualMap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

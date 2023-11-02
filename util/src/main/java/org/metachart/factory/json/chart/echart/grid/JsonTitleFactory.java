@@ -1,9 +1,9 @@
-package org.metachart.factory.json.chart.echart;
+package org.metachart.factory.json.chart.echart.grid;
 
 import java.util.Objects;
 
 import org.metachart.interfaces.chart.Title;
-import org.metachart.model.json.chart.echart.JsonTitle;
+import org.metachart.model.json.chart.echart.grid.JsonTitle;
 
 public class JsonTitleFactory
 {	

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.metachart.model.json.chart.echart.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonData;
 
 public class JsonDataFactory
 {	

@@ -1,6 +1,6 @@
-package org.metachart.factory.json.chart.echart;
+package org.metachart.factory.json.chart.echart.ui;
 
-import org.metachart.model.json.chart.echart.JsonTooltip;
+import org.metachart.model.json.chart.echart.ui.JsonTooltip;
 
 public class JsonTooltipFactory
 {	
@@ -12,8 +12,8 @@ public class JsonTooltipFactory
 		json = new JsonTooltip();
 	}
 	
-	public JsonTooltip build() {return json;}
-	
 	public JsonTooltipFactory trigger(String trigger) {json.setTrigger(trigger);return this;}
 	public JsonTooltipFactory position(String position) {json.setPosition(position); return this;}
+	
+	public JsonTooltip build() {return json;}
 }
