@@ -21,7 +21,7 @@ public class JsonEchartHeatmapFactory
 	public static JsonEchartHeatmapFactory instance() {return new JsonEchartHeatmapFactory();}
 	private JsonEchartHeatmapFactory()
 	{
-		
+
 	}
 	
 	public JsonOption demoOption()
