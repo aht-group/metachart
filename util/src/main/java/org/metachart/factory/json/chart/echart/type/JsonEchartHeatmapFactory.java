@@ -47,7 +47,7 @@ public class JsonEchartHeatmapFactory
 	public JsonData demoCategoriesX()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
-		for (int i=0;i<24;i++)
+		for (int i=0;i<24;i++) 
 		{
 			jf.string(""+i);
         }

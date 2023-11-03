@@ -34,7 +34,7 @@ public class EchartProvider
 		{
 			case sankey: sankey(txtChart); break;
 			case heatmap: heatmap(txtChart); break;
-			case heatbar: heatbar(txtChart); break;
+			case heatbar: JsonEchartHeatbarFactory.demoChart(txtChart); break;
 		}
 		txtChart.init();
 	}
@@ -56,17 +56,6 @@ public class EchartProvider
 		fEchart.letData().letCategoriesX().letCategoriesY();
 		fEchart.categories("x",f.demoCategoriesX());
 		fEchart.categories("y",f.demoCategoriesY());
-		fEchart.dataDoubles2(f.demoData(),TxtEchartFunctionFactory.nullify(3));
-		fEchart.option(f.demoOption());
-	}
-	
-	private static void heatbar(JsonEchartFactory fEchart) throws IOException
-	{
-		JsonEchartHeatbarFactory f = JsonEchartHeatbarFactory.instance();
-		
-		fEchart.letData().letCategoriesX().letCategoriesY();
-		fEchart.categories("x",f.demoCategoriesX());
-		fEchart.categories("y",f.yCategories());
 		fEchart.dataDoubles2(f.demoData(),TxtEchartFunctionFactory.nullify(3));
 		fEchart.option(f.demoOption());
 	}

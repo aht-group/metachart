@@ -50,7 +50,7 @@ public class JsonEchartHeatbarFactory
 		txtChart.letData().letCategoriesX().letCategoriesY();
 		txtChart.categories("x",this.xCategories(data));
 		txtChart.categories("y",this.yCategories());
-		txtChart.dataDoubles2(this.demoData(),TxtEchartFunctionFactory.nullify(3));
+		txtChart.dataDoubles2(this.toDoubles2(this.demoData()),TxtEchartFunctionFactory.nullify(3));
 		txtChart.option(this.jsfOption(jsfGrid,data));
 		
 		txtChart.init();
@@ -86,7 +86,27 @@ public class JsonEchartHeatbarFactory
 	public JsonData yCategories() {return JsonDataFactory.instance().string("A").build();}
 	public JsonData xCategories(Data data) {return JsonDataFactory.instance().repeat(data.getValue().getDoubles2().length).build();}
 	
+	private JsonData toDoubles2(JsonData data)
+	{
+		JsonDataFactory jf = JsonDataFactory.instance();
+		for(int i=0;i<data.getDoubles1().length;i++)
+		{
+			jf.double2(new double[] {i,0,data.getDoubles1()[i]});
+		}
+		return jf.build();
+	}
+	
 	// Demo Methods
+	public static void demoChart(JsonEchartFactory fEchart) throws IOException
+	{
+		JsonEchartHeatbarFactory f = JsonEchartHeatbarFactory.instance();
+		
+		fEchart.letData().letCategoriesX().letCategoriesY();
+		fEchart.categories("x",f.demoCategoriesX());
+		fEchart.categories("y",f.yCategories());
+		fEchart.dataDoubles2(f.toDoubles2(f.demoData()),TxtEchartFunctionFactory.nullify(3));
+		fEchart.option(f.demoOption());
+	}
 	public JsonOption demoOption()
 	{
 		JsonOption option = new JsonOption();
@@ -115,7 +135,7 @@ public class JsonEchartHeatbarFactory
         }
 		return jf.build();
 	}
-	public JsonData demoData()
+	private JsonData demoData()
 	{
 		Random rnd = new Random();
 		JsonDataFactory jf = JsonDataFactory.instance();
@@ -123,7 +143,7 @@ public class JsonEchartHeatbarFactory
 		{
 			int value = rnd.nextInt(15)-5;
 			if(value<0) {value=0;}
-			jf.double2(new double[] {x,0,value});
+			jf.double1(value);
 		}
 		return jf.build();
 	}
