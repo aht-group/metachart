@@ -70,7 +70,6 @@
 		   <groupId>com.fasterxml.jackson.core</groupId>
 		   <artifactId>jackson-annotations</artifactId>
 		   <scope>provided</scope>
-		   <version>2.5.0</version>
 		</dependency>
 		
 		<!-- Logging -->
