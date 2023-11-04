@@ -54,9 +54,9 @@ public class Chart extends UINamingContainer
 	@Override
  	public void encodeBegin(FacesContext ctx) throws IOException
  	{
-		System.out.println();
+//		System.out.println();
 		super.encodeBegin(ctx);
-		logger.info("encodeBegin "+this.getClientId());
+		logger.trace("encodeBegin "+this.getClientId());
 		
 		type = ComponentAttribute.toString(ctx,this,Attribute.type,type);
 		scope = ComponentAttribute.toString(ctx,this,Attribute.scope,scope);
@@ -75,7 +75,7 @@ public class Chart extends UINamingContainer
 	@Override public boolean getRendersChildren() {return true;}
 	@Override public void encodeChildren(FacesContext ctx) throws IOException
 	{
-	    logger.info("encodeChildren "+this.getClientId());
+	    logger.trace("encodeChildren "+this.getClientId());
 	    super.encodeChildren(ctx);
 		
 		for (UIComponent child : this.getChildren())
@@ -125,6 +125,6 @@ public class Chart extends UINamingContainer
         writer.writeText(System.getProperty("line.separator"), null);
         
         super.encodeEnd(ctx);
-        logger.info("encodeEnd "+this.getClientId());
+        logger.trace("encodeEnd "+this.getClientId());
 	}	
 }
