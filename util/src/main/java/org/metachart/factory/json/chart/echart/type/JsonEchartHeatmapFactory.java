@@ -4,7 +4,7 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.exlp.util.JsUtil;
+import org.exlp.util.io.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;

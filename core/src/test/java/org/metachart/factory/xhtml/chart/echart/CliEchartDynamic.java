@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.exlp.interfaces.system.property.Configuration;
+import org.exlp.util.io.JsonUtil;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
@@ -22,7 +23,6 @@ import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.JsonUtil;
 import net.sf.exlp.util.xml.JDomUtil;
 
 public class CliEchartDynamic

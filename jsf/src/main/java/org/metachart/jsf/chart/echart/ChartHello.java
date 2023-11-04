@@ -14,10 +14,11 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
-import org.exlp.util.JsfUtil;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonTitleFactory;
+import org.exlp.util.io.JsonUtil;
+import org.exlp.util.jx.JsfUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.metachart.factory.json.function.TxtRandomDataFactory;
@@ -26,8 +27,6 @@ import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 @FacesComponent(value="org.metachart.jsf.chart.echart.ChartHello")
 @ListenerFor(systemEventClass=PostAddToViewEvent.class)
@@ -117,7 +116,7 @@ public class ChartHello extends UINamingContainer
 		series.setData("data");
 		
 		JsonOption apache = new JsonOption();
-		apache.setTitle(JsonTitleFactory.build(title));
+		apache.setTitle(JsonTitleFactory.build(title.getText()));
 		apache.setAxisX(JsonAxisFactory.instance().type("time").build());
 		apache.setAxisY(JsonAxisFactory.instance().type("value").build());
 		apache.setSeries(new ArrayList<>());

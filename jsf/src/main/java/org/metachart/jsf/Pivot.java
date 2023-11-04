@@ -12,7 +12,8 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
-import net.sf.exlp.util.io.JsonUtil;
+
+import org.exlp.util.io.JsonUtil;
 import org.metachart.model.json.pivot.PivotSettings;
 
 import org.slf4j.Logger;

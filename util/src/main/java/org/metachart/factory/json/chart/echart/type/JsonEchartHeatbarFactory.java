@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-import org.exlp.util.JsUtil;
+import org.exlp.util.io.JsUtil;
+import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
@@ -25,8 +26,6 @@ import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.JsonUtil;
-
 public class JsonEchartHeatbarFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonEchartHeatbarFactory.class);
@@ -44,13 +43,16 @@ public class JsonEchartHeatbarFactory
 	
 	public void jsf(String div, JsonGrid jsfGrid, Data data) throws IOException
 	{
+//		if(Objects.nonNull(data) && Objects.nonNull(data.getValue())) {logger.info(TxtDataFactory.double1ToInteger1(data.getValue()));}
+//		else {logger.info("DATA NULL");}
+		
 		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
 		
 		txtChart.declare(div,JsonHtmlFactory.build("canvas",false));
 		txtChart.letData().letCategoriesX().letCategoriesY();
 		txtChart.categories("x",this.xCategories(data));
 		txtChart.categories("y",this.yCategories());
-		txtChart.dataDoubles2(this.toDoubles2(this.demoData()),TxtEchartFunctionFactory.nullify(3));
+		txtChart.dataDoubles2(this.toDoubles2(data.getValue()),TxtEchartFunctionFactory.nullify(3));
 		txtChart.option(this.jsfOption(jsfGrid,data));
 		
 		txtChart.init();
@@ -61,7 +63,7 @@ public class JsonEchartHeatbarFactory
 		if(Objects.nonNull(jsfGrid.getHeight()))
 		{
 			Double d = Double.valueOf(jsfGrid.getHeight());
-			jsfGrid.setWidth(""+d*data.getValue().getDoubles2().length);
+			jsfGrid.setWidth(""+d*data.getValue().getDoubles1().length);
 		}
 		
 		JsonOption option = new JsonOption();
@@ -84,7 +86,7 @@ public class JsonEchartHeatbarFactory
 	}
 	
 	public JsonData yCategories() {return JsonDataFactory.instance().string("A").build();}
-	public JsonData xCategories(Data data) {return JsonDataFactory.instance().repeat(data.getValue().getDoubles2().length).build();}
+	public JsonData xCategories(Data data) {return JsonDataFactory.instance().repeat(data.getValue().getDoubles1().length).build();}
 	
 	private JsonData toDoubles2(JsonData data)
 	{

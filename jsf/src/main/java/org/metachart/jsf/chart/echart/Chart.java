@@ -2,7 +2,6 @@ package org.metachart.jsf.chart.echart;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.UUID;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
@@ -15,8 +14,8 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.exlp.util.JsfUtil;
 import org.exlp.util.jx.ComponentAttribute;
+import org.exlp.util.jx.JsfUtil;
 import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
@@ -27,27 +26,24 @@ import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.StringUtil;
-
 @FacesComponent(value="org.metachart.jsf.chart.echart.Chart")
 @ListenerFor(systemEventClass=PostAddToViewEvent.class)
 public class Chart extends UINamingContainer
 {
 	final static Logger logger = LoggerFactory.getLogger(Chart.class);
 
+	private String type; public String getType() {return type;} public void setType(String type) {this.type = type;}
+	private String scope; public String getScope() {return scope;} public void setScope(String scope) {this.scope = scope;}
+
+	private String height; public String getHeight() {return height;} public void setHeight(String height) {this.height = height;}
+
 	private static enum Attribute {scope,type,height}
+
+	public Chart()
+	{
+		logger.info("New "+this.toString());
+	}
 	
-	private String chartId;
-	
-	private String type;
-	private String scope;
-	private String height;
-	
-	private JsonGrid grid;
-	
-	private Title title;
-	private Data data;
- 
 	@Override
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException
 	{
@@ -58,38 +54,49 @@ public class Chart extends UINamingContainer
 	@Override
  	public void encodeBegin(FacesContext ctx) throws IOException
  	{
+		System.out.println();
+		super.encodeBegin(ctx);
+		logger.info("encodeBegin "+this.getClientId());
+		
+		type = ComponentAttribute.toString(ctx,this,Attribute.type,type);
+		scope = ComponentAttribute.toString(ctx,this,Attribute.scope,scope);
+		height = ComponentAttribute.toString(ctx,this,Attribute.height,height);
+		
 //		logger.info(StringUtil.stars());
 //		logger.info("ID:"+super.getId());
 //		logger.info("ClientID:"+super.getClientId());
 //		logger.info("Parent.ID:"+super.getParent().getId());
 //		logger.info("Parent.ClientID:"+super.getParent().getClientId());
-		
-		chartId = super.getClientId().replace(":","_");
-		scope = ComponentAttribute.toString(ctx,this,Attribute.scope);
-		type = ComponentAttribute.toString(ctx,this,Attribute.type);
-		height = ComponentAttribute.toString(ctx,this,Attribute.height);
-
-		if(ObjectUtils.anyNotNull(height)) {grid = JsonGridFactory.instance().size(height,null).build();}
-		
-		this.encodeChildren(ctx);
-	}
+ 	}
 	
-	@Override
-	public void encodeChildren(FacesContext ctx) throws IOException
+	Title title;
+	Data data = null;
+	
+	@Override public boolean getRendersChildren() {return true;}
+	@Override public void encodeChildren(FacesContext ctx) throws IOException
 	{
-        for (UIComponent child : getChildren())
+	    logger.info("encodeChildren "+this.getClientId());
+	    super.encodeChildren(ctx);
+		
+		for (UIComponent child : this.getChildren())
         {
-        	logger.info(child.getClass().getName());
-        	child.encodeAll(ctx);
+        	logger.trace(child.getClass().getName());
         	if(child instanceof org.metachart.jsf.common.Title) {title = (org.metachart.jsf.common.Title)child;}
-        	if(child instanceof org.metachart.jsf.common.Data) {data = (org.metachart.jsf.common.Data)child;}
+        	else if(child instanceof org.metachart.jsf.common.Data) {data = (org.metachart.jsf.common.Data)child;}
         }
-    }
-	
+	}
+		
 	@Override
  	public void encodeEnd(FacesContext ctx) throws IOException
- 	{
+	{
 		ResponseWriter writer = ctx.getResponseWriter();
+		
+		String chartId = this.getClientId().replace(":","_");
+
+		logger.trace("type: "+type+" "+this.getClientId());
+		
+		JsonGrid grid = null;
+		if(ObjectUtils.anyNotNull(height)) {grid = JsonGridFactory.instance().size(height,null).build();}
 		
 		writer.startElement("div",this);
 		writer.writeAttribute("id",chartId,null);
@@ -116,5 +123,8 @@ public class Chart extends UINamingContainer
 		
 		writer.endElement("script");
         writer.writeText(System.getProperty("line.separator"), null);
- 	}
+        
+        super.encodeEnd(ctx);
+        logger.info("encodeEnd "+this.getClientId());
+	}	
 }

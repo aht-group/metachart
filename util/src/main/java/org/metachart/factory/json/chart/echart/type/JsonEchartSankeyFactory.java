@@ -3,15 +3,15 @@ package org.metachart.factory.json.chart.echart.type;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.exlp.util.JsUtil;
+import org.exlp.util.io.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonLinkFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonEmphasisFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonEmphasisFactory.Focus;
 import org.metachart.factory.json.chart.echart.ui.JsonLabelFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonLineStyleFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
-import org.metachart.factory.json.chart.echart.ui.JsonEmphasisFactory.Focus;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonLink;

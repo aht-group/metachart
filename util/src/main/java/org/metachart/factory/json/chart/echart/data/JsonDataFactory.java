@@ -3,6 +3,7 @@ package org.metachart.factory.json.chart.echart.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import org.metachart.model.json.chart.echart.data.JsonData;
 
@@ -61,5 +62,11 @@ public class JsonDataFactory
 		return json;
 	}
 	
-//	public static JsonData d
+	public static JsonData random1Int(int size, int max)
+	{
+		Random rnd = new Random();
+		JsonDataFactory jf = JsonDataFactory.instance();
+		for(int i=0;i<size;i++) {jf.double1(rnd.nextInt(max));}
+		return jf.build();
+	}
 }

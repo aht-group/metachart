@@ -16,7 +16,7 @@ public class McBootstrap
 	private enum System {metachart}
 	
 	public final static String cfgDirTmp = "dir.tmp";
-	public final static String xmlConfig = "metachart/core/system/property/mc.xml";
+	public final static String xmlConfig = "metachart/system/property/mc.xml";
 
 	private static Configuration config;
 	
@@ -25,7 +25,7 @@ public class McBootstrap
 	public static Configuration init(String configFile)
 	{		
 		LoggerInit loggerBootstrap = new LoggerInit("log4j.xml");
-		loggerBootstrap.path("metachart/core/system/io/log");
+		loggerBootstrap.path("metachart/system/io/log");
 		loggerBootstrap.init();
 		//JaxbUtil.setNsPrefixMapper(new McNsPrefixMapper());
 		

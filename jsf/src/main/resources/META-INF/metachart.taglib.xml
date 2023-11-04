@@ -30,12 +30,20 @@
         <component>
              <component-type>org.metachart.jsf.common.Title</component-type>
         </component>
+        <attribute>
+            <name>text</name>
+            <type>java.lang.String</type>
+        </attribute>
 	</tag>
 	<tag>
         <tag-name>data</tag-name>
         <component>
              <component-type>org.metachart.jsf.common.Data</component-type>
         </component>
+        <attribute>
+            <name>value</name>
+            <type>org.metachart.model.json.chart.echart.data.JsonData</type>
+        </attribute>
 	</tag>
 	<tag>
         <tag-name>axis</tag-name>

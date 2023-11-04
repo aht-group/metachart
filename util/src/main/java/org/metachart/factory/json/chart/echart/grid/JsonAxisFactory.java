@@ -1,6 +1,6 @@
 package org.metachart.factory.json.chart.echart.grid;
 
-import org.exlp.util.JsUtil;
+import org.exlp.util.io.JsUtil;
 import org.metachart.model.json.chart.echart.grid.JsonAxis;
 import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
 

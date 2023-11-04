@@ -3,6 +3,7 @@ package org.metachart.factory.json.chart;
 import java.io.IOException;
 import java.io.Writer;
 
+import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.type.JsonEchartHeatbarFactory;
@@ -11,8 +12,6 @@ import org.metachart.factory.json.chart.echart.type.JsonEchartSankeyFactory;
 import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public class EchartProvider
 {
