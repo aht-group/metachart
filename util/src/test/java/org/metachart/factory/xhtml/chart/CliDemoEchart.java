@@ -56,8 +56,9 @@ public class CliDemoEchart
 		Configuration config = McBootstrap.init();
 		CliDemoEchart cli = new CliDemoEchart(config);
 		
-		cli.html(JsonEchartFactory.Type.sankey);
+//		cli.html(JsonEchartFactory.Type.sankey);
 //		cli.html(JsonEchartFactory.Type.heatmap);
-		cli.html(JsonEchartFactory.Type.heatbar);
+//		cli.html(JsonEchartFactory.Type.heatbar);
+		cli.html(JsonEchartFactory.Type.graph);
 	}
 }

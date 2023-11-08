@@ -10,11 +10,12 @@ import org.exlp.util.io.JsonUtil;
 import org.metachart.model.json.chart.echart.JsonHtml;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonEdge;
 import org.metachart.model.json.chart.echart.data.JsonLink;
 
 public class JsonEchartFactory
 {
-	public enum Type{sankey,heatmap,heatbar}
+	public enum Type{sankey,heatmap,heatbar,graph}
 	
 	private final Writer w;
 	private final JsonUtil jom;
@@ -42,6 +43,8 @@ public class JsonEchartFactory
 	
 	public JsonEchartFactory letData() throws IOException {w.write("\nlet data"+id+" = [];"); return this;}
 	public JsonEchartFactory letLinks() throws IOException {w.write("\nlet links"+id+" = [];");return this;}
+	public JsonEchartFactory letEdges() throws IOException {w.write("\nlet edges"+id+" = [];");return this;}
+	public JsonEchartFactory letCategories(String suffix) throws IOException {w.write("\nlet categories"+suffix+id+" = [];");return this;}
 	public JsonEchartFactory letCategoriesX() throws IOException {w.write("\nlet xCategories"+id+" = [];");return this;}
 	public JsonEchartFactory letCategoriesY() throws IOException {w.write("\nlet yCategories"+id+" = [];");return this;}
 	
@@ -60,9 +63,12 @@ public class JsonEchartFactory
 		sb.append("\n");
 		sb.append("\ndata").append(id).append(" = ");
 		sb.append(jom.toFormattedString(list));
+		sb.append(";");
 		w.write(sb.toString());
 		return sb.toString();
 	}
+	
+	
 	public String dataDoubles1(JsonData data) throws IOException
 	{
 		StringBuilder sb = new StringBuilder();
@@ -99,12 +105,32 @@ public class JsonEchartFactory
 		w.write(sb.toString());
 		return sb.toString();
 	}
+	public String categories(String suffix, List<JsonData> data) throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\n").append("categories").append(suffix).append(id);
+		sb.append(" = ").append(jom.toFormattedString(data));
+		sb.append(";");
+		w.write(sb.toString());
+		return sb.toString();
+	}
 	
 	public String links(List<JsonLink> list) throws IOException
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
 		sb.append("\nlinks = ").append(jom.toFormattedString(list));
+		sb.append(";");
+		w.write(sb.toString());
+		return sb.toString();
+	}
+	public String edges(List<JsonEdge> list) throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\nedges = ").append(jom.toFormattedString(list));
+		sb.append(";");
 		w.write(sb.toString());
 		return sb.toString();
 	}

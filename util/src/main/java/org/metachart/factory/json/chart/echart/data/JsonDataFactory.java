@@ -53,6 +53,16 @@ public class JsonDataFactory
 		return this;
 	}
 	
+	public JsonDataFactory data(JsonData value)
+	{
+		if(Objects.isNull(json.getData())) {json.setData(new ArrayList<>());}
+		json.getData().add(value);
+		return this;
+	}
+	
+	public JsonDataFactory name(String value) {json.setName(value);return this;}
+	public JsonDataFactory category(int index) {json.setCategory(index);return this;}
+	
 	public static JsonData create() {return new JsonData();}
 	
 	public static JsonData build(String name)

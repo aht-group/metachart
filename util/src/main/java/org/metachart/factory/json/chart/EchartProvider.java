@@ -6,6 +6,7 @@ import java.io.Writer;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
+import org.metachart.factory.json.chart.echart.type.JsonEchartGraphFactory;
 import org.metachart.factory.json.chart.echart.type.JsonEchartHeatbarFactory;
 import org.metachart.factory.json.chart.echart.type.JsonEchartHeatmapFactory;
 import org.metachart.factory.json.chart.echart.type.JsonEchartSankeyFactory;
@@ -34,6 +35,7 @@ public class EchartProvider
 			case sankey: sankey(txtChart); break;
 			case heatmap: heatmap(txtChart); break;
 			case heatbar: JsonEchartHeatbarFactory.demoChart(txtChart); break;
+			case graph: JsonEchartGraphFactory.demoChart(txtChart); break;
 		}
 		txtChart.init();
 	}

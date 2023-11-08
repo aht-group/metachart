@@ -17,6 +17,11 @@ public class JsonSeries implements Serializable
 	public String getType() {return type;}
 	public void setType(String type) {this.type = type;}
 	
+	@JsonProperty("layout")
+	private String layout;
+	public String getLayout() {return layout;}
+	public void setLayout(String layout) {this.layout = layout;}
+
 	@JsonProperty("name")
 	private String name;
 	public String getName() {return name;}
@@ -31,6 +36,16 @@ public class JsonSeries implements Serializable
 	private JsonLineStyle lineStyle;
 	public JsonLineStyle getLineStyle() {return lineStyle;}
 	public void setLineStyle(JsonLineStyle lineStyle) {this.lineStyle = lineStyle;}
+	
+	@JsonProperty("animation")
+	private Boolean animation;
+	public Boolean getAnimation() {return animation;}
+	public void setAnimation(Boolean animation) {this.animation = animation;}
+
+	@JsonProperty("draggable")
+	private Boolean draggable;
+	public Boolean getDraggable() {return draggable;}
+	public void setDraggable(Boolean draggable) {this.draggable = draggable;}
 
 	@JsonProperty("label")
 	private JsonLabel label;
@@ -42,6 +57,11 @@ public class JsonSeries implements Serializable
 	public JsonEmphasis getEmphasis() {return emphasis;}
 	public void setEmphasis(JsonEmphasis emphasis) {this.emphasis = emphasis;}
 
+	@JsonProperty("categories")
+	private String categories;
+	public String getCategories() {return categories;}
+	public void setCategories(String categories) {this.categories = categories;}
+
 	@JsonProperty("data")
 	private String data;
 	public String getData() {return data;}
@@ -51,4 +71,9 @@ public class JsonSeries implements Serializable
 	private String links;
 	public String getLinks() {return links;}
 	public void setLinks(String links) {this.links = links;}
+	
+	@JsonProperty("edges")
+	private String edges;
+	public String getEdges() {return edges;}
+	public void setEdges(String edges) {this.edges = edges;}
 }
