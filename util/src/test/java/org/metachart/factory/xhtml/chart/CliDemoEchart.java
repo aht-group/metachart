@@ -1,4 +1,4 @@
-package org.metachart.factory.xhtml.chart.echart;
+package org.metachart.factory.xhtml.chart;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -17,14 +17,14 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-public class CliEchartType
+public class CliDemoEchart
 {
-	final static Logger logger = LoggerFactory.getLogger(CliEchartType.class);
+	final static Logger logger = LoggerFactory.getLogger(CliDemoEchart.class);
 	
 	private final Path path;
 	private final XhtmlEchartFactory xhfEchart;
 	
-	public CliEchartType(Configuration config)
+	public CliDemoEchart(Configuration config)
 	{
 		xhfEchart = XhtmlEchartFactory.instance();
 		
@@ -54,9 +54,9 @@ public class CliEchartType
 	public static void main (String[] args) throws Exception
 	{		
 		Configuration config = McBootstrap.init();
-		CliEchartType cli = new CliEchartType(config);
+		CliDemoEchart cli = new CliDemoEchart(config);
 		
-//		cli.html(JsonEchartFactory.Type.sankey);
+		cli.html(JsonEchartFactory.Type.sankey);
 //		cli.html(JsonEchartFactory.Type.heatmap);
 		cli.html(JsonEchartFactory.Type.heatbar);
 	}
