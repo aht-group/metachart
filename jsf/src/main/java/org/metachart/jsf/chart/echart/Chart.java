@@ -19,6 +19,7 @@ import org.exlp.util.jx.JsfUtil;
 import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
+import org.metachart.factory.json.chart.echart.type.JsonEchartGraphFactory;
 import org.metachart.factory.json.chart.echart.type.JsonEchartHeatbarFactory;
 import org.metachart.jsf.common.Data;
 import org.metachart.jsf.common.Title;
@@ -69,20 +70,36 @@ public class Chart extends UINamingContainer
 //		logger.info("Parent.ClientID:"+super.getParent().getClientId());
  	}
 	
-	Title title;
-	Data data = null;
+	private Title title;
+	private Data data;
+	private Data categories;
+	private Data edges;
 	
 	@Override public boolean getRendersChildren() {return true;}
 	@Override public void encodeChildren(FacesContext ctx) throws IOException
 	{
 	    logger.trace("encodeChildren "+this.getClientId());
+	    
+	    data=null;
+	    categories=null;
+	    
 	    super.encodeChildren(ctx);
 		
 		for (UIComponent child : this.getChildren())
         {
         	logger.trace(child.getClass().getName());
         	if(child instanceof org.metachart.jsf.common.Title) {title = (org.metachart.jsf.common.Title)child;}
-        	else if(child instanceof org.metachart.jsf.common.Data) {data = (org.metachart.jsf.common.Data)child;}
+        	else if(child instanceof org.metachart.jsf.common.Data)
+        	{
+        		org.metachart.jsf.common.Data c = (org.metachart.jsf.common.Data)child;
+        		switch(Data.Type.valueOf(c.getType()))
+        		{
+        			case data:	data=c; break;
+        			case category: categories=c; break;
+        			case edge: edges=c; break;
+        		}
+        		
+        	}
         }
 	}
 		
@@ -116,6 +133,7 @@ public class Chart extends UINamingContainer
 				switch(JsonEchartFactory.Type.valueOf(type))
 				{
 					case heatbar: JsonEchartHeatbarFactory.instance(writer).id(chartId).jsf(chartId,grid,data); break;
+					case graph: JsonEchartGraphFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data,edges); break;
 					default: logger.warn("NYI"); break;
 				}
 			}

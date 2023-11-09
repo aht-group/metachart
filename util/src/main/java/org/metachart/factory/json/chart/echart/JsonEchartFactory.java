@@ -120,7 +120,8 @@ public class JsonEchartFactory
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\nlinks = ").append(jom.toFormattedString(list));
+		sb.append("\nlinks").append(id);
+		sb.append(" = ").append(jom.toFormattedString(list));
 		sb.append(";");
 		w.write(sb.toString());
 		return sb.toString();
@@ -129,7 +130,8 @@ public class JsonEchartFactory
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\nedges = ").append(jom.toFormattedString(list));
+		sb.append("\nedges").append(id);
+		sb.append(" = ").append(jom.toFormattedString(list));
 		sb.append(";");
 		w.write(sb.toString());
 		return sb.toString();

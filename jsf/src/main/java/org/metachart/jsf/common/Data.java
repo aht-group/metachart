@@ -1,6 +1,7 @@
 package org.metachart.jsf.common;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
@@ -16,14 +17,17 @@ public class Data extends UINamingContainer implements org.metachart.interfaces.
 {
 final static Logger logger = LoggerFactory.getLogger(Data.class);
 	
-	private static enum Attribute {value}
+	private enum Attribute {type,value}
+	public enum Type{data,category,edge}
 	
-	private JsonData value; 
-	@Override public JsonData getValue() {return value;}
-	public void setData(JsonData value) {this.value = value;}
-
+	private String type; public void setType(String type) {this.type = type;} public String getType() {return type;}
+	private JsonData value; @Override public JsonData getValue() {return value;} public void setData(JsonData value) {this.value = value;}
+	
 	@Override public void encodeAll(FacesContext ctx) throws IOException
 	{
+		if(Objects.isNull(type)) {type = ComponentAttribute.toString(ctx,this,Attribute.type,Type.data.toString());}
 		value = ComponentAttribute.toObject(ctx,this, Attribute.value, null);
+		
+		logger.info("Type "+type);
 	}
 }

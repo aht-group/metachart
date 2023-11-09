@@ -25,10 +25,7 @@ public class Title extends UIComponentBase
     @Override public void encodeAll(FacesContext ctx) throws IOException
 	{
     	ComponentAttribute.debugOnInfo(true);
-    	if(Objects.isNull(text))
-    	{
-    		text = ComponentAttribute.toString(ctx,this,Attribute.text,text);
-    	}
+    	if(Objects.isNull(text)) {text = ComponentAttribute.toString(ctx,this,Attribute.text,text);}
     	ComponentAttribute.debugOnInfo(false);
     	logger.info(text);
 	}

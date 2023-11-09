@@ -38,4 +38,9 @@ public class JsonData implements Serializable
 	private List<JsonData> data;
 	public List<JsonData> getData() {return data;}
 	public void setData(List<JsonData> data) {this.data = data;}
+	
+	@JsonProperty("edges")
+	private List<JsonEdge> edges;
+	public List<JsonEdge> getEdges() {return edges;}
+	public void setEdges(List<JsonEdge> edges) {this.edges = edges;}
 }

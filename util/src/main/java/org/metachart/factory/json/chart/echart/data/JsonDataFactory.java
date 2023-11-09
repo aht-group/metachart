@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Random;
 
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonEdge;
 
 public class JsonDataFactory
 {	
@@ -59,9 +60,17 @@ public class JsonDataFactory
 		json.getData().add(value);
 		return this;
 	}
+	public JsonDataFactory edge(JsonEdge edge)
+	{
+		if(Objects.isNull(json.getEdges())) {json.setEdges(new ArrayList<>());}
+		json.getEdges().add(edge);
+		return this;
+	}
 	
 	public JsonDataFactory name(String value) {json.setName(value);return this;}
 	public JsonDataFactory category(int index) {json.setCategory(index);return this;}
+	
+	
 	
 	public static JsonData create() {return new JsonData();}
 	
