@@ -1,35 +1,42 @@
 package org.metachart.factory.json.chart.echart.type;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import org.exlp.util.io.JsUtil;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
+import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
+import org.metachart.factory.json.chart.echart.data.JsonEdgeFactory;
 import org.metachart.factory.json.chart.echart.demo.JsonEchartDemoGraphFactory;
-import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
-import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
-import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
-import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
-import org.metachart.factory.json.chart.echart.ui.JsonVisualMapFactory;
+import org.metachart.factory.xhtml.XhtmlEchartFactory;
 import org.metachart.interfaces.chart.Data;
-import org.metachart.model.json.chart.echart.JsonOption;
-import org.metachart.model.json.chart.echart.data.JsonSeries;
+import org.metachart.interfaces.graph.EchartDataProvider;
+import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
-import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
+import org.metachart.model.json.graph.mc.JsonCategory;
+import org.metachart.model.json.graph.mc.JsonEdge;
+import org.metachart.model.json.graph.mc.JsonGraph;
+import org.metachart.model.json.graph.mc.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonEchartGraphFactory
+public class JsonEchartGraphFactory implements EchartDataProvider
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonEchartGraphFactory.class);
 	
 	private final Writer w;
 	private String id; public JsonEchartGraphFactory id(String id) {this.id=id; return this;}
 	
+	private JsonData categories; @Override public JsonData getGraphCategories() {return categories;}
+	private JsonData nodes; @Override public JsonData getGraphNodes() {return nodes;}
+	private JsonData edges; @Override public JsonData getGraphEdges() {return edges;}
+	
+
 	public static JsonEchartGraphFactory instance() {return new JsonEchartGraphFactory(null);}
 	public static JsonEchartGraphFactory instance(Writer w) {return new JsonEchartGraphFactory(w);}
 	private JsonEchartGraphFactory(Writer w)
@@ -53,30 +60,52 @@ public class JsonEchartGraphFactory
 		f.init();
 	}
 	
-	private JsonOption jsfOption(JsonGrid jsfGrid, Data data)
+	public JsonEchartGraphFactory transform(JsonGraph graph)
 	{
-		if(Objects.nonNull(jsfGrid.getHeight()))
+		if(Objects.isNull(graph.getCategories())) {graph.setCategories(new ArrayList<>());}
+		if(Objects.isNull(graph.getNodes())) {graph.setNodes(new ArrayList<>());}
+		if(Objects.isNull(graph.getEdges())) {graph.setEdges(new ArrayList<>());}
+		
+		JsonDataFactory jfNodes = JsonDataFactory.instance();
+		for(JsonNode node : graph.getNodes())
 		{
-			Double d = Double.valueOf(jsfGrid.getHeight());
-			jsfGrid.setWidth(""+d*data.getValue().getDoubles1().length);
+			jfNodes.data(JsonDataFactory.instance().name(node.getLabel()).category(graph.getCategories().indexOf(node.getCategory())).build());
 		}
+		nodes = jfNodes.build();
 		
-		JsonOption option = new JsonOption();
+		JsonDataFactory jfEdges = JsonDataFactory.instance();
+		for(JsonEdge edge : graph.getEdges())
+		{
+			int source = graph.getNodes().indexOf(edge.getSource());
+			int destination = graph.getNodes().indexOf(edge.getDestination());		
+			jfEdges.edge(JsonEdgeFactory.edge(source,destination));	
+		}
+		edges = jfEdges.build();
 		
-		option.setGrid(JsonGridFactory.instance().size(jsfGrid).margin(0,0,0,0).build());
+		JsonDataFactory jfCategory = JsonDataFactory.instance();
+		for(JsonCategory category : graph.getCategories())
+		{
+			jfCategory.data(JsonDataFactory.build(category.getLabel()));
+		}
+		categories = jfCategory.build();
 		
-		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
-		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).build());
-		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).build());
-		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
-		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
+		return this;
+	}
+	
+	public void xhtml(Path path, EchartDataProvider provider) throws IOException
+	{
+		StringWriter w = new StringWriter();
+		XhtmlEchartFactory xf = XhtmlEchartFactory.instance();
+		JsonEchartFactory fEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(xf.getDivCntainerId(),JsonHtmlFactory.build("canvas",false));
+		JsonEchartDemoGraphFactory demo = JsonEchartDemoGraphFactory.instance();
 		
-		option.setSeries(new ArrayList<>());
-		JsonSeries series = new JsonSeries();
-		series.setData(JsUtil.magicField("data"+id));
-		series.setType(JsonEchartFactory.Type.heatmap.toString());
+		fEchart.letCategories("Node").letData().letEdges();
+		fEchart.categories("Node",provider.getGraphCategories().getData());
+		fEchart.data(provider.getGraphNodes().getData());
+		fEchart.edges(provider.getGraphEdges().getEdges());
+		fEchart.option(demo.demoOption());
+		fEchart.init();
 		
-		option.getSeries().add(series);
-		return option;
+		xf.write(path,w);
 	}
 }

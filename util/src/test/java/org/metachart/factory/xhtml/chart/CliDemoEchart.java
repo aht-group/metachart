@@ -10,7 +10,7 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
-import org.metachart.factory.txt.chart.XhtmlEchartFactory;
+import org.metachart.factory.xhtml.XhtmlEchartFactory;
 import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -15,10 +15,6 @@ public class JsonEdge implements Serializable
 
 	@JsonProperty("destination")
 	private JsonNode destination;
-	public JsonNode getDestination() {
-		return destination;
-	}
-	public void setDestination(JsonNode destination) {
-		this.destination = destination;
-	}
+	public JsonNode getDestination() {return destination;}
+	public void setDestination(JsonNode destination) {this.destination = destination;}
 }

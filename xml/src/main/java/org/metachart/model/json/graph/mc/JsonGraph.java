@@ -18,4 +18,9 @@ public class JsonGraph implements Serializable
 	private List<JsonEdge> edges;
 	public List<JsonEdge> getEdges() {return edges;}
 	public void setEdges(List<JsonEdge> edges) {this.edges = edges;}
+	
+	@JsonProperty("categories")
+	private List<JsonCategory> categories;
+	public List<JsonCategory> getCategories() {return categories;}
+	public void setCategories(List<JsonCategory> categories) {this.categories = categories;}
 }

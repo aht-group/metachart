@@ -16,7 +16,7 @@ import org.metachart.factory.json.chart.echart.grid.JsonTitleFactory;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.metachart.factory.json.function.TxtRandomDataFactory;
-import org.metachart.factory.txt.chart.XhtmlEchartFactory;
+import org.metachart.factory.xhtml.XhtmlEchartFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.test.McBootstrap;

@@ -1,8 +1,13 @@
-package org.metachart.factory.txt.chart;
+package org.metachart.factory.xhtml;
 
 import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.file.Path;
 
+import org.jdom2.Document;
 import org.jdom2.Element;
+
+import net.sf.exlp.util.xml.JDomUtil;
 
 public class XhtmlEchartFactory
 {
@@ -12,6 +17,20 @@ public class XhtmlEchartFactory
 	private XhtmlEchartFactory()
 	{
 		divCntainerId = "chart-container";
+	}
+	
+	public void write(Path path, StringWriter w) throws IOException
+	{
+		Element html = new Element("html");
+		html.setAttribute("lang","en");
+		html.getChildren().add(this.head("Demo: "));
+		html.getChildren().add(this.body(w.toString()));
+
+        Document doc = new Document(html);
+        doc.setDocType(new org.jdom2.DocType("html"));
+		
+//		JDomUtil.instance().omitDeclaration(true).info(doc);
+		JDomUtil.instance().omitDeclaration(true).write(doc,path);
 	}
 	
 	public Element head(String title)
