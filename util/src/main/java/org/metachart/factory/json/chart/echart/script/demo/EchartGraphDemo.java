@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.echart.demo;
+package org.metachart.factory.json.chart.echart.script.demo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,33 +8,33 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonEdgeFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
+import org.metachart.interfaces.data.EchartGraphDataProvider;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonEchartDemoGraphFactory
+public class EchartGraphDemo implements EchartGraphDataProvider
 {
-	final static Logger logger = LoggerFactory.getLogger(JsonEchartDemoGraphFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EchartGraphDemo.class);
 	
-	private String id; public JsonEchartDemoGraphFactory id(String id) {this.id=id; return this;}
+	private String id; public EchartGraphDemo id(String id) {this.id=id; return this;}
 	
-	public static JsonEchartDemoGraphFactory instance() {return new JsonEchartDemoGraphFactory();}
-	private JsonEchartDemoGraphFactory()
+	public static EchartGraphDemo instance() {return new EchartGraphDemo();}
+	private EchartGraphDemo()
 	{
+
 		id="";
 	}
 	
-	public static void demoChart(JsonEchartFactory fEchart) throws IOException
+	public void demo(JsonEchartFactory fEchart) throws IOException
 	{
-		JsonEchartDemoGraphFactory f = JsonEchartDemoGraphFactory.instance();
-		
 		fEchart.letCategories("Node").letData().letEdges();
-		fEchart.categories("Node",f.categories().getData());
-		fEchart.data(f.nodes().getData());
-		fEchart.edges(f.edges().getEdges());
-		fEchart.option(f.demoOption());
+		fEchart.categories("Node",this.getGraphCategories().getData());
+		fEchart.data(this.getGraphNodes().getData());
+		fEchart.edges(this.getGraphEdges().getEdges());
+		fEchart.option(this.demoOption());
 	}
 	public JsonOption demoOption()
 	{
@@ -56,7 +56,8 @@ public class JsonEchartDemoGraphFactory
 		option.getSeries().add(series);
 		return option;
 	}
-	public JsonData categories()
+	
+	@Override public JsonData getGraphCategories()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		
@@ -65,7 +66,8 @@ public class JsonEchartDemoGraphFactory
 		
 		return jf.build();
 	}
-	public JsonData nodes()
+	
+	@Override public JsonData getGraphNodes()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		jf.data(JsonDataFactory.instance().name("Node 1").category(0).build());
@@ -74,7 +76,8 @@ public class JsonEchartDemoGraphFactory
 		jf.data(JsonDataFactory.instance().name("Node 4").category(1).build());
 		return jf.build();
 	}
-	public JsonData edges()
+	
+	@Override public JsonData getGraphEdges()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		jf.edge(JsonEdgeFactory.edge(0,1));

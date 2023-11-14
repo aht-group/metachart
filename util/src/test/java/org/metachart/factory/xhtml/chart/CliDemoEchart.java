@@ -10,6 +10,10 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
+import org.metachart.factory.json.chart.echart.script.demo.EchartGraphDemo;
+import org.metachart.factory.json.chart.echart.script.demo.EchartLineDemo;
+import org.metachart.factory.json.chart.echart.script.type.JsonEchartGraphFactory;
+import org.metachart.factory.json.chart.echart.script.type.JsonEchartLineFactory;
 import org.metachart.factory.xhtml.XhtmlEchartFactory;
 import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
@@ -30,6 +34,19 @@ public class CliDemoEchart
 		
 		path = Paths.get(config.getString(McBootstrap.cfgDirTmp));
 		logger.info("Wrting to "+path.toString());
+	}
+	
+	public void demo(JsonEchartFactory.Type type) throws IOException
+	{	
+		Path p = path.resolve("echart-"+type.toString()+".html");
+		switch(type)
+		{
+			case line: JsonEchartLineFactory.instance().xhtml(p, EchartLineDemo.instance()); break;
+			case sankey: this.html(type); break;
+			case heatmap: this.html(type); break;
+			case heatbar: this.html(type); break;
+			case graph: JsonEchartGraphFactory.instance().xhtml(p, EchartGraphDemo.instance()); break;
+		}
 	}
 	
 	public Document html(JsonEchartFactory.Type type) throws IOException
@@ -56,9 +73,10 @@ public class CliDemoEchart
 		Configuration config = McBootstrap.init();
 		CliDemoEchart cli = new CliDemoEchart(config);
 		
+		cli.demo(JsonEchartFactory.Type.line);
 //		cli.html(JsonEchartFactory.Type.sankey);
 //		cli.html(JsonEchartFactory.Type.heatmap);
-//		cli.html(JsonEchartFactory.Type.heatbar);
-		cli.html(JsonEchartFactory.Type.graph);
+//		cli.demo(JsonEchartFactory.Type.heatbar);
+//		cli.demo(JsonEchartFactory.Type.graph);
 	}
 }

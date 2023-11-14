@@ -6,11 +6,10 @@ import java.io.Writer;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
-import org.metachart.factory.json.chart.echart.demo.JsonEchartDemoGraphFactory;
-import org.metachart.factory.json.chart.echart.type.JsonEchartHeatbarFactory;
-import org.metachart.factory.json.chart.echart.type.JsonEchartHeatmapFactory;
-import org.metachart.factory.json.chart.echart.type.JsonEchartSankeyFactory;
-import org.metachart.factory.json.function.TxtEchartFunctionFactory;
+import org.metachart.factory.json.chart.echart.script.demo.EchartGraphDemo;
+import org.metachart.factory.json.chart.echart.script.demo.EchartHeatbarDemo;
+import org.metachart.factory.json.chart.echart.script.demo.EchartHeatmapDemo;
+import org.metachart.factory.json.chart.echart.script.demo.EchartSankeyDemo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,32 +31,11 @@ public class EchartProvider
 		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(divId,JsonHtmlFactory.build("canvas",false));
 		switch(type)
 		{
-			case sankey: sankey(txtChart); break;
-			case heatmap: heatmap(txtChart); break;
-			case heatbar: JsonEchartHeatbarFactory.demoChart(txtChart); break;
-			case graph: JsonEchartDemoGraphFactory.demoChart(txtChart); break;
+			case sankey: EchartSankeyDemo.instance(txtChart).demo(); break;
+			case heatmap: EchartHeatmapDemo.instance(txtChart).demo(); break;
+			case heatbar: EchartHeatbarDemo.instance(txtChart).demo(); break;
+			case graph: EchartGraphDemo.instance().demo(txtChart); break;
 		}
 		txtChart.init();
-	}
-	
-	private static void sankey(JsonEchartFactory fEchart) throws IOException
-	{
-		JsonEchartSankeyFactory f = JsonEchartSankeyFactory.instance();
-		
-		fEchart.letData().letLinks();
-		fEchart.data(f.demoData());
-		fEchart.links(f.demoLinks());
-		fEchart.option(f.demoOption());
-	}
-	
-	private static void heatmap(JsonEchartFactory fEchart) throws IOException
-	{
-		JsonEchartHeatmapFactory f = JsonEchartHeatmapFactory.instance();
-		
-		fEchart.letData().letCategoriesX().letCategoriesY();
-		fEchart.categories("x",f.demoCategoriesX());
-		fEchart.categories("y",f.demoCategoriesY());
-		fEchart.dataDoubles2(f.demoData(),TxtEchartFunctionFactory.nullify(3));
-		fEchart.option(f.demoOption());
 	}
 }

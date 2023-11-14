@@ -1,4 +1,4 @@
-package org.metachart.factory.chart;
+package org.metachart.factory.xml.chart.high;
 
 import java.util.ArrayList;
 import java.util.List;

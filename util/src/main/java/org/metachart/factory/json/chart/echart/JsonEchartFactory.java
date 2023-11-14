@@ -15,7 +15,7 @@ import org.metachart.model.json.chart.echart.data.JsonLink;
 
 public class JsonEchartFactory
 {
-	public enum Type{sankey,heatmap,heatbar,graph}
+	public enum Type{line,sankey,heatmap,heatbar,graph}
 	
 	private final Writer w;
 	private final JsonUtil jom;
@@ -95,11 +95,11 @@ public class JsonEchartFactory
 		w.write(sb.toString());
 	}
 	
-	public String categories(String axis, JsonData data) throws IOException
+	public String categories(String suffix, JsonData data) throws IOException
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\n").append(axis.toLowerCase()).append("Categories").append(id);
+		sb.append("\n").append("categories").append(suffix).append(id);
 		sb.append(" = ").append(jom.toFormattedString(data.getStrings()));
 		sb.append(";");
 		w.write(sb.toString());

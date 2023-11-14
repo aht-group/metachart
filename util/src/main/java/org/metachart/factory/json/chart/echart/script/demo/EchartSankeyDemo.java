@@ -1,5 +1,6 @@
-package org.metachart.factory.json.chart.echart.type;
+package org.metachart.factory.json.chart.echart.script.demo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +18,24 @@ import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonLink;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 
-public class JsonEchartSankeyFactory
+public class EchartSankeyDemo
 {
-	public static JsonEchartSankeyFactory instance() {return new JsonEchartSankeyFactory();}
-	private JsonEchartSankeyFactory()
+	private final JsonEchartFactory fEchart;
+	
+	public static EchartSankeyDemo instance(JsonEchartFactory fEchart) {return new EchartSankeyDemo(fEchart);}
+	private EchartSankeyDemo(JsonEchartFactory fEchart)
+	{
+		this.fEchart=fEchart;
+	}
+	
+	public void demo() throws IOException
 	{
 		
+		
+		fEchart.letData().letLinks();
+		fEchart.data(this.demoData());
+		fEchart.links(this.demoLinks());
+		fEchart.option(this.demoOption());
 	}
 	
 	public JsonOption demoOption()

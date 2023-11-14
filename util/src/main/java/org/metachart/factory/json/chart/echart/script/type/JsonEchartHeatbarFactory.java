@@ -1,10 +1,9 @@
-package org.metachart.factory.json.chart.echart.type;
+package org.metachart.factory.json.chart.echart.script.type;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
 
 import org.exlp.util.io.JsUtil;
 import org.exlp.util.io.JsonUtil;
@@ -88,64 +87,12 @@ public class JsonEchartHeatbarFactory
 	public JsonData yCategories() {return JsonDataFactory.instance().string("A").build();}
 	public JsonData xCategories(Data data) {return JsonDataFactory.instance().repeat(data.getValue().getDoubles1().length).build();}
 	
-	private JsonData toDoubles2(JsonData data)
+	public JsonData toDoubles2(JsonData data)
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		for(int i=0;i<data.getDoubles1().length;i++)
 		{
 			jf.double2(new double[] {i,0,data.getDoubles1()[i]});
-		}
-		return jf.build();
-	}
-	
-	// Demo Methods
-	public static void demoChart(JsonEchartFactory fEchart) throws IOException
-	{
-		JsonEchartHeatbarFactory f = JsonEchartHeatbarFactory.instance();
-		
-		fEchart.letData().letCategoriesX().letCategoriesY();
-		fEchart.categories("x",f.demoCategoriesX());
-		fEchart.categories("y",f.yCategories());
-		fEchart.dataDoubles2(f.toDoubles2(f.demoData()),TxtEchartFunctionFactory.nullify(3));
-		fEchart.option(f.demoOption());
-	}
-	public JsonOption demoOption()
-	{
-		JsonOption option = new JsonOption();
-		option.setGrid(JsonGridFactory.instance().size(12,(12*24)).margin(5,5,5,5).build());
-		
-		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
-		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).build());
-		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).build());
-		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
-		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
-		
-		option.setSeries(new ArrayList<>());
-		JsonSeries series = new JsonSeries();
-		series.setData(JsUtil.magicField("data"+id));
-		series.setType(JsonEchartFactory.Type.heatmap.toString());
-		
-		option.getSeries().add(series);
-		return option;
-	}
-	public JsonData demoCategoriesX()
-	{
-		JsonDataFactory jf = JsonDataFactory.instance();
-		for (int i=0;i<24;i++)
-		{
-			jf.string(""+i);
-        }
-		return jf.build();
-	}
-	private JsonData demoData()
-	{
-		Random rnd = new Random();
-		JsonDataFactory jf = JsonDataFactory.instance();
-		for(int x=0;x<24;x++)
-		{
-			int value = rnd.nextInt(15)-5;
-			if(value<0) {value=0;}
-			jf.double1(value);
 		}
 		return jf.build();
 	}

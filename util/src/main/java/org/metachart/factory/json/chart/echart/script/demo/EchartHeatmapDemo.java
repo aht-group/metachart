@@ -1,5 +1,6 @@
-package org.metachart.factory.json.chart.echart.type;
+package org.metachart.factory.json.chart.echart.script.demo;
 
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,17 +12,29 @@ import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonVisualMapFactory;
+import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
 
-public class JsonEchartHeatmapFactory
+public class EchartHeatmapDemo
 {
-	public static JsonEchartHeatmapFactory instance() {return new JsonEchartHeatmapFactory();}
-	private JsonEchartHeatmapFactory()
+	private final JsonEchartFactory fEchart;
+	
+	public static EchartHeatmapDemo instance(JsonEchartFactory fEchart) {return new EchartHeatmapDemo(fEchart);}
+	private EchartHeatmapDemo(JsonEchartFactory fEchart)
 	{
-
+		this.fEchart=fEchart;
+	}
+	
+	public void demo() throws IOException
+	{		
+		fEchart.letData().letCategoriesX().letCategoriesY();
+		fEchart.categories("x",this.demoCategoriesX());
+		fEchart.categories("y",this.demoCategoriesY());
+		fEchart.dataDoubles2(this.demoData(),TxtEchartFunctionFactory.nullify(3));
+		fEchart.option(this.demoOption());
 	}
 	
 	public JsonOption demoOption()

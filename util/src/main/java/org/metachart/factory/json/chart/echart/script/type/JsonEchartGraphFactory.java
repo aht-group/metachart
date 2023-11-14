@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.echart.type;
+package org.metachart.factory.json.chart.echart.script.type;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -12,10 +12,10 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonEdgeFactory;
-import org.metachart.factory.json.chart.echart.demo.JsonEchartDemoGraphFactory;
+import org.metachart.factory.json.chart.echart.script.demo.EchartGraphDemo;
 import org.metachart.factory.xhtml.XhtmlEchartFactory;
 import org.metachart.interfaces.chart.Data;
-import org.metachart.interfaces.graph.EchartDataProvider;
+import org.metachart.interfaces.data.EchartGraphDataProvider;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.model.json.graph.mc.JsonCategory;
@@ -25,7 +25,7 @@ import org.metachart.model.json.graph.mc.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonEchartGraphFactory implements EchartDataProvider
+public class JsonEchartGraphFactory implements EchartGraphDataProvider
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonEchartGraphFactory.class);
 	
@@ -36,7 +36,6 @@ public class JsonEchartGraphFactory implements EchartDataProvider
 	private JsonData nodes; @Override public JsonData getGraphNodes() {return nodes;}
 	private JsonData edges; @Override public JsonData getGraphEdges() {return edges;}
 	
-
 	public static JsonEchartGraphFactory instance() {return new JsonEchartGraphFactory(null);}
 	public static JsonEchartGraphFactory instance(Writer w) {return new JsonEchartGraphFactory(w);}
 	private JsonEchartGraphFactory(Writer w)
@@ -48,8 +47,7 @@ public class JsonEchartGraphFactory implements EchartDataProvider
 	public void jsf(String div, JsonGrid jsfGrid, Data categories, Data data, Data edges) throws IOException
 	{		
 		JsonEchartFactory f = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
-		
-		JsonEchartDemoGraphFactory demo = JsonEchartDemoGraphFactory.instance().id(id);
+		EchartGraphDemo demo = EchartGraphDemo.instance().id(id);
 		
 		f.declare(div,JsonHtmlFactory.build("canvas",false));
 		f.categories("Node",categories.getValue().getData());
@@ -92,17 +90,17 @@ public class JsonEchartGraphFactory implements EchartDataProvider
 		return this;
 	}
 	
-	public void xhtml(Path path, EchartDataProvider provider) throws IOException
+	public void xhtml(Path path, EchartGraphDataProvider data) throws IOException
 	{
 		StringWriter w = new StringWriter();
 		XhtmlEchartFactory xf = XhtmlEchartFactory.instance();
 		JsonEchartFactory fEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(xf.getDivCntainerId(),JsonHtmlFactory.build("canvas",false));
-		JsonEchartDemoGraphFactory demo = JsonEchartDemoGraphFactory.instance();
+		EchartGraphDemo demo = EchartGraphDemo.instance();
 		
 		fEchart.letCategories("Node").letData().letEdges();
-		fEchart.categories("Node",provider.getGraphCategories().getData());
-		fEchart.data(provider.getGraphNodes().getData());
-		fEchart.edges(provider.getGraphEdges().getEdges());
+		fEchart.categories("Node",data.getGraphCategories().getData());
+		fEchart.data(data.getGraphNodes().getData());
+		fEchart.edges(data.getGraphEdges().getEdges());
 		fEchart.option(demo.demoOption());
 		fEchart.init();
 		
