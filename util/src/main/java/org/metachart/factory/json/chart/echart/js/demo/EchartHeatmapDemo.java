@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.echart.script.demo;
+package org.metachart.factory.json.chart.echart.js.demo;
 
 import java.io.IOException;
 import java.time.DayOfWeek;

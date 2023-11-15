@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.echart.script.type;
+package org.metachart.factory.json.chart.echart.js.type;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -12,7 +12,7 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonEdgeFactory;
-import org.metachart.factory.json.chart.echart.script.demo.EchartGraphDemo;
+import org.metachart.factory.json.chart.echart.js.demo.EchartGraphDemo;
 import org.metachart.factory.xhtml.XhtmlEchartFactory;
 import org.metachart.interfaces.chart.Data;
 import org.metachart.interfaces.data.EchartGraphDataProvider;

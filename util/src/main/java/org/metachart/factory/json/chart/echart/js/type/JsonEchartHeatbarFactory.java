@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.echart.script.type;
+package org.metachart.factory.json.chart.echart.js.type;
 
 import java.io.IOException;
 import java.io.Writer;

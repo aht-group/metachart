@@ -6,10 +6,10 @@ import java.io.Writer;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
-import org.metachart.factory.json.chart.echart.script.demo.EchartGraphDemo;
-import org.metachart.factory.json.chart.echart.script.demo.EchartHeatbarDemo;
-import org.metachart.factory.json.chart.echart.script.demo.EchartHeatmapDemo;
-import org.metachart.factory.json.chart.echart.script.demo.EchartSankeyDemo;
+import org.metachart.factory.json.chart.echart.js.demo.EchartGraphDemo;
+import org.metachart.factory.json.chart.echart.js.demo.EchartHeatbarDemo;
+import org.metachart.factory.json.chart.echart.js.demo.EchartHeatmapDemo;
+import org.metachart.factory.json.chart.echart.js.demo.EchartSankeyDemo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
