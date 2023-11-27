@@ -34,6 +34,12 @@ public class JsonEchartFactory
 	public JsonEchartFactory declare(String div, JsonHtml html) throws IOException
 	{
 		StringBuilder sb = new StringBuilder();
+		sb.append("\n").append("$(function() {");
+		sb.append("\n").append("    var td = $('#").append(div).append("').closest('td');");
+		sb.append("\n").append("    var index = td.parent().children().index(td);");
+		sb.append("\n").append("    td.closest('table').find('th:nth-child(' + (index + 1) +'),td:nth-child(' + (index + 1) +')').addClass('jeesl-min-width-column');");
+		sb.append("\n").append("});");
+		
 		sb.append("\n").append("var ").append(varChart).append(id).append(" = ");
 		sb.append("echarts.init(").append("document.getElementById('").append(div).append("'), null, "+jom.toCompactString(html)+");");
 		sb.append("\n").append("var option").append(id).append(";");

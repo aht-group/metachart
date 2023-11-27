@@ -47,7 +47,7 @@ public class JsonEchartHeatbarFactory
 		
 		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
 		
-		txtChart.declare(div,JsonHtmlFactory.build("canvas",false));
+		txtChart.declare(div,JsonHtmlFactory.build("svg",false));
 		txtChart.letData().letCategoriesX().letCategoriesY();
 		txtChart.categories("x",this.xCategories(data));
 		txtChart.categories("y",this.yCategories());
