@@ -17,4 +17,14 @@ public class JsonHtml implements Serializable
 	private Boolean useDirtyRect;
 	public Boolean getUseDirtyRect() {return useDirtyRect;}
 	public void setUseDirtyRect(Boolean useDirtyRect) {this.useDirtyRect = useDirtyRect;}
+
+	@JsonProperty("width")
+	private String width;
+	public String getWidth() {return width;}
+	public void setWidth(String width) {this.width = width;}
+
+	@JsonProperty("height")
+	private String height;
+	public String getHeight() {return height;}
+	public void setHeight(String height) {this.height = height;}
 }

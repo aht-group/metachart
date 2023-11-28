@@ -12,4 +12,11 @@ public class JsonHtmlFactory
 		json.setUseDirtyRect(useDirtyRect);
 		return json;
 	}
+	public static JsonHtml build(String renderer, Boolean useDirtyRect, String width, String height)
+	{
+		JsonHtml json = build(renderer, useDirtyRect);
+		json.setWidth(width);
+		json.setHeight(height);
+		return json;
+	}
 }

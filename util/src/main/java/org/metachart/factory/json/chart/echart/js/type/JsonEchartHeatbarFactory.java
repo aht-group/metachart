@@ -46,8 +46,9 @@ public class JsonEchartHeatbarFactory
 //		else {logger.info("DATA NULL");}
 		
 		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
-		
-		txtChart.declare(div,JsonHtmlFactory.build("svg",false));
+
+		Double d = Double.valueOf(jsfGrid.getHeight());
+		txtChart.declare(div,JsonHtmlFactory.build("svg",true,""+d*data.getValue().getDoubles1().length,jsfGrid.getHeight()));
 		txtChart.letData().letCategoriesX().letCategoriesY();
 		txtChart.categories("x",this.xCategories(data));
 		txtChart.categories("y",this.yCategories());
