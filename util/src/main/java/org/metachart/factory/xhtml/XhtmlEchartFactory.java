@@ -38,6 +38,7 @@ public class XhtmlEchartFactory
 		Element metaCharset = new Element("meta"); metaCharset.setAttribute("charset","UTF-8");
 		Element eTitle = new Element("title"); eTitle.addContent(title);
 		Element script = new Element("script"); script.setText("cx"); script.setAttribute("src","https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js");
+		Element jQuery = new Element("script"); jQuery.setText("cx"); jQuery.setAttribute("src","https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js");
 		
 		
 		Element css = new Element("style");
@@ -49,6 +50,7 @@ public class XhtmlEchartFactory
 		head.getChildren().add(metaCharset);
 		head.getChildren().add(eTitle);
 		head.getChildren().add(script);
+		head.getChildren().add(jQuery);
 		head.getChildren().add(css);
 		return head;
 	}
