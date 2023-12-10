@@ -74,9 +74,9 @@ public class CliDemoEchart
 		CliDemoEchart cli = new CliDemoEchart(config);
 		
 		cli.demo(JsonEchartFactory.Type.line);
-//		cli.html(JsonEchartFactory.Type.sankey);
-//		cli.html(JsonEchartFactory.Type.heatmap);
-//		cli.demo(JsonEchartFactory.Type.heatbar);
-//		cli.demo(JsonEchartFactory.Type.graph);
+		cli.html(JsonEchartFactory.Type.sankey);
+		cli.html(JsonEchartFactory.Type.heatmap);
+		cli.demo(JsonEchartFactory.Type.heatbar);
+		cli.demo(JsonEchartFactory.Type.graph);
 	}
 }
