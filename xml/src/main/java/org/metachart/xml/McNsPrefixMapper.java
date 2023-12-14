@@ -1,8 +1,8 @@
 package org.metachart.xml;
 
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
-
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+
+import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 public class McNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
 {
