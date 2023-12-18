@@ -3,6 +3,7 @@ package org.metachart.chart.renderer.ts;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.Day;
@@ -100,7 +101,7 @@ public class TimeSeriesChartRenderer extends XYPlotRenderer implements ChartRend
 			{
 				Date d = DateUtil.toDate(LocalDate.of(data.getRecord().getYear(), data.getRecord().getMonth(), data.getRecord().getDay()));
 				RegularTimePeriod rtp = getRtp(d);
-				if(data.isSetY())
+				if(Objects.nonNull(data.getY()))
 				{
 					ts.addOrUpdate(rtp, data.getY());
 				}

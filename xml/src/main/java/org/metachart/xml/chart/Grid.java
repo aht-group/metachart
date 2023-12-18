@@ -48,7 +48,7 @@ public class Grid
      *     {@link Boolean }
      *     
      */
-    public boolean isRange() {
+    public Boolean isRange() {
         return range;
     }
 
@@ -60,16 +60,8 @@ public class Grid
      *     {@link Boolean }
      *     
      */
-    public void setRange(boolean value) {
+    public void setRange(Boolean value) {
         this.range = value;
-    }
-
-    public boolean isSetRange() {
-        return (this.range!= null);
-    }
-
-    public void unsetRange() {
-        this.range = null;
     }
 
     /**
@@ -80,7 +72,7 @@ public class Grid
      *     {@link Boolean }
      *     
      */
-    public boolean isDomain() {
+    public Boolean isDomain() {
         return domain;
     }
 
@@ -92,16 +84,8 @@ public class Grid
      *     {@link Boolean }
      *     
      */
-    public void setDomain(boolean value) {
+    public void setDomain(Boolean value) {
         this.domain = value;
-    }
-
-    public boolean isSetDomain() {
-        return (this.domain!= null);
-    }
-
-    public void unsetDomain() {
-        this.domain = null;
     }
 
 }

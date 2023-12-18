@@ -3,6 +3,7 @@ package org.metachart.processor.timeseries;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
 
 import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.xml.chart.Data;
@@ -75,9 +76,9 @@ public class TimeSeriesGapNullifier
 	
 	public static synchronized boolean gapNullerActivated(RendererTimeseries chartTimeSeries)
 	{
-		if(chartTimeSeries.isSetGap())
+		if(Objects.nonNull(chartTimeSeries.isGap()))
 		{
-			if(chartTimeSeries.isSetTimePeriod())
+			if(Objects.nonNull(chartTimeSeries.getTimePeriod()))
 			{
 				return chartTimeSeries.isGap();
 			}

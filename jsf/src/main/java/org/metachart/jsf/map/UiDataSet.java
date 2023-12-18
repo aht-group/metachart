@@ -1,5 +1,7 @@
 package org.metachart.jsf.map;
 
+import java.util.Objects;
+
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
 
@@ -27,7 +29,7 @@ public class UiDataSet extends UINamingContainer
 				sb.append("{");
 				sb.append("value: ").append(data.getY());
 				sb.append(", code: '").append(data.getCategory()).append("'");
-				if(data.isSetLabel()) {sb.append(", label:'").append(data.getLabel()).append("'");}
+				if(Objects.nonNull(data.getLabel())) {sb.append(", label:'").append(data.getLabel()).append("'");}
 				sb.append("},");
 			}
 			String result = sb.substring(0, sb.length()-1);

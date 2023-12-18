@@ -70,10 +70,6 @@ public class Label
         this.key = value;
     }
 
-    public boolean isSetKey() {
-        return (this.key!= null);
-    }
-
     /**
      * Gets the value of the text property.
      * 
@@ -98,10 +94,6 @@ public class Label
         this.text = value;
     }
 
-    public boolean isSetText() {
-        return (this.text!= null);
-    }
-
     /**
      * Gets the value of the size property.
      * 
@@ -110,7 +102,7 @@ public class Label
      *     {@link Integer }
      *     
      */
-    public int getSize() {
+    public Integer getSize() {
         return size;
     }
 
@@ -122,16 +114,8 @@ public class Label
      *     {@link Integer }
      *     
      */
-    public void setSize(int value) {
+    public void setSize(Integer value) {
         this.size = value;
-    }
-
-    public boolean isSetSize() {
-        return (this.size!= null);
-    }
-
-    public void unsetSize() {
-        this.size = null;
     }
 
     /**
@@ -156,10 +140,6 @@ public class Label
      */
     public void setFont(String value) {
         this.font = value;
-    }
-
-    public boolean isSetFont() {
-        return (this.font!= null);
     }
 
 }

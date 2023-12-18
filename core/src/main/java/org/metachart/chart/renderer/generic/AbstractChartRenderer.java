@@ -1,6 +1,7 @@
 package org.metachart.chart.renderer.generic;
 
 import java.awt.Dimension;
+import java.util.Objects;
 
 import org.jfree.chart.JFreeChart;
 import org.metachart.factory.chart.high.OfxChartTypeResolver.AxisOrientation;
@@ -32,7 +33,7 @@ public class AbstractChartRenderer
 	
 	protected void setGrid()
 	{
-		 if(ofxChart.isSetGrid())
+		 if(Objects.nonNull(ofxChart.getGrid()))
 		 {
 			 setSpecialGrid();
 		 }

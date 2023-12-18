@@ -115,10 +115,6 @@ public class Chart
         this.renderer = value;
     }
 
-    public boolean isSetRenderer() {
-        return (this.renderer!= null);
-    }
-
     /**
      * Gets the value of the axis property.
      * 
@@ -148,14 +144,6 @@ public class Chart
         return this.axis;
     }
 
-    public boolean isSetAxis() {
-        return ((this.axis!= null)&&(!this.axis.isEmpty()));
-    }
-
-    public void unsetAxis() {
-        this.axis = null;
-    }
-
     /**
      * Gets the value of the title property.
      * 
@@ -178,10 +166,6 @@ public class Chart
      */
     public void setTitle(Title value) {
         this.title = value;
-    }
-
-    public boolean isSetTitle() {
-        return (this.title!= null);
     }
 
     /**
@@ -208,10 +192,6 @@ public class Chart
         this.subtitle = value;
     }
 
-    public boolean isSetSubtitle() {
-        return (this.subtitle!= null);
-    }
-
     /**
      * Gets the value of the dimension property.
      * 
@@ -234,10 +214,6 @@ public class Chart
      */
     public void setDimension(Dimension value) {
         this.dimension = value;
-    }
-
-    public boolean isSetDimension() {
-        return (this.dimension!= null);
     }
 
     /**
@@ -264,10 +240,6 @@ public class Chart
         this.colors = value;
     }
 
-    public boolean isSetColors() {
-        return (this.colors!= null);
-    }
-
     /**
      * Gets the value of the grid property.
      * 
@@ -290,10 +262,6 @@ public class Chart
      */
     public void setGrid(Grid value) {
         this.grid = value;
-    }
-
-    public boolean isSetGrid() {
-        return (this.grid!= null);
     }
 
     /**
@@ -320,10 +288,6 @@ public class Chart
         this.ds = value;
     }
 
-    public boolean isSetDs() {
-        return (this.ds!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -332,7 +296,7 @@ public class Chart
      *     {@link Integer }
      *     
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -344,16 +308,8 @@ public class Chart
      *     {@link Integer }
      *     
      */
-    public void setId(int value) {
+    public void setId(Integer value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -380,10 +336,6 @@ public class Chart
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the legend property.
      * 
@@ -392,7 +344,7 @@ public class Chart
      *     {@link Boolean }
      *     
      */
-    public boolean isLegend() {
+    public Boolean isLegend() {
         return legend;
     }
 
@@ -404,16 +356,8 @@ public class Chart
      *     {@link Boolean }
      *     
      */
-    public void setLegend(boolean value) {
+    public void setLegend(Boolean value) {
         this.legend = value;
-    }
-
-    public boolean isSetLegend() {
-        return (this.legend!= null);
-    }
-
-    public void unsetLegend() {
-        this.legend = null;
     }
 
 
@@ -475,14 +419,6 @@ public class Chart
                 color = new ArrayList<Color>();
             }
             return this.color;
-        }
-
-        public boolean isSetColor() {
-            return ((this.color!= null)&&(!this.color.isEmpty()));
-        }
-
-        public void unsetColor() {
-            this.color = null;
         }
 
     }

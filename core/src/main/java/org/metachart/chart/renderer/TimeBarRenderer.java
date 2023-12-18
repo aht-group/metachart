@@ -3,6 +3,7 @@ package org.metachart.chart.renderer;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -58,8 +59,8 @@ public class TimeBarRenderer extends XYPlotRenderer implements ChartRenderer
         XYPlot plot = (XYPlot) chart.getPlot();
         ClusteredXYBarRenderer renderer = new ClusteredXYBarRenderer(0.0, false);
         
-        if(timebar.isSetShadow()){renderer.setShadowVisible(timebar.isShadow());}
-        if(timebar.isSetGradient() && timebar.isGradient())
+        if(Objects.nonNull(timebar.isShadow())) {renderer.setShadowVisible(timebar.isShadow());}
+        if(Objects.nonNull(timebar.isGradient()) && timebar.isGradient())
         {
         	renderer.setBarPainter(new StandardXYBarPainter());
         }

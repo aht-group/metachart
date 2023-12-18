@@ -3,7 +3,9 @@ package org.metachart.factory.pojo;
 import java.awt.Color;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +19,7 @@ public class ChartColorFactory
 	
 	public static synchronized Color createColor(Chart ofxChart, Area area)
 	{
-		if(ofxChart.isSetColors()  && ofxChart.getColors().isSetColor())
+		if(Objects.nonNull(ofxChart.getColors()) && ObjectUtils.isNotEmpty(ofxChart.getColors().getColor()))
 		{
 			for(org.metachart.xml.chart.Color c : ofxChart.getColors().getColor())
 			{

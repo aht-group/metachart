@@ -2,6 +2,7 @@ package org.metachart.factory.chart.jfree;
 
 import java.awt.Font;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
@@ -46,11 +47,10 @@ public class AxisFactory
 		AxisType.Number ofxNumberAxis = ofxAxis.getAxisType().getNumber();
 		NumberAxis axis = new NumberAxis();
 		boolean autoRangeIncludesZero = true;
-		if(ofxAxis.isSetAutoRangIncludeNull()){autoRangeIncludesZero = ofxAxis.isAutoRangIncludeNull();}
+		if(Objects.nonNull(ofxAxis.isAutoRangIncludeNull())) {autoRangeIncludesZero = ofxAxis.isAutoRangIncludeNull();}
 		axis.setAutoRangeIncludesZero(autoRangeIncludesZero);
 		
-		logger.debug("ticker: "+ofxNumberAxis.isSetTicker());
-		if(ofxNumberAxis.isSetTicker() && ofxNumberAxis.getTicker().isSetSize())
+		if(Objects.nonNull(ofxNumberAxis.getTicker()) && Objects.nonNull(ofxNumberAxis.getTicker().getSize()))
 		{
 			logger.debug("size: "+ofxNumberAxis.getTicker().getSize());
 			axis.setTickUnit(new NumberTickUnit(ofxNumberAxis.getTicker().getSize()));
@@ -69,11 +69,11 @@ public class AxisFactory
 		axis.setAutoRangeTimePeriodClass(Month.class);
 		axis.setMajorTickTimePeriodClass(Month.class);
 		
-		if(ofxDateAxis.isSetAutoRangeTimePeriod())
+		if(Objects.nonNull(ofxDateAxis.getAutoRangeTimePeriod()))
 		{
 			axis.setAutoRangeTimePeriodClass(TimePeriodFactory.getPeriodClass(ofxDateAxis.getAutoRangeTimePeriod()));
 		}
-		if(ofxDateAxis.isSetMajorTickTimePeriod())
+		if(Objects.nonNull(ofxDateAxis.getMajorTickTimePeriod()))
 		{
 			axis.setMajorTickTimePeriodClass(TimePeriodFactory.getPeriodClass(ofxDateAxis.getMajorTickTimePeriod()));
 		}
@@ -101,13 +101,13 @@ public class AxisFactory
 	
 	public static synchronized void labelAxisAxis(Axis axis, org.metachart.xml.chart.Axis ofxAxis)
 	{
-		if(ofxAxis.isSetLabel())
+		if(Objects.nonNull(ofxAxis.getLabel()))
 		{
 			Label ofxLabel = ofxAxis.getLabel();
-			if(ofxLabel.isSetText())
+			if(Objects.nonNull(ofxLabel.getText()))
 			{
 				axis.setLabel(ofxLabel.getText());
-				if(ofxLabel.isSetSize() || ofxLabel.isSetFont())
+				if(Objects.nonNull(ofxLabel.getSize()) || Objects.nonNull(ofxLabel.getFont()))
 				{
 					axis.setLabelFont(createFont(ofxLabel));
 				}
@@ -119,8 +119,8 @@ public class AxisFactory
 	{
 		String fontFamily = "SansSerif";
 		int fontSize=10;
-		if(ofxLabel.isSetFont()){fontFamily = ofxLabel.getFont();}
-		if(ofxLabel.isSetSize()){fontSize=ofxLabel.getSize();}
+		if(Objects.nonNull(ofxLabel.getFont())) {fontFamily = ofxLabel.getFont();}
+		if(Objects.nonNull(ofxLabel.getSize())) {fontSize=ofxLabel.getSize();}
 		
 		Font font = new Font(fontFamily, Font.PLAIN, fontSize);
 		return font;
@@ -131,7 +131,7 @@ public class AxisFactory
 		org.metachart.xml.chart.Axis axisResult = null;
 		for(org.metachart.xml.chart.Axis axis : ofxChart.getAxis())
 		{
-			if(axis.isSetCode() && axis.getCode().equals(type.toString())){axisResult = axis;}
+			if(Objects.nonNull(axis.getCode()) && axis.getCode().equals(type.toString())){axisResult = axis;}
 		}
 		return axisResult;
 	}

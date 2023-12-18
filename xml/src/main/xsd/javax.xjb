@@ -10,6 +10,12 @@
 		<jxb:serializable uid="1" />
 	</jxb:globalBindings>
 
+	<jxb:bindings schemaLocation="metachart/chart.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.metachart.xml.chart"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
 	<jxb:bindings schemaLocation="metachart/graph.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.metachart.xml.graph"/>

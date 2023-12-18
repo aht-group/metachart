@@ -111,10 +111,6 @@ public class AxisType
         this.number = value;
     }
 
-    public boolean isSetNumber() {
-        return (this.number!= null);
-    }
-
     /**
      * Gets the value of the date property.
      * 
@@ -137,10 +133,6 @@ public class AxisType
      */
     public void setDate(AxisType.Date value) {
         this.date = value;
-    }
-
-    public boolean isSetDate() {
-        return (this.date!= null);
     }
 
 
@@ -219,14 +211,6 @@ public class AxisType
             return this.ticker;
         }
 
-        public boolean isSetTicker() {
-            return ((this.ticker!= null)&&(!this.ticker.isEmpty()));
-        }
-
-        public void unsetTicker() {
-            this.ticker = null;
-        }
-
         /**
          * Gets the value of the autoRangeTimePeriod property.
          * 
@@ -251,10 +235,6 @@ public class AxisType
             this.autoRangeTimePeriod = value;
         }
 
-        public boolean isSetAutoRangeTimePeriod() {
-            return (this.autoRangeTimePeriod!= null);
-        }
-
         /**
          * Gets the value of the majorTickTimePeriod property.
          * 
@@ -277,10 +257,6 @@ public class AxisType
          */
         public void setMajorTickTimePeriod(String value) {
             this.majorTickTimePeriod = value;
-        }
-
-        public boolean isSetMajorTickTimePeriod() {
-            return (this.majorTickTimePeriod!= null);
         }
 
 
@@ -338,10 +314,6 @@ public class AxisType
                 this.timePeriod = value;
             }
 
-            public boolean isSetTimePeriod() {
-                return (this.timePeriod!= null);
-            }
-
             /**
              * Gets the value of the format property.
              * 
@@ -364,10 +336,6 @@ public class AxisType
              */
             public void setFormat(String value) {
                 this.format = value;
-            }
-
-            public boolean isSetFormat() {
-                return (this.format!= null);
             }
 
         }
@@ -438,10 +406,6 @@ public class AxisType
             this.ticker = value;
         }
 
-        public boolean isSetTicker() {
-            return (this.ticker!= null);
-        }
-
 
         /**
          * <p>Java class for anonymous complex type.
@@ -478,7 +442,7 @@ public class AxisType
              *     {@link Integer }
              *     
              */
-            public int getSize() {
+            public Integer getSize() {
                 return size;
             }
 
@@ -490,16 +454,8 @@ public class AxisType
              *     {@link Integer }
              *     
              */
-            public void setSize(int value) {
+            public void setSize(Integer value) {
                 this.size = value;
-            }
-
-            public boolean isSetSize() {
-                return (this.size!= null);
-            }
-
-            public void unsetSize() {
-                this.size = null;
             }
 
         }

@@ -51,7 +51,7 @@ public class Dimension
      *     {@link Integer }
      *     
      */
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
@@ -63,16 +63,8 @@ public class Dimension
      *     {@link Integer }
      *     
      */
-    public void setHeight(int value) {
+    public void setHeight(Integer value) {
         this.height = value;
-    }
-
-    public boolean isSetHeight() {
-        return (this.height!= null);
-    }
-
-    public void unsetHeight() {
-        this.height = null;
     }
 
     /**
@@ -83,7 +75,7 @@ public class Dimension
      *     {@link Integer }
      *     
      */
-    public int getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
@@ -95,16 +87,8 @@ public class Dimension
      *     {@link Integer }
      *     
      */
-    public void setWidth(int value) {
+    public void setWidth(Integer value) {
         this.width = value;
-    }
-
-    public boolean isSetWidth() {
-        return (this.width!= null);
-    }
-
-    public void unsetWidth() {
-        this.width = null;
     }
 
     /**
@@ -115,7 +99,7 @@ public class Dimension
      *     {@link Double }
      *     
      */
-    public double getRatio() {
+    public Double getRatio() {
         return ratio;
     }
 
@@ -127,16 +111,8 @@ public class Dimension
      *     {@link Double }
      *     
      */
-    public void setRatio(double value) {
+    public void setRatio(Double value) {
         this.ratio = value;
-    }
-
-    public boolean isSetRatio() {
-        return (this.ratio!= null);
-    }
-
-    public void unsetRatio() {
-        this.ratio = null;
     }
 
 }

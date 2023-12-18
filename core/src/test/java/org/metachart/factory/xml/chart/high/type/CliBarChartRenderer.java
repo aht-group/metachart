@@ -56,7 +56,7 @@ public class CliBarChartRenderer
 		for(int i=1;i<20;i++)
 		{
 			Data data = new Data();
-			data.setY(rnd.nextInt(i));
+			data.setY(Integer.valueOf(rnd.nextInt(i)).doubleValue());
 			data.setCategory("cat"+rnd.nextInt(3));
 			x.getData().add(data);
 		}

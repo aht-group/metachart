@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
@@ -97,9 +99,9 @@ public class SplineChartRenderer extends XYPlotRenderer implements ChartRenderer
 		int colorIndex=0;	
 		for(Ds c : lContainer)
 		{
-			if(!c.isSetRangeIndex()){c.setRangeIndex(0);}
+			if(Objects.isNull(c.getRangeIndex())) {c.setRangeIndex(0);}
 			XYSeries series;
-			if(c.isSetData())
+			if(ObjectUtils.isNotEmpty(c.getData()))
 			{
 				logger.info("Container: index="+getColorSeriesIndex(c.getRangeIndex()));
 				series = new XYSeries(c.getLabel());
@@ -108,7 +110,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements ChartRenderer
 				getXYSeriesCollection(c.getRangeIndex()).addSeries(series);			
 				
 				int containerColor;
-				if(c.isSetColorIndex()){containerColor = c.getColorIndex();}
+				if(Objects.nonNull(c.getColorIndex())) {containerColor = c.getColorIndex();}
 				else{containerColor = colorIndex;}
 				
 				getOfxPaintColor(c.getRangeIndex()).addColorMapping(getColorSeriesIndex(c.getRangeIndex()), containerColor);
@@ -117,8 +119,8 @@ public class SplineChartRenderer extends XYPlotRenderer implements ChartRenderer
 			
 			for(Ds c2 : c.getDs())
 			{
-				if(!c2.isSetRangeIndex()){c2.setRangeIndex(0);}
-				if(c2.isSetData())
+				if(Objects.isNull(c2.getRangeIndex())) {c2.setRangeIndex(0);}
+				if(ObjectUtils.isNotEmpty(c2.getData()))
 				{
 					series = new XYSeries(c.getLabel()+"-"+c2.getLabel());
 					for(Data d : c2.getData()){series.add(d.getX(), d.getY());}
@@ -126,7 +128,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements ChartRenderer
 					getXYSeriesCollection(c2.getRangeIndex()).addSeries(series);
 					
 					int containerColor;
-					if(c2.isSetColorIndex()){containerColor = c2.getColorIndex();}
+					if(Objects.nonNull(c2.getColorIndex())) {containerColor = c2.getColorIndex();}
 					else{containerColor = colorIndex;}
 					logger.info("color "+containerColor);
 					

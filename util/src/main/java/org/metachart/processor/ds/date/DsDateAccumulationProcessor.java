@@ -2,6 +2,7 @@ package org.metachart.processor.ds.date;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.metachart.exception.McProcessingException;
 import org.metachart.interfaces.McDatasetProcessor;
@@ -24,7 +25,7 @@ public class DsDateAccumulationProcessor implements McDatasetProcessor
 	
 	public static DsDateAccumulationProcessor factory(RendererTimeseries renderer)
 	{
-		if(renderer.isSetSumDate())
+		if(Objects.nonNull(renderer.isSumDate()))
 		{
 			if(renderer.isSumDate())
 			{

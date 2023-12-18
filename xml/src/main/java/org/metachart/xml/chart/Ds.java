@@ -101,14 +101,6 @@ public class Ds
         return this.data;
     }
 
-    public boolean isSetData() {
-        return ((this.data!= null)&&(!this.data.isEmpty()));
-    }
-
-    public void unsetData() {
-        this.data = null;
-    }
-
     /**
      * Gets the value of the ds property.
      * 
@@ -138,14 +130,6 @@ public class Ds
         return this.ds;
     }
 
-    public boolean isSetDs() {
-        return ((this.ds!= null)&&(!this.ds.isEmpty()));
-    }
-
-    public void unsetDs() {
-        this.ds = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -154,7 +138,7 @@ public class Ds
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -166,16 +150,8 @@ public class Ds
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -202,10 +178,6 @@ public class Ds
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the color property.
      * 
@@ -228,10 +200,6 @@ public class Ds
      */
     public void setColor(String value) {
         this.color = value;
-    }
-
-    public boolean isSetColor() {
-        return (this.color!= null);
     }
 
     /**
@@ -258,10 +226,6 @@ public class Ds
         this.symbol = value;
     }
 
-    public boolean isSetSymbol() {
-        return (this.symbol!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -284,10 +248,6 @@ public class Ds
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
     /**
@@ -314,10 +274,6 @@ public class Ds
         this.description = value;
     }
 
-    public boolean isSetDescription() {
-        return (this.description!= null);
-    }
-
     /**
      * Gets the value of the rangeIndex property.
      * 
@@ -326,7 +282,7 @@ public class Ds
      *     {@link Integer }
      *     
      */
-    public int getRangeIndex() {
+    public Integer getRangeIndex() {
         return rangeIndex;
     }
 
@@ -338,16 +294,8 @@ public class Ds
      *     {@link Integer }
      *     
      */
-    public void setRangeIndex(int value) {
+    public void setRangeIndex(Integer value) {
         this.rangeIndex = value;
-    }
-
-    public boolean isSetRangeIndex() {
-        return (this.rangeIndex!= null);
-    }
-
-    public void unsetRangeIndex() {
-        this.rangeIndex = null;
     }
 
     /**
@@ -358,7 +306,7 @@ public class Ds
      *     {@link Integer }
      *     
      */
-    public int getColorIndex() {
+    public Integer getColorIndex() {
         return colorIndex;
     }
 
@@ -370,16 +318,8 @@ public class Ds
      *     {@link Integer }
      *     
      */
-    public void setColorIndex(int value) {
+    public void setColorIndex(Integer value) {
         this.colorIndex = value;
-    }
-
-    public boolean isSetColorIndex() {
-        return (this.colorIndex!= null);
-    }
-
-    public void unsetColorIndex() {
-        this.colorIndex = null;
     }
 
 }

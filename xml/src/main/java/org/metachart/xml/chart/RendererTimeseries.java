@@ -67,7 +67,7 @@ public class RendererTimeseries
      *     {@link Boolean }
      *     
      */
-    public boolean isGap() {
+    public Boolean isGap() {
         return gap;
     }
 
@@ -79,16 +79,8 @@ public class RendererTimeseries
      *     {@link Boolean }
      *     
      */
-    public void setGap(boolean value) {
+    public void setGap(Boolean value) {
         this.gap = value;
-    }
-
-    public boolean isSetGap() {
-        return (this.gap!= null);
-    }
-
-    public void unsetGap() {
-        this.gap = null;
     }
 
     /**
@@ -115,10 +107,6 @@ public class RendererTimeseries
         this.from = value;
     }
 
-    public boolean isSetFrom() {
-        return (this.from!= null);
-    }
-
     /**
      * Gets the value of the to property.
      * 
@@ -143,10 +131,6 @@ public class RendererTimeseries
         this.to = value;
     }
 
-    public boolean isSetTo() {
-        return (this.to!= null);
-    }
-
     /**
      * Gets the value of the cumulate property.
      * 
@@ -155,7 +139,7 @@ public class RendererTimeseries
      *     {@link Boolean }
      *     
      */
-    public boolean isCumulate() {
+    public Boolean isCumulate() {
         return cumulate;
     }
 
@@ -167,16 +151,8 @@ public class RendererTimeseries
      *     {@link Boolean }
      *     
      */
-    public void setCumulate(boolean value) {
+    public void setCumulate(Boolean value) {
         this.cumulate = value;
-    }
-
-    public boolean isSetCumulate() {
-        return (this.cumulate!= null);
-    }
-
-    public void unsetCumulate() {
-        this.cumulate = null;
     }
 
     /**
@@ -203,10 +179,6 @@ public class RendererTimeseries
         this.timePeriod = value;
     }
 
-    public boolean isSetTimePeriod() {
-        return (this.timePeriod!= null);
-    }
-
     /**
      * Gets the value of the orderRecords property.
      * 
@@ -215,7 +187,7 @@ public class RendererTimeseries
      *     {@link Boolean }
      *     
      */
-    public boolean isOrderRecords() {
+    public Boolean isOrderRecords() {
         return orderRecords;
     }
 
@@ -227,16 +199,8 @@ public class RendererTimeseries
      *     {@link Boolean }
      *     
      */
-    public void setOrderRecords(boolean value) {
+    public void setOrderRecords(Boolean value) {
         this.orderRecords = value;
-    }
-
-    public boolean isSetOrderRecords() {
-        return (this.orderRecords!= null);
-    }
-
-    public void unsetOrderRecords() {
-        this.orderRecords = null;
     }
 
     /**
@@ -247,7 +211,7 @@ public class RendererTimeseries
      *     {@link Boolean }
      *     
      */
-    public boolean isSumDate() {
+    public Boolean isSumDate() {
         return sumDate;
     }
 
@@ -259,16 +223,8 @@ public class RendererTimeseries
      *     {@link Boolean }
      *     
      */
-    public void setSumDate(boolean value) {
+    public void setSumDate(Boolean value) {
         this.sumDate = value;
-    }
-
-    public boolean isSetSumDate() {
-        return (this.sumDate!= null);
-    }
-
-    public void unsetSumDate() {
-        this.sumDate = null;
     }
 
 }

@@ -76,10 +76,6 @@ public class Color
         this.typ = value;
     }
 
-    public boolean isSetTyp() {
-        return (this.typ!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -104,10 +100,6 @@ public class Color
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the r property.
      * 
@@ -116,7 +108,7 @@ public class Color
      *     {@link Integer }
      *     
      */
-    public int getR() {
+    public Integer getR() {
         return r;
     }
 
@@ -128,16 +120,8 @@ public class Color
      *     {@link Integer }
      *     
      */
-    public void setR(int value) {
+    public void setR(Integer value) {
         this.r = value;
-    }
-
-    public boolean isSetR() {
-        return (this.r!= null);
-    }
-
-    public void unsetR() {
-        this.r = null;
     }
 
     /**
@@ -148,7 +132,7 @@ public class Color
      *     {@link Integer }
      *     
      */
-    public int getG() {
+    public Integer getG() {
         return g;
     }
 
@@ -160,16 +144,8 @@ public class Color
      *     {@link Integer }
      *     
      */
-    public void setG(int value) {
+    public void setG(Integer value) {
         this.g = value;
-    }
-
-    public boolean isSetG() {
-        return (this.g!= null);
-    }
-
-    public void unsetG() {
-        this.g = null;
     }
 
     /**
@@ -180,7 +156,7 @@ public class Color
      *     {@link Integer }
      *     
      */
-    public int getB() {
+    public Integer getB() {
         return b;
     }
 
@@ -192,16 +168,8 @@ public class Color
      *     {@link Integer }
      *     
      */
-    public void setB(int value) {
+    public void setB(Integer value) {
         this.b = value;
-    }
-
-    public boolean isSetB() {
-        return (this.b!= null);
-    }
-
-    public void unsetB() {
-        this.b = null;
     }
 
     /**
@@ -212,7 +180,7 @@ public class Color
      *     {@link Integer }
      *     
      */
-    public int getA() {
+    public Integer getA() {
         return a;
     }
 
@@ -224,16 +192,8 @@ public class Color
      *     {@link Integer }
      *     
      */
-    public void setA(int value) {
+    public void setA(Integer value) {
         this.a = value;
-    }
-
-    public boolean isSetA() {
-        return (this.a!= null);
-    }
-
-    public void unsetA() {
-        this.a = null;
     }
 
 }

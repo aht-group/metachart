@@ -1,5 +1,7 @@
 package org.metachart.factory.chart.high;
 
+import java.util.Objects;
+
 import org.metachart.factory.chart.high.OfxChartTypeResolver.AxisOrientation;
 import org.metachart.xml.chart.Axis;
 import org.metachart.xml.chart.Chart;
@@ -13,7 +15,7 @@ public class ChartLabelResolver
 	public synchronized static String getTitle(Chart ofxChart)
 	{
 		String result = null;
-		if(ofxChart.isSetTitle()){result = ofxChart.getTitle().getLabel();}
+		if(Objects.nonNull(ofxChart.getTitle())) {result = ofxChart.getTitle().getLabel();}
 		return result;
 	}
 	
@@ -27,7 +29,7 @@ public class ChartLabelResolver
 		{
 			for(Axis axis : ofxChart.getAxis())
 			{
-				if(axis.isSetCode() && axis.getCode().equals(type.toString()) && axis.isSetLabel() && axis.getLabel().isSetText())
+				if(Objects.nonNull(axis.getCode()) && axis.getCode().equals(type.toString()) && Objects.nonNull(axis.getLabel()) && Objects.nonNull(axis.getLabel().getText()))
 				{
 					result = axis.getLabel().getText();
 					break;

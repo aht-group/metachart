@@ -1,5 +1,8 @@
 package org.metachart.chart.renderer.generic;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
@@ -34,13 +37,13 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	{
 		XYPlot plot = (XYPlot) chart.getPlot();
 		Grid grid = ofxChart.getGrid();
-	    if(grid.isSetDomain()){plot.setDomainGridlinesVisible(grid.isDomain());}
-	    if(grid.isSetRange()){plot.setRangeGridlinesVisible(grid.isRange());}
+	    if(Objects.nonNull(grid.isDomain())) {plot.setDomainGridlinesVisible(grid.isDomain());}
+	    if(Objects.nonNull(grid.isRange())) {plot.setRangeGridlinesVisible(grid.isRange());}
 	}
 	
 	protected void setTimePeriod()
 	{
-		if(ofxChart.getRenderer().isSetRendererTimeseries() && ofxChart.getRenderer().getRendererTimeseries().isSetTimePeriod())
+		if(Objects.nonNull(ofxChart.getRenderer().getRendererTimeseries()) && ObjectUtils.isNotEmpty(ofxChart.getRenderer().getRendererTimeseries().getTimePeriod()))
 		{
 			logger.debug("checking="+ofxChart.getRenderer().getRendererTimeseries().getTimePeriod());
 			
@@ -54,7 +57,7 @@ public class XYPlotRenderer extends AbstractChartRenderer
 				ofxTimePeriod = OfxChartTimePeriod.Hour;
 			}
 		}
-		else if(ofxChart.getRenderer().isSetGantt() && ofxChart.getRenderer().getGantt().isSetTimePeriod())
+		else if(Objects.nonNull(ofxChart.getRenderer().getGantt()) && Objects.nonNull(ofxChart.getRenderer().getGantt().getTimePeriod()))
 		{
 			ofxTimePeriod = OfxChartTimePeriod.valueOf(ofxChart.getRenderer().getGantt().getTimePeriod());
 		}
@@ -90,6 +93,5 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	        	default: logger.warn("NYI");
 	        }
 		}
-
 	}
 }

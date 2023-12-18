@@ -107,10 +107,6 @@ public class Renderer
         this.rendererTimeseries = value;
     }
 
-    public boolean isSetRendererTimeseries() {
-        return (this.rendererTimeseries!= null);
-    }
-
     /**
      * Gets the value of the timebar property.
      * 
@@ -133,10 +129,6 @@ public class Renderer
      */
     public void setTimebar(Renderer.Timebar value) {
         this.timebar = value;
-    }
-
-    public boolean isSetTimebar() {
-        return (this.timebar!= null);
     }
 
     /**
@@ -163,10 +155,6 @@ public class Renderer
         this.bar = value;
     }
 
-    public boolean isSetBar() {
-        return (this.bar!= null);
-    }
-
     /**
      * Gets the value of the gantt property.
      * 
@@ -191,10 +179,6 @@ public class Renderer
         this.gantt = value;
     }
 
-    public boolean isSetGantt() {
-        return (this.gantt!= null);
-    }
-
     /**
      * Gets the value of the spline property.
      * 
@@ -217,10 +201,6 @@ public class Renderer
      */
     public void setSpline(Object value) {
         this.spline = value;
-    }
-
-    public boolean isSetSpline() {
-        return (this.spline!= null);
     }
 
 
@@ -259,7 +239,7 @@ public class Renderer
          *     {@link Boolean }
          *     
          */
-        public boolean isVertical() {
+        public Boolean isVertical() {
             return vertical;
         }
 
@@ -271,16 +251,8 @@ public class Renderer
          *     {@link Boolean }
          *     
          */
-        public void setVertical(boolean value) {
+        public void setVertical(Boolean value) {
             this.vertical = value;
-        }
-
-        public boolean isSetVertical() {
-            return (this.vertical!= null);
-        }
-
-        public void unsetVertical() {
-            this.vertical = null;
         }
 
     }
@@ -337,10 +309,6 @@ public class Renderer
             this.timePeriod = value;
         }
 
-        public boolean isSetTimePeriod() {
-            return (this.timePeriod!= null);
-        }
-
     }
 
 
@@ -382,7 +350,7 @@ public class Renderer
          *     {@link Boolean }
          *     
          */
-        public boolean isShadow() {
+        public Boolean isShadow() {
             return shadow;
         }
 
@@ -394,16 +362,8 @@ public class Renderer
          *     {@link Boolean }
          *     
          */
-        public void setShadow(boolean value) {
+        public void setShadow(Boolean value) {
             this.shadow = value;
-        }
-
-        public boolean isSetShadow() {
-            return (this.shadow!= null);
-        }
-
-        public void unsetShadow() {
-            this.shadow = null;
         }
 
         /**
@@ -414,7 +374,7 @@ public class Renderer
          *     {@link Boolean }
          *     
          */
-        public boolean isGradient() {
+        public Boolean isGradient() {
             return gradient;
         }
 
@@ -426,16 +386,8 @@ public class Renderer
          *     {@link Boolean }
          *     
          */
-        public void setGradient(boolean value) {
+        public void setGradient(Boolean value) {
             this.gradient = value;
-        }
-
-        public boolean isSetGradient() {
-            return (this.gradient!= null);
-        }
-
-        public void unsetGradient() {
-            this.gradient = null;
         }
 
     }

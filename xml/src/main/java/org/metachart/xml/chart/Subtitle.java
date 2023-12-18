@@ -72,10 +72,6 @@ public class Subtitle
         this.labels = value;
     }
 
-    public boolean isSetLabels() {
-        return (this.labels!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -100,10 +96,6 @@ public class Subtitle
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the key property.
      * 
@@ -126,10 +118,6 @@ public class Subtitle
      */
     public void setKey(String value) {
         this.key = value;
-    }
-
-    public boolean isSetKey() {
-        return (this.key!= null);
     }
 
 }

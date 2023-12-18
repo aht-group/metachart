@@ -1,5 +1,7 @@
 package org.metachart.processor.ds;
 
+import java.util.Objects;
+
 import org.metachart.interfaces.McDatasetProcessor;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.Ds;
@@ -20,7 +22,7 @@ public class DsAccumulatorProcessor implements McDatasetProcessor
 	
 	public static DsAccumulatorProcessor factory(RendererTimeseries renderer)
 	{
-		if(renderer.isSetCumulate())
+		if(Objects.nonNull(renderer.isCumulate()))
 		{
 			if(renderer.isCumulate()){return new DsAccumulatorProcessor(true);}
 		}

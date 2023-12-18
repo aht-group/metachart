@@ -79,10 +79,6 @@ public class Axis
         this.axisType = value;
     }
 
-    public boolean isSetAxisType() {
-        return (this.axisType!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -105,10 +101,6 @@ public class Axis
      */
     public void setLabel(Label value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
     /**
@@ -135,10 +127,6 @@ public class Axis
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the dateformat property.
      * 
@@ -163,10 +151,6 @@ public class Axis
         this.dateformat = value;
     }
 
-    public boolean isSetDateformat() {
-        return (this.dateformat!= null);
-    }
-
     /**
      * Gets the value of the autoRangIncludeNull property.
      * 
@@ -175,7 +159,7 @@ public class Axis
      *     {@link Boolean }
      *     
      */
-    public boolean isAutoRangIncludeNull() {
+    public Boolean isAutoRangIncludeNull() {
         return autoRangIncludeNull;
     }
 
@@ -187,16 +171,8 @@ public class Axis
      *     {@link Boolean }
      *     
      */
-    public void setAutoRangIncludeNull(boolean value) {
+    public void setAutoRangIncludeNull(Boolean value) {
         this.autoRangIncludeNull = value;
-    }
-
-    public boolean isSetAutoRangIncludeNull() {
-        return (this.autoRangIncludeNull!= null);
-    }
-
-    public void unsetAutoRangIncludeNull() {
-        this.autoRangIncludeNull = null;
     }
 
 }

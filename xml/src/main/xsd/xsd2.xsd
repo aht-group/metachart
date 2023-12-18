@@ -4,6 +4,7 @@
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     jaxb:version="2.0">
 	
+	<xsd:import namespace="http://www.metachart.org/xml"	schemaLocation="metachart/chart.xsd"/>
 	<xsd:import namespace="http://www.metachart.org/graph"  schemaLocation="metachart/graph.xsd"/>
 	
 </xsd:schema>

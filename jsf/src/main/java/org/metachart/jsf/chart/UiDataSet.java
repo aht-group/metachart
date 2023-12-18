@@ -3,6 +3,7 @@ package org.metachart.jsf.chart;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
@@ -83,16 +84,19 @@ public class UiDataSet extends UINamingContainer
 		{
 			for(Data data : ds.getData())
 			{
-				if(data.isSetRecord() || data.isSetX()){sb.append("[");}
-				if(data.isSetRecord() && data.isSetX()) {sb.append("x:"+data.getX()+" , "); sb.append("name:"); appendDate(data.getRecord(),sb);}
-                if(data.isSetRecord() && !data.isSetX()){appendDate(data.getRecord(),sb);}
-                else if(data.isSetX() && !data.isSetRecord()) {sb.append(data.getX()+" , ");}
-                if(data.isSetY() && data.isSetRecord() && data.isSetX()) {sb.append("y:"+data.getY());}
-                else if(data.isSetY()){sb.append(data.getY());}
+				if(Objects.nonNull(data.getRecord()) || Objects.nonNull(data.getX())){sb.append("[");}
+				if(Objects.nonNull(data.getRecord()) && Objects.nonNull(data.getX())) {sb.append("x:"+data.getX()+" , "); sb.append("name:"); appendDate(data.getRecord(),sb);}
+                
+				if(Objects.nonNull(data.getRecord()) && Objects.isNull(data.getX())){appendDate(data.getRecord(),sb);}
+                else if(Objects.nonNull(data.getX()) && Objects.isNull(data.getRecord())) {sb.append(data.getX()+" , ");}
+                
+                if(Objects.nonNull(data.getY()) && Objects.nonNull(data.getRecord()) && Objects.nonNull(data.getX())) {sb.append("y:"+data.getY());}
+                else if(Objects.nonNull(data.getY())) {sb.append(data.getY());}
                 else{sb.append("null");}
-                if(data.isSetRecord() || data.isSetX()){sb.append("]");}
+                
+                if(Objects.nonNull(data.getRecord()) || Objects.nonNull(data.getX())){sb.append("]");}
 				sb.append(", ");
-				if(data.isSetRecord() && data.isSetX()) {sb = new StringBuffer(sb.toString().replaceAll("\\[", "\\{").replaceAll("\\]", "\\}"));}
+				if(Objects.nonNull(data.getRecord()) && Objects.nonNull(data.getX())) {sb = new StringBuffer(sb.toString().replaceAll("\\[", "\\{").replaceAll("\\]", "\\}"));}
 			}
 			return sb.substring(0, sb.length()-2);
 		}

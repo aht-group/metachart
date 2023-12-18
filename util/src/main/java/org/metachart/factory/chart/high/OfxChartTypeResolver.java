@@ -1,5 +1,7 @@
 package org.metachart.factory.chart.high;
 
+import java.util.Objects;
+
 import org.metachart.xml.chart.AxisType;
 import org.metachart.xml.chart.Renderer;
 import org.slf4j.Logger;
@@ -18,11 +20,11 @@ public class OfxChartTypeResolver
 	
 	public synchronized static Type getType(Renderer type)
 	{
-		if(type.isSetRendererTimeseries()){return Type.TimeSeries;}
-		if(type.isSetBar()){return Type.Bar;}
-		if(type.isSetTimebar()){return Type.TimeBar;}
-		if(type.isSetGantt()){return Type.Gantt;}
-		if(type.isSetSpline()){return Type.Spline;}
+		if(Objects.nonNull(type.getRendererTimeseries())) {return Type.TimeSeries;}
+		if(Objects.nonNull(type.getBar())) {return Type.Bar;}
+		if(Objects.nonNull(type.getTimebar())) {return Type.TimeBar;}
+		if(Objects.nonNull(type.getGantt())) {return Type.Gantt;}
+		if(Objects.nonNull(type.getSpline())) {return Type.Spline;}
 		logger.warn("Unknown Charttype");
 		JaxbUtil.debug(type);
 		return null;
@@ -32,8 +34,8 @@ public class OfxChartTypeResolver
 	{
 		if(type!=null)
 		{
-			if(type.isSetNumber()){return ChartAxisType.Number;}
-			if(type.isSetDate()){return ChartAxisType.Date;}
+			if(Objects.nonNull(type.getNumber())) {return ChartAxisType.Number;}
+			if(Objects.nonNull(type.getDate())) {return ChartAxisType.Date;}
 		}
 		return ChartAxisType.Nil;
 	}

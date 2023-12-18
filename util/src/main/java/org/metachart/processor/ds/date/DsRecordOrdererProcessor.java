@@ -2,6 +2,7 @@ package org.metachart.processor.ds.date;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 import org.metachart.interfaces.McDatasetProcessor;
 import org.metachart.xml.chart.Data;
@@ -23,7 +24,7 @@ public class DsRecordOrdererProcessor implements McDatasetProcessor
 	
 	public static DsRecordOrdererProcessor factory(RendererTimeseries renderer)
 	{
-		if(renderer.isSetOrderRecords())
+		if(Objects.nonNull(renderer.isOrderRecords()))
 		{
 			if(renderer.isOrderRecords())
 			{
