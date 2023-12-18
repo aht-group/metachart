@@ -76,14 +76,6 @@ public class MergedNodes
         return this.node;
     }
 
-    public boolean isSetNode() {
-        return ((this.node!= null)&&(!this.node.isEmpty()));
-    }
-
-    public void unsetNode() {
-        this.node = null;
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -106,10 +98,6 @@ public class MergedNodes
      */
     public void setType(String value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
 }

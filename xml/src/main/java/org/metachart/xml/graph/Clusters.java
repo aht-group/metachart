@@ -72,12 +72,4 @@ public class Clusters
         return this.cluster;
     }
 
-    public boolean isSetCluster() {
-        return ((this.cluster!= null)&&(!this.cluster.isEmpty()));
-    }
-
-    public void unsetCluster() {
-        this.cluster = null;
-    }
-
 }

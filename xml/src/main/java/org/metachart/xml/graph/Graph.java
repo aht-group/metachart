@@ -81,10 +81,6 @@ public class Graph
         this.nodes = value;
     }
 
-    public boolean isSetNodes() {
-        return (this.nodes!= null);
-    }
-
     /**
      * Gets the value of the edges property.
      * 
@@ -107,10 +103,6 @@ public class Graph
      */
     public void setEdges(Edges value) {
         this.edges = value;
-    }
-
-    public boolean isSetEdges() {
-        return (this.edges!= null);
     }
 
     /**
@@ -137,10 +129,6 @@ public class Graph
         this.clusters = value;
     }
 
-    public boolean isSetClusters() {
-        return (this.clusters!= null);
-    }
-
     /**
      * Gets the value of the dot property.
      * 
@@ -165,10 +153,6 @@ public class Graph
         this.dot = value;
     }
 
-    public boolean isSetDot() {
-        return (this.dot!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -191,10 +175,6 @@ public class Graph
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

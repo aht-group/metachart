@@ -89,14 +89,6 @@ public class Cluster
         return this.node;
     }
 
-    public boolean isSetNode() {
-        return ((this.node!= null)&&(!this.node.isEmpty()));
-    }
-
-    public void unsetNode() {
-        this.node = null;
-    }
-
     /**
      * Gets the value of the mergedNodes property.
      * 
@@ -119,10 +111,6 @@ public class Cluster
      */
     public void setMergedNodes(MergedNodes value) {
         this.mergedNodes = value;
-    }
-
-    public boolean isSetMergedNodes() {
-        return (this.mergedNodes!= null);
     }
 
     /**
@@ -149,10 +137,6 @@ public class Cluster
         this.category = value;
     }
 
-    public boolean isSetCategory() {
-        return (this.category!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -161,7 +145,7 @@ public class Cluster
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -173,16 +157,8 @@ public class Cluster
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -209,10 +185,6 @@ public class Cluster
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -235,10 +207,6 @@ public class Cluster
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

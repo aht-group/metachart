@@ -100,14 +100,6 @@ public class Node
         return this.node;
     }
 
-    public boolean isSetNode() {
-        return ((this.node!= null)&&(!this.node.isEmpty()));
-    }
-
-    public void unsetNode() {
-        this.node = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -116,7 +108,7 @@ public class Node
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -128,16 +120,8 @@ public class Node
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -164,10 +148,6 @@ public class Node
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -190,10 +170,6 @@ public class Node
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
     /**
@@ -220,10 +196,6 @@ public class Node
         this.category = value;
     }
 
-    public boolean isSetCategory() {
-        return (this.category!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -246,10 +218,6 @@ public class Node
      */
     public void setType(String value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
     /**
@@ -276,10 +244,6 @@ public class Node
         this.color = value;
     }
 
-    public boolean isSetColor() {
-        return (this.color!= null);
-    }
-
     /**
      * Gets the value of the size property.
      * 
@@ -288,7 +252,7 @@ public class Node
      *     {@link Integer }
      *     
      */
-    public int getSize() {
+    public Integer getSize() {
         return size;
     }
 
@@ -300,16 +264,8 @@ public class Node
      *     {@link Integer }
      *     
      */
-    public void setSize(int value) {
+    public void setSize(Integer value) {
         this.size = value;
-    }
-
-    public boolean isSetSize() {
-        return (this.size!= null);
-    }
-
-    public void unsetSize() {
-        this.size = null;
     }
 
     /**
@@ -320,7 +276,7 @@ public class Node
      *     {@link Boolean }
      *     
      */
-    public boolean isSizeRelative() {
+    public Boolean isSizeRelative() {
         return sizeRelative;
     }
 
@@ -332,16 +288,8 @@ public class Node
      *     {@link Boolean }
      *     
      */
-    public void setSizeRelative(boolean value) {
+    public void setSizeRelative(Boolean value) {
         this.sizeRelative = value;
-    }
-
-    public boolean isSetSizeRelative() {
-        return (this.sizeRelative!= null);
-    }
-
-    public void unsetSizeRelative() {
-        this.sizeRelative = null;
     }
 
     /**
@@ -352,7 +300,7 @@ public class Node
      *     {@link Boolean }
      *     
      */
-    public boolean isSizeAdjustsColor() {
+    public Boolean isSizeAdjustsColor() {
         return sizeAdjustsColor;
     }
 
@@ -364,16 +312,8 @@ public class Node
      *     {@link Boolean }
      *     
      */
-    public void setSizeAdjustsColor(boolean value) {
+    public void setSizeAdjustsColor(Boolean value) {
         this.sizeAdjustsColor = value;
-    }
-
-    public boolean isSetSizeAdjustsColor() {
-        return (this.sizeAdjustsColor!= null);
-    }
-
-    public void unsetSizeAdjustsColor() {
-        this.sizeAdjustsColor = null;
     }
 
 }

@@ -2,7 +2,9 @@ package org.metachart.processor.graph;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.metachart.interfaces.graph.GraphColorProvider;
 import org.metachart.util.query.GraphXpath;
 import org.metachart.xml.graph.Cluster;
@@ -37,7 +39,7 @@ public class ColorSchemeManager implements GraphColorProvider
 		String colorCode = cluster.getCode();
 		boolean isDefaultColor = true;
 
-		if(cluster.isSetNode())
+		if(ObjectUtils.isNotEmpty(cluster.getNode()))
 		{
 			logger.info("Cluster name : " + cluster.getCategory());
 			logger.info("------------------------------------" );
@@ -80,9 +82,9 @@ public class ColorSchemeManager implements GraphColorProvider
 		logger.debug("Getting color for node name = "+node.getLabel() + " : category="+node.getCategory());
 
 		int colorAdjust = 0;
-		if(node.isSetSizeAdjustsColor() && node.isSizeAdjustsColor() && node.isSetSize())
+		if(Objects.nonNull(node.isSizeAdjustsColor()) && node.isSizeAdjustsColor() && Objects.nonNull(node.getSize()))
 		{
-			if(node.isSetSizeRelative() && node.isSizeRelative()==false)
+			if(Objects.nonNull(node.isSizeRelative()) && node.isSizeRelative()==false)
 			{
 				logger.error("adjust and rel=false not allowed");
 			}
@@ -92,7 +94,7 @@ public class ColorSchemeManager implements GraphColorProvider
 			}
 		}
 
-		if(xml!=null && node.isSetCategory())
+		if(xml!=null && Objects.nonNull(node.getCategory()))
 		{
 			try{
 				Cluster cluster = GraphXpath.getClusterForName(xml,node.getCategory());

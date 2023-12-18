@@ -72,12 +72,4 @@ public class Graphs
         return this.graph;
     }
 
-    public boolean isSetGraph() {
-        return ((this.graph!= null)&&(!this.graph.isEmpty()));
-    }
-
-    public void unsetGraph() {
-        this.graph = null;
-    }
-
 }
