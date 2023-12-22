@@ -139,7 +139,6 @@
 	<profiles>
 		<profile>
 			<id>javax</id>
-			<!-- <activation><jdk>1.8</jdk></activation> -->
 			<build>
 				<plugins>
 					<plugin>
@@ -164,7 +163,6 @@
 		        			</execution>
 		    			</executions>                    
 					</plugin>
-					<!--
 					<plugin>
 						<artifactId>maven-clean-plugin</artifactId>
 						<version>3.3.2</version>
@@ -184,7 +182,6 @@
 							</execution>
 						</executions>
   					</plugin>
-					-->
 				</plugins>
 			</build>
 		</profile>
