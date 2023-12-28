@@ -18,10 +18,10 @@ import org.jfree.data.xy.IntervalXYDataset;
 import org.metachart.chart.renderer.generic.XYPlotRenderer;
 import org.metachart.factory.chart.high.ChartLabelResolver;
 import org.metachart.interfaces.ChartRenderer;
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
-import org.metachart.xml.chart.Renderer.Timebar;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
+import org.metachart.model.xml.chart.Renderer.Timebar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

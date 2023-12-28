@@ -2,8 +2,8 @@ package org.metachart.factory.xml.chart.high.ds;
 
 import java.util.List;
 
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

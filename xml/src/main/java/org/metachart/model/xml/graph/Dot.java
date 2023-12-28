@@ -1,12 +1,12 @@
 
-package org.metachart.xml.graph;
+package org.metachart.model.xml.graph;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 
 /**
@@ -16,13 +16,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * <pre>
  * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.metachart.org/graph}node"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
+ *   &lt;simpleContent&gt;
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/simpleContent&gt;
  * &lt;/complexType&gt;
  * </pre>
  * 
@@ -30,39 +27,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "node"
+    "value"
 })
-@XmlRootElement(name = "tree")
-public class Tree
+@XmlRootElement(name = "dot")
+public class Dot
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
-    protected Node node;
+    @XmlValue
+    protected String value;
 
     /**
-     * Gets the value of the node property.
+     * Gets the value of the value property.
      * 
      * @return
      *     possible object is
-     *     {@link Node }
+     *     {@link String }
      *     
      */
-    public Node getNode() {
-        return node;
+    public String getValue() {
+        return value;
     }
 
     /**
-     * Sets the value of the node property.
+     * Sets the value of the value property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Node }
+     *     {@link String }
      *     
      */
-    public void setNode(Node value) {
-        this.node = value;
+    public void setValue(String value) {
+        this.value = value;
     }
 
 }

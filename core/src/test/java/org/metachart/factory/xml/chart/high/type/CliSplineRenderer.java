@@ -12,11 +12,11 @@ import org.jfree.chart.JFreeChart;
 import org.metachart.chart.OfxChartRenderer;
 import org.metachart.factory.chart.high.TimePeriodFactory;
 import org.metachart.factory.pojo.ChartColorFactory;
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
-import org.metachart.xml.chart.Renderer;
-import org.metachart.xml.chart.RendererTimeseries;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
+import org.metachart.model.xml.chart.Renderer;
+import org.metachart.model.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

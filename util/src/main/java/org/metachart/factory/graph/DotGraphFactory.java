@@ -1,6 +1,6 @@
 package org.metachart.factory.graph;
 
-import org.metachart.xml.graph.Graph;
+import org.metachart.model.xml.graph.Graph;
 
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 

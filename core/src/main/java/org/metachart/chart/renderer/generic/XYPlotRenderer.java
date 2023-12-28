@@ -11,8 +11,8 @@ import org.metachart.factory.chart.high.OfxChartTypeResolver.AxisOrientation;
 import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.factory.chart.jfree.AxisFactory;
 import org.metachart.factory.pojo.ChartColorFactory;
-import org.metachart.xml.chart.Axis;
-import org.metachart.xml.chart.Grid;
+import org.metachart.model.xml.chart.Axis;
+import org.metachart.model.xml.chart.Grid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

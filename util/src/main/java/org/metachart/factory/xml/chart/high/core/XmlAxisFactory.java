@@ -1,6 +1,6 @@
 package org.metachart.factory.xml.chart.high.core;
 
-import org.metachart.xml.chart.Axis;
+import org.metachart.model.xml.chart.Axis;
 
 public class XmlAxisFactory
 {

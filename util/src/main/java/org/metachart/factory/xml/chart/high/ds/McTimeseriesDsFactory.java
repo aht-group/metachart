@@ -10,8 +10,8 @@ import org.metachart.exception.McProcessingException;
 import org.metachart.factory.xml.chart.high.core.XmlDataFactory;
 import org.metachart.factory.xml.chart.high.core.XmlDataSetFactory;
 import org.metachart.interfaces.McDatasetProcessor;
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -17,9 +17,9 @@ import org.metachart.factory.chart.high.OfxChartTypeResolver;
 import org.metachart.factory.chart.high.TimePeriodFactory;
 import org.metachart.factory.chart.high.OfxChartTypeResolver.AxisOrientation;
 import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
-import org.metachart.xml.chart.AxisType;
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Label;
+import org.metachart.model.xml.chart.AxisType;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Label;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class AxisFactory
 	
 	public static synchronized Axis createNumberAxis(Chart ofxChart, AxisOrientation type)
 	{
-		org.metachart.xml.chart.Axis ofxAxis = AxisFactory.getAxis(ofxChart, type);
+		org.metachart.model.xml.chart.Axis ofxAxis = AxisFactory.getAxis(ofxChart, type);
 		
 		Axis axis = null;
 		switch(OfxChartTypeResolver.getAxisType(ofxAxis.getAxisType()))
@@ -42,7 +42,7 @@ public class AxisFactory
 		return axis;
 	}
 	
-	public static synchronized NumberAxis createNumberAxis(org.metachart.xml.chart.Axis ofxAxis)
+	public static synchronized NumberAxis createNumberAxis(org.metachart.model.xml.chart.Axis ofxAxis)
 	{
 		AxisType.Number ofxNumberAxis = ofxAxis.getAxisType().getNumber();
 		NumberAxis axis = new NumberAxis();
@@ -59,7 +59,7 @@ public class AxisFactory
 		return axis;
 	}
 	
-	public static synchronized PeriodAxis createPeriodAxis(org.metachart.xml.chart.Axis ofxAxis)
+	public static synchronized PeriodAxis createPeriodAxis(org.metachart.model.xml.chart.Axis ofxAxis)
 	{
 		AxisType.Date ofxDateAxis = ofxAxis.getAxisType().getDate();
 		int level = ofxDateAxis.getTicker().size();
@@ -80,7 +80,7 @@ public class AxisFactory
 		
 		PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[level];
 		int i=0;
-		for(org.metachart.xml.chart.AxisType.Date.Ticker dt : ofxAxis.getAxisType().getDate().getTicker())
+		for(org.metachart.model.xml.chart.AxisType.Date.Ticker dt : ofxAxis.getAxisType().getDate().getTicker())
 		{
 			SimpleDateFormat sdf = new SimpleDateFormat(dt.getFormat());
 			OfxChartTimePeriod ofxTp = OfxChartTimePeriod.valueOf(dt.getTimePeriod());
@@ -99,7 +99,7 @@ public class AxisFactory
 		return axis;
 	}
 	
-	public static synchronized void labelAxisAxis(Axis axis, org.metachart.xml.chart.Axis ofxAxis)
+	public static synchronized void labelAxisAxis(Axis axis, org.metachart.model.xml.chart.Axis ofxAxis)
 	{
 		if(Objects.nonNull(ofxAxis.getLabel()))
 		{
@@ -126,10 +126,10 @@ public class AxisFactory
 		return font;
 	}
 	
-	private static synchronized org.metachart.xml.chart.Axis getAxis(Chart ofxChart, AxisOrientation type)
+	private static synchronized org.metachart.model.xml.chart.Axis getAxis(Chart ofxChart, AxisOrientation type)
 	{
-		org.metachart.xml.chart.Axis axisResult = null;
-		for(org.metachart.xml.chart.Axis axis : ofxChart.getAxis())
+		org.metachart.model.xml.chart.Axis axisResult = null;
+		for(org.metachart.model.xml.chart.Axis axis : ofxChart.getAxis())
 		{
 			if(Objects.nonNull(axis.getCode()) && axis.getCode().equals(type.toString())){axisResult = axis;}
 		}

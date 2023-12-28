@@ -7,13 +7,13 @@ import org.metachart.factory.xml.graph.XmlEdgesFactory;
 import org.metachart.factory.xml.graph.XmlGraphFactory;
 import org.metachart.factory.xml.graph.XmlNodeFactory;
 import org.metachart.factory.xml.graph.XmlNodesFactory;
+import org.metachart.model.xml.graph.Cluster;
+import org.metachart.model.xml.graph.Clusters;
+import org.metachart.model.xml.graph.Edges;
+import org.metachart.model.xml.graph.Graph;
+import org.metachart.model.xml.graph.Nodes;
 import org.metachart.processor.graph.ColorSchemeManager;
 import org.metachart.processor.graph.Graph2DotConverter;
-import org.metachart.xml.graph.Cluster;
-import org.metachart.xml.graph.Clusters;
-import org.metachart.xml.graph.Edges;
-import org.metachart.xml.graph.Graph;
-import org.metachart.xml.graph.Nodes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

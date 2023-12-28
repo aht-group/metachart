@@ -8,9 +8,9 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.metachart.chart.renderer.generic.AbstractChartRenderer;
 import org.metachart.interfaces.ChartRenderer;
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,5 +1,5 @@
 
-package org.metachart.xml.graph;
+package org.metachart.model.xml.graph;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.metachart.org/graph}graph" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.metachart.org/graph}node" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,44 +32,44 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "graph"
+    "node"
 })
-@XmlRootElement(name = "graphs")
-public class Graphs
+@XmlRootElement(name = "nodes")
+public class Nodes
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Graph> graph;
+    protected List<Node> node;
 
     /**
-     * Gets the value of the graph property.
+     * Gets the value of the node property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the graph property.
+     * This is why there is not a <CODE>set</CODE> method for the node property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGraph().add(newItem);
+     *    getNode().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Graph }
+     * {@link Node }
      * 
      * 
      */
-    public List<Graph> getGraph() {
-        if (graph == null) {
-            graph = new ArrayList<Graph>();
+    public List<Node> getNode() {
+        if (node == null) {
+            node = new ArrayList<Node>();
         }
-        return this.graph;
+        return this.node;
     }
 
 }

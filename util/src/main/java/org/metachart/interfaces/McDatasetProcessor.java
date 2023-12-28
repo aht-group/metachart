@@ -1,7 +1,7 @@
 package org.metachart.interfaces;
 
 import org.metachart.exception.McProcessingException;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Ds;
 
 public interface McDatasetProcessor
 {

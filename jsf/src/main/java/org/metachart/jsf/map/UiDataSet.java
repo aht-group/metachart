@@ -5,8 +5,8 @@ import java.util.Objects;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
 
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

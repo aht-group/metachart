@@ -3,8 +3,8 @@ package org.metachart.factory.chart.high;
 import java.util.Objects;
 
 import org.metachart.factory.chart.high.OfxChartTypeResolver.AxisOrientation;
-import org.metachart.xml.chart.Axis;
-import org.metachart.xml.chart.Chart;
+import org.metachart.model.xml.chart.Axis;
+import org.metachart.model.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

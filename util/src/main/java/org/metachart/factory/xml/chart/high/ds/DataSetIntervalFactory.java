@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.metachart.factory.xml.chart.high.core.XmlDataFactory;
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

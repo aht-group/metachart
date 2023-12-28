@@ -4,8 +4,8 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
 
 @FacesComponent(value="org.metachart.jsf.UiAxis")
 public class UiAxis extends UINamingContainer

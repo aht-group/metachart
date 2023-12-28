@@ -3,7 +3,7 @@ package org.metachart.factory.graph;
 import java.util.Objects;
 
 import org.metachart.interfaces.graph.GraphColorProvider;
-import org.metachart.xml.graph.Node;
+import org.metachart.model.xml.graph.Node;
 
 public class DotNodeFactory
 {

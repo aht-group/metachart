@@ -1,5 +1,6 @@
 package org.metachart.xml.chart;
 
+import org.metachart.model.xml.chart.Ds;
 import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

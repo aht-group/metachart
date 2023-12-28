@@ -6,10 +6,10 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.metachart.interfaces.graph.GraphColorProvider;
+import org.metachart.model.xml.graph.Cluster;
+import org.metachart.model.xml.graph.Graph;
+import org.metachart.model.xml.graph.Node;
 import org.metachart.util.query.GraphXpath;
-import org.metachart.xml.graph.Cluster;
-import org.metachart.xml.graph.Graph;
-import org.metachart.xml.graph.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

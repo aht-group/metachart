@@ -1,6 +1,6 @@
 package org.metachart.interfaces.graph;
 
-import org.metachart.xml.graph.Node;
+import org.metachart.model.xml.graph.Node;
 
 public interface GraphColorProvider
 {

@@ -23,9 +23,9 @@ import org.metachart.factory.chart.high.OfxChartTypeResolver.AxisOrientation;
 import org.metachart.factory.chart.jfree.AxisFactory;
 import org.metachart.factory.pojo.OfxCustomPaintColors;
 import org.metachart.interfaces.ChartRenderer;
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

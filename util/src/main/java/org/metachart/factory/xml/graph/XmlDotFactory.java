@@ -1,6 +1,6 @@
 package org.metachart.factory.xml.graph;
 
-import org.metachart.xml.graph.Dot;
+import org.metachart.model.xml.graph.Dot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

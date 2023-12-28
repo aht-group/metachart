@@ -1,12 +1,11 @@
 
-package org.metachart.xml.graph;
+package org.metachart.model.xml.graph;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -22,9 +21,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.metachart.org/graph}node" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.metachart.org/graph}graph" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
- *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -34,70 +32,44 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "node"
+    "graph"
 })
-@XmlRootElement(name = "mergedNodes")
-public class MergedNodes
+@XmlRootElement(name = "graphs")
+public class Graphs
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Node> node;
-    @XmlAttribute(name = "type")
-    protected String type;
+    protected List<Graph> graph;
 
     /**
-     * Gets the value of the node property.
+     * Gets the value of the graph property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the node property.
+     * This is why there is not a <CODE>set</CODE> method for the graph property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getNode().add(newItem);
+     *    getGraph().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Node }
+     * {@link Graph }
      * 
      * 
      */
-    public List<Node> getNode() {
-        if (node == null) {
-            node = new ArrayList<Node>();
+    public List<Graph> getGraph() {
+        if (graph == null) {
+            graph = new ArrayList<Graph>();
         }
-        return this.node;
-    }
-
-    /**
-     * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setType(String value) {
-        this.type = value;
+        return this.graph;
     }
 
 }

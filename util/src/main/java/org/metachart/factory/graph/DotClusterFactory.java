@@ -1,8 +1,8 @@
 package org.metachart.factory.graph;
 
 import org.metachart.interfaces.graph.GraphColorProvider;
-import org.metachart.xml.graph.Cluster;
-import org.metachart.xml.graph.Node;
+import org.metachart.model.xml.graph.Cluster;
+import org.metachart.model.xml.graph.Node;
 
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 

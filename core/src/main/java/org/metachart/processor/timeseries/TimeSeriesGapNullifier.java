@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
-import org.metachart.xml.chart.RendererTimeseries;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
+import org.metachart.model.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

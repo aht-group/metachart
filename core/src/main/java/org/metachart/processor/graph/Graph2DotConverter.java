@@ -8,10 +8,10 @@ import org.metachart.factory.graph.DotEdgeFactory;
 import org.metachart.factory.graph.DotGraphFactory;
 import org.metachart.factory.graph.DotNodeFactory;
 import org.metachart.interfaces.graph.GraphColorProvider;
-import org.metachart.xml.graph.Cluster;
-import org.metachart.xml.graph.Edge;
-import org.metachart.xml.graph.Graph;
-import org.metachart.xml.graph.Node;
+import org.metachart.model.xml.graph.Cluster;
+import org.metachart.model.xml.graph.Edge;
+import org.metachart.model.xml.graph.Graph;
+import org.metachart.model.xml.graph.Node;
 
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 

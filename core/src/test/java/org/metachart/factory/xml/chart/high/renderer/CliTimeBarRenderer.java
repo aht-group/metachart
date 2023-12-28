@@ -7,10 +7,10 @@ import java.io.OutputStream;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.metachart.chart.OfxChartRenderer;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Grid;
+import org.metachart.model.xml.chart.Renderer;
 import org.metachart.test.McBootstrap;
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Grid;
-import org.metachart.xml.chart.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

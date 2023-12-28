@@ -1,5 +1,5 @@
 
-package org.metachart.xml.chart;
+package org.metachart.model.xml.chart;
 
 import java.io.Serializable;
 import java.util.ArrayList;

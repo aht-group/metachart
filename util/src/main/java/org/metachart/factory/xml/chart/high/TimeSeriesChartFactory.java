@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.factory.xml.chart.high.core.XmlAxisFactory;
-import org.metachart.xml.chart.Axis;
-import org.metachart.xml.chart.AxisType;
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Renderer;
-import org.metachart.xml.chart.RendererTimeseries;
+import org.metachart.model.xml.chart.Axis;
+import org.metachart.model.xml.chart.AxisType;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Renderer;
+import org.metachart.model.xml.chart.RendererTimeseries;
 
 public class TimeSeriesChartFactory
 {

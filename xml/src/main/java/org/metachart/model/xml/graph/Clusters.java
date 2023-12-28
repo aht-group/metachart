@@ -1,5 +1,5 @@
 
-package org.metachart.xml.chart;
+package org.metachart.model.xml.graph;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.metachart.org/xml}label" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.metachart.org/graph}cluster" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,44 +32,44 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "label"
+    "cluster"
 })
-@XmlRootElement(name = "labels")
-public class Labels
+@XmlRootElement(name = "clusters")
+public class Clusters
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Label> label;
+    protected List<Cluster> cluster;
 
     /**
-     * Gets the value of the label property.
+     * Gets the value of the cluster property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the label property.
+     * This is why there is not a <CODE>set</CODE> method for the cluster property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLabel().add(newItem);
+     *    getCluster().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Label }
+     * {@link Cluster }
      * 
      * 
      */
-    public List<Label> getLabel() {
-        if (label == null) {
-            label = new ArrayList<Label>();
+    public List<Cluster> getCluster() {
+        if (cluster == null) {
+            cluster = new ArrayList<Cluster>();
         }
-        return this.label;
+        return this.cluster;
     }
 
 }

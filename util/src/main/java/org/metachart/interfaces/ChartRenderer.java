@@ -3,7 +3,7 @@ package org.metachart.interfaces;
 import java.awt.Dimension;
 
 import org.jfree.chart.JFreeChart;
-import org.metachart.xml.chart.Chart;
+import org.metachart.model.xml.chart.Chart;
 
 public interface ChartRenderer
 {

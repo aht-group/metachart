@@ -1,5 +1,5 @@
 
-package org.metachart.xml.graph;
+package org.metachart.model.xml.graph;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

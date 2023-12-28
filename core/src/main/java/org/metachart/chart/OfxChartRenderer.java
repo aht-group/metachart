@@ -9,7 +9,7 @@ import org.metachart.chart.renderer.ts.TimeSeriesChartRenderer;
 import org.metachart.chart.renderer.xy.SplineChartRenderer;
 import org.metachart.factory.chart.high.OfxChartTypeResolver;
 import org.metachart.interfaces.ChartRenderer;
-import org.metachart.xml.chart.Chart;
+import org.metachart.model.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

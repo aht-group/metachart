@@ -1,5 +1,5 @@
 
-package org.metachart.xml.chart;
+package org.metachart.model.xml.chart;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "labels"
 })
-@XmlRootElement(name = "title")
-public class Title
+@XmlRootElement(name = "subtitle")
+public class Subtitle
     implements Serializable
 {
 

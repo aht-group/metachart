@@ -1,7 +1,7 @@
 package org.metachart.factory.xml.chart.high.core;
 
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Title;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Title;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

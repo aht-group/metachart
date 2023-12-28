@@ -3,7 +3,7 @@ package org.metachart.factory.graph;
 import java.util.Objects;
 
 import org.metachart.interfaces.graph.GraphColorProvider;
-import org.metachart.xml.graph.Edge;
+import org.metachart.model.xml.graph.Edge;
 
 public class DotEdgeFactory 
 {

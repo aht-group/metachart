@@ -12,8 +12,8 @@ import javax.faces.context.FacesContext;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.metachart.jsf.chart.high.Chart;
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
 import org.primefaces.util.ComponentTraversalUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

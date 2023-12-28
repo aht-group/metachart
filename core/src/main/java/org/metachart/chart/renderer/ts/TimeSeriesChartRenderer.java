@@ -16,13 +16,13 @@ import org.metachart.chart.renderer.generic.XYPlotRenderer;
 import org.metachart.exception.McProcessingException;
 import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.interfaces.ChartRenderer;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Data;
+import org.metachart.model.xml.chart.Ds;
 import org.metachart.processor.ds.DsAccumulatorProcessor;
 import org.metachart.processor.ds.date.DsDateAccumulationProcessor;
 import org.metachart.processor.ds.date.DsRecordOrdererProcessor;
 import org.metachart.processor.timeseries.TimeSeriesGapNullifier;
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Data;
-import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
