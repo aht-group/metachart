@@ -1,13 +1,10 @@
 package org.metachart.factory.json.chart.echart.js.demo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.exlp.util.io.JsUtil;
-import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
-import org.metachart.factory.json.chart.echart.data.JsonEdgeFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.interfaces.data.EchartLineDataProvider;
 import org.metachart.model.json.chart.echart.JsonOption;
