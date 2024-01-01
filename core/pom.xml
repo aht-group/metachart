@@ -167,6 +167,13 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
+			<type>jar</type>
+			<classifier>javax</classifier>
+			<scope>test</scope>
+		</dependency>
     	
 	</dependencies>
 </project>
