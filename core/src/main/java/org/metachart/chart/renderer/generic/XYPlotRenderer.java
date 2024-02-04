@@ -3,6 +3,7 @@ package org.metachart.chart.renderer.generic;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.jx.JaxbUtil;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
@@ -15,8 +16,6 @@ import org.metachart.model.xml.chart.Axis;
 import org.metachart.model.xml.chart.Grid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class XYPlotRenderer extends AbstractChartRenderer
 {

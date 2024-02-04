@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.exlp.util.system.DateUtil;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
@@ -24,8 +25,6 @@ import org.metachart.model.xml.chart.Ds;
 import org.metachart.model.xml.chart.Renderer.Timebar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class TimeBarRenderer extends XYPlotRenderer implements ChartRenderer
 {

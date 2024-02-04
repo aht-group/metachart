@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.exlp.util.system.DateUtil;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
@@ -25,8 +26,6 @@ import org.metachart.processor.ds.date.DsRecordOrdererProcessor;
 import org.metachart.processor.timeseries.TimeSeriesGapNullifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class TimeSeriesChartRenderer extends XYPlotRenderer implements ChartRenderer
 {

@@ -7,12 +7,11 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.exlp.util.system.DateUtil;
 import org.metachart.model.xml.chart.Data;
 import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class XmlDataFactory
 {

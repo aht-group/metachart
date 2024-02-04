@@ -2,12 +2,11 @@ package org.metachart.factory.chart.high;
 
 import java.util.Objects;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.metachart.model.xml.chart.AxisType;
 import org.metachart.model.xml.chart.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxChartTypeResolver
 {
