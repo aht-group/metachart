@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.metachart.factory.graph.DotEdgeFactory;
 import org.metachart.factory.graph.DotNodeFactory;
 import org.metachart.model.xml.graph.Edge;
@@ -14,8 +15,6 @@ import org.metachart.model.xml.graph.Graph;
 import org.metachart.model.xml.graph.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class Graph1DotConverter
 {

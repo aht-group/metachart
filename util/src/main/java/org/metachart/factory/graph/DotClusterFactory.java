@@ -1,10 +1,9 @@
 package org.metachart.factory.graph;
 
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.metachart.interfaces.graph.GraphColorProvider;
 import org.metachart.model.xml.graph.Cluster;
 import org.metachart.model.xml.graph.Node;
-
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class DotClusterFactory {
 	private final GraphColorProvider csm;

@@ -1,8 +1,7 @@
 package org.metachart.factory.graph;
 
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.metachart.model.xml.graph.Graph;
-
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class DotGraphFactory {
 	private ExlpTxtWriter txtWriter;

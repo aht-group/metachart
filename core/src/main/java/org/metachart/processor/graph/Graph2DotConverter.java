@@ -3,6 +3,7 @@ package org.metachart.processor.graph;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.metachart.factory.graph.DotClusterFactory;
 import org.metachart.factory.graph.DotEdgeFactory;
 import org.metachart.factory.graph.DotGraphFactory;
@@ -12,8 +13,6 @@ import org.metachart.model.xml.graph.Cluster;
 import org.metachart.model.xml.graph.Edge;
 import org.metachart.model.xml.graph.Graph;
 import org.metachart.model.xml.graph.Node;
-
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class Graph2DotConverter
 {
