@@ -1,5 +1,6 @@
 package org.metachart.test;
 
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
@@ -22,10 +23,11 @@ public class McBootstrap
 	public static Configuration init() {return init(xmlConfig);}
 	
 	public static Configuration init(String configFile)
-	{		
-		LoggerInit loggerBootstrap = new LoggerInit("log4j.xml");
-		loggerBootstrap.path("metachart/system/io/log");
-		loggerBootstrap.init();
+	{
+		LoggerBootstrap.instance("cli.xml.log4j2.xml").path("lis/system/io/log").init();
+//		LoggerInit loggerBootstrap = new LoggerInit("log4j.xml");
+//		loggerBootstrap.path("metachart/system/io/log");
+//		loggerBootstrap.init();
 		//JaxbUtil.setNsPrefixMapper(new McNsPrefixMapper());
 		
 		ConfigLoader configBootstrap = ConfigLoader.instance();

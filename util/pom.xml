@@ -109,17 +109,7 @@
 			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<scope>test</scope>
-		</dependency>
-        <dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
+		
 		<dependency>
    			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -134,11 +124,24 @@
 		
 		<!-- Test -->
 		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+			<classifier>javax</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.metachart</groupId>
 			<artifactId>metachart-xml</artifactId>
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
@@ -174,16 +177,7 @@
 		   <artifactId>jackson-datatype-jsr310</artifactId>
 		   <scope>test</scope>
 		</dependency>
-		
-		<!-- Test -->
-		<dependency>
-			<groupId>org.metachart</groupId>
-			<artifactId>metachart-xml</artifactId>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		
-		
+
 	</dependencies>
 	
 	<build>
