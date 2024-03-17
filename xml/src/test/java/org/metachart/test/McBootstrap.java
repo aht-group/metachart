@@ -24,7 +24,7 @@ public class McBootstrap
 	
 	public static Configuration init(String configFile)
 	{
-		LoggerBootstrap.instance("cli.xml.log4j2.xml").path("lis/system/io/log").init();
+		LoggerBootstrap.instance("cli.xml.log4j2.xml").path("metachart/system/io/log").init();
 //		LoggerInit loggerBootstrap = new LoggerInit("log4j.xml");
 //		loggerBootstrap.path("metachart/system/io/log");
 //		loggerBootstrap.init();

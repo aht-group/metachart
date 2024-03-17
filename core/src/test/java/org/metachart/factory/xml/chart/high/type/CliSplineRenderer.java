@@ -20,6 +20,7 @@ import org.metachart.model.xml.chart.Data;
 import org.metachart.model.xml.chart.Ds;
 import org.metachart.model.xml.chart.Renderer;
 import org.metachart.model.xml.chart.RendererTimeseries;
+import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,9 +87,7 @@ public class CliSplineRenderer
 	
 	public static void main (String[] args) throws Exception
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("resources/config");
-			loggerInit.init();
+		McBootstrap.init();
 		
 		CliSplineRenderer test = new CliSplineRenderer();
 		Chart chart;
