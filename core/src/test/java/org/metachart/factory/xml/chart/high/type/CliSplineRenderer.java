@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.Random;
 
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
 import org.jfree.chart.ChartUtilities;
