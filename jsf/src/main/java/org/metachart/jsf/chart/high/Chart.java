@@ -72,7 +72,8 @@ public class Chart extends UINamingContainer
 			logger.info("key: " + entry.getKey() + "; value: " + entry.getValue());
 		};
 		*/
- 		if(viewRoot.findComponent("selectPointForm") == null) {
+ 		if(viewRoot.findComponent("selectPointForm") == null)
+ 		{
  			logger.info("--- creating selectPointCommand ---");
  			UIComponent selectPointForm = new HtmlForm();
  			selectPointForm.setId("selectPointForm");
