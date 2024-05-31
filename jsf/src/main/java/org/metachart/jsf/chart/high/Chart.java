@@ -43,16 +43,14 @@ public class Chart extends UINamingContainer
 	@Override
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException
 	{
-		UIViewRoot viewRoot = this.getFacesContext().getViewRoot();
 		if(event instanceof PostAddToViewEvent)
 		{
 			UIOutput js = new UIOutput();
-	 		js.setId("connectChartTableJs");
 			js.setRendererType("javax.faces.resource.Script");
-			js.getAttributes().put("library", "chartJsf.js");
-			js.getAttributes().put("name", "connectChartTable.js");
-
-			viewRoot.addComponentResource(this.getFacesContext(), js, "head");
+			js.getAttributes().put("library", "mcTypeScript");
+			js.getAttributes().put("name", "dist/hc.bundle.js");
+			FacesContext context = this.getFacesContext();
+			context.getViewRoot().addComponentResource(context, js, "head");
 		}
 		super.processEvent(event);
 	}

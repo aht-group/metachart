@@ -15,12 +15,8 @@
 	</composite:interface>
 	        
 	<composite:implementation>
-        <h:outputScript library="jsMetaChart" name="jquery-2.2.4.min.js" target="head" />
-        <h:outputScript library="jsMetaChart" name="highmaps-6.1.0.js" target="head" />
-        <h:outputScript library="jsMetaChart" name="data-6.1.0.js" target="head" />
-
+        <h:outputScript library="mcTypeScript" name="dist/hc.bundle.js" target="head" />
 		<div id="mcMap" style="height: #{cc.attrs.height}px; min-width: 310px; max-width: 800px; margin: 0 auto; "></div>
-
 	<h:outputScript>
 
 $.getJSON('#{cc.attrs.geojson}', function (geojson) {

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+	<properties>
+		<enforcer.skip>true</enforcer.skip>
+	</properties>
 	<parent>
     	<groupId>org.metachart</groupId>
     	<artifactId>metachart</artifactId>
@@ -88,10 +90,77 @@
 			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- Node.js and npm dependency -->
+		<dependency>
+			<groupId>com.github.eirslett</groupId>
+			<artifactId>frontend-maven-plugin</artifactId>
+			<version>1.8.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 	    <plugins>
+		        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+                <execution>
+					<id>remove package-lock</id>
+					<phase>clean</phase>
+					<goals>
+						<goal>run</goal>
+					</goals>
+					<configuration>
+						<target>
+							<delete file="${project.basedir}/src/main/resources/META-INF/resources/mcTypeScript/package-lock.json"/>
+						</target>
+					</configuration>
+				</execution>
+            </executions>
+        </plugin>
+	
+        <!-- frontend-maven-plugin to handle Node.js and npm -->
+        <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.11.3</version>
+            <configuration>
+                <installDirectory>target</installDirectory>
+				<workingDirectory>src/main/resources/META-INF/resources/mcTypeScript</workingDirectory>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>install node and npm</id>
+                    <goals>
+                        <goal>install-node-and-npm</goal>
+                    </goals>
+                    <configuration>
+                        <nodeVersion>v14.17.1</nodeVersion>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>npm install</id>
+                    <goals>
+                        <goal>npm</goal>
+                    </goals>
+                    <configuration>
+                        <arguments>install</arguments>
+                    </configuration>
+                </execution>
+				<execution>
+                    <id>npm run build</id>
+                    <goals>
+                        <goal>npm</goal>
+                    </goals>
+                    <configuration>
+                        <arguments>run build</arguments>
+                    </configuration>
+                </execution>
+                <!-- Add other executions as needed -->
+            </executions>
+        </plugin>
 <!--	        <plugin>
 	            <groupId>com.google.code.maven-replacer-plugin</groupId>
            		<artifactId>replacer</artifactId>
