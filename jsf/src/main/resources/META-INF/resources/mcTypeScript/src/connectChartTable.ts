@@ -52,7 +52,4 @@ export function selectRowInTable(point: any): void { // Add type annotation to t
     console.log("selectGraphPoint(" + json + ")");
     point.select(true);
 }
-
-export function selectGraphPoint(json: any[]) {
-    throw new Error("Function not implemented.");
-}
+declare function selectGraphPoint(json: any): any;

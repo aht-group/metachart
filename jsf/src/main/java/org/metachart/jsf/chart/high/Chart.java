@@ -70,21 +70,23 @@ public class Chart extends UINamingContainer
 			logger.info("key: " + entry.getKey() + "; value: " + entry.getValue());
 		};
 		*/
- 		if(viewRoot.findComponent("selectPointForm") == null)
- 		{
- 			logger.info("--- creating selectPointCommand ---");
- 			UIComponent selectPointForm = new HtmlForm();
- 			selectPointForm.setId("selectPointForm");
- 			RemoteCommand selectPointCommand = new RemoteCommand();
- 			selectPointCommand.setId("selectPointCommand");
- 			selectPointCommand.setName("selectGraphPoint");
- 	        MethodExpression selectPointActionExpression = factory.createMethodExpression(ctx.getELContext(),"#{" + getAttributes().get("linkBackingBean")+  "." + getAttributes().get("chartAndTableHandler") + ".selectPoint}",null, new Class<?>[]{});
- 	        selectPointCommand.setActionExpression(selectPointActionExpression);
- 	        selectPointCommand.setUpdate((String) getAttributes().get("linkDataTableId"));
- 	        selectPointForm.getChildren().add(selectPointCommand);
-			viewRoot.addComponentResource(ctx, selectPointForm);
- 		}
-
+		if(getAttributes().get("chartAndTableHandler") != null)
+		{
+			if(viewRoot.findComponent("selectPointForm") == null)
+			{
+				logger.info("--- creating selectPointCommand ---");
+				UIComponent selectPointForm = new HtmlForm();
+				selectPointForm.setId("selectPointForm");
+				RemoteCommand selectPointCommand = new RemoteCommand();
+				selectPointCommand.setId("selectPointCommand");
+				selectPointCommand.setName("selectGraphPoint");
+				MethodExpression selectPointActionExpression = factory.createMethodExpression(ctx.getELContext(),"#{" + getAttributes().get("linkBackingBean")+  "." + getAttributes().get("chartAndTableHandler") + ".selectPoint}",null, new Class<?>[]{});
+				selectPointCommand.setActionExpression(selectPointActionExpression);
+				selectPointCommand.setUpdate((String) getAttributes().get("linkDataTableId"));
+				selectPointForm.getChildren().add(selectPointCommand);
+				viewRoot.addComponentResource(ctx, selectPointForm);
+			}
+		}
  		super.encodeBegin(ctx);
 	}
 
@@ -95,6 +97,9 @@ public class Chart extends UINamingContainer
 
  		UIViewRoot viewRoot = ctx.getViewRoot();
  		UIComponent selectPointForm = viewRoot.findComponent("selectPointForm");
- 		selectPointForm.encodeAll(ctx);
+ 		if(selectPointForm != null)
+		{
+			selectPointForm.encodeAll(ctx);
+		}
  	}
 }

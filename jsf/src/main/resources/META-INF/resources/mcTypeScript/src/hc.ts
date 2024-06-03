@@ -13,7 +13,6 @@ import 'highcharts/modules/heatmap';
 import './heat_bar';
 
 // Include connectChartTable
-import { selectElementInChart, selectRowInTable, selectGraphPoint } from './connectChartTable';
+import { selectElementInChart, selectRowInTable } from './connectChartTable';
 (window as any).selectElementInChart = selectElementInChart;
 (window as any).selectRowInTable = selectRowInTable;
-(window as any).selectGraphPoint = selectGraphPoint;
