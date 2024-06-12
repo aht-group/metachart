@@ -37,22 +37,7 @@ public class CliEchartDemo
 	}
 	
 	public void demo(JsonEchartFactory.Type type) throws IOException
-	{	
-		Path p = path.resolve("echart-"+type.toString()+".html");
-		switch(type)
-		{
-			case heatbar: this.html(type); break;
-			case heatmap: this.html(type); break;
-			case line: this.html(type); break;
-			case sankey: this.html(type); break;
-			case graph: this.html(type); break;
-			
-//			case graph: JsonEchartGraphFactory.instance().xhtml(p, EchartDemoGraph.instance()); break;
-		}
-	}
-	
-	public Document html(JsonEchartFactory.Type type) throws IOException
-	{
+	{		
 		Element html = new Element("html");
 		html.setAttribute("lang","en");
 		html.getChildren().add(xhfEchart.head("Demo: "+type));
@@ -67,7 +52,6 @@ public class CliEchartDemo
 		
 		JDomUtil.instance().omitDeclaration(true).info(doc);
 		JDomUtil.instance().omitDeclaration(true).write(doc,path.resolve("echart-"+type.toString()+".html"));
-		return doc;
 	}
 	
 	public static void main (String[] args) throws Exception
@@ -75,9 +59,11 @@ public class CliEchartDemo
 		Configuration config = McBootstrap.init();
 		CliEchartDemo cli = new CliEchartDemo(config);
 		
+		cli.demo(JsonEchartFactory.Type.line);
+//		cli.demo(JsonEchartFactory.Type.time);
+		
 //		cli.demo(JsonEchartFactory.Type.heatbar);
-//		cli.demo(JsonEchartFactory.Type.line);
 //		cli.demo(JsonEchartFactory.Type.heatbar);
-		cli.demo(JsonEchartFactory.Type.graph);
+//		cli.demo(JsonEchartFactory.Type.graph);
 	}
 }

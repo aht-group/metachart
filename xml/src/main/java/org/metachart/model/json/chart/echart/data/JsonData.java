@@ -1,6 +1,7 @@
 package org.metachart.model.json.chart.echart.data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,6 +24,11 @@ public class JsonData implements Serializable
 	private String[] strings;
 	public String[] getStrings() {return strings;}
 	public void setStrings(String[] strings) {this.strings = strings;}
+	
+	@JsonProperty("times")
+	private LocalDateTime[] times;
+	public LocalDateTime[] getTimes() {return times;}
+	public void setTimes(LocalDateTime[] times) {this.times = times;}
 
 	@JsonProperty("doubles1")
 	private double[] doubles1;

@@ -15,7 +15,7 @@ import org.metachart.model.json.chart.echart.data.JsonLink;
 
 public class JsonEchartFactory
 {
-	public enum Type{line,sankey,heatmap,heatbar,graph}
+	public enum Type{line,time,sankey,heatmap,heatbar,graph}
 	
 	private final Writer w;
 	private final JsonUtil jom;
@@ -74,7 +74,6 @@ public class JsonEchartFactory
 		return sb.toString();
 	}
 	
-	
 	public String dataDoubles1(JsonData data) throws IOException
 	{
 		StringBuilder sb = new StringBuilder();
@@ -82,6 +81,25 @@ public class JsonEchartFactory
 		sb.append("\ndata").append(id).append(" = ");
 		sb.append(jom.toFormattedString(data.getDoubles1()));
 		sb.append(";");
+		w.write(sb.toString());
+		return sb.toString();
+	}
+	
+	public String dataTime(JsonData data) throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\ndata").append(id).append(" = [");
+		for(int i=0; i<data.getTimes().length; i++)
+		{
+			sb.append(" [");
+			sb.append(data.getTimes()[i].toString());
+			sb.append(" , ").append(data.getDoubles1()[i]);
+			sb.append("]");
+			if(i<data.getTimes().length) {sb.append(", ");}
+		}
+		sb.append(jom.toFormattedString(data.getDoubles1()));
+		sb.append("];");
 		w.write(sb.toString());
 		return sb.toString();
 	}

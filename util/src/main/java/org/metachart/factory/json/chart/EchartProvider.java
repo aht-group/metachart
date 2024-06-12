@@ -11,6 +11,7 @@ import org.metachart.factory.json.chart.echart.js.demo.EchartDemoHeatbar;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoHeatmap;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoLine;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoSankey;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,10 +34,12 @@ public class EchartProvider
 		switch(type)
 		{
 			case line: EchartDemoLine.instance(jfEchart).demo(); break;
+			case time: EchartDemoTime.instance(jfEchart).demo(); break;
 			case sankey: EchartDemoSankey.instance(jfEchart).demo(); break;
 			case heatmap: EchartDemoHeatmap.instance(jfEchart).demo(); break;
 			case heatbar: EchartDemoHeatbar.instance(jfEchart).demo(); break;
 			case graph: EchartDemoGraph.instance(jfEchart).demo(); break;
+			default: logger.warn("NYI: "+type.toString());
 		}
 		jfEchart.init();
 	}
