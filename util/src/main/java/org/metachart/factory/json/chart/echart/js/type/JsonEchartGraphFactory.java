@@ -12,7 +12,7 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonEdgeFactory;
-import org.metachart.factory.json.chart.echart.js.demo.EchartGraphDemo;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGraph;
 import org.metachart.factory.xhtml.XhtmlEchartFactory;
 import org.metachart.interfaces.chart.Data;
 import org.metachart.interfaces.data.EchartGraphDataProvider;
@@ -47,7 +47,7 @@ public class JsonEchartGraphFactory implements EchartGraphDataProvider
 	public void jsf(String div, JsonGrid jsfGrid, Data categories, Data data, Data edges) throws IOException
 	{		
 		JsonEchartFactory f = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
-		EchartGraphDemo demo = EchartGraphDemo.instance().id(id);
+		EchartDemoGraph demo = EchartDemoGraph.instance().id(id);
 		
 		f.declare(div,JsonHtmlFactory.build("canvas",false));
 		f.categories("Node",categories.getValue().getData());
@@ -95,7 +95,7 @@ public class JsonEchartGraphFactory implements EchartGraphDataProvider
 		StringWriter w = new StringWriter();
 		XhtmlEchartFactory xf = XhtmlEchartFactory.instance();
 		JsonEchartFactory fEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(xf.getDivCntainerId(),JsonHtmlFactory.build("canvas",false));
-		EchartGraphDemo demo = EchartGraphDemo.instance();
+		EchartDemoGraph demo = EchartDemoGraph.instance();
 		
 		fEchart.letCategories("Node").letData().letEdges();
 		fEchart.categories("Node",data.getGraphCategories().getData());

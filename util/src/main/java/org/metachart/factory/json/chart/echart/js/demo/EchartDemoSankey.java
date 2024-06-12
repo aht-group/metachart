@@ -18,20 +18,18 @@ import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonLink;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 
-public class EchartSankeyDemo
+public class EchartDemoSankey
 {
 	private final JsonEchartFactory fEchart;
 	
-	public static EchartSankeyDemo instance(JsonEchartFactory fEchart) {return new EchartSankeyDemo(fEchart);}
-	private EchartSankeyDemo(JsonEchartFactory fEchart)
+	public static EchartDemoSankey instance(JsonEchartFactory fEchart) {return new EchartDemoSankey(fEchart);}
+	private EchartDemoSankey(JsonEchartFactory fEchart)
 	{
 		this.fEchart=fEchart;
 	}
 	
 	public void demo() throws IOException
-	{
-		
-		
+	{	
 		fEchart.letData().letLinks();
 		fEchart.data(this.demoData());
 		fEchart.links(this.demoLinks());

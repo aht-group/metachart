@@ -6,10 +6,10 @@ import java.io.Writer;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
-import org.metachart.factory.json.chart.echart.js.demo.EchartGraphDemo;
-import org.metachart.factory.json.chart.echart.js.demo.EchartHeatbarDemo;
-import org.metachart.factory.json.chart.echart.js.demo.EchartHeatmapDemo;
-import org.metachart.factory.json.chart.echart.js.demo.EchartSankeyDemo;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGraph;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoHeatbar;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoHeatmap;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoSankey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,10 +31,10 @@ public class EchartProvider
 		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(divId,JsonHtmlFactory.build("canvas",false));
 		switch(type)
 		{
-			case sankey: EchartSankeyDemo.instance(txtChart).demo(); break;
-			case heatmap: EchartHeatmapDemo.instance(txtChart).demo(); break;
-			case heatbar: EchartHeatbarDemo.instance(txtChart).demo(); break;
-			case graph: EchartGraphDemo.instance().demo(txtChart); break;
+			case sankey: EchartDemoSankey.instance(txtChart).demo(); break;
+			case heatmap: EchartDemoHeatmap.instance(txtChart).demo(); break;
+			case heatbar: EchartDemoHeatbar.instance(txtChart).demo(); break;
+			case graph: EchartDemoGraph.instance().demo(txtChart); break;
 		}
 		txtChart.init();
 	}

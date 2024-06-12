@@ -18,12 +18,12 @@ import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
 
-public class EchartHeatmapDemo
+public class EchartDemoHeatmap
 {
 	private final JsonEchartFactory fEchart;
 	
-	public static EchartHeatmapDemo instance(JsonEchartFactory fEchart) {return new EchartHeatmapDemo(fEchart);}
-	private EchartHeatmapDemo(JsonEchartFactory fEchart)
+	public static EchartDemoHeatmap instance(JsonEchartFactory fEchart) {return new EchartDemoHeatmap(fEchart);}
+	private EchartDemoHeatmap(JsonEchartFactory fEchart)
 	{
 		this.fEchart=fEchart;
 	}

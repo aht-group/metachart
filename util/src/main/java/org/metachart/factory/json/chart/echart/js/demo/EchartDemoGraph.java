@@ -15,14 +15,14 @@ import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EchartGraphDemo implements EchartGraphDataProvider
+public class EchartDemoGraph implements EchartGraphDataProvider
 {
-	final static Logger logger = LoggerFactory.getLogger(EchartGraphDemo.class);
+	final static Logger logger = LoggerFactory.getLogger(EchartDemoGraph.class);
 	
-	private String id; public EchartGraphDemo id(String id) {this.id=id; return this;}
+	private String id; public EchartDemoGraph id(String id) {this.id=id; return this;}
 	
-	public static EchartGraphDemo instance() {return new EchartGraphDemo();}
-	private EchartGraphDemo()
+	public static EchartDemoGraph instance() {return new EchartDemoGraph();}
+	private EchartDemoGraph()
 	{
 
 		id="";

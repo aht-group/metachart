@@ -20,16 +20,16 @@ import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EchartHeatbarDemo
+public class EchartDemoHeatbar
 {
-	final static Logger logger = LoggerFactory.getLogger(EchartHeatbarDemo.class);
+	final static Logger logger = LoggerFactory.getLogger(EchartDemoHeatbar.class);
 	
 	private final JsonEchartFactory fEchart;
 	
-	private String id; public EchartHeatbarDemo id(String id) {this.id=id; return this;}
+	private String id; public EchartDemoHeatbar id(String id) {this.id=id; return this;}
 	
-	public static EchartHeatbarDemo instance(JsonEchartFactory fEchart) {return new EchartHeatbarDemo(fEchart);}
-	private EchartHeatbarDemo(JsonEchartFactory fEchart)
+	public static EchartDemoHeatbar instance(JsonEchartFactory fEchart) {return new EchartDemoHeatbar(fEchart);}
+	private EchartDemoHeatbar(JsonEchartFactory fEchart)
 	{
 		this.fEchart=fEchart;
 		id="";
