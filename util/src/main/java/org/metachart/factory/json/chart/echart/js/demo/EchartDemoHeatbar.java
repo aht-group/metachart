@@ -40,50 +40,51 @@ public class EchartDemoHeatbar
 		org.metachart.factory.json.chart.echart.js.type.JsonEchartHeatbarFactory fHeatbar = org.metachart.factory.json.chart.echart.js.type.JsonEchartHeatbarFactory.instance();
 		
 		fEchart.letData().letCategoriesX().letCategoriesY();
-		fEchart.categories("x",this.demoCategoriesX());
+		fEchart.categories("x",this.categoriesX());
 		fEchart.categories("y",fHeatbar.yCategories());
 		fEchart.dataDoubles2(fHeatbar.toDoubles2(this.demoData()),TxtEchartFunctionFactory.nullify(3));
 		fEchart.option(this.demoOption());
 	}
 	
-		public JsonOption demoOption()
+	public JsonOption demoOption()
+	{
+		JsonOption option = new JsonOption();
+		option.setGrid(JsonGridFactory.instance().size(12,(12*24)).margin(5,5,5,5).build());
+		
+		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
+		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).build());
+		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).build());
+		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
+		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
+		
+		option.setSeries(new ArrayList<>());
+		JsonSeries series = new JsonSeries();
+		series.setData(JsUtil.magicField("data"+id));
+		series.setType(JsonEchartFactory.Type.heatmap.toString());
+		
+		option.getSeries().add(series);
+		return option;
+	}
+	
+	private JsonData categoriesX()
+	{
+		JsonDataFactory jf = JsonDataFactory.instance();
+		for (int i=0;i<24;i++)
 		{
-			JsonOption option = new JsonOption();
-			option.setGrid(JsonGridFactory.instance().size(12,(12*24)).margin(5,5,5,5).build());
-			
-			JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
-			option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).build());
-			option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).build());
-			option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
-			option.setTooltip(JsonTooltipFactory.instance().position("top").build());
-			
-			option.setSeries(new ArrayList<>());
-			JsonSeries series = new JsonSeries();
-			series.setData(JsUtil.magicField("data"+id));
-			series.setType(JsonEchartFactory.Type.heatmap.toString());
-			
-			option.getSeries().add(series);
-			return option;
-		}
-		public JsonData demoCategoriesX()
+			jf.string(""+i);
+        }
+		return jf.build();
+	}
+	private JsonData demoData()
+	{
+		Random rnd = new Random();
+		JsonDataFactory jf = JsonDataFactory.instance();
+		for(int x=0;x<24;x++)
 		{
-			JsonDataFactory jf = JsonDataFactory.instance();
-			for (int i=0;i<24;i++)
-			{
-				jf.string(""+i);
-	        }
-			return jf.build();
+			int value = rnd.nextInt(15)-5;
+			if(value<0) {value=0;}
+			jf.double1(value);
 		}
-		private JsonData demoData()
-		{
-			Random rnd = new Random();
-			JsonDataFactory jf = JsonDataFactory.instance();
-			for(int x=0;x<24;x++)
-			{
-				int value = rnd.nextInt(15)-5;
-				if(value<0) {value=0;}
-				jf.double1(value);
-			}
-			return jf.build();
-		}
+		return jf.build();
+	}
 }

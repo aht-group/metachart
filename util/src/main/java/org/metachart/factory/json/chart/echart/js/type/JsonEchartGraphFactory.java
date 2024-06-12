@@ -47,7 +47,7 @@ public class JsonEchartGraphFactory implements EchartGraphDataProvider
 	public void jsf(String div, JsonGrid jsfGrid, Data categories, Data data, Data edges) throws IOException
 	{		
 		JsonEchartFactory f = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
-		EchartDemoGraph demo = EchartDemoGraph.instance().id(id);
+		EchartDemoGraph demo = EchartDemoGraph.instance(f).id(id);
 		
 		f.declare(div,JsonHtmlFactory.build("canvas",false));
 		f.categories("Node",categories.getValue().getData());
@@ -95,15 +95,15 @@ public class JsonEchartGraphFactory implements EchartGraphDataProvider
 		StringWriter w = new StringWriter();
 		XhtmlEchartFactory xf = XhtmlEchartFactory.instance();
 		JsonEchartFactory fEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(xf.getDivCntainerId(),JsonHtmlFactory.build("canvas",false));
-		EchartDemoGraph demo = EchartDemoGraph.instance();
+		EchartDemoGraph demo = EchartDemoGraph.instance(fEchart);
 		
-		fEchart.letCategories("Node").letData().letEdges();
-		fEchart.categories("Node",data.getGraphCategories().getData());
-		fEchart.data(data.getGraphNodes().getData());
-		fEchart.edges(data.getGraphEdges().getEdges());
-		fEchart.option(demo.demoOption());
-		fEchart.init();
+//		fEchart.letCategories("Node").letData().letEdges();
+//		fEchart.categories("Node",data.getGraphCategories().getData());
+//		fEchart.data(data.getGraphNodes().getData());
+//		fEchart.edges(data.getGraphEdges().getEdges());
+//		fEchart.option(demo.demoOption());
+//		fEchart.init();
 		
-		xf.write(path,w);
+//		xf.write(path,w);
 	}
 }

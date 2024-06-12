@@ -71,6 +71,7 @@ public class Chart extends UINamingContainer
  	}
 	
 	private Title title;
+	
 	private Data data;
 	private Data categories;
 	private Data edges;
@@ -98,7 +99,6 @@ public class Chart extends UINamingContainer
         			case category: categories=c; break;
         			case edge: edges=c; break;
         		}
-        		
         	}
         }
 	}

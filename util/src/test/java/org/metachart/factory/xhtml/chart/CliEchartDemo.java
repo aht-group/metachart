@@ -41,13 +41,13 @@ public class CliEchartDemo
 		Path p = path.resolve("echart-"+type.toString()+".html");
 		switch(type)
 		{
+			case heatbar: this.html(type); break;
+			case heatmap: this.html(type); break;
 			case line: this.html(type); break;
 			case sankey: this.html(type); break;
-			case heatmap: this.html(type); break;
-			case heatbar: this.html(type); break;
+			case graph: this.html(type); break;
 			
-//			case line: JsonEchartLineFactory.instance().xhtml(p, EchartLineDemo.instance()); break;
-			case graph: JsonEchartGraphFactory.instance().xhtml(p, EchartDemoGraph.instance()); break;
+//			case graph: JsonEchartGraphFactory.instance().xhtml(p, EchartDemoGraph.instance()); break;
 		}
 	}
 	
@@ -75,10 +75,9 @@ public class CliEchartDemo
 		Configuration config = McBootstrap.init();
 		CliEchartDemo cli = new CliEchartDemo(config);
 		
-		cli.demo(JsonEchartFactory.Type.line);
 //		cli.demo(JsonEchartFactory.Type.heatbar);
-//		cli.demo(JsonEchartFactory.Type.graph);
-		
-
+//		cli.demo(JsonEchartFactory.Type.line);
+//		cli.demo(JsonEchartFactory.Type.heatbar);
+		cli.demo(JsonEchartFactory.Type.graph);
 	}
 }

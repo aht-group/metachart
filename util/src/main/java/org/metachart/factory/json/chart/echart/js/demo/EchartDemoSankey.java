@@ -20,20 +20,20 @@ import org.metachart.model.json.chart.echart.data.JsonSeries;
 
 public class EchartDemoSankey
 {
-	private final JsonEchartFactory fEchart;
+	private final JsonEchartFactory jfEchart;
 	
 	public static EchartDemoSankey instance(JsonEchartFactory fEchart) {return new EchartDemoSankey(fEchart);}
-	private EchartDemoSankey(JsonEchartFactory fEchart)
+	private EchartDemoSankey(JsonEchartFactory jfEchart)
 	{
-		this.fEchart=fEchart;
+		this.jfEchart=jfEchart;
 	}
 	
 	public void demo() throws IOException
 	{	
-		fEchart.letData().letLinks();
-		fEchart.data(this.demoData());
-		fEchart.links(this.demoLinks());
-		fEchart.option(this.demoOption());
+		jfEchart.letData().letLinks();
+		jfEchart.data(this.demoData());
+		jfEchart.links(this.demoLinks());
+		jfEchart.option(this.demoOption());
 	}
 	
 	public JsonOption demoOption()

@@ -1,56 +1,58 @@
 package org.metachart.factory.json.chart.echart.js.demo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.exlp.util.io.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
-import org.metachart.interfaces.data.EchartLineDataProvider;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EchartDemoLine implements EchartLineDataProvider
+public class EchartDemoLine
 {
 	final static Logger logger = LoggerFactory.getLogger(EchartDemoLine.class);
+
+	private final JsonEchartFactory jfEchart;
 	
 	private String id; public EchartDemoLine id(String id) {this.id=id; return this;}
 	
-	public static EchartDemoLine instance() {return new EchartDemoLine();}
-	private EchartDemoLine()
+	public static EchartDemoLine instance(JsonEchartFactory fEchart) {return new EchartDemoLine(fEchart);}
+	private EchartDemoLine(JsonEchartFactory jfEchart)
 	{
-
+		this.jfEchart=jfEchart;
 		id="";
 	}
 	
-//	public void demo(JsonEchartFactory fEchart) throws IOException
-//	{
-//		fEchart.letCategories("X").letData().letEdges();
-//		fEchart.categories("Node",this.getGraphCategories().getData());
-//		fEchart.data(this.getGraphNodes().getData());
-//		fEchart.edges(this.getGraphEdges().getEdges());
-//		fEchart.option(this.demoOption());
-//	}
-	public JsonOption demoOption()
+	public void demo() throws IOException
+	{
+		jfEchart.letCategories("X").letData();
+		jfEchart.categories("X",this.toCategoriesX());
+		jfEchart.dataDoubles1(this.toData());
+		jfEchart.option(this.toOption());
+	}
+	
+	public JsonOption toOption()
 	{
 		JsonOption option = new JsonOption();
 		option.setAxisX(JsonAxisFactory.instance().type("category").data("categoriesX").build());
 		option.setAxisY(JsonAxisFactory.instance().type("value").build());
 		
-		option.setSeries(new ArrayList<>());
-	
 		JsonSeries series = new JsonSeries();
 		series.setType(JsonEchartFactory.Type.line.toString());
 		series.setData(JsUtil.magicField("data"+id));
 		
+		option.setSeries(new ArrayList<>());
 		option.getSeries().add(series);
+		
 		return option;
 	}
 	
-	@Override public JsonData getLineCategories()
+	private JsonData toCategoriesX()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		jf.string("Mon");
@@ -63,7 +65,7 @@ public class EchartDemoLine implements EchartLineDataProvider
 		return jf.build();
 	}
 	
-	@Override public JsonData getLineData()
+	private JsonData toData()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		jf.double1(1);

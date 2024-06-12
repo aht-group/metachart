@@ -19,22 +19,24 @@ public class EchartDemoGraph implements EchartGraphDataProvider
 {
 	final static Logger logger = LoggerFactory.getLogger(EchartDemoGraph.class);
 	
+	private final JsonEchartFactory jfEchart;
+	
 	private String id; public EchartDemoGraph id(String id) {this.id=id; return this;}
 	
-	public static EchartDemoGraph instance() {return new EchartDemoGraph();}
-	private EchartDemoGraph()
+	public static EchartDemoGraph instance(JsonEchartFactory fEchart) {return new EchartDemoGraph(fEchart);}
+	private EchartDemoGraph(JsonEchartFactory jfEchart)
 	{
-
+		this.jfEchart=jfEchart;
 		id="";
 	}
 	
-	public void demo(JsonEchartFactory fEchart) throws IOException
+	public void demo() throws IOException
 	{
-		fEchart.letCategories("Node").letData().letEdges();
-		fEchart.categories("Node",this.getGraphCategories().getData());
-		fEchart.data(this.getGraphNodes().getData());
-		fEchart.edges(this.getGraphEdges().getEdges());
-		fEchart.option(this.demoOption());
+		jfEchart.letCategories("Node").letData().letEdges();
+		jfEchart.categories("Node",this.getGraphCategories().getData());
+		jfEchart.data(this.getGraphNodes().getData());
+		jfEchart.edges(this.getGraphEdges().getEdges());
+		jfEchart.option(this.demoOption());
 	}
 	public JsonOption demoOption()
 	{
@@ -87,4 +89,6 @@ public class EchartDemoGraph implements EchartGraphDataProvider
 		jf.edge(JsonEdgeFactory.edge(2,3));
 		return jf.build();
 	}
+	
+	
 }
