@@ -53,7 +53,18 @@
 		<connection>scm:git:ssh://git@github.com/aht-group/metachart.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/aht-group/metachart.git</developerConnection>
 	  <tag>metachart-0.0.3</tag>
-  </scm>
+	</scm>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype.snapshot.token</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 	
 	<developers>
 		<developer>
@@ -157,17 +168,6 @@
 			
 		</plugins>
 	</build>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
 
 	<profiles>
 		<profile>
