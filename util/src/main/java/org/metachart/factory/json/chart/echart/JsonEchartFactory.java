@@ -13,7 +13,6 @@ import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonEdge;
 import org.metachart.model.json.chart.echart.data.JsonLink;
-import org.metachart.model.json.chart.echart.data.JsonTsData;
 
 public class JsonEchartFactory
 {
@@ -21,15 +20,11 @@ public class JsonEchartFactory
 
 	private final Writer w;
 	private final JsonUtil jom;
-<<<<<<< HEAD
+
 	private String varChart; public String getVarChart() {return varChart;}	
 	private String id; public JsonEchartFactory id(String id) {this.id=id; return this;}
-	
-=======
-	private String varChart; public String getVarChart() {return varChart;}
-	private String id; public JsonEchartFactory id(String id) {this.id=id ;return this;}
 
->>>>>>> branch 'master' of git@github.com:aht-group/metachart.git
+
 	public static JsonEchartFactory instance(Writer writer, JsonUtil jom) {return new JsonEchartFactory(writer,jom);}
 	private JsonEchartFactory(Writer writer, JsonUtil jom)
 	{
@@ -112,28 +107,28 @@ public class JsonEchartFactory
 	}
 
 	
-	public String dataTime(JsonTsData data) throws IOException
-	{
-		StringBuilder sb = new StringBuilder();
-		sb.append("\n");
-		sb.append("\ndata").append(id).append(" = [");
-		int i=0;
-		for (Object[] jsonTsDataPair : data.getValue()) 
-		{
-			sb.append(" [");
-			for(int j=0; j<jsonTsDataPair.length; j++)
-			{
-				sb.append(jsonTsDataPair[j].toString());
-				if(j<jsonTsDataPair.length - 1) {sb.append(", ");}
-			}
-			sb.append("]");
-			if(i<data.getValue().size() - 1) {sb.append(", ");}
-			i++;
-		}
-		sb.append("];");
-		w.write(sb.toString());
-		return sb.toString();
-	}
+//	public String dataTime(JsonTsData data) throws IOException
+//	{
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("\n");
+//		sb.append("\ndata").append(id).append(" = [");
+//		int i=0;
+//		for (Object[] jsonTsDataPair : data.getValue()) 
+//		{
+//			sb.append(" [");
+//			for(int j=0; j<jsonTsDataPair.length; j++)
+//			{
+//				sb.append(jsonTsDataPair[j].toString());
+//				if(j<jsonTsDataPair.length - 1) {sb.append(", ");}
+//			}
+//			sb.append("]");
+//			if(i<data.getValue().size() - 1) {sb.append(", ");}
+//			i++;
+//		}
+//		sb.append("];");
+//		w.write(sb.toString());
+//		return sb.toString();
+//	}
 
 	public void dataDoubles2(JsonData data) throws IOException {this.dataDoubles2(data,null);}
 	public void dataDoubles2(JsonData data, String transform) throws IOException

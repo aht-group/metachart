@@ -6,26 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.metachart.model.json.chart.echart.data.JsonTsData;
-
 public class JsonTsDataFactory
 {	
-	private JsonTsData json;
+//	private JsonTsData json;
 	private List<Object[]> tsDataItems;
 	
 	public static JsonTsDataFactory instance() {return new JsonTsDataFactory();}
 	private JsonTsDataFactory()
 	{
-		json = JsonTsDataFactory.create();
+//		json = JsonTsDataFactory.create();
 	}
 	
-	public JsonTsData build()
-	{
-		if(Objects.nonNull(tsDataItems)) {json.setValue(tsDataItems);}
-		return json;
-	}
-
-	public static JsonTsData create() {return new JsonTsData();}
+//	public JsonTsData build()
+//	{
+//		if(Objects.nonNull(tsDataItems)) {json.setValue(tsDataItems);}
+//		return json;
+//	}
+//
+//	public static JsonTsData create() {return new JsonTsData();}
 
 	public void addTsData(LocalDateTime plusHours, double value) 
 	{
