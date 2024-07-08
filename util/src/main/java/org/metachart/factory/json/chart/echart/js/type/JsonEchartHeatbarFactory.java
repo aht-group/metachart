@@ -40,22 +40,21 @@ public class JsonEchartHeatbarFactory
 		id="";
 	}
 	
-	public void jsf(String div, JsonGrid jsfGrid, Data data) throws IOException
-	{
-//		if(Objects.nonNull(data) && Objects.nonNull(data.getValue())) {logger.info(TxtDataFactory.double1ToInteger1(data.getValue()));}
-//		else {logger.info("DATA NULL");}
+	public void jsf(String div, JsonGrid grid, Data data) throws IOException
+	{	
+		if(Objects.isNull(grid)) {grid = JsonGridFactory.instance().size("12",null).build();}
 		
-		JsonEchartFactory txtChart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
+		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
 
-		Double d = Double.valueOf(jsfGrid.getHeight());
-		txtChart.declare(div,JsonHtmlFactory.build("svg",true,""+d*data.getValue().getDoubles1().length,jsfGrid.getHeight()));
-		txtChart.letData().letCategoriesX().letCategoriesY();
-		txtChart.categories("x",this.xCategories(data));
-		txtChart.categories("y",this.yCategories());
-		txtChart.dataDoubles2(this.toDoubles2(data.getValue()),TxtEchartFunctionFactory.nullify(3));
-		txtChart.option(this.jsfOption(jsfGrid,data));
+		Double d = Double.valueOf(grid.getHeight());
+		jfEchart.declare(div,JsonHtmlFactory.build("svg",true,""+d*data.getValue().getDoubles1().length,grid.getHeight()));
+		jfEchart.letData().letCategoriesX().letCategoriesY();
+		jfEchart.categories("x",this.xCategories(data));
+		jfEchart.categories("y",this.yCategories());
+		jfEchart.dataDoubles2(this.toDoubles2(data.getValue()),TxtEchartFunctionFactory.nullify(3));
+		jfEchart.option(this.jsfOption(grid,data));
 		
-		txtChart.init();
+		jfEchart.init();
 	}
 	
 	private JsonOption jsfOption(JsonGrid jsfGrid, Data data)

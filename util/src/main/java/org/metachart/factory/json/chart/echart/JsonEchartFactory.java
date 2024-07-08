@@ -2,6 +2,7 @@ package org.metachart.factory.json.chart.echart;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +21,7 @@ public class JsonEchartFactory
 	private final Writer w;
 	private final JsonUtil jom;
 	private String varChart; public String getVarChart() {return varChart;}	
-	private String id; public JsonEchartFactory id(String id) {this.id=id ;return this;}
+	private String id; public JsonEchartFactory id(String id) {this.id=id; return this;}
 	
 	public static JsonEchartFactory instance(Writer writer, JsonUtil jom) {return new JsonEchartFactory(writer,jom);}
 	private JsonEchartFactory(Writer writer, JsonUtil jom)
@@ -51,7 +52,7 @@ public class JsonEchartFactory
 	public JsonEchartFactory letLinks() throws IOException {w.write("\nlet links"+id+" = [];");return this;}
 	public JsonEchartFactory letEdges() throws IOException {w.write("\nlet edges"+id+" = [];");return this;}
 	public JsonEchartFactory letCategories(String suffix) throws IOException {w.write("\nlet categories"+suffix+id+" = [];");return this;}
-	public JsonEchartFactory letCategoriesX() throws IOException {w.write("\nlet xCategories"+id+" = [];");return this;}
+	public JsonEchartFactory letCategoriesX() throws IOException {w.write("\nlet categoriesX"+id+" = [];");return this;}
 	public JsonEchartFactory letCategoriesY() throws IOException {w.write("\nlet yCategories"+id+" = [];");return this;}
 	
 	public void option(JsonOption echart) throws IOException
@@ -93,12 +94,11 @@ public class JsonEchartFactory
 		for(int i=0; i<data.getTimes().length; i++)
 		{
 			sb.append(" [");
-			sb.append(data.getTimes()[i].toString());
+			sb.append(data.getTimes()[i].atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
 			sb.append(" , ").append(data.getDoubles1()[i]);
 			sb.append("]");
-			if(i<data.getTimes().length) {sb.append(", ");}
+			if(i<data.getTimes().length-1) {sb.append(", ");}
 		}
-		sb.append(jom.toFormattedString(data.getDoubles1()));
 		sb.append("];");
 		w.write(sb.toString());
 		return sb.toString();

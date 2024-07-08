@@ -13,16 +13,16 @@ import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EchartDemoLine
+public class EchartDemoCategoryLine
 {
-	final static Logger logger = LoggerFactory.getLogger(EchartDemoLine.class);
+	final static Logger logger = LoggerFactory.getLogger(EchartDemoCategoryLine.class);
 
 	private final JsonEchartFactory jfEchart;
 	
-	private String id; public EchartDemoLine id(String id) {this.id=id; return this;}
+	private String id; public EchartDemoCategoryLine id(String id) {this.id=id; return this;}
 	
-	public static EchartDemoLine instance(JsonEchartFactory fEchart) {return new EchartDemoLine(fEchart);}
-	private EchartDemoLine(JsonEchartFactory jfEchart)
+	public static EchartDemoCategoryLine instance(JsonEchartFactory fEchart) {return new EchartDemoCategoryLine(fEchart);}
+	private EchartDemoCategoryLine(JsonEchartFactory jfEchart)
 	{
 		this.jfEchart=jfEchart;
 		id="";
@@ -31,8 +31,8 @@ public class EchartDemoLine
 	public void demo() throws IOException
 	{
 		jfEchart.letCategories("X").letData();
-		jfEchart.categories("X",this.toCategoriesX());
-		jfEchart.dataDoubles1(this.toData());
+		jfEchart.categories("X",EchartDemoCategoryLine.toCategoriesX());
+		jfEchart.dataDoubles1(EchartDemoCategoryLine.toData());
 		jfEchart.option(this.toOption());
 	}
 	
@@ -52,7 +52,7 @@ public class EchartDemoLine
 		return option;
 	}
 	
-	private JsonData toCategoriesX()
+	public static JsonData toCategoriesX()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		jf.string("Mon");
@@ -65,7 +65,7 @@ public class EchartDemoLine
 		return jf.build();
 	}
 	
-	private JsonData toData()
+	public static JsonData toData()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		jf.double1(1);

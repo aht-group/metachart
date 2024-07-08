@@ -51,6 +51,8 @@ public class EchartDemoTime
 		option.setSeries(new ArrayList<>());
 		option.getSeries().add(series);
 		
+		option.setUseUtc(true);
+		
 		return option;
 	}
 	
@@ -60,11 +62,12 @@ public class EchartDemoTime
 		
 		JsonDataFactory jf = JsonDataFactory.instance();
 		jf.time(ldt.plusHours(5),2);
-		jf.time(ldt.plusHours(5),3);
-		jf.time(ldt.plusHours(5),4);
-		jf.time(ldt.plusHours(5),2);
-		jf.time(ldt.plusHours(5),3);
-		jf.time(ldt.plusHours(5),3);
+		jf.time(ldt.plusHours(10),3);
+		jf.time(ldt.plusHours(15),1);
+		jf.time(ldt.plusHours(20),2);
+		jf.time(ldt.plusHours(21),3);
+		jf.time(ldt.plusHours(22),5);
+		jf.time(ldt.plusHours(23),4);
 		
 		JsonData data = jf.build();
 		JsonUtil.info(data);

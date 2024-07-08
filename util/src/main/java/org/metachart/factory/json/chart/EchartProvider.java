@@ -9,7 +9,7 @@ import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGraph;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoHeatbar;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoHeatmap;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoLine;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoCategoryLine;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoSankey;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class EchartProvider
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(divId,JsonHtmlFactory.build("canvas",false));
 		switch(type)
 		{
-			case line: EchartDemoLine.instance(jfEchart).demo(); break;
+			case line: EchartDemoCategoryLine.instance(jfEchart).demo(); break;
 			case time: EchartDemoTime.instance(jfEchart).demo(); break;
 			case sankey: EchartDemoSankey.instance(jfEchart).demo(); break;
 			case heatmap: EchartDemoHeatmap.instance(jfEchart).demo(); break;
