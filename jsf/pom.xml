@@ -100,108 +100,127 @@
 	</dependencies>
 
 	<build>
-	    <plugins>
-		        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.8</version>
-            <executions>
-                <execution>
-					<id>remove package-lock</id>
-					<phase>clean</phase>
-					<goals>
-						<goal>run</goal>
-					</goals>
-					<configuration>
-						<target>
-							<delete file="${project.basedir}/src/main/resources/META-INF/resources/mcTypeScript/package-lock.json"/>
-						</target>
-					</configuration>
-				</execution>
-            </executions>
-        </plugin>
-	
-        <!-- frontend-maven-plugin to handle Node.js and npm -->
-        <plugin>
-            <groupId>com.github.eirslett</groupId>
-            <artifactId>frontend-maven-plugin</artifactId>
-            <version>1.11.3</version>
-            <configuration>
-                <installDirectory>target</installDirectory>
-				<workingDirectory>src/main/resources/META-INF/resources/mcTypeScript</workingDirectory>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>install node and npm</id>
-                    <goals>
-                        <goal>install-node-and-npm</goal>
-                    </goals>
-                    <configuration>
-                        <nodeVersion>v14.17.1</nodeVersion>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>npm install</id>
-                    <goals>
-                        <goal>npm</goal>
-                    </goals>
-                    <configuration>
-                        <arguments>install</arguments>
-                    </configuration>
-                </execution>
-				<execution>
-                    <id>npm run build</id>
-                    <goals>
-                        <goal>npm</goal>
-                    </goals>
-                    <configuration>
-                        <arguments>run build</arguments>
-                    </configuration>
-                </execution>
-                <!-- Add other executions as needed -->
-            </executions>
-        </plugin>
-<!--	        <plugin>
-	            <groupId>com.google.code.maven-replacer-plugin</groupId>
-           		<artifactId>replacer</artifactId>
-          		 <version>1.5.2</version>
-	            <executions>
-	                <execution>
-	                    <phase>prepare-package</phase>
-	                    <goals>
-	                        <goal>replace</goal>
-	                    </goals>                    
-	                </execution>
-	            </executions>
-	            <configuration>
-	                <file>${my.build.directory}/classes/META-INF/resources/metachart/dhtmlx/js/dhtmlxgantt.js</file>
-	                <regex>false</regex>
-	                <replacements>
-	                    <replacement>
-	                        <token>;GanttChart.prototype.setStylePath</token>
-	                        <value>;GanttChart.prototype.setImageSuffix = function(newPath) {this.imgSfx = newPath};GanttChart.prototype.setStylePath</value>
-	                    </replacement>
-	                    <replacement>
-	                        <token>this.imgs = "codebase/imgs/";</token>
-	                        <value>this.imgs = "codebase/imgs/";this.imgSfx = "";</value>
-	                    </replacement>
-	                    <replacement>
-	                        <token>this.imgs = "codebase/imgs/";</token>
-	                        <value>this.imgs = "codebase/imgs/";this.imgSfx = "";</value>
-	                    </replacement>
-	                    <replacement>
-	                        <token>.png"</token>
-	                        <value>.png"+this.Chart.imgSfx</value>
-	                    </replacement>
-
-	                    <replacement>
-	                        <token>.png)</token>
-	                        <value>.png"+this.imgSfx+")</value>
-	                    </replacement>	                    
-	                </replacements>             
-	            </configuration>
-	        </plugin>
- -->	    </plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/mcTypeScript/node_modules/**</exclude>
+					<exclude>**/mcTypeScript/src/**</exclude>
+					<exclude>**/mcTypeScript/*.*</exclude>
+				</excludes>
+			</resource>
+		</resources>
 	</build>
+	
+	<profiles>
+		<profile>
+			<id>tsDevEnv</id>
+			<dependencies>
+				<!-- Node.js and npm dependency -->
+				<dependency>
+					<groupId>com.github.eirslett</groupId>
+					<artifactId>frontend-maven-plugin</artifactId>
+					<version>1.8.0</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.github.eirslett</groupId>
+						<artifactId>frontend-maven-plugin</artifactId>
+						<version>1.11.3</version>
+						<configuration>
+							<installDirectory>target</installDirectory>
+							<workingDirectory>src/main/resources/META-INF/resources/mcTypeScript</workingDirectory>
+						</configuration>
+						<executions>
+							<execution>
+								<id>install node and npm</id>
+								<goals>
+									<goal>install-node-and-npm</goal>
+								</goals>
+								<configuration>
+									<nodeVersion>v14.17.1</nodeVersion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>npm install</id>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<configuration>
+									<arguments>install</arguments>
+								</configuration>
+							</execution>
+							<execution>
+								<id>npm run build</id>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<configuration>
+									<arguments>run build</arguments>
+								</configuration>
+							</execution>
+							<!-- Add other executions as needed -->
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>tsProdEnv</id>
+			<properties><enforcer.skip>true</enforcer.skip></properties>
+			<dependencies>
+				<!-- Node.js and npm dependency -->
+				<dependency>
+					<groupId>com.github.eirslett</groupId>
+					<artifactId>frontend-maven-plugin</artifactId>
+					<version>1.8.0</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.github.eirslett</groupId>
+						<artifactId>frontend-maven-plugin</artifactId>
+						<version>1.11.3</version>
+						<configuration>
+							<installDirectory>target</installDirectory>
+							<workingDirectory>src/main/resources/META-INF/resources/mcTypeScript</workingDirectory>
+						</configuration>
+						<executions>
+							<execution>
+								<id>install node and npm</id>
+								<goals>
+									<goal>install-node-and-npm</goal>
+								</goals>
+								<configuration>
+									<nodeVersion>v14.17.1</nodeVersion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>npm install</id>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<configuration>
+									<arguments>install</arguments>
+								</configuration>
+							</execution>
+							<execution>
+								<id>npm run build</id>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<configuration>
+									<arguments>run build-min</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	
 </project>
