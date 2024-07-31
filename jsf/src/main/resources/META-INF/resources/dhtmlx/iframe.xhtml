@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsp/jstl/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:composite="http://java.sun.com/jsf/composite">
+    
+	<composite:interface>
+        <composite:attribute name="title" required="false" default=""
+                shortDescription="Title of visual element in iframe"/>
+        <composite:attribute name="width" required="false" default="1024"
+                shortDescription="Width of visual element in iframe"/>
+        <composite:attribute name="height" required="false" default="804"
+                shortDescription="Height of visual element in iframe"/>
+        <composite:attribute name="src" required="true"
+                shortDescription="URL of visual element in iframe"/>
+        <composite:attribute name="frameborder" required="false" default="0"
+                shortDescription="Frame border of visual element in iframe"/>
+        <composite:attribute name="allowFullScreen" required="false" default="true"
+                shortDescription="Allow full screen of visual element in iframe"/>
+	</composite:interface>
+	<composite:implementation>
+    <iframe 
+        title="#{not empty cc.attrs.title}" 
+        width="#{cc.attrs.width}" height="#{cc.attrs.height}" 
+        src="#{cc.attrs.src}" 
+        frameborder="#{cc.attrs.frameborder} " 
+        allowFullScreen="#{cc.attrs.allowFullScreen}">
+    </iframe>
+</composite:implementation>
+</html>
