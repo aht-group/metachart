@@ -51,4 +51,9 @@ public class JsonOption implements Serializable
 	private List<JsonSeries> series;
 	public List<JsonSeries> getSeries() {return series;}
 	public void setSeries(List<JsonSeries> series) {this.series = series;}
+	
+	@JsonProperty("useUTC")
+	private Boolean useUtc;
+	public Boolean getUseUtc() {return useUtc;}
+	public void setUseUtc(Boolean useUtc) {this.useUtc = useUtc;}
 }

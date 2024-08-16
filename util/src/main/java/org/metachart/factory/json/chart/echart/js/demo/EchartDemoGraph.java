@@ -15,26 +15,28 @@ import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EchartGraphDemo implements EchartGraphDataProvider
+public class EchartDemoGraph implements EchartGraphDataProvider
 {
-	final static Logger logger = LoggerFactory.getLogger(EchartGraphDemo.class);
+	final static Logger logger = LoggerFactory.getLogger(EchartDemoGraph.class);
 	
-	private String id; public EchartGraphDemo id(String id) {this.id=id; return this;}
+	private final JsonEchartFactory jfEchart;
 	
-	public static EchartGraphDemo instance() {return new EchartGraphDemo();}
-	private EchartGraphDemo()
+	private String id; public EchartDemoGraph id(String id) {this.id=id; return this;}
+	
+	public static EchartDemoGraph instance(JsonEchartFactory fEchart) {return new EchartDemoGraph(fEchart);}
+	private EchartDemoGraph(JsonEchartFactory jfEchart)
 	{
-
+		this.jfEchart=jfEchart;
 		id="";
 	}
 	
-	public void demo(JsonEchartFactory fEchart) throws IOException
+	public void demo() throws IOException
 	{
-		fEchart.letCategories("Node").letData().letEdges();
-		fEchart.categories("Node",this.getGraphCategories().getData());
-		fEchart.data(this.getGraphNodes().getData());
-		fEchart.edges(this.getGraphEdges().getEdges());
-		fEchart.option(this.demoOption());
+		jfEchart.letCategories("Node").letData().letEdges();
+		jfEchart.categories("Node",this.getGraphCategories().getData());
+		jfEchart.data(this.getGraphNodes().getData());
+		jfEchart.edges(this.getGraphEdges().getEdges());
+		jfEchart.option(this.demoOption());
 	}
 	public JsonOption demoOption()
 	{
@@ -87,4 +89,6 @@ public class EchartGraphDemo implements EchartGraphDataProvider
 		jf.edge(JsonEdgeFactory.edge(2,3));
 		return jf.build();
 	}
+	
+	
 }

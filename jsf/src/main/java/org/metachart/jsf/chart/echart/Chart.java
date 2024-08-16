@@ -21,6 +21,7 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.js.type.JsonEchartGraphFactory;
 import org.metachart.factory.json.chart.echart.js.type.JsonEchartHeatbarFactory;
+import org.metachart.factory.json.chart.echart.js.type.category.JsonEchartCategoryLineFactory;
 import org.metachart.jsf.common.Data;
 import org.metachart.jsf.common.Title;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
@@ -71,6 +72,7 @@ public class Chart extends UINamingContainer
  	}
 	
 	private Title title;
+	
 	private Data data;
 	private Data categories;
 	private Data edges;
@@ -98,7 +100,6 @@ public class Chart extends UINamingContainer
         			case category: categories=c; break;
         			case edge: edges=c; break;
         		}
-        		
         	}
         }
 	}
@@ -123,15 +124,14 @@ public class Chart extends UINamingContainer
 		
 		writer.startElement("script", this);
 		
-		EchartProvider echart = EchartProvider.instance(writer);
-		
 		if(Objects.nonNull(type))
 		{
-			if(Objects.nonNull(scope) && scope.equals("demo")) {echart.demo(type,chartId);}
+			if(Objects.nonNull(scope) && scope.equals("demo")) {EchartProvider.instance(writer).demo(type,chartId);}
 			else
 			{
 				switch(JsonEchartFactory.Type.valueOf(type))
 				{
+					case line: JsonEchartCategoryLineFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data); break;
 					case heatbar: JsonEchartHeatbarFactory.instance(writer).id(chartId).jsf(chartId,grid,data); break;
 					case graph: JsonEchartGraphFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data,edges); break;
 					default: logger.warn("NYI"); break;

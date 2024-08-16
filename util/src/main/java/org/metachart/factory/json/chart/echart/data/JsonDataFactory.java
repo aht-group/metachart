@@ -1,5 +1,6 @@
 package org.metachart.factory.json.chart.echart.data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +12,8 @@ import org.metachart.model.json.chart.echart.data.JsonEdge;
 public class JsonDataFactory
 {	
 	private JsonData json;
+	
+	private List<LocalDateTime> times;
 	private List<String> strings;
 	private List<Double> doubles1;
 	private List<double[]> doubles2;
@@ -23,9 +26,11 @@ public class JsonDataFactory
 	
 	public JsonData build()
 	{
+		if(Objects.nonNull(times)) {json.setTimes(times.toArray(new LocalDateTime[times.size()]));}
 		if(Objects.nonNull(strings)) {json.setStrings(strings.toArray(new String[strings.size()]));}
 		if(Objects.nonNull(doubles1)) {json.setDoubles1(doubles1.stream().mapToDouble(Double::doubleValue).toArray());}
 		if(Objects.nonNull(doubles2)) {json.setDoubles2(doubles2.stream().toArray(double[][]::new));}
+		
 		return json;
 	}
 	
@@ -53,6 +58,15 @@ public class JsonDataFactory
 		doubles2.add(value);
 		return this;
 	}
+	public JsonDataFactory time(LocalDateTime ldt, double value)
+	{
+		if(Objects.isNull(times)) {times = new ArrayList<>();}
+		if(Objects.isNull(doubles1)) {doubles1 = new ArrayList<>();}
+		
+		times.add(ldt);
+		doubles1.add(value);
+		return this;
+	}
 	
 	public JsonDataFactory data(JsonData value)
 	{
@@ -67,13 +81,10 @@ public class JsonDataFactory
 		return this;
 	}
 	
-	public JsonDataFactory name(String value) {json.setName(value);return this;}
-	public JsonDataFactory category(int index) {json.setCategory(index);return this;}
-	
-	
-	
+	public JsonDataFactory name(String value) {json.setName(value); return this;}
+	public JsonDataFactory category(int index) {json.setCategory(index); return this;}
+
 	public static JsonData create() {return new JsonData();}
-	
 	public static JsonData build(String name)
 	{
 		JsonData json = JsonDataFactory.create();
