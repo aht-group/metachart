@@ -1,5 +1,7 @@
 package org.metachart.xml.graph;
 
+import java.nio.file.Paths;
+
 import org.metachart.test.AbstractMcXmlTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,6 @@ public abstract class AbstractXmlGraphTest <T extends Object> extends AbstractMc
 
 	public AbstractXmlGraphTest(Class<T> cXml)
 	{
-		super(cXml,"graph");
+		super(cXml,Paths.get("graph"));
 	}
 }
