@@ -10,6 +10,8 @@ public class JsonData implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
+//	private JsonData() {}
+	
 	@JsonProperty("name")
 	private String name;
 	public String getName() {return name;}
