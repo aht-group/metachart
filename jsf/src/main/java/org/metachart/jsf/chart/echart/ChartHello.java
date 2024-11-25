@@ -48,7 +48,7 @@ public class ChartHello extends UINamingContainer
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException
 	{
 		super.processEvent(event);
-		JsfUtil.pushJsToHead(this.getFacesContext(), "echarts", "5.4.2/echarts.min.js");
+		JsfUtil.pushJsToHead(this.getFacesContext(), "mcTypeScript", "dist/mc.bundle.js");
 	}
 	
 	@Override
