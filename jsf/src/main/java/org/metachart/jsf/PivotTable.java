@@ -38,46 +38,14 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
 	{
 		if(event instanceof PostAddToViewEvent)
 		{
-
-			// Include Pivot.js JavaScript
+			// Include metachart typescript library
 			UIOutput js = new UIOutput();
 			js.setRendererType("javax.faces.resource.Script");
-			js.getAttributes().put("library", "jsMetaChart");
-			js.getAttributes().put("name", "pivot.js");
+			js.getAttributes().put("library", "mcTypeScript");
+			js.getAttributes().put("name", "dist/pivot.bundle.js");
 			FacesContext context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, js, "head");
-
-			UIOutput jsMap = new UIOutput();
-			jsMap.setRendererType("javax.faces.resource.Script");
-			jsMap.getAttributes().put("library", "jsMetaChart");
-			jsMap.getAttributes().put("name", "pivot.js.map");
-			//context.getViewRoot().addComponentResource(context, jsMap, "head");
-
-
-			// Include FileSaver.js JavaScript
-			UIOutput jsfs = new UIOutput();
-			jsfs.setRendererType("javax.faces.resource.Script");
-			jsfs.getAttributes().put("library", "jsMetaChart");
-			jsfs.getAttributes().put("name", "fileSaver.js");
-			context = this.getFacesContext();
-			context.getViewRoot().addComponentResource(context, jsfs, "head");
-
-			// Include Export Renderers for Excel Export JavaScript
-			UIOutput jse = new UIOutput();
-			jse.setRendererType("javax.faces.resource.Script");
-			jse.getAttributes().put("library", "jsMetaChart");
-			jse.getAttributes().put("name", "export_renderers.js");
-			context = this.getFacesContext();
-			context.getViewRoot().addComponentResource(context, jse, "head");
-
-			// Include Aht Pivot functions.js JavaScript
-			UIOutput ahtPivotJs = new UIOutput();
-			ahtPivotJs.setRendererType("javax.faces.resource.Script");
-			ahtPivotJs.getAttributes().put("library", "jsMetaChart");
-			ahtPivotJs.getAttributes().put("name", "pivot_aht_functions.js");
-			context = this.getFacesContext();
-			context.getViewRoot().addComponentResource(context, ahtPivotJs, "head");
-
+			
 			// Include CSS
 	        UIOutput css = new UIOutput();
 			css.setRendererType("javax.faces.resource.Stylesheet");

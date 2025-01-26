@@ -13,9 +13,7 @@
 	</composite:interface>
 	        
 	<composite:implementation>
-		<h:outputScript library="viz.js" name="viz.js" target="head" />
-		<h:outputScript library="viz.js" name="full.render.js" target="head" />
-		 
+        <h:outputScript library="mcTypeScript" name="dist/mc.bundle.js" target="head" />
 		<div id="target_svg" style="text-align:center;"></div>
 		
         <h:outputStylesheet>
@@ -23,17 +21,15 @@
         </h:outputStylesheet>
         
         <h:outputScript>
-            var viz = new Viz();
             var dotScript = `#{cc.attrs.dotScript}`;
             if(dotScript){
-                viz.renderSVGElement(dotScript)
+                vizPromise
+                .then(viz => viz.renderSVGElement(dotScript))
                 .then(function(element) {
                     var elem = document.getElementById("target_svg");
                     elem.appendChild(element);
                 })
                 .catch(error => {
-                  // Create a new Viz instance
-                  viz = new Viz();
                   // Possibly display the error
                   console.error(error);
                 });

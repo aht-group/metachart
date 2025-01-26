@@ -22,8 +22,7 @@
 	</composite:interface>
 	        
 	<composite:implementation>
-        <h:outputScript rendered="#{cc.attrs.jquery}" library="jsMetaChart" name="jquery-1.9.1.min.js" target="head" />
-        <h:outputScript library="jsMetaChart" name="highchart-8.0.4/code/highcharts.js" target="head" />
+        <h:outputScript library="mcTypeScript" name="dist/hc.bundle.js" target="head" />
         <!-- 
         <div id="buttonrow">
 		  <button id="export-png">Export to PNG</button>
