@@ -55,11 +55,13 @@
    	   		<artifactId>jaxb-impl</artifactId>
    	   		<scope>provided</scope>
    	   	</dependency>
+   	   	
+   	   	<!-- 2025-02-10 tk: Removed
    	   	<dependency>
 			<groupId>org.jdom</groupId>
 			<artifactId>jdom</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
    	   	
    	   	<!-- JSON Jackson -->
 		<dependency>

@@ -87,22 +87,24 @@
 			<artifactId>jola-time</artifactId>
 		</dependency> -->
 		
-		<dependency>
-			<groupId>commons-jxpath</groupId>
-			<artifactId>commons-jxpath</artifactId>
-			<scope>provided</scope>
-		</dependency>
+		<!-- 2025-02-10 tk: Removed
 		<dependency>
 			<artifactId>jdom</artifactId>
 			<groupId>org.jdom</groupId>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- Apache Commons -->
+		<dependency>
+			<groupId>commons-jxpath</groupId>
+			<artifactId>commons-jxpath</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
