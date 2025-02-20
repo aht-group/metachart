@@ -32,6 +32,8 @@
 			<artifactId>metachart-xml</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		
 
 		<dependency>
 			<groupId>jfree</groupId>
@@ -93,9 +95,12 @@
 			<groupId>org.jdom</groupId>
 			<scope>test</scope>
 		</dependency> -->
+		
+		<!-- JAXB -->
 		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.9</version>
 			<scope>test</scope>
 		</dependency>
 		

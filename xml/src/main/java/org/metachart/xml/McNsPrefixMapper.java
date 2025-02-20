@@ -1,10 +1,7 @@
 package org.metachart.xml;
 
-import org.exlp.interfaces.io.NsPrefixMapperInterface;
-
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-
-public class McNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
+public class McNsPrefixMapper  // 2025-02-19 PrefixMapper deactivated
+								// extends NamespacePrefixMapper implements NsPrefixMapperInterface
 {
     public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix)
     {

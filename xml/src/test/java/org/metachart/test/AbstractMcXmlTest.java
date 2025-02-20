@@ -14,7 +14,7 @@ public abstract class AbstractMcXmlTest <T extends Object> extends AbstractXmlTe
 	
 	public AbstractMcXmlTest(Class<T> cXml, Path pSuffix)
 	{
-		super(cXml,Paths.get("geojsf","system","io","jaxb"),pSuffix);
+		super(cXml,Paths.get("metachart","system","io","jaxb"),pSuffix);
 	}
 	
 //	@BeforeClass

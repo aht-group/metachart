@@ -26,13 +26,20 @@
 	</dependencyManagement>
 	
 	<dependencies>
-		<!-- JAXB-XML -->
+	
+		<!-- XML Libraries -->
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-xml</artifactId>
 			<type>jar</type>
 			<classifier>javax</classifier>
-			<scope>provided</scope>
+			<scope>test</scope>
 		</dependency>
 	
 		<!-- ExLP  
@@ -44,17 +51,28 @@
 		</dependency>
 -->
 
-		<!-- JDOM -->
+		<!-- Jakarta EE -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
-   	   		<artifactId>jaxb-api</artifactId>
-   	   		<scope>provided</scope>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Utilities-->
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-util</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		
+		<!--
    	   	<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
    	   		<artifactId>jaxb-impl</artifactId>
    	   		<scope>provided</scope>
-   	   	</dependency>
+   	   	</dependency> -->
    	   	
    	   	<!-- 2025-02-10 tk: Removed
    	   	<dependency>
@@ -62,6 +80,14 @@
 			<artifactId>jdom</artifactId>
 			<scope>provided</scope>
 		</dependency> -->
+		
+		<!-- JAXB -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.9</version>
+			<scope>test</scope>
+		</dependency>
    	   	
    	   	<!-- JSON Jackson -->
 		<dependency>
@@ -75,11 +101,36 @@
 		   <scope>provided</scope>
 		</dependency>
 		
+		<!-- Apache Commons-->
+		<dependency>
+	 		<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+			<exclusions>
+        		<exclusion>
+        			<artifactId>commons-logging</artifactId>
+        			<groupId>commons-logging</groupId>
+        		</exclusion>
+        	</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.2</version>
+			<scope>test</scope>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -89,6 +140,11 @@
 		
 		<!-- Test -->
 		<dependency>
+   	   		<groupId>net.sf.exlp</groupId>
+   	   		<artifactId>exlp-test</artifactId>
+   	   		<scope>test</scope>
+		</dependency>
+		<dependency>
 	 		<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
@@ -97,17 +153,6 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.exlp</groupId>
-			<artifactId>exlp-util</artifactId>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-   	   		<groupId>net.sf.exlp</groupId>
-   	   		<artifactId>exlp-test</artifactId>
-   	   		<scope>test</scope>
 		</dependency>
 	</dependencies>
 	
