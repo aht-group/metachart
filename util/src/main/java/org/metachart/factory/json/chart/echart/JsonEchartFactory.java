@@ -16,7 +16,7 @@ import org.metachart.model.json.chart.echart.data.JsonLink;
 
 public class JsonEchartFactory
 {
-	public enum Type{line,time,sankey,heatmap,heatbar,graph, timeSeries}
+	public enum Type{line,time,sankey,heatmap,heatbar,graph, timeSeries,gauge}
 
 	private final Writer w;
 	private final JsonUtil jom;
@@ -105,30 +105,6 @@ public class JsonEchartFactory
 		w.write(sb.toString());
 		return sb.toString();
 	}
-
-	
-//	public String dataTime(JsonTsData data) throws IOException
-//	{
-//		StringBuilder sb = new StringBuilder();
-//		sb.append("\n");
-//		sb.append("\ndata").append(id).append(" = [");
-//		int i=0;
-//		for (Object[] jsonTsDataPair : data.getValue()) 
-//		{
-//			sb.append(" [");
-//			for(int j=0; j<jsonTsDataPair.length; j++)
-//			{
-//				sb.append(jsonTsDataPair[j].toString());
-//				if(j<jsonTsDataPair.length - 1) {sb.append(", ");}
-//			}
-//			sb.append("]");
-//			if(i<data.getValue().size() - 1) {sb.append(", ");}
-//			i++;
-//		}
-//		sb.append("];");
-//		w.write(sb.toString());
-//		return sb.toString();
-//	}
 
 	public void dataDoubles2(JsonData data) throws IOException {this.dataDoubles2(data,null);}
 	public void dataDoubles2(JsonData data, String transform) throws IOException

@@ -54,7 +54,6 @@ public class EchartDemoGraph implements EchartGraphDataProvider
 		series.setData(JsUtil.magicField("data"+id));
 		series.setEdges(JsUtil.magicField("edges"+id));
 		
-		
 		option.getSeries().add(series);
 		return option;
 	}
@@ -89,6 +88,4 @@ public class EchartDemoGraph implements EchartGraphDataProvider
 		jf.edge(JsonEdgeFactory.edge(2,3));
 		return jf.build();
 	}
-	
-	
 }

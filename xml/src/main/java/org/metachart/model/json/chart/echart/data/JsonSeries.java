@@ -62,6 +62,16 @@ public class JsonSeries implements Serializable
 	public String getCategories() {return categories;}
 	public void setCategories(String categories) {this.categories = categories;}
 
+	@JsonProperty("min")
+	private Double min;
+	public Double getMin() {return min;}
+	public void setMin(Double min) {this.min = min;}
+	
+	@JsonProperty("max")
+	private Double max;
+	public Double getMax() {return max;}
+	public void setMax(Double max) {this.max = max;}
+
 	@JsonProperty("data")
 	private String data;
 	public String getData() {return data;}

@@ -25,6 +25,7 @@ import org.metachart.factory.json.chart.echart.js.type.category.JsonEchartCatego
 import org.metachart.jsf.common.Data;
 import org.metachart.jsf.common.Title;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
+import org.metachart.util.provider.data.EchartLineCategoryDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -131,7 +132,7 @@ public class Chart extends UINamingContainer
 			{
 				switch(JsonEchartFactory.Type.valueOf(type))
 				{
-					case line: JsonEchartCategoryLineFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data); break;
+					case line: JsonEchartCategoryLineFactory.instance(writer).id(chartId).jsf(chartId,grid,EchartLineCategoryDataProvider.instance().categories(categories).data(data)); break;
 					case heatbar: JsonEchartHeatbarFactory.instance(writer).id(chartId).jsf(chartId,grid,data); break;
 					case graph: JsonEchartGraphFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data,edges); break;
 					default: logger.warn("NYI"); break;

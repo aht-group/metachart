@@ -66,7 +66,6 @@ public class JsonEchartHeatbarFactory
 		}
 		
 		JsonOption option = new JsonOption();
-		
 		option.setGrid(JsonGridFactory.instance().size(jsfGrid).margin(0,0,0,0).build());
 		
 		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();

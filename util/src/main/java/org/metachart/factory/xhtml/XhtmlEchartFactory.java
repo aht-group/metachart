@@ -11,12 +11,12 @@ import net.sf.exlp.util.xml.JDomUtil;
 
 public class XhtmlEchartFactory
 {
-	private String divCntainerId; public String getDivCntainerId() {return divCntainerId;} public void setDivCntainerId(String divCntainerId) {this.divCntainerId = divCntainerId;}
+	private String divId; public String getDivId() {return divId;} 
 	
 	public static XhtmlEchartFactory instance() {return new XhtmlEchartFactory();}
 	private XhtmlEchartFactory()
 	{
-		divCntainerId = "chart-container";
+		divId = "chart-container";
 	}
 	
 	public void write(Path path, StringWriter w) throws IOException
@@ -58,7 +58,7 @@ public class XhtmlEchartFactory
 	public Element body(String script) throws IOException
 	{
 		Element div = new Element("div");
-		div.setAttribute("id",divCntainerId);
+		div.setAttribute("id",divId);
 		div.setAttribute("class","metachart-echart");
 		
 		Element eScript = new Element("script");

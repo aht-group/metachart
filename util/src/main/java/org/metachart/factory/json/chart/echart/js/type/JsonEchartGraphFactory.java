@@ -94,7 +94,7 @@ public class JsonEchartGraphFactory implements EchartGraphDataProvider
 	{
 		StringWriter w = new StringWriter();
 		XhtmlEchartFactory xf = XhtmlEchartFactory.instance();
-		JsonEchartFactory fEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(xf.getDivCntainerId(),JsonHtmlFactory.build("canvas",false));
+		JsonEchartFactory fEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(xf.getDivId(),JsonHtmlFactory.build("canvas",false));
 		EchartDemoGraph demo = EchartDemoGraph.instance(fEchart);
 		
 //		fEchart.letCategories("Node").letData().letEdges();

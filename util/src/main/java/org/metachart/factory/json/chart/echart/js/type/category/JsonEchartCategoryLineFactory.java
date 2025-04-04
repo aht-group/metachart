@@ -9,22 +9,15 @@ import org.exlp.util.io.JsUtil;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
-import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
-import org.metachart.factory.json.chart.echart.data.JsonEdgeFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGraph;
-import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.metachart.interfaces.chart.Data;
 import org.metachart.interfaces.data.EchartGraphDataProvider;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
-import org.metachart.model.json.graph.mc.JsonCategory;
-import org.metachart.model.json.graph.mc.JsonEdge;
-import org.metachart.model.json.graph.mc.JsonGraph;
-import org.metachart.model.json.graph.mc.JsonNode;
+import org.metachart.util.provider.data.EchartLineCategoryDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +40,7 @@ public class JsonEchartCategoryLineFactory implements EchartGraphDataProvider
 		id="";
 	}
 	
-	public void jsf(String div, JsonGrid grid, Data categories, Data data) throws IOException
+	public void jsf(String div, JsonGrid grid, EchartLineCategoryDataProvider provider) throws IOException
 	{	
 		if(Objects.isNull(grid)) {grid = JsonGridFactory.instance().size("200",null).build();}
 		
@@ -55,8 +48,11 @@ public class JsonEchartCategoryLineFactory implements EchartGraphDataProvider
 
 		jfEchart.declare(div,JsonHtmlFactory.build("svg",true,"100%",grid.getHeight()));
 		jfEchart.letData().letCategoriesX();
-		jfEchart.categories("X",categories.getValue());
-		jfEchart.dataDoubles1(data.getValue());
+		
+		if(Objects.nonNull(provider.getCategories())) {jfEchart.categories("X",provider.getCategories());}
+		
+		if(Objects.nonNull(provider.getData())) {jfEchart.dataDoubles1(provider.getData());}
+		
 		jfEchart.option(this.toOption());
 
 		jfEchart.init();
@@ -77,5 +73,4 @@ public class JsonEchartCategoryLineFactory implements EchartGraphDataProvider
 		
 		return option;
 	}
-	
 }

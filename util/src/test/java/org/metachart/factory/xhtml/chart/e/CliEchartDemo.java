@@ -1,4 +1,4 @@
-package org.metachart.factory.xhtml.chart;
+package org.metachart.factory.xhtml.chart.e;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -45,7 +45,7 @@ public class CliEchartDemo
 		html.getChildren().add(xhfEchart.head("Demo: "+type));
 
 		StringWriter sw = new StringWriter();
-		EchartProvider.instance(sw).demo(type,xhfEchart.getDivCntainerId());
+		EchartProvider.instance(sw).demo(type,xhfEchart.getDivId());
 
 		html.getChildren().add(xhfEchart.body(sw.toString()));
 
@@ -61,11 +61,12 @@ public class CliEchartDemo
 		Configuration config = McBootstrap.init();
 		CliEchartDemo cli = new CliEchartDemo(config);
 
-		cli.demo(JsonEchartFactory.Type.timeSeries);
-		//cli.demo(JsonEchartFactory.Type.line);
+//		cli.demo(JsonEchartFactory.Type.line);
+//		cli.demo(JsonEchartFactory.Type.timeSeries);
 //		cli.demo(JsonEchartFactory.Type.time);
+		
+		cli.demo(JsonEchartFactory.Type.gauge);
 
-//		cli.demo(JsonEchartFactory.Type.heatbar);
 //		cli.demo(JsonEchartFactory.Type.heatbar);
 //		cli.demo(JsonEchartFactory.Type.graph);
 	}

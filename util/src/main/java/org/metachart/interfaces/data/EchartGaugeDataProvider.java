@@ -2,8 +2,7 @@ package org.metachart.interfaces.data;
 
 import org.metachart.model.json.chart.echart.data.JsonData;
 
-public interface EchartLineDataProvider
+public interface EchartGaugeDataProvider
 {
-	JsonData getLineCategories();
-	JsonData getLineData();
+	JsonData getGaugeData();
 }
