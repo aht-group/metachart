@@ -5,6 +5,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.JsUtil;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
@@ -46,8 +47,11 @@ public class JsonEchartHeatbarFactory
 		
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
 
-		Double d = Double.valueOf(grid.getHeight());
-		jfEchart.declare(div,JsonHtmlFactory.build("svg",true,""+d*data.getValue().getDoubles1().length,grid.getHeight()));
+		Double dHeight = Double.valueOf(grid.getHeight());
+		Double dWidth = dHeight;
+		if(Objects.nonNull(data.getValue()) && ObjectUtils.isNotEmpty(data.getValue().getDoubles1())) {dWidth = dHeight*data.getValue().getDoubles1().length;}
+		
+		jfEchart.declare(div,JsonHtmlFactory.build("svg",true,""+dWidth,grid.getHeight()));
 		jfEchart.letData().letCategoriesX().letCategoriesY();
 		jfEchart.categories("x",this.xCategories(data));
 		jfEchart.categories("y",this.yCategories());
@@ -61,8 +65,9 @@ public class JsonEchartHeatbarFactory
 	{
 		if(Objects.nonNull(jsfGrid.getHeight()))
 		{
-			Double d = Double.valueOf(jsfGrid.getHeight());
-			jsfGrid.setWidth(""+d*data.getValue().getDoubles1().length);
+			Double d=1d; if(ObjectUtils.isNotEmpty(jsfGrid.getHeight())) {d= Double.valueOf(jsfGrid.getHeight());}
+			Integer w=1; if(Objects.nonNull(data.getValue())) {w = data.getValue().getDoubles1().length;}
+			jsfGrid.setWidth(""+d*w);
 		}
 		
 		JsonOption option = new JsonOption();
@@ -84,14 +89,23 @@ public class JsonEchartHeatbarFactory
 	}
 	
 	public JsonData yCategories() {return JsonDataFactory.instance().string("A").build();}
-	public JsonData xCategories(Data data) {return JsonDataFactory.instance().repeat(data.getValue().getDoubles1().length).build();}
+	public JsonData xCategories(Data data)
+	{
+		JsonDataFactory jf = JsonDataFactory.instance();
+		if(Objects.nonNull(data.getValue())) {jf.repeat(data.getValue().getDoubles1().length);}
+		else {jf.repeat(0);}
+		return jf.build();
+	}
 	
 	public JsonData toDoubles2(JsonData data)
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
-		for(int i=0;i<data.getDoubles1().length;i++)
+		if(Objects.nonNull(data) && ObjectUtils.isNotEmpty(data.getDoubles1()))
 		{
-			jf.double2(new double[] {i,0,data.getDoubles1()[i]});
+			for(int i=0;i<data.getDoubles1().length;i++)
+			{
+				jf.double2(new double[] {i,0,data.getDoubles1()[i]});
+			}
 		}
 		return jf.build();
 	}
