@@ -63,7 +63,7 @@ public class CliEchartDynamic
 		TxtRandomDataFactory tfRandom = TxtRandomDataFactory.instance().writer(sw);
 		TxtEchartFunctionFactory tfFunction = TxtEchartFunctionFactory.instance().writer(sw);
 		
-		txtChart.declare(xhfEchart.getDivId(),JsonHtmlFactory.build("canvas",false));
+		txtChart.declare(xhfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		txtChart.letData();
 		tfRandom.randomDataDate();
 		txtChart.option(apache());

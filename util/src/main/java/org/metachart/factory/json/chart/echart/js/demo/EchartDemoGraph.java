@@ -62,20 +62,20 @@ public class EchartDemoGraph implements EchartGraphDataProvider
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		
-		jf.data(JsonDataFactory.instance().name("Cat A").build());
-		jf.data(JsonDataFactory.instance().name("Cat B").build());
+		jf.data(JsonDataFactory.instance().name("Cat A").assemble());
+		jf.data(JsonDataFactory.instance().name("Cat B").assemble());
 		
-		return jf.build();
+		return jf.assemble();
 	}
 	
 	@Override public JsonData getGraphNodes()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
-		jf.data(JsonDataFactory.instance().name("Node 1").category(0).build());
-		jf.data(JsonDataFactory.instance().name("Node 2").category(1).build());
-		jf.data(JsonDataFactory.instance().name("Node 3").category(1).build());
-		jf.data(JsonDataFactory.instance().name("Node 4").category(1).build());
-		return jf.build();
+		jf.data(JsonDataFactory.instance().name("Node 1").category(0).assemble());
+		jf.data(JsonDataFactory.instance().name("Node 2").category(1).assemble());
+		jf.data(JsonDataFactory.instance().name("Node 3").category(1).assemble());
+		jf.data(JsonDataFactory.instance().name("Node 4").category(1).assemble());
+		return jf.assemble();
 	}
 	
 	@Override public JsonData getGraphEdges()
@@ -86,6 +86,6 @@ public class EchartDemoGraph implements EchartGraphDataProvider
 		jf.edge(JsonEdgeFactory.edge(0,3));
 		jf.edge(JsonEdgeFactory.edge(0,4));
 		jf.edge(JsonEdgeFactory.edge(2,3));
-		return jf.build();
+		return jf.assemble();
 	}
 }

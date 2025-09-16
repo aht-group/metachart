@@ -1,5 +1,8 @@
 package org.metachart.test;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.interfaces.system.property.Configuration;
@@ -7,6 +10,7 @@ import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class McBootstrap
 {
@@ -17,6 +21,8 @@ public class McBootstrap
 	public final static String cfgDirTmp = "dir.tmp";
 	public final static String xmlConfig = "metachart/system/property/mc.xml";
 
+	public static Path pTemp;
+	
 	private static Configuration config;
 	
 	public static Configuration init() {return init(xmlConfig);}
@@ -33,6 +39,8 @@ public class McBootstrap
 		configBootstrap.add(ExlpCentralConfigPointer.instance(System.metachart).jaxb(JaxbUtil.instance()).toPath("core"));
 		configBootstrap.add(configFile);
 		config = configBootstrap.wrap();
+		
+		pTemp = Paths.get(config.getString(McBootstrap.cfgDirTmp,java.lang.System.getProperty("java.io.tmpdir")));
 		
 		logger.debug("Config and Logger initialized");
 		return config;

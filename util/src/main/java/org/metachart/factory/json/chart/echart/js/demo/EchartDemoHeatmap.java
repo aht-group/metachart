@@ -64,7 +64,7 @@ public class EchartDemoHeatmap
 		{
 			jf.string(""+i);
         }
-		return jf.build();
+		return jf.assemble();
 	}
 	public JsonData demoCategoriesY()
 	{
@@ -73,7 +73,7 @@ public class EchartDemoHeatmap
 		{
 			jf.string(day.getDisplayName(java.time.format.TextStyle.FULL, java.util.Locale.ENGLISH));
         }
-		return jf.build();
+		return jf.assemble();
 	}
 	public JsonData demoData()
 	{
@@ -88,6 +88,6 @@ public class EchartDemoHeatmap
 				jf.double2(new double[] {x,y,value});
 			}
 		}
-		return jf.build();
+		return jf.assemble();
 	}
 }

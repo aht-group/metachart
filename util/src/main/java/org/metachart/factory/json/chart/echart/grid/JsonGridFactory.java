@@ -9,10 +9,10 @@ public class JsonGridFactory
 	public static JsonGridFactory instance() {return new JsonGridFactory();}
 	private JsonGridFactory()
 	{
-		json = JsonGridFactory.create();
+		json = JsonGridFactory.build();
 	}
 	 
-	public static JsonGrid create() {return new JsonGrid();}
+	public static JsonGrid build() {return new JsonGrid();}
 	
 	public JsonGridFactory show(Boolean show) {json.setShow(show); return this;}
 	public JsonGridFactory margin(int top, int left, int right, int bottom) {json.setTop(""+top); json.setLeft(""+left); json.setRight(""+right); json.setBottom(""+bottom); return this;}
@@ -20,5 +20,5 @@ public class JsonGridFactory
 	public JsonGridFactory size(int height, int width) {json.setHeight(""+height); json.setWidth(""+width); return this;}
 	public JsonGridFactory size(JsonGrid grid) {json.setHeight(grid.getHeight()); json.setWidth(grid.getWidth()); return this;}
 	
-	public JsonGrid build() {return json;}
+	public JsonGrid assemble() {return json;}
 }

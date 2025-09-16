@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.echart.js.type.category;
+package org.metachart.factory.json.chart.echart.js.line;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -11,47 +11,46 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
-import org.metachart.interfaces.chart.Data;
 import org.metachart.interfaces.data.EchartGraphDataProvider;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
-import org.metachart.util.provider.data.EchartLineCategoryDataProvider;
+import org.metachart.util.provider.data.EchartTimeDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonEchartCategoryLineFactory implements EchartGraphDataProvider
+public class JsonEchartTimeFactory implements EchartGraphDataProvider
 {
-	final static Logger logger = LoggerFactory.getLogger(JsonEchartCategoryLineFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(JsonEchartTimeFactory.class);
 	
 	private final Writer w;
-	private String id; public JsonEchartCategoryLineFactory id(String id) {this.id=id; return this;}
+	private String id; public JsonEchartTimeFactory id(String id) {this.id=id; return this;}
 	
 	private JsonData categories; @Override public JsonData getGraphCategories() {return categories;}
 	private JsonData nodes; @Override public JsonData getGraphNodes() {return nodes;}
 	private JsonData edges; @Override public JsonData getGraphEdges() {return edges;}
 	
-	public static JsonEchartCategoryLineFactory instance() {return new JsonEchartCategoryLineFactory(null);}
-	public static JsonEchartCategoryLineFactory instance(Writer w) {return new JsonEchartCategoryLineFactory(w);}
-	private JsonEchartCategoryLineFactory(Writer w)
+	public static JsonEchartTimeFactory instance() {return new JsonEchartTimeFactory(null);}
+	public static JsonEchartTimeFactory instance(Writer w) {return new JsonEchartTimeFactory(w);}
+	private JsonEchartTimeFactory(Writer w)
 	{
 		this.w=w;
 		id="";
 	}
 	
-	public void jsf(String div, JsonGrid grid, EchartLineCategoryDataProvider provider) throws IOException
+	public void jsf(JsonGrid grid, EchartTimeDataProvider provider) throws IOException
 	{	
-		if(Objects.isNull(grid)) {grid = JsonGridFactory.instance().size("200",null).build();}
+		if(Objects.isNull(grid)) {grid = JsonGridFactory.instance().size("200",null).assemble();}
 		
-		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
+		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);
 
-		jfEchart.declare(div,JsonHtmlFactory.build("svg",true,"100%",grid.getHeight()));
+		jfEchart.declare(id,JsonHtmlFactory.build(JsonHtmlFactory.Renderer.svg,true,"100%",grid.getHeight()));
 		jfEchart.letData().letCategoriesX();
 		
-		if(Objects.nonNull(provider.getCategories())) {jfEchart.categories("X",provider.getCategories());}
-		
-		if(Objects.nonNull(provider.getData())) {jfEchart.dataDoubles1(provider.getData());}
+//		if(Objects.nonNull(provider.getCategories())) {jfEchart.categories("X",provider.getCategories());}
+//		
+//		if(Objects.nonNull(provider.getData())) {jfEchart.dataDoubles1(provider.getData());}
 		
 		jfEchart.option(this.toOption());
 

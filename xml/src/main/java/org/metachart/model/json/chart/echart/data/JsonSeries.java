@@ -32,6 +32,11 @@ public class JsonSeries implements Serializable
 	public Boolean getShowSymbol() {return showSymbol;}
 	public void setShowSymbol(Boolean showSymbol) {this.showSymbol = showSymbol;}
 	
+	@JsonProperty("smooth")
+	private Boolean smooth;
+	public Boolean getSmooth() {return smooth;}
+	public void setSmooth(Boolean smooth) {this.smooth = smooth;}
+
 	@JsonProperty("lineStyle")
 	private JsonLineStyle lineStyle;
 	public JsonLineStyle getLineStyle() {return lineStyle;}

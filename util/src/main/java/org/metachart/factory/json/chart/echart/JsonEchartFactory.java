@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import org.exlp.util.io.JsUtil;
 import org.exlp.util.io.JsonUtil;
+import org.metachart.factory.txt.chart.TxtDataFactory;
 import org.metachart.model.json.chart.echart.JsonHtml;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
@@ -16,7 +17,9 @@ import org.metachart.model.json.chart.echart.data.JsonLink;
 
 public class JsonEchartFactory
 {
-	public enum Type{line,time,sankey,heatmap,heatbar,graph, timeSeries,gauge}
+	public enum Type{line,time,
+					heatmap,heatbar,
+					sankey,graph,gauge}
 
 	private final Writer w;
 	private final JsonUtil jom;
@@ -50,7 +53,8 @@ public class JsonEchartFactory
 		return this;
 	}
 
-	public JsonEchartFactory letData() throws IOException {w.write("\nlet data"+id+" = [];"); return this;}
+	public JsonEchartFactory letData() throws IOException {return this.letData(null);}
+	public JsonEchartFactory letData(String nr) throws IOException {w.write("\nlet "+TxtDataFactory.id(id,nr)+" = [];"); return this;}
 	public JsonEchartFactory letLinks() throws IOException {w.write("\nlet links"+id+" = [];");return this;}
 	public JsonEchartFactory letEdges() throws IOException {w.write("\nlet edges"+id+" = [];");return this;}
 	public JsonEchartFactory letCategories(String suffix) throws IOException {w.write("\nlet categories"+suffix+id+" = [];");return this;}
@@ -92,7 +96,7 @@ public class JsonEchartFactory
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\ndata").append(id).append(" = [");
+		sb.append("\n").append(TxtDataFactory.id(id,data.getId())).append(" = [");
 		for(int i=0; i<data.getTimes().length; i++)
 		{
 			sb.append(" [");

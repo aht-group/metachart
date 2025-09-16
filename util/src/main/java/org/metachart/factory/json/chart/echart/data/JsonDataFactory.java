@@ -24,7 +24,7 @@ public class JsonDataFactory
 		json = JsonDataFactory.create();
 	}
 	
-	public JsonData build()
+	public JsonData assemble()
 	{
 		if(Objects.nonNull(times)) {json.setTimes(times.toArray(new LocalDateTime[times.size()]));}
 		if(Objects.nonNull(strings)) {json.setStrings(strings.toArray(new String[strings.size()]));}
@@ -32,6 +32,12 @@ public class JsonDataFactory
 		if(Objects.nonNull(doubles2)) {json.setDoubles2(doubles2.stream().toArray(double[][]::new));}
 		
 		return json;
+	}
+	
+	public JsonDataFactory id(String seriesId)
+	{
+		json.setId(seriesId);
+		return this;
 	}
 	
 	public JsonDataFactory repeat(int number)
@@ -97,6 +103,6 @@ public class JsonDataFactory
 		Random rnd = new Random();
 		JsonDataFactory jf = JsonDataFactory.instance();
 		for(int i=0;i<size;i++) {jf.double1(rnd.nextInt(max));}
-		return jf.build();
+		return jf.assemble();
 	}
 }

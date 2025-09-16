@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.echart.js.type;
+package org.metachart.factory.json.chart.echart.js.heat;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -43,7 +43,7 @@ public class JsonEchartHeatbarFactory
 	
 	public void jsf(String div, JsonGrid grid, Data data) throws IOException
 	{	
-		if(Objects.isNull(grid)) {grid = JsonGridFactory.instance().size("12",null).build();}
+		if(Objects.isNull(grid)) {grid = JsonGridFactory.instance().size("12",null).assemble();}
 		
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
 
@@ -51,7 +51,7 @@ public class JsonEchartHeatbarFactory
 		Double dWidth = dHeight;
 		if(Objects.nonNull(data.getValue()) && ObjectUtils.isNotEmpty(data.getValue().getDoubles1())) {dWidth = dHeight*data.getValue().getDoubles1().length;}
 		
-		jfEchart.declare(div,JsonHtmlFactory.build("svg",true,""+dWidth,grid.getHeight()));
+		jfEchart.declare(div,JsonHtmlFactory.build(JsonHtmlFactory.Renderer.svg,true,""+dWidth,grid.getHeight()));
 		jfEchart.letData().letCategoriesX().letCategoriesY();
 		jfEchart.categories("x",this.xCategories(data));
 		jfEchart.categories("y",this.yCategories());
@@ -71,7 +71,7 @@ public class JsonEchartHeatbarFactory
 		}
 		
 		JsonOption option = new JsonOption();
-		option.setGrid(JsonGridFactory.instance().size(jsfGrid).margin(0,0,0,0).build());
+		option.setGrid(JsonGridFactory.instance().size(jsfGrid).margin(0,0,0,0).assemble());
 		
 		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
 		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).build());
@@ -88,13 +88,13 @@ public class JsonEchartHeatbarFactory
 		return option;
 	}
 	
-	public JsonData yCategories() {return JsonDataFactory.instance().string("A").build();}
+	public JsonData yCategories() {return JsonDataFactory.instance().string("A").assemble();}
 	public JsonData xCategories(Data data)
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		if(Objects.nonNull(data.getValue())) {jf.repeat(data.getValue().getDoubles1().length);}
 		else {jf.repeat(0);}
-		return jf.build();
+		return jf.assemble();
 	}
 	
 	public JsonData toDoubles2(JsonData data)
@@ -107,6 +107,6 @@ public class JsonEchartHeatbarFactory
 				jf.double2(new double[] {i,0,data.getDoubles1()[i]});
 			}
 		}
-		return jf.build();
+		return jf.assemble();
 	}
 }

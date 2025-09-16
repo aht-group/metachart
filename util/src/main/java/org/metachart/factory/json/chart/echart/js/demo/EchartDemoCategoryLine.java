@@ -62,7 +62,7 @@ public class EchartDemoCategoryLine
 		jf.string("Fri");
 		jf.string("Sat");
 		jf.string("Sun");
-		return jf.build();
+		return jf.assemble();
 	}
 	
 	public static JsonData toData()
@@ -75,6 +75,6 @@ public class EchartDemoCategoryLine
 		jf.double1(2);
 		jf.double1(3);
 		jf.double1(3);
-		return jf.build();
+		return jf.assemble();
 	}
 }

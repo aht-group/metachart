@@ -56,7 +56,7 @@ public class EchartDemoGauge implements EchartGaugeDataProvider
 		JsonDataFactory jf = JsonDataFactory.instance();
 		jf.double1(400);
 
-		return jf.build();
+		return jf.assemble();
 	}
 	
 }

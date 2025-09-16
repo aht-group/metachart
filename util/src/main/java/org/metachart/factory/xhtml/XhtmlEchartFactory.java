@@ -16,7 +16,7 @@ public class XhtmlEchartFactory
 	public static XhtmlEchartFactory instance() {return new XhtmlEchartFactory();}
 	private XhtmlEchartFactory()
 	{
-		divId = "chart-container";
+		divId = "ChartContainer";
 	}
 	
 	public void write(Path path, StringWriter w) throws IOException
@@ -43,7 +43,7 @@ public class XhtmlEchartFactory
 		
 		Element css = new Element("style");
 		css.setText("* {margin: 0; padding: 0;}"
-				+ "\n#chart-container {position: relative; height: 100vh; overflow: hidden;}"
+				+ "\n#"+divId+" {position: relative; height: 100vh; overflow: hidden;}"
 				+ "\n.metachart-echart {border: 1px dotted blue;}");
 		
 		Element head = new Element("head");

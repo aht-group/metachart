@@ -12,10 +12,9 @@ import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGraph;
+import org.metachart.factory.json.chart.echart.js.graph.JsonEchartGraphFactory;
+import org.metachart.factory.json.chart.echart.js.line.JsonEchartCategoryFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoCategoryLine;
-import org.metachart.factory.json.chart.echart.js.type.JsonEchartGraphFactory;
-import org.metachart.factory.json.chart.echart.js.type.category.JsonEchartCategoryLineFactory;
-
 import org.metachart.factory.xhtml.XhtmlEchartFactory;
 import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
@@ -55,19 +54,31 @@ public class CliEchartDemo
 		JDomUtil.instance().omitDeclaration(true).info(doc);
 		JDomUtil.instance().omitDeclaration(true).write(doc,path.resolve("echart-"+type.toString()+".html"));
 	}
+	
+	public void all() throws IOException
+	{
+		for(JsonEchartFactory.Type type : JsonEchartFactory.Type.values())
+		{
+			this.demo(type);
+		}
+	}
+	
+	public void single() throws IOException
+	{
+		this.demo(JsonEchartFactory.Type.time);
+//		this.demo(JsonEchartFactory.Type.line);
+//		this.demo(JsonEchartFactory.Type.gauge);
+
+//		cli.demo(JsonEchartFactory.Type.heatbar);
+//		cli.demo(JsonEchartFactory.Type.graph);
+	}
 
 	public static void main (String[] args) throws Exception
 	{
 		Configuration config = McBootstrap.init();
 		CliEchartDemo cli = new CliEchartDemo(config);
 
-//		cli.demo(JsonEchartFactory.Type.line);
-//		cli.demo(JsonEchartFactory.Type.timeSeries);
-//		cli.demo(JsonEchartFactory.Type.time);
-		
-		cli.demo(JsonEchartFactory.Type.gauge);
-
-//		cli.demo(JsonEchartFactory.Type.heatbar);
-//		cli.demo(JsonEchartFactory.Type.graph);
+//		cli.all();
+		cli.single();
 	}
 }

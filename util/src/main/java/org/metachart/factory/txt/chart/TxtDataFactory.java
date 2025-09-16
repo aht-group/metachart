@@ -1,9 +1,21 @@
 package org.metachart.factory.txt.chart;
 
+import java.util.Objects;
+
 import org.metachart.model.json.chart.echart.data.JsonData;
 
 public class TxtDataFactory
-{	
+{
+	public static String id(String chartId, String seriesId)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("data");
+		if(Objects.nonNull(seriesId)) {sb.append(seriesId);}
+		sb.append(chartId);
+		
+		return sb.toString();
+	}
+	
 	public static String double1ToInteger1(JsonData data)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -16,4 +28,5 @@ public class TxtDataFactory
 		sb.append("]");
 		return sb.toString();
 	}
+	
 }

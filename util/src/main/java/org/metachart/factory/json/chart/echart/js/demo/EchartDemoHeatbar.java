@@ -37,7 +37,7 @@ public class EchartDemoHeatbar
 	
 	public void demo() throws IOException
 	{
-		org.metachart.factory.json.chart.echart.js.type.JsonEchartHeatbarFactory fHeatbar = org.metachart.factory.json.chart.echart.js.type.JsonEchartHeatbarFactory.instance();
+		org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory fHeatbar = org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory.instance();
 		
 		fEchart.letData().letCategoriesX().letCategoriesY();
 		fEchart.categories("x",this.categoriesX());
@@ -49,7 +49,7 @@ public class EchartDemoHeatbar
 	public JsonOption demoOption()
 	{
 		JsonOption option = new JsonOption();
-		option.setGrid(JsonGridFactory.instance().size(12,(12*24)).margin(5,5,5,5).build());
+		option.setGrid(JsonGridFactory.instance().size(12,(12*24)).margin(5,5,5,5).assemble());
 		
 		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
 		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).build());
@@ -73,7 +73,7 @@ public class EchartDemoHeatbar
 		{
 			jf.string(""+i);
         }
-		return jf.build();
+		return jf.assemble();
 	}
 	private JsonData demoData()
 	{
@@ -85,6 +85,6 @@ public class EchartDemoHeatbar
 			if(value<0) {value=0;}
 			jf.double1(value);
 		}
-		return jf.build();
+		return jf.assemble();
 	}
 }

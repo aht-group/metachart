@@ -17,15 +17,17 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.jx.ComponentAttribute;
 import org.exlp.util.jx.JsfUtil;
 import org.metachart.factory.json.chart.EchartProvider;
-import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
-import org.metachart.factory.json.chart.echart.js.type.JsonEchartGraphFactory;
-import org.metachart.factory.json.chart.echart.js.type.JsonEchartHeatbarFactory;
-import org.metachart.factory.json.chart.echart.js.type.category.JsonEchartCategoryLineFactory;
+import org.metachart.factory.json.chart.echart.js.graph.JsonEchartGraphFactory;
+import org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory;
+import org.metachart.factory.json.chart.echart.js.line.JsonEchartCategoryFactory;
+import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
 import org.metachart.jsf.common.Data;
 import org.metachart.jsf.common.Title;
+import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.util.provider.data.EchartLineCategoryDataProvider;
+import org.metachart.util.provider.data.EchartTimeDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -115,7 +117,7 @@ public class Chart extends UINamingContainer
 		logger.trace("type: "+type+" "+this.getClientId());
 		
 		JsonGrid grid = null;
-		if(ObjectUtils.anyNotNull(height)) {grid = JsonGridFactory.instance().size(height,null).build();}
+		if(ObjectUtils.anyNotNull(height)) {grid = JsonGridFactory.instance().size(height,null).assemble();}
 		
 		writer.startElement("div",this);
 		writer.writeAttribute("id",chartId,null);
@@ -130,9 +132,10 @@ public class Chart extends UINamingContainer
 			if(Objects.nonNull(scope) && scope.equals("demo")) {EchartProvider.instance(writer).demo(type,chartId);}
 			else
 			{
-				switch(JsonEchartFactory.Type.valueOf(type))
+				switch(JsonEchart.Type.valueOf(type))
 				{
-					case line: JsonEchartCategoryLineFactory.instance(writer).id(chartId).jsf(chartId,grid,EchartLineCategoryDataProvider.instance().categories(categories).data(data)); break;
+					case time: JsonEchartTimeFactory.instance(writer).id(chartId).jsf(grid,EchartTimeDataProvider.instance().data(data)); break;
+					case category: JsonEchartCategoryFactory.instance(writer).id(chartId).jsf(chartId,grid,EchartLineCategoryDataProvider.instance().categories(categories).data(data)); break;
 					case heatbar: JsonEchartHeatbarFactory.instance(writer).id(chartId).jsf(chartId,grid,data); break;
 					case graph: JsonEchartGraphFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data,edges); break;
 					default: logger.warn("NYI"); break;

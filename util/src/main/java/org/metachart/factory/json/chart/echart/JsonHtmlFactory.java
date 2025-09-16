@@ -3,20 +3,37 @@ package org.metachart.factory.json.chart.echart;
 import org.metachart.model.json.chart.echart.JsonHtml;
 
 public class JsonHtmlFactory
-{	
-	public static JsonHtml build() {return new JsonHtml();}
-	public static JsonHtml build(String renderer, Boolean useDirtyRect)
+{
+	public enum Renderer {svg,canvas}
+	
+	
+	private JsonHtml json;
+	
+	public static JsonHtmlFactory instance() {return new JsonHtmlFactory();}
+	private JsonHtmlFactory()
 	{
-		JsonHtml json = JsonHtmlFactory.build();
-		json.setRenderer(renderer);
-		json.setUseDirtyRect(useDirtyRect);
-		return json;
+		json = JsonHtmlFactory.build();
+		json.setRenderer(Renderer.svg.toString());
+		json.setUseDirtyRect(true);
 	}
-	public static JsonHtml build(String renderer, Boolean useDirtyRect, String width, String height)
+	
+	
+	
+	public JsonHtml assemble(){return json;}
+	
+	public static JsonHtml build(Renderer renderer, Boolean useDirtyRect, String width, String height)
 	{
-		JsonHtml json = build(renderer, useDirtyRect);
+		JsonHtml json = JsonHtmlFactory.build(renderer, useDirtyRect);
 		json.setWidth(width);
 		json.setHeight(height);
 		return json;
 	}
+	public static JsonHtml build(Renderer renderer, Boolean useDirtyRect)
+	{
+		JsonHtml json = JsonHtmlFactory.build();
+		json.setRenderer(renderer.toString());
+		json.setUseDirtyRect(useDirtyRect);
+		return json;
+	}
+	public static JsonHtml build() {return new JsonHtml();}
 }

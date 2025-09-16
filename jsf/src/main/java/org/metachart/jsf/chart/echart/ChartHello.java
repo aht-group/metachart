@@ -95,7 +95,7 @@ public class ChartHello extends UINamingContainer
 		TxtRandomDataFactory tfRandom = TxtRandomDataFactory.instance().writer(writer);
 		TxtEchartFunctionFactory tfFunction = TxtEchartFunctionFactory.instance().writer(writer);
 		
-		txtChart.declare(chartId,JsonHtmlFactory.build("canvas",false));
+		txtChart.declare(chartId,JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		txtChart.letData();
 		
 		tfRandom.randomDataDate();

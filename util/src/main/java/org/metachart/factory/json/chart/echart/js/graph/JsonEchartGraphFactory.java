@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.echart.js.type;
+package org.metachart.factory.json.chart.echart.js.graph;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -49,7 +49,7 @@ public class JsonEchartGraphFactory implements EchartGraphDataProvider
 		JsonEchartFactory f = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
 		EchartDemoGraph demo = EchartDemoGraph.instance(f).id(id);
 		
-		f.declare(div,JsonHtmlFactory.build("canvas",false));
+		f.declare(div,JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		f.categories("Node",categories.getValue().getData());
 		f.data(data.getValue().getData());
 		f.edges(edges.getValue().getEdges());
@@ -67,9 +67,9 @@ public class JsonEchartGraphFactory implements EchartGraphDataProvider
 		JsonDataFactory jfNodes = JsonDataFactory.instance();
 		for(JsonNode node : graph.getNodes())
 		{
-			jfNodes.data(JsonDataFactory.instance().name(node.getLabel()).category(graph.getCategories().indexOf(node.getCategory())).build());
+			jfNodes.data(JsonDataFactory.instance().name(node.getLabel()).category(graph.getCategories().indexOf(node.getCategory())).assemble());
 		}
-		nodes = jfNodes.build();
+		nodes = jfNodes.assemble();
 		
 		JsonDataFactory jfEdges = JsonDataFactory.instance();
 		for(JsonEdge edge : graph.getEdges())
@@ -78,14 +78,14 @@ public class JsonEchartGraphFactory implements EchartGraphDataProvider
 			int destination = graph.getNodes().indexOf(edge.getDestination());		
 			jfEdges.edge(JsonEdgeFactory.edge(source,destination));	
 		}
-		edges = jfEdges.build();
+		edges = jfEdges.assemble();
 		
 		JsonDataFactory jfCategory = JsonDataFactory.instance();
 		for(JsonCategory category : graph.getCategories())
 		{
 			jfCategory.data(JsonDataFactory.build(category.getLabel()));
 		}
-		categories = jfCategory.build();
+		categories = jfCategory.assemble();
 		
 		return this;
 	}
@@ -94,7 +94,7 @@ public class JsonEchartGraphFactory implements EchartGraphDataProvider
 	{
 		StringWriter w = new StringWriter();
 		XhtmlEchartFactory xf = XhtmlEchartFactory.instance();
-		JsonEchartFactory fEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(xf.getDivId(),JsonHtmlFactory.build("canvas",false));
+		JsonEchartFactory fEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).declare(xf.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		EchartDemoGraph demo = EchartDemoGraph.instance(fEchart);
 		
 //		fEchart.letCategories("Node").letData().letEdges();
