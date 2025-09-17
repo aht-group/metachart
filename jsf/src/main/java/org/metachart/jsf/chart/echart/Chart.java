@@ -1,6 +1,8 @@
 package org.metachart.jsf.chart.echart;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.faces.component.FacesComponent;
@@ -13,6 +15,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.jx.ComponentAttribute;
 import org.exlp.util.jx.JsfUtil;
@@ -25,8 +28,9 @@ import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
 import org.metachart.jsf.common.Data;
 import org.metachart.jsf.common.Title;
 import org.metachart.model.json.chart.echart.JsonEchart;
+import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
-import org.metachart.util.provider.data.EchartLineCategoryDataProvider;
+import org.metachart.util.provider.data.EchartCategoryDataProvider;
 import org.metachart.util.provider.data.EchartTimeDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +80,7 @@ public class Chart extends UINamingContainer
 	
 	private Title title;
 	
+	private List<org.metachart.interfaces.chart.Data> datas;
 	private Data data;
 	private Data categories;
 	private Data edges;
@@ -99,9 +104,18 @@ public class Chart extends UINamingContainer
         		org.metachart.jsf.common.Data c = (org.metachart.jsf.common.Data)child;
         		switch(Data.Type.valueOf(c.getType()))
         		{
-        			case data:	data=c; break;
+        			case data:	data=c; if(Objects.isNull(datas)) {datas = new ArrayList<>();} datas.add(c); break;
         			case category: categories=c; break;
         			case edge: edges=c; break;
+        		}
+        	}
+        	else if(child instanceof org.metachart.jsf.common.Datas)
+        	{
+        		org.metachart.jsf.common.Datas c = (org.metachart.jsf.common.Datas)child;
+        		if(Objects.isNull(datas)) {datas = new ArrayList<>();}
+        		for(JsonData d : ListUtils.emptyIfNull(c.getValue()))
+        		{
+        			datas.add(Data.instance(d));
         		}
         	}
         }
@@ -134,8 +148,8 @@ public class Chart extends UINamingContainer
 			{
 				switch(JsonEchart.Type.valueOf(type))
 				{
-					case time: JsonEchartTimeFactory.instance(writer).id(chartId).jsf(grid,EchartTimeDataProvider.instance().data(data)); break;
-					case category: JsonEchartCategoryFactory.instance(writer).id(chartId).jsf(chartId,grid,EchartLineCategoryDataProvider.instance().categories(categories).data(data)); break;
+					case time: JsonEchartTimeFactory.instance(writer).id(chartId).jsf(grid,EchartTimeDataProvider.instance().datas(datas)); break;
+					case category: JsonEchartCategoryFactory.instance(writer).id(chartId).jsf(grid,EchartCategoryDataProvider.instance().categories(categories).data(data)); break;
 					case heatbar: JsonEchartHeatbarFactory.instance(writer).id(chartId).jsf(chartId,grid,data); break;
 					case graph: JsonEchartGraphFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data,edges); break;
 					default: logger.warn("NYI"); break;

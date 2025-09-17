@@ -42,8 +42,8 @@ public class EchartDemoTime
 	private JsonOption toOption()
 	{
 		JsonOption option = new JsonOption();
-		option.setAxisX(JsonAxisFactory.instance().type("time").build());
-		option.setAxisY(JsonAxisFactory.instance().type("value").build());
+		option.setAxisX(JsonAxisFactory.instance().type("time").assemble());
+		option.setAxisY(JsonAxisFactory.instance().type("value").assemble());
 		
 		JsonSeries seriesA = new JsonSeries();
 		seriesA.setType(JsonEchartFactory.Type.line.toString());
@@ -66,7 +66,6 @@ public class EchartDemoTime
 	public static JsonData toData(String seriesId)
 	{
 		Random rnd = new Random();
-		
 		LocalDateTime ldt = LocalDateTime.now();
 		
 		JsonDataFactory jf = JsonDataFactory.instance().id(seriesId);
@@ -77,8 +76,7 @@ public class EchartDemoTime
 		jf.time(ldt.plusHours(21),3+rnd.nextDouble());
 		jf.time(ldt.plusHours(22),5+rnd.nextDouble());
 		jf.time(ldt.plusHours(23),4+rnd.nextDouble());
-		
-		JsonData data = jf.assemble();
-		return data;
+
+		return jf.assemble();
 	}
 }

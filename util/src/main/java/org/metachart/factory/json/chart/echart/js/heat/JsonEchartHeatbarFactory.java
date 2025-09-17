@@ -74,8 +74,8 @@ public class JsonEchartHeatbarFactory
 		option.setGrid(JsonGridFactory.instance().size(jsfGrid).margin(0,0,0,0).assemble());
 		
 		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
-		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).build());
-		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).build());
+		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).assemble());
+		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).assemble());
 		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
 		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
 		

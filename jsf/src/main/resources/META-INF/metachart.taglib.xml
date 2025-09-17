@@ -46,6 +46,16 @@
         </attribute>
 	</tag>
 	<tag>
+        <tag-name>datas</tag-name>
+        <component>
+             <component-type>org.metachart.jsf.common.Datas</component-type>
+        </component>
+        <attribute>
+            <name>value</name>
+            <type>java.util.List</type>
+        </attribute>
+	</tag>
+	<tag>
         <tag-name>axis</tag-name>
         <component>
              <component-type>org.metachart.jsf.common.Axis</component-type>

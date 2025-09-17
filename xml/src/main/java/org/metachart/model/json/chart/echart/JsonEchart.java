@@ -6,5 +6,6 @@ public class JsonEchart implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
-	public enum Type {time,category,heatbar,graph,sankey,gauge}
+	public enum Type {time,category,graph,sankey,gauge,
+						heatbar,heatmap}
 }

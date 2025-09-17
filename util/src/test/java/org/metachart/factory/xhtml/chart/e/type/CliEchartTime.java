@@ -5,22 +5,22 @@ import java.io.StringWriter;
 
 import org.exlp.interfaces.system.property.Configuration;
 import org.metachart.factory.json.chart.EchartProvider;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoCategory;
-import org.metachart.factory.json.chart.echart.js.line.JsonEchartCategoryFactory;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
+import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
 import org.metachart.factory.xhtml.chart.e.AbstractCliEchart;
 import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.test.McBootstrap;
-import org.metachart.util.provider.data.EchartCategoryDataProvider;
+import org.metachart.util.provider.data.EchartTimeDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CliEchartCategory extends AbstractCliEchart
+public class CliEchartTime extends AbstractCliEchart
 {
-	final static Logger logger = LoggerFactory.getLogger(CliEchartCategory.class);
+	final static Logger logger = LoggerFactory.getLogger(CliEchartTime.class);
 
-	public CliEchartCategory(Configuration config)
+	public CliEchartTime(Configuration config)
 	{
-		type = JsonEchart.Type.category;
+		type = JsonEchart.Type.time;
 		logger.info("Wrting to "+McBootstrap.pTemp.toString());
 	}
 
@@ -33,12 +33,12 @@ public class CliEchartCategory extends AbstractCliEchart
 	
 	public void jsf() throws IOException
 	{
-		EchartCategoryDataProvider dp = EchartCategoryDataProvider.instance();
-		dp.categories(EchartDemoCategory.toCategoriesX());
-		dp.data(EchartDemoCategory.toData());
+		EchartTimeDataProvider dp = EchartTimeDataProvider.instance();
+		dp.data(EchartDemoTime.toData("A"));
+		dp.data(EchartDemoTime.toData("B"));
 		
 		StringWriter sw = new StringWriter();
-		JsonEchartCategoryFactory f = JsonEchartCategoryFactory.instance(sw).id(xfEchart.getDivId()); 
+		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
 		f.jsf(null, dp);
 		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
 	}
@@ -46,7 +46,7 @@ public class CliEchartCategory extends AbstractCliEchart
 	public static void main (String[] args) throws Exception
 	{
 		Configuration config = McBootstrap.init();
-		CliEchartCategory cli = new CliEchartCategory(config);
+		CliEchartTime cli = new CliEchartTime(config);
 
 //		cli.demo();
 		cli.jsf();

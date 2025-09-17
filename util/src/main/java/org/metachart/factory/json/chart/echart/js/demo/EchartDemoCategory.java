@@ -13,16 +13,16 @@ import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EchartDemoCategoryLine
+public class EchartDemoCategory
 {
-	final static Logger logger = LoggerFactory.getLogger(EchartDemoCategoryLine.class);
+	final static Logger logger = LoggerFactory.getLogger(EchartDemoCategory.class);
 
 	private final JsonEchartFactory jfEchart;
 	
-	private String id; public EchartDemoCategoryLine id(String id) {this.id=id; return this;}
+	private String id; public EchartDemoCategory id(String id) {this.id=id; return this;}
 	
-	public static EchartDemoCategoryLine instance(JsonEchartFactory fEchart) {return new EchartDemoCategoryLine(fEchart);}
-	private EchartDemoCategoryLine(JsonEchartFactory jfEchart)
+	public static EchartDemoCategory instance(JsonEchartFactory fEchart) {return new EchartDemoCategory(fEchart);}
+	private EchartDemoCategory(JsonEchartFactory jfEchart)
 	{
 		this.jfEchart=jfEchart;
 		id="";
@@ -31,16 +31,16 @@ public class EchartDemoCategoryLine
 	public void demo() throws IOException
 	{
 		jfEchart.letCategories("X").letData();
-		jfEchart.categories("X",EchartDemoCategoryLine.toCategoriesX());
-		jfEchart.dataDoubles1(EchartDemoCategoryLine.toData());
+		jfEchart.categories("X",EchartDemoCategory.toCategoriesX());
+		jfEchart.dataDoubles1(EchartDemoCategory.toData());
 		jfEchart.option(this.toOption());
 	}
 	
 	public JsonOption toOption()
 	{
 		JsonOption option = new JsonOption();
-		option.setAxisX(JsonAxisFactory.instance().type("category").data("categoriesX").build());
-		option.setAxisY(JsonAxisFactory.instance().type("value").build());
+		option.setAxisX(JsonAxisFactory.instance().type("category").data("categoriesX").assemble());
+		option.setAxisY(JsonAxisFactory.instance().type("value").assemble());
 		
 		JsonSeries series = new JsonSeries();
 		series.setType(JsonEchartFactory.Type.line.toString());

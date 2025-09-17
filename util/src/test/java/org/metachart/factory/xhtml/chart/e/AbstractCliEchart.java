@@ -8,6 +8,7 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.xhtml.XhtmlEchartFactory;
+import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +20,11 @@ public class AbstractCliEchart
 	final static Logger logger = LoggerFactory.getLogger(AbstractCliEchart.class);
 
 	protected final XhtmlEchartFactory xfEchart;
-	protected JsonEchartFactory.Type type;
+	protected JsonEchart.Type type;
 
 	public AbstractCliEchart()
 	{
 		xfEchart = XhtmlEchartFactory.instance();
-
-		type = JsonEchartFactory.Type.line;
 		logger.info("Wrting to "+McBootstrap.pTemp.toString());
 	}
 	

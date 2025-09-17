@@ -11,13 +11,12 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
-import org.metachart.interfaces.chart.Data;
 import org.metachart.interfaces.data.EchartGraphDataProvider;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
-import org.metachart.util.provider.data.EchartLineCategoryDataProvider;
+import org.metachart.util.provider.data.EchartCategoryDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,13 +39,13 @@ public class JsonEchartCategoryFactory implements EchartGraphDataProvider
 		id="";
 	}
 	
-	public void jsf(String div, JsonGrid grid, EchartLineCategoryDataProvider provider) throws IOException
+	public void jsf(JsonGrid grid, EchartCategoryDataProvider provider) throws IOException
 	{	
-		if(Objects.isNull(grid)) {grid = JsonGridFactory.instance().size("400",null).assemble();}
+		if(Objects.isNull(grid)) {grid = JsonGridFactory.fallback();}
 		
-		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
+		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);
 
-		jfEchart.declare(div,JsonHtmlFactory.instance().assemble());
+		jfEchart.declare(id,JsonHtmlFactory.instance().assemble());
 		jfEchart.letData().letCategoriesX();
 		
 		if(Objects.nonNull(provider.getCategories())) {jfEchart.categories("X",provider.getCategories());}
@@ -59,8 +58,8 @@ public class JsonEchartCategoryFactory implements EchartGraphDataProvider
 	public JsonOption toOption()
 	{
 		JsonOption option = new JsonOption();
-		option.setAxisX(JsonAxisFactory.instance(id).type("category").data("categoriesX").build());
-		option.setAxisY(JsonAxisFactory.instance().type("value").build());
+		option.setAxisX(JsonAxisFactory.instance(id).type("category").data("categoriesX").assemble());
+		option.setAxisY(JsonAxisFactory.instance().type("value").assemble());
 		
 		JsonSeries series = new JsonSeries();
 		series.setType(JsonEchartFactory.Type.line.toString());

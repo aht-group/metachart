@@ -10,12 +10,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
-
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGraph;
-import org.metachart.factory.json.chart.echart.js.graph.JsonEchartGraphFactory;
-import org.metachart.factory.json.chart.echart.js.line.JsonEchartCategoryFactory;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoCategoryLine;
 import org.metachart.factory.xhtml.XhtmlEchartFactory;
+import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +33,7 @@ public class CliEchartDemo
 		logger.info("Wrting to "+path.toString());
 	}
 
-	public void demo(JsonEchartFactory.Type type) throws IOException
+	public void demo(JsonEchart.Type type) throws IOException
 	{
 		Element html = new Element("html");
 		html.setAttribute("lang","en");
@@ -57,7 +53,7 @@ public class CliEchartDemo
 	
 	public void all() throws IOException
 	{
-		for(JsonEchartFactory.Type type : JsonEchartFactory.Type.values())
+		for(JsonEchart.Type type : JsonEchart.Type.values())
 		{
 			this.demo(type);
 		}
@@ -65,7 +61,7 @@ public class CliEchartDemo
 	
 	public void single() throws IOException
 	{
-		this.demo(JsonEchartFactory.Type.time);
+		this.demo(JsonEchart.Type.time);
 //		this.demo(JsonEchartFactory.Type.line);
 //		this.demo(JsonEchartFactory.Type.gauge);
 

@@ -16,13 +16,13 @@ public class JsonAxisFactory
 		json = JsonAxisFactory.create();
 		this.id=id;
 	}
-	 
-	public static JsonAxis create() {return new JsonAxis();}
 	
 	public JsonAxisFactory show(Boolean show) {json.setShow(show); return this;}
 	public JsonAxisFactory type(String type) {json.setType(type); return this;}
 	public JsonAxisFactory data(String data) {json.setData(JsUtil.magicField(data+id)); return this;}
 	public JsonAxisFactory splitArea(JsonSplitArea splitArea) {json.setSplitArea(splitArea); return this;}
 	
-	public JsonAxis build() {return json;}
+	public JsonAxis assemble() {return json;}
+	
+	public static JsonAxis create() {return new JsonAxis();}
 }

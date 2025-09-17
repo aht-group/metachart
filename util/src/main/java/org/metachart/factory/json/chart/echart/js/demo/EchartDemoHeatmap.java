@@ -42,8 +42,8 @@ public class EchartDemoHeatmap
 		JsonOption option = new JsonOption();
 		
 		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
-		option.setAxisX(JsonAxisFactory.instance().type("category").data("xCategories").splitArea(splitArea).build());
-		option.setAxisY(JsonAxisFactory.instance().type("category").data("yCategories").splitArea(splitArea).build());
+		option.setAxisX(JsonAxisFactory.instance().type("category").data("xCategories").splitArea(splitArea).assemble());
+		option.setAxisY(JsonAxisFactory.instance().type("category").data("yCategories").splitArea(splitArea).assemble());
 		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
 		
 		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
