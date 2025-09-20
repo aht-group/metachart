@@ -1,4 +1,4 @@
-package org.metachart.factory.xhtml.chart.e.type;
+package org.metachart.factory.xhtml.chart.e.family;
 
 import java.io.IOException;
 import java.io.StringWriter;

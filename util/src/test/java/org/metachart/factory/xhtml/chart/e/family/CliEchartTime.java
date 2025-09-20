@@ -1,14 +1,16 @@
-package org.metachart.factory.xhtml.chart.e.type;
+package org.metachart.factory.xhtml.chart.e.family;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
 import org.exlp.interfaces.system.property.Configuration;
+import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
 import org.metachart.factory.xhtml.chart.e.AbstractCliEchart;
 import org.metachart.model.json.chart.echart.JsonEchart;
+import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.test.McBootstrap;
 import org.metachart.util.provider.data.EchartTimeDataProvider;
 import org.slf4j.Logger;
@@ -36,6 +38,21 @@ public class CliEchartTime extends AbstractCliEchart
 		EchartTimeDataProvider dp = EchartTimeDataProvider.instance();
 		dp.data(EchartDemoTime.toData("A"));
 		dp.data(EchartDemoTime.toData("B"));
+		JsonUtil.instance().write(dp.getDatas(), McBootstrap.pTemp.resolve("datas-"+type.toString()+".json"));
+		
+		StringWriter sw = new StringWriter();
+		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
+		f.jsf(null, dp);
+		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
+	}
+	
+	public void app() throws IOException
+	{
+		EchartTimeDataProvider dp = EchartTimeDataProvider.instance();
+//		dp.data(EchartDemoTime.toData("A"));
+		
+		JsonData[] datas = JsonUtil.instance().readArray(JsonData[].class,McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.time+".app.json"));
+		dp.datas(datas);
 		
 		StringWriter sw = new StringWriter();
 		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
@@ -49,6 +66,7 @@ public class CliEchartTime extends AbstractCliEchart
 		CliEchartTime cli = new CliEchartTime(config);
 
 //		cli.demo();
-		cli.jsf();
+//		cli.jsf();
+		cli.app();
 	}
 }

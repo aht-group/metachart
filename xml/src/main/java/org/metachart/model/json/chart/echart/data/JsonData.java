@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 public class JsonData implements Serializable
 {
@@ -33,6 +38,9 @@ public class JsonData implements Serializable
 	public void setStrings(String[] strings) {this.strings = strings;}
 	
 	@JsonProperty("times")
+//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS")
+//	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+//	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	private LocalDateTime[] times;
 	public LocalDateTime[] getTimes() {return times;}
 	public void setTimes(LocalDateTime[] times) {this.times = times;}

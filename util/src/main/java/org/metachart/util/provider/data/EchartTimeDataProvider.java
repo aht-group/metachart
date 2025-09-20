@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.metachart.interfaces.chart.Data;
 import org.metachart.model.json.chart.echart.data.JsonData;
 
@@ -30,6 +31,12 @@ public class EchartTimeDataProvider
 		return this;
 	}
 	public EchartTimeDataProvider data(Data data) {return this.data(data.getValue());}
+	
+	public EchartTimeDataProvider datas(JsonData[] datas)
+	{
+		if(ObjectUtils.isNotEmpty(datas)) {for(JsonData data : datas) {this.data(data);}}
+		return this;
+	}
 	public EchartTimeDataProvider data(JsonData data)
 	{
 		if(Objects.isNull(datas)) {datas = new ArrayList<>();}
