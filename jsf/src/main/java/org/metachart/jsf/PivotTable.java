@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
@@ -28,10 +29,11 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
 {
 	final static Logger logger = LoggerFactory.getLogger(PivotTable.class);
 
-	private static enum Attribute {data,locale,saveBean,saveMethod}
+	private static enum Attribute {data,locale,saveBean,saveMethod,showSaveButton}
 
 	private String data; public String getData() {return data;} public void setData(String data) {this.data = data;}
 	private String locale; public String getLocale() {return locale;} public void setLocale(String locale) {this.locale = locale;}
+	private Boolean showSaveButton; public Boolean getShowSaveButton() {return showSaveButton;} public void setShowSaveButton(Boolean showSaveButton) {this.showSaveButton = showSaveButton;}
 
 	@Override
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException
@@ -45,7 +47,7 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
 			js.getAttributes().put("name", "dist/pivot.bundle.js");
 			FacesContext context = this.getFacesContext();
 			context.getViewRoot().addComponentResource(context, js, "head");
-			
+
 			// Include CSS
 	        UIOutput css = new UIOutput();
 			css.setRendererType("javax.faces.resource.Stylesheet");
@@ -261,9 +263,13 @@ public class PivotTable extends UINamingContainer implements ClientBehaviorHolde
         writer.startElement("div", this);
         writer.writeAttribute("id", this.getClientId(), null);
         writer.write("<div id='output' style='margin: 10px;'></div>");
-        writer.write("<div>");
-        writer.write("<input type='button' value='Save' id='save' onclick=\"saveRowColumnConfig('" + this.getClientId() + "')\"/>");
-        writer.write("</div>");
+		// showSaveButton only when specifically set to true
+		if(Objects.nonNull(showSaveButton) && showSaveButton)
+		{
+			writer.write("<div>");
+        	writer.write("<input type='button' value='Save' id='save' onclick=\"saveRowColumnConfig('" + this.getClientId() + "')\"/>");
+        	writer.write("</div>");
+		}
         writer.endElement("div");
 
         writer.writeText(System.getProperty("line.separator"), null);
