@@ -25,6 +25,13 @@ public class CliEchartTime extends AbstractCliEchart
 		type = JsonEchart.Type.time;
 		logger.info("Wrting to "+McBootstrap.pTemp.toString());
 	}
+	
+	public void data()
+	{
+		JsonData data = EchartDemoTime.toData("A");
+		JsonUtil.info(data);
+		logger.info(JsonUtil.instance().toFormattedString(data));
+	}
 
 	public void demo() throws IOException
 	{
@@ -65,8 +72,9 @@ public class CliEchartTime extends AbstractCliEchart
 		Configuration config = McBootstrap.init();
 		CliEchartTime cli = new CliEchartTime(config);
 
-//		cli.demo();
+		cli.data();
+		cli.demo();
 //		cli.jsf();
-		cli.app();
+//		cli.app();
 	}
 }

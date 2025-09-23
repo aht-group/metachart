@@ -38,9 +38,9 @@ public class JsonData implements Serializable
 	public void setStrings(String[] strings) {this.strings = strings;}
 	
 	@JsonProperty("times")
-//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS")
-//	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-//	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
+	@JsonDeserialize(contentUsing = LocalDateTimeDeserializer.class)
+	@JsonSerialize(contentUsing = LocalDateTimeSerializer.class)
 	private LocalDateTime[] times;
 	public LocalDateTime[] getTimes() {return times;}
 	public void setTimes(LocalDateTime[] times) {this.times = times;}

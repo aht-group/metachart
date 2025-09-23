@@ -12,6 +12,7 @@ import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.txt.chart.TxtDataFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +37,11 @@ public class EchartDemoTime
 		jfEchart.letData("A").letData("B");
 		jfEchart.dataTime(EchartDemoTime.toData("A"));
 		jfEchart.dataTime(EchartDemoTime.toData("B"));
-		jfEchart.option(this.toOption());
+		jfEchart.option(this.toOption(true));
 	}
 	
-	private JsonOption toOption()
+	
+	public JsonOption toOption(boolean withMagic)
 	{
 		JsonOption option = new JsonOption();
 		option.setAxisX(JsonAxisFactory.instance().type("time").assemble());
@@ -47,11 +49,11 @@ public class EchartDemoTime
 		
 		JsonSeries seriesA = new JsonSeries();
 		seriesA.setType(JsonEchartFactory.Type.line.toString());
-		seriesA.setData(JsUtil.magicField(TxtDataFactory.id(id,"A")));
+		seriesA.setData(withMagic ? JsUtil.magicField(TxtDataFactory.dataId(id,"A")) : TxtDataFactory.id(id,"A"));
 		
 		JsonSeries seriesB = new JsonSeries();
 		seriesB.setType(JsonEchartFactory.Type.line.toString());
-		seriesB.setData(JsUtil.magicField(TxtDataFactory.id(id,"B")));
+		seriesB.setData(withMagic ? JsUtil.magicField(TxtDataFactory.dataId(id,"B")) : TxtDataFactory.id(id,"B"));
 		seriesB.setSmooth(true);
 		
 		option.setSeries(new ArrayList<>());
@@ -63,20 +65,34 @@ public class EchartDemoTime
 		return option;
 	}
 	
+	public static JsonDatas toDatas()
+	{
+		JsonDatas datas = new JsonDatas();
+		datas.setList(new ArrayList<>());
+		datas.getList().add(EchartDemoTime.toData("A"));
+		datas.getList().add(EchartDemoTime.toData("B"));
+		return datas;
+	}
+	
 	public static JsonData toData(String seriesId)
 	{
 		Random rnd = new Random();
 		LocalDateTime ldt = LocalDateTime.now();
 		
 		JsonDataFactory jf = JsonDataFactory.instance().id(seriesId);
-		jf.time(ldt.plusHours(5),2+rnd.nextDouble());
-		jf.time(ldt.plusHours(10),3+rnd.nextDouble());
-		jf.time(ldt.plusHours(15),1+rnd.nextDouble());
-		jf.time(ldt.plusHours(20),2+rnd.nextDouble());
-		jf.time(ldt.plusHours(21),3+rnd.nextDouble());
-		jf.time(ldt.plusHours(22),5+rnd.nextDouble());
-		jf.time(ldt.plusHours(23),4+rnd.nextDouble());
+		EchartDemoTime.add(jf,ldt, 5, 2, rnd);
+		EchartDemoTime.add(jf,ldt, 10, 3, rnd);
+		EchartDemoTime.add(jf,ldt, 15, 1, rnd);
+		EchartDemoTime.add(jf,ldt, 20, 2, rnd);
+		EchartDemoTime.add(jf,ldt, 21, 3, rnd);
+		EchartDemoTime.add(jf,ldt, 22, 5, rnd);
+		EchartDemoTime.add(jf,ldt, 23, 4, rnd);
 
 		return jf.assemble();
+	}
+	
+	private static void add(JsonDataFactory jf, LocalDateTime ldt, int hours, double value, Random rnd)
+	{
+		jf.time(ldt.plusHours(hours),value+ 2*(rnd.nextDouble()-0.5));
 	}
 }

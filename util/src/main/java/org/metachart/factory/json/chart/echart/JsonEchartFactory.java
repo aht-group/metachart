@@ -2,7 +2,7 @@ package org.metachart.factory.json.chart.echart;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -54,7 +54,7 @@ public class JsonEchartFactory
 	}
 
 	public JsonEchartFactory letData() throws IOException {return this.letData(null);}
-	public JsonEchartFactory letData(String nr) throws IOException {w.write("\nlet "+TxtDataFactory.id(id,nr)+" = [];"); return this;}
+	public JsonEchartFactory letData(String nr) throws IOException {w.write("\nlet "+TxtDataFactory.dataId(id,nr)+" = [];"); return this;}
 	public JsonEchartFactory letLinks() throws IOException {w.write("\nlet links"+id+" = [];");return this;}
 	public JsonEchartFactory letEdges() throws IOException {w.write("\nlet edges"+id+" = [];");return this;}
 	public JsonEchartFactory letCategories(String suffix) throws IOException {w.write("\nlet categories"+suffix+id+" = [];");return this;}
@@ -94,13 +94,17 @@ public class JsonEchartFactory
 
 	public String dataTime(JsonData data) throws IOException
 	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\n").append(TxtDataFactory.id(id,data.getId())).append(" = [");
+		sb.append("\n").append(TxtDataFactory.dataId(id,data.getId())).append(" = [");
 		for(int i=0; i<data.getTimes().length; i++)
 		{
 			sb.append(" [");
-			sb.append(data.getTimes()[i].atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+//			sb.append(data.getTimes()[i].atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+//			sb.append(data.getTimes()[i].toString());
+			sb.append("\"").append(data.getTimes()[i].format(formatter)).append("\"");
 			sb.append(" , ").append(data.getDoubles1()[i]);
 			sb.append("]");
 			if(i<data.getTimes().length-1) {sb.append(", ");}

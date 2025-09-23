@@ -6,10 +6,16 @@ import org.metachart.model.json.chart.echart.data.JsonData;
 
 public class TxtDataFactory
 {
-	public static String id(String chartId, String seriesId)
+	public static String dataId(String chartId, String seriesId)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("data");
+		sb.append(TxtDataFactory.id(chartId, seriesId));
+		return sb.toString();
+	}
+	public static String id(String chartId, String seriesId)
+	{
+		StringBuilder sb = new StringBuilder();
 		if(Objects.nonNull(seriesId)) {sb.append(seriesId);}
 		sb.append(chartId);
 		

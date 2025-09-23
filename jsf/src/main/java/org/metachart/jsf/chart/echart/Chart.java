@@ -28,7 +28,9 @@ import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
 import org.metachart.jsf.common.Data;
 import org.metachart.jsf.common.Title;
 import org.metachart.model.json.chart.echart.JsonEchart;
+import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.util.provider.data.EchartCategoryDataProvider;
 import org.metachart.util.provider.data.EchartTimeDataProvider;
@@ -45,8 +47,10 @@ public class Chart extends UINamingContainer
 	private String scope; public String getScope() {return scope;} public void setScope(String scope) {this.scope = scope;}
 
 	private String height; public String getHeight() {return height;} public void setHeight(String height) {this.height = height;}
+	
+	private JsonOption option; public JsonOption getOption() {return option;} public void setOption(JsonOption option) {this.option = option;}
 
-	private static enum Attribute {scope,type,height}
+	private static enum Attribute {scope,type,height,option}
 
 	public Chart()
 	{
@@ -70,6 +74,7 @@ public class Chart extends UINamingContainer
 		type = ComponentAttribute.toString(ctx,this,Attribute.type,type);
 		scope = ComponentAttribute.toString(ctx,this,Attribute.scope,scope);
 		height = ComponentAttribute.toString(ctx,this,Attribute.height,height);
+		option = ComponentAttribute.toObject(ctx, this, Attribute.option,null);
 		
 //		logger.info(StringUtil.stars());
 //		logger.info("ID:"+super.getId());
@@ -144,6 +149,16 @@ public class Chart extends UINamingContainer
 		if(Objects.nonNull(type))
 		{
 			if(Objects.nonNull(scope) && scope.equals("demo")) {EchartProvider.instance(writer).demo(type,chartId);}
+			else if(Objects.nonNull(option))
+			{
+				JsonDatas jDatas = org.metachart.jsf.common.Data.toJson(datas);
+				switch(JsonEchart.Type.valueOf(type))
+				{
+					case time: JsonEchartTimeFactory.instance(writer).id(chartId).json(grid,jDatas,option); break;
+				
+					default: logger.warn("NYI"); break;
+				}
+			}
 			else
 			{
 				switch(JsonEchart.Type.valueOf(type))

@@ -12,9 +12,11 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.txt.chart.TxtDataFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.util.provider.data.EchartTimeDataProvider;
@@ -38,6 +40,27 @@ public class JsonEchartTimeFactory //implements EchartGraphDataProvider
 	{
 		this.w=w;
 		id="";
+	}
+	
+	public void json(JsonGrid grid, JsonDatas datas, JsonOption option) throws IOException
+	{	
+		if(Objects.isNull(grid)) {grid = JsonGridFactory.fallback();}
+		
+		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);
+		jfEchart.declare(id,JsonHtmlFactory.instance().assemble());
+		
+		for(JsonData d : ListUtils.emptyIfNull(datas.getList()))
+		{
+			jfEchart.letData(d.getId());
+		}
+		
+		for(JsonData d : ListUtils.emptyIfNull(datas.getList()))
+		{
+			jfEchart.dataTime(d);
+		}
+
+		jfEchart.option(JsonOptionFactory.toMagicDatas(id,option));
+		jfEchart.init();
 	}
 	
 	public void jsf(JsonGrid grid, EchartTimeDataProvider provider) throws IOException
@@ -73,7 +96,7 @@ public class JsonEchartTimeFactory //implements EchartGraphDataProvider
 		{
 			JsonSeries series = new JsonSeries();
 			series.setType(JsonEchartFactory.Type.line.toString());
-			series.setData(JsUtil.magicField(TxtDataFactory.id(id,d.getId())));
+			series.setData(JsUtil.magicField(TxtDataFactory.dataId(id,d.getId())));
 			option.getSeries().add(series);
 		}
 		
