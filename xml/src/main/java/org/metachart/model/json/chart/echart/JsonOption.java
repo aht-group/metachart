@@ -6,6 +6,7 @@ import java.util.List;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonAxis;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
+import org.metachart.model.json.chart.echart.grid.JsonLegend;
 import org.metachart.model.json.chart.echart.grid.JsonTitle;
 import org.metachart.model.json.chart.echart.ui.JsonTooltip;
 import org.metachart.model.json.chart.echart.ui.JsonVisualMap;
@@ -37,6 +38,16 @@ public class JsonOption implements Serializable
 	public JsonAxis getAxisY() {return axisY;}
 	public void setAxisY(JsonAxis axisY) {this.axisY = axisY;}
 	
+	@JsonProperty("legend")
+	private JsonLegend legend;
+	
+	public JsonLegend getLegend() {
+		return legend;
+	}
+	public void setLegend(JsonLegend legend) {
+		this.legend = legend;
+	}
+
 	@JsonProperty("tooltip")
 	private JsonTooltip tooltip;
 	public JsonTooltip getTooltip() {return tooltip;}

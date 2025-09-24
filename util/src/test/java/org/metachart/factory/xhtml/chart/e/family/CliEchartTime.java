@@ -6,10 +6,12 @@ import java.io.StringWriter;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.EchartProvider;
+import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
 import org.metachart.factory.xhtml.chart.e.AbstractCliEchart;
 import org.metachart.model.json.chart.echart.JsonEchart;
+import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.test.McBootstrap;
 import org.metachart.util.provider.data.EchartTimeDataProvider;
@@ -54,17 +56,14 @@ public class CliEchartTime extends AbstractCliEchart
 	}
 	
 	public void app() throws IOException
-	{
-		EchartTimeDataProvider dp = EchartTimeDataProvider.instance();
-//		dp.data(EchartDemoTime.toData("A"));
-		
-		JsonData[] datas = JsonUtil.instance().readArray(JsonData[].class,McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.time+".app.json"));
-		dp.datas(datas);
+	{		
+		JsonData[] datas = JsonUtil.instance().readArray(JsonData[].class,McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.time+".datas.json"));
+		JsonOption option = JsonUtil.instance().read(JsonOption.class,McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.time+".option.json"));
 		
 		StringWriter sw = new StringWriter();
 		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.jsf(null, dp);
-		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
+		f.json(null, JsonDatasFactory.build(datas), option);
+		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".app.html"));
 	}
 
 	public static void main (String[] args) throws Exception
@@ -72,9 +71,9 @@ public class CliEchartTime extends AbstractCliEchart
 		Configuration config = McBootstrap.init();
 		CliEchartTime cli = new CliEchartTime(config);
 
-		cli.data();
-		cli.demo();
+//		cli.data();
+//		cli.demo();
 //		cli.jsf();
-//		cli.app();
+		cli.app();
 	}
 }

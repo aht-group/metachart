@@ -8,7 +8,7 @@ import java.util.Random;
 import org.exlp.util.io.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
-import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.txt.chart.TxtDataFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
@@ -40,12 +40,9 @@ public class EchartDemoTime
 		jfEchart.option(this.toOption(true));
 	}
 	
-	
 	public JsonOption toOption(boolean withMagic)
 	{
-		JsonOption option = new JsonOption();
-		option.setAxisX(JsonAxisFactory.instance().type("time").assemble());
-		option.setAxisY(JsonAxisFactory.instance().type("value").assemble());
+		JsonOption option =  JsonOptionFactory.instance().time2().assemble();
 		
 		JsonSeries seriesA = new JsonSeries();
 		seriesA.setType(JsonEchartFactory.Type.line.toString());
@@ -59,9 +56,7 @@ public class EchartDemoTime
 		option.setSeries(new ArrayList<>());
 		option.getSeries().add(seriesA);
 		option.getSeries().add(seriesB);
-		
-		option.setUseUtc(true);
-		
+	
 		return option;
 	}
 	
@@ -80,7 +75,7 @@ public class EchartDemoTime
 		LocalDateTime ldt = LocalDateTime.now();
 		
 		JsonDataFactory jf = JsonDataFactory.instance().id(seriesId);
-		EchartDemoTime.add(jf,ldt, 5, 2, rnd);
+		EchartDemoTime.add(jf,ldt, 05, 2, rnd);
 		EchartDemoTime.add(jf,ldt, 10, 3, rnd);
 		EchartDemoTime.add(jf,ldt, 15, 1, rnd);
 		EchartDemoTime.add(jf,ldt, 20, 2, rnd);

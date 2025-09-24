@@ -22,10 +22,21 @@ public class JsonAxis implements Serializable
 	private String data;
 	public String getData() {return data;}
 	public void setData(String data) {this.data = data;}
+	
+	@JsonProperty("min")
+	private String min;
+
+	public String getMin() {
+		return min;
+	}
+	public void setMin(String min) {
+		this.min = min;
+	}
 
 	@JsonProperty("splitArea")
 	private JsonSplitArea splitArea;
 	public JsonSplitArea getSplitArea() {return splitArea;}
 	public void setSplitArea(JsonSplitArea splitArea) {this.splitArea = splitArea;}
 
+	
 }

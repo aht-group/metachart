@@ -91,4 +91,9 @@ public class JsonSeries implements Serializable
 	private String edges;
 	public String getEdges() {return edges;}
 	public void setEdges(String edges) {this.edges = edges;}
+	
+	@JsonProperty("color")
+	private String color;
+	public String getColor() {return color;}
+	public void setColor(String color) {this.color = color;}
 }

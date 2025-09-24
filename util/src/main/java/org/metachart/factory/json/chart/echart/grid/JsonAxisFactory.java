@@ -22,6 +22,8 @@ public class JsonAxisFactory
 	public JsonAxisFactory data(String data) {json.setData(JsUtil.magicField(data+id)); return this;}
 	public JsonAxisFactory splitArea(JsonSplitArea splitArea) {json.setSplitArea(splitArea); return this;}
 	
+	public JsonAxisFactory dataMin() {json.setMin("dataMin"); return this;}
+	
 	public JsonAxis assemble() {return json;}
 	
 	public static JsonAxis create() {return new JsonAxis();}
