@@ -1,15 +1,7 @@
 package org.metachart.factory.json.chart.echart.data;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.awt.Color;
 
-import org.apache.commons.collections4.ListUtils;
-import org.exlp.util.io.JsUtil;
-import org.metachart.factory.json.chart.echart.JsonEchartFactory;
-import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
-import org.metachart.factory.txt.chart.TxtDataFactory;
-import org.metachart.model.json.chart.echart.JsonOption;
-import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +25,11 @@ public class JsonSeriesFactory
 	{
 		logger.info("Color: "+hex);
 		json.setColor(String.format("#%s",hex));
+		return this;
+	}
+	public JsonSeriesFactory color(Color color)
+	{
+		json.setColor(String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue()));
 		return this;
 	}
 	

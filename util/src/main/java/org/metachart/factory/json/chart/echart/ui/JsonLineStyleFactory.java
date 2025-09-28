@@ -12,8 +12,9 @@ public class JsonLineStyleFactory
 		json = new JsonLineStyle();
 	}
 	
-	public JsonLineStyleFactory colorSource() {json.setColor("source"); return this;}
+	public JsonLineStyleFactory width(int width) {json.setWidth(width); return this;}
 	public JsonLineStyleFactory curveness(double value) {json.setCurveness(value); return this;}
+	public JsonLineStyleFactory colorSource() {json.setColor("source"); return this;}
 	
-	public JsonLineStyle build() {return json;}
+	public JsonLineStyle assemble() {return json;}
 }

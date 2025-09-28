@@ -40,9 +40,9 @@ public class EchartDemoSankey
 	{
 		JsonSeries series = new JsonSeries();	
 		series.setType(JsonEchartFactory.Type.sankey.toString());
-		series.setLineStyle(JsonLineStyleFactory.instance().colorSource().curveness(0.5).build());
+		series.setLineStyle(JsonLineStyleFactory.instance().colorSource().curveness(0.5).assemble());
 		series.setLabel(JsonLabelFactory.instance().colorGrey().fontArial().fontSize(11).build());
-		series.setEmphasis(JsonEmphasisFactory.instance().focus(Focus.adjacency).build());
+		series.setEmphasis(JsonEmphasisFactory.instance().focus(Focus.adjacency).assemble());
 		series.setData(JsUtil.magicField("data"));
 		series.setLinks(JsUtil.magicField("links"));
 		

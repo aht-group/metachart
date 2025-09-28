@@ -12,4 +12,13 @@ public class JsonEmphasis implements Serializable
 	private String focus;
 	public String getFocus() {return focus;}
 	public void setFocus(String focus) {this.focus = focus;}
+	
+	@JsonProperty("lineStyle")
+	private JsonLineStyle lineStyle;
+	public JsonLineStyle getLineStyle() {
+		return lineStyle;
+	}
+	public void setLineStyle(JsonLineStyle lineStyle) {
+		this.lineStyle = lineStyle;
+	}
 }

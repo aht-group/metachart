@@ -100,7 +100,7 @@ public class CliEchartDemo
 		CliEchartDemo cli = new CliEchartDemo(config);
 
 		cli.option();
-//		cli.all();
+		cli.all();
 //		cli.single();
 	}
 }

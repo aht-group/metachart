@@ -12,7 +12,11 @@ public class JsonLineStyle implements Serializable
 	private String color;
 	public String getColor() {return color;}
 	public void setColor(String color) {this.color = color;}
-
+	
+	@JsonProperty("width")
+	private Integer width;
+	public Integer getWidth() {return width;}
+	public void setWidth(Integer width) {this.width = width;}
 
 	@JsonProperty("curveness")
 	private Double curveness;
