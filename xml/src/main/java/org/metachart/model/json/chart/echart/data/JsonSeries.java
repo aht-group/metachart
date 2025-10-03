@@ -2,6 +2,7 @@ package org.metachart.model.json.chart.echart.data;
 
 import java.io.Serializable;
 
+import org.metachart.model.json.chart.echart.grid.JsonMarkArea;
 import org.metachart.model.json.chart.echart.ui.JsonEmphasis;
 import org.metachart.model.json.chart.echart.ui.JsonLabel;
 import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
@@ -96,4 +97,10 @@ public class JsonSeries implements Serializable
 	private String color;
 	public String getColor() {return color;}
 	public void setColor(String color) {this.color = color;}
+	
+	@JsonProperty("markArea")
+	private JsonMarkArea markArea;
+	public JsonMarkArea getMarkArea() {return markArea;}
+	public void setMarkArea(JsonMarkArea markArea) {this.markArea = markArea;}
+	
 }

@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.exlp.util.io.JsUtil;
+import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
+import org.metachart.factory.json.chart.echart.data.JsonSeriesFactory;
+import org.metachart.factory.json.chart.echart.grid.JsonMarkAreaFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.txt.chart.TxtDataFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
@@ -34,7 +37,7 @@ public class EchartDemoTime
 	
 	public void demo() throws IOException
 	{
-		jfEchart.letData("A").letData("B");
+		jfEchart.letData("A").letData("B").letData("AreaSeries");
 		jfEchart.dataTime(EchartDemoTime.toData("A"));
 		jfEchart.dataTime(EchartDemoTime.toData("B"));
 		jfEchart.option(this.toOption(true));
@@ -53,9 +56,16 @@ public class EchartDemoTime
 		seriesB.setData(withMagic ? JsUtil.magicField(TxtDataFactory.dataId(id,"B")) : TxtDataFactory.id(id,"B"));
 		seriesB.setSmooth(true);
 		
+		JsonSeriesFactory jfSeriesArea = JsonSeriesFactory.instance().type(JsonEchartFactory.Type.line);
+		jfSeriesArea.data(withMagic,id,"AreaSeries");
+		
+		JsonMarkAreaFactory jfArea = JsonMarkAreaFactory.instance().data(EchartDemoTime.toDataArea());
+		jfSeriesArea.markArea(jfArea.assemble());
+		
 		option.setSeries(new ArrayList<>());
 		option.getSeries().add(seriesA);
 		option.getSeries().add(seriesB);
+		option.getSeries().add(jfSeriesArea.assemble());
 	
 		return option;
 	}
@@ -84,6 +94,13 @@ public class EchartDemoTime
 		EchartDemoTime.add(jf,ldt, 23, 4, rnd);
 
 		return jf.assemble();
+	}
+	
+	public static JsonData toDataArea()
+	{
+		JsonDataFactory jfAxis = JsonDataFactory.instance();
+		jfAxis.axisRange(LocalDateTime.now().plusHours(10), LocalDateTime.now().plusHours(20));
+		return jfAxis.assemble();
 	}
 	
 	private static void add(JsonDataFactory jf, LocalDateTime ldt, int hours, double value, Random rnd)

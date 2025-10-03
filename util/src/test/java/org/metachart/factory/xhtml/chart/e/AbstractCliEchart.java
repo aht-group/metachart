@@ -33,7 +33,6 @@ public class AbstractCliEchart
 		Element html = new Element("html");
 		html.setAttribute("lang","en");
 		html.getChildren().add(xfEchart.head("Demo: "+type));
-		
 		html.getChildren().add(xfEchart.body(w.toString()));
 
         Document doc = new Document(html);

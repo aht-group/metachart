@@ -38,15 +38,15 @@ public class JsonOption implements Serializable
 	public JsonAxis getAxisY() {return axisY;}
 	public void setAxisY(JsonAxis axisY) {this.axisY = axisY;}
 	
+	@JsonProperty("useUTC")
+	private Boolean useUtc;
+	public Boolean getUseUtc() {return useUtc;}
+	public void setUseUtc(Boolean useUtc) {this.useUtc = useUtc;}
+	
 	@JsonProperty("legend")
 	private JsonLegend legend;
-	
-	public JsonLegend getLegend() {
-		return legend;
-	}
-	public void setLegend(JsonLegend legend) {
-		this.legend = legend;
-	}
+	public JsonLegend getLegend() {return legend;}
+	public void setLegend(JsonLegend legend) {this.legend = legend;}
 
 	@JsonProperty("tooltip")
 	private JsonTooltip tooltip;
@@ -57,14 +57,10 @@ public class JsonOption implements Serializable
 	private JsonVisualMap visualMap;
 	public JsonVisualMap getVisualMap() {return visualMap;}
 	public void setVisualMap(JsonVisualMap visualMap) {this.visualMap = visualMap;}
-
+	
 	@JsonProperty("series")
 	private List<JsonSeries> series;
 	public List<JsonSeries> getSeries() {return series;}
 	public void setSeries(List<JsonSeries> series) {this.series = series;}
 	
-	@JsonProperty("useUTC")
-	private Boolean useUtc;
-	public Boolean getUseUtc() {return useUtc;}
-	public void setUseUtc(Boolean useUtc) {this.useUtc = useUtc;}
 }

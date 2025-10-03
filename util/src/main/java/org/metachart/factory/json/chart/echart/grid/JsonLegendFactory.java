@@ -1,6 +1,5 @@
 package org.metachart.factory.json.chart.echart.grid;
 
-import org.metachart.model.json.chart.echart.grid.JsonAxis;
 import org.metachart.model.json.chart.echart.grid.JsonLegend;
 
 public class JsonLegendFactory

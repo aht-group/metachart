@@ -55,6 +55,15 @@ public class JsonData implements Serializable
 	public double[][] getDoubles2() {return doubles2;}
 	public void setDoubles2(double[][] doubles2) {this.doubles2 = doubles2;}
 	
+	@JsonProperty("areas")
+	private List<JsonData>[] areas;
+
+	public List<JsonData>[] getAreas() {
+		return areas;
+	}
+	public void setAreas(List<JsonData>[] areas) {
+		this.areas = areas;}
+
 	@JsonProperty("data")
 	private List<JsonData> data;
 	public List<JsonData> getData() {return data;}
@@ -64,4 +73,12 @@ public class JsonData implements Serializable
 	private List<JsonEdge> edges;
 	public List<JsonEdge> getEdges() {return edges;}
 	public void setEdges(List<JsonEdge> edges) {this.edges = edges;}
+	
+	@JsonProperty("xAxis")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
+	@JsonDeserialize(contentUsing = LocalDateTimeDeserializer.class)
+	@JsonSerialize(contentUsing = LocalDateTimeSerializer.class)
+	private LocalDateTime xAxis;
+	public LocalDateTime getxAxis() {return xAxis;}
+	public void setxAxis(LocalDateTime xAxis) {this.xAxis = xAxis;}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
+import org.exlp.util.io.JsonUtil;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonEdge;
 
@@ -17,6 +18,7 @@ public class JsonDataFactory
 	private List<String> strings;
 	private List<Double> doubles1;
 	private List<double[]> doubles2;
+	private List<List<JsonData>> areas;
 	
 	public static JsonDataFactory instance() {return new JsonDataFactory();}
 	private JsonDataFactory()
@@ -24,12 +26,14 @@ public class JsonDataFactory
 		json = JsonDataFactory.create();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public JsonData assemble()
 	{
 		if(Objects.nonNull(times)) {json.setTimes(times.toArray(new LocalDateTime[times.size()]));}
 		if(Objects.nonNull(strings)) {json.setStrings(strings.toArray(new String[strings.size()]));}
 		if(Objects.nonNull(doubles1)) {json.setDoubles1(doubles1.stream().mapToDouble(Double::doubleValue).toArray());}
 		if(Objects.nonNull(doubles2)) {json.setDoubles2(doubles2.stream().toArray(double[][]::new));}
+		if(Objects.nonNull(areas)) {json.setAreas(areas.stream().toArray(List[]::new));}
 		
 		return json;
 	}
@@ -87,9 +91,22 @@ public class JsonDataFactory
 		return this;
 	}
 	
+	public JsonDataFactory axisRange(LocalDateTime from, LocalDateTime to)
+	{
+		List<JsonData> l = new ArrayList<>();
+		JsonData d1 = new JsonData(); d1.setxAxis(from); l.add(d1);
+		JsonData d2 = new JsonData(); d2.setxAxis(to); l.add(d2);
+		
+		if(Objects.isNull(areas)) {areas = new ArrayList<>();}
+		areas.add(l);
+		return this;
+	}
+	
+	
 	public JsonDataFactory name(String value) {json.setName(value); return this;}
 	public JsonDataFactory category(int index) {json.setCategory(index); return this;}
 
+	
 	public static JsonData create() {return new JsonData();}
 	public static JsonData build(String name)
 	{

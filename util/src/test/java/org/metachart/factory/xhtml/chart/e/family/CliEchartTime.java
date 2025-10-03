@@ -2,10 +2,14 @@ package org.metachart.factory.xhtml.chart.e.family;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.EchartProvider;
+import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
@@ -71,9 +75,13 @@ public class CliEchartTime extends AbstractCliEchart
 		Configuration config = McBootstrap.init();
 		CliEchartTime cli = new CliEchartTime(config);
 
+		JsonDataFactory jfAxis = JsonDataFactory.instance();
+		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
+		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
+		
 //		cli.data();
-//		cli.demo();
+		cli.demo();
 //		cli.jsf();
-		cli.app();
+//		cli.app();
 	}
 }
