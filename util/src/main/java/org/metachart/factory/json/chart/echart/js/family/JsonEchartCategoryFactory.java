@@ -1,19 +1,22 @@
-package org.metachart.factory.json.chart.echart.js.line;
+package org.metachart.factory.json.chart.echart.js.family;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import org.apache.commons.collections4.ListUtils;
 import org.exlp.util.io.JsUtil;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.interfaces.data.EchartGraphDataProvider;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.util.provider.data.EchartCategoryDataProvider;

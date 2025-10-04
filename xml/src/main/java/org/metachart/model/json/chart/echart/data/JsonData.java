@@ -57,12 +57,8 @@ public class JsonData implements Serializable
 	
 	@JsonProperty("areas")
 	private List<JsonData>[] areas;
-
-	public List<JsonData>[] getAreas() {
-		return areas;
-	}
-	public void setAreas(List<JsonData>[] areas) {
-		this.areas = areas;}
+	public List<JsonData>[] getAreas() {return areas;}
+	public void setAreas(List<JsonData>[] areas) {this.areas = areas;}
 
 	@JsonProperty("data")
 	private List<JsonData> data;

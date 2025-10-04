@@ -13,7 +13,7 @@ import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
-import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
+import org.metachart.factory.json.chart.echart.js.family.JsonEchartTimeFactory;
 import org.metachart.factory.xhtml.XhtmlEchartFactory;
 import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.test.McBootstrap;

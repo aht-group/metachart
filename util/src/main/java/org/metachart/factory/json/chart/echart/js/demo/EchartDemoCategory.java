@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.exlp.util.io.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
+import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
@@ -53,6 +54,15 @@ public class EchartDemoCategory
 		return option;
 	}
 	
+	public static JsonDatas toDatas()
+	{
+		JsonDatasFactory jf = JsonDatasFactory.instance();
+		jf.add(EchartDemoCategory.toCategoriesX());
+		jf.add(EchartDemoCategory.toData("A"));
+		
+		return jf.assemble();
+	}
+	
 	public static JsonData toCategoriesX()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
@@ -65,16 +75,7 @@ public class EchartDemoCategory
 		jf.string("Sun");
 		return jf.assemble();
 	}
-	
-	public static JsonDatas toDatas()
-	{
-		JsonDatas datas = new JsonDatas();
-		datas.setList(new ArrayList<>());
-		datas.getList().add(EchartDemoCategory.toData("A"));
-		
-		return datas;
-	}
-	
+
 	public static JsonData toData(String sid)
 	{
 		JsonDataFactory jf = JsonDataFactory.instance().id(sid);

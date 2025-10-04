@@ -1,4 +1,4 @@
-package org.metachart.factory.json.chart.echart.js.line;
+package org.metachart.factory.json.chart.echart.js.family;
 
 import java.io.IOException;
 import java.io.Writer;
