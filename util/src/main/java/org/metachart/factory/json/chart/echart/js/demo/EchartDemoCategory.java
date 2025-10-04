@@ -9,6 +9,7 @@ import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +33,11 @@ public class EchartDemoCategory
 	{
 		jfEchart.letCategories("X").letData();
 		jfEchart.categories("X",EchartDemoCategory.toCategoriesX());
-		jfEchart.dataDoubles1(EchartDemoCategory.toData());
-		jfEchart.option(this.toOption());
+		jfEchart.dataDoubles1(EchartDemoCategory.toData(""));
+		jfEchart.option(this.toOption(true));
 	}
 	
-	public JsonOption toOption()
+	public JsonOption toOption(boolean withMagic)
 	{
 		JsonOption option = new JsonOption();
 		option.setAxisX(JsonAxisFactory.instance().type("category").data("categoriesX").assemble());
@@ -65,9 +66,18 @@ public class EchartDemoCategory
 		return jf.assemble();
 	}
 	
-	public static JsonData toData()
+	public static JsonDatas toDatas()
 	{
-		JsonDataFactory jf = JsonDataFactory.instance();
+		JsonDatas datas = new JsonDatas();
+		datas.setList(new ArrayList<>());
+		datas.getList().add(EchartDemoCategory.toData("A"));
+		
+		return datas;
+	}
+	
+	public static JsonData toData(String sid)
+	{
+		JsonDataFactory jf = JsonDataFactory.instance().id(sid);
 		jf.double1(1);
 		jf.double1(2);
 		jf.double1(3);

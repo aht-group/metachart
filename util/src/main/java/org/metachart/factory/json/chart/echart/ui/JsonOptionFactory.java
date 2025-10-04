@@ -38,6 +38,13 @@ public class JsonOptionFactory
 		json.setUseUtc(true);
 		return this;
 	}
+	public JsonOptionFactory scatter()
+	{
+		json.setAxisX(JsonAxisFactory.instance().assemble());
+		json.setAxisY(JsonAxisFactory.instance().assemble());
+		return this;
+	}
+	
 	public JsonOptionFactory series(JsonSeries series)
 	{
 		if(Objects.isNull(json.getSeries())) {json.setSeries(new ArrayList<>());}

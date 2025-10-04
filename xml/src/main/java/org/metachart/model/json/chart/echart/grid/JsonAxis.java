@@ -25,13 +25,8 @@ public class JsonAxis implements Serializable
 	
 	@JsonProperty("min")
 	private String min;
-
-	public String getMin() {
-		return min;
-	}
-	public void setMin(String min) {
-		this.min = min;
-	}
+	public String getMin() {return min;}
+	public void setMin(String min) {this.min = min;}
 
 	@JsonProperty("splitArea")
 	private JsonSplitArea splitArea;

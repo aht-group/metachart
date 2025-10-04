@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.exlp.util.io.JsUtil;
-import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonSeriesFactory;
@@ -58,7 +57,6 @@ public class EchartDemoTime
 		
 		JsonSeriesFactory jfSeriesArea = JsonSeriesFactory.instance().type(JsonEchartFactory.Type.line);
 		jfSeriesArea.data(withMagic,id,"AreaSeries");
-		
 		JsonMarkAreaFactory jfArea = JsonMarkAreaFactory.instance().data(EchartDemoTime.toDataArea());
 		jfSeriesArea.markArea(jfArea.assemble());
 		
@@ -76,10 +74,12 @@ public class EchartDemoTime
 		datas.setList(new ArrayList<>());
 		datas.getList().add(EchartDemoTime.toData("A"));
 		datas.getList().add(EchartDemoTime.toData("B"));
+		datas.getList().add(EchartDemoTime.toDataArea());
+		
 		return datas;
 	}
 	
-	public static JsonData toData(String seriesId)
+	private static JsonData toData(String seriesId)
 	{
 		Random rnd = new Random();
 		LocalDateTime ldt = LocalDateTime.now();
@@ -98,7 +98,7 @@ public class EchartDemoTime
 	
 	public static JsonData toDataArea()
 	{
-		JsonDataFactory jfAxis = JsonDataFactory.instance();
+		JsonDataFactory jfAxis = JsonDataFactory.instance().id("AreaSeries");
 		jfAxis.axisRange(LocalDateTime.now().plusHours(10), LocalDateTime.now().plusHours(20));
 		return jfAxis.assemble();
 	}

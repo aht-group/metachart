@@ -17,7 +17,7 @@ import org.metachart.model.json.chart.echart.data.JsonLink;
 
 public class JsonEchartFactory
 {
-	public enum Type{line,time,
+	public enum Type{line,time,scatter,
 					heatmap,heatbar,
 					sankey,graph,gauge}
 
@@ -119,8 +119,6 @@ public class JsonEchartFactory
 	
 	public String markArea(JsonData data) throws IOException
 	{
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
-		
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
 		sb.append("\n").append(TxtDataFactory.dataId(id,data.getId())).append(" = [");
@@ -128,9 +126,6 @@ public class JsonEchartFactory
 		{
 			for(int i=0; i<data.getAreas().length; i++)
 			{
-//				sb.append(" [");
-	//			sb.append(data.getTimes()[i].atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
-	//			sb.append(data.getTimes()[i].toString());
 				sb.append(jom.toCompactString(data.getAreas()[i]));
 				if(i<data.getAreas().length-1) {sb.append(", ");}
 			}
@@ -145,7 +140,7 @@ public class JsonEchartFactory
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\ndata").append(id).append(" = ");
+		sb.append("\n").append(TxtDataFactory.dataId(id,data.getId())).append(" = ");
 		sb.append(jom.toFormattedString(data.getDoubles2()));
 		if(Objects.nonNull(transform))
 		{

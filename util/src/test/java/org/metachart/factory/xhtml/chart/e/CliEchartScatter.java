@@ -1,61 +1,60 @@
-package org.metachart.factory.xhtml.chart.e.family;
+package org.metachart.factory.xhtml.chart.e;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.EchartProvider;
+import org.metachart.factory.json.chart.echart.JsonEchartFactory;
+import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoScatter;
+import org.metachart.factory.json.chart.echart.js.line.JsonEchartScatterFactory;
 import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
-import org.metachart.factory.xhtml.chart.e.AbstractCliEchart;
 import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.test.McBootstrap;
-import org.metachart.util.provider.data.EchartTimeDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CliEchartTime extends AbstractCliEchart
+public class CliEchartScatter extends AbstractCliEchart
 {
-	final static Logger logger = LoggerFactory.getLogger(CliEchartTime.class);
+	final static Logger logger = LoggerFactory.getLogger(CliEchartScatter.class);
 
-	public CliEchartTime(Configuration config)
+	public CliEchartScatter(Configuration config)
 	{
-		type = JsonEchart.Type.time;
-		logger.info("Wrting to "+McBootstrap.pTemp.toString());
+		type = JsonEchart.Type.scatter;
 	}
 	
 	public void data()
 	{
-		JsonData data = EchartDemoTime.toData("A");
-		JsonUtil.info(data);
-		logger.info(JsonUtil.instance().toFormattedString(data));
+		JsonDatas datas = EchartDemoScatter.toDatas();
+		JsonUtil.info(datas);
+		logger.info(JsonUtil.instance().toFormattedString(datas));
 	}
 
 	public void demo() throws IOException
 	{
 		StringWriter sw = new StringWriter();
-		EchartProvider.instance(sw).demo(type,xfEchart.getDivId());
+		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
+		EchartDemoScatter.instance(jfEchart).demo();
+		jfEchart.init();
 		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
 	}
 	
 	public void jsf() throws IOException
 	{
-		EchartTimeDataProvider dp = EchartTimeDataProvider.instance();
-		dp.data(EchartDemoTime.toData("A"));
-		dp.data(EchartDemoTime.toData("B"));
-		JsonUtil.instance().write(dp.getDatas(), McBootstrap.pTemp.resolve("datas-"+type.toString()+".json"));
+		JsonDatas datas = EchartDemoScatter.toDatas();
+		JsonUtil.instance().write(datas, McBootstrap.pTemp.resolve("echart-"+type.toString()+".datas.json"));
 		
 		StringWriter sw = new StringWriter();
-		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.jsf(null, dp);
+		JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
+		f.jsf(null,datas);
 		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
 	}
 	
@@ -73,15 +72,15 @@ public class CliEchartTime extends AbstractCliEchart
 	public static void main (String[] args) throws Exception
 	{
 		Configuration config = McBootstrap.init();
-		CliEchartTime cli = new CliEchartTime(config);
+		CliEchartScatter cli = new CliEchartScatter(config);
 
 		JsonDataFactory jfAxis = JsonDataFactory.instance();
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		
 //		cli.data();
-		cli.demo();
-//		cli.jsf();
+//		cli.demo();
+		cli.jsf();
 //		cli.app();
 	}
 }

@@ -1,8 +1,6 @@
 package org.metachart.jsf.chart.echart;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.faces.component.FacesComponent;
@@ -15,25 +13,24 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.jx.ComponentAttribute;
 import org.exlp.util.jx.JsfUtil;
 import org.metachart.factory.json.chart.EchartProvider;
+import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.js.graph.JsonEchartGraphFactory;
 import org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory;
 import org.metachart.factory.json.chart.echart.js.line.JsonEchartCategoryFactory;
+import org.metachart.factory.json.chart.echart.js.line.JsonEchartScatterFactory;
 import org.metachart.factory.json.chart.echart.js.line.JsonEchartTimeFactory;
 import org.metachart.jsf.common.Data;
 import org.metachart.jsf.common.Title;
 import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.model.json.chart.echart.JsonOption;
-import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.util.provider.data.EchartCategoryDataProvider;
-import org.metachart.util.provider.data.EchartTimeDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,7 +82,7 @@ public class Chart extends UINamingContainer
 	
 	private Title title;
 	
-	private List<org.metachart.interfaces.chart.Data> datas;
+	private JsonDatas datas;
 	private Data data;
 	private Data categories;
 	private Data edges;
@@ -100,6 +97,7 @@ public class Chart extends UINamingContainer
 	    
 	    super.encodeChildren(ctx);
 		
+	    JsonDatasFactory jfDatas = JsonDatasFactory.instance();
 		for (UIComponent child : this.getChildren())
         {
         	logger.trace(child.getClass().getName());
@@ -109,7 +107,7 @@ public class Chart extends UINamingContainer
         		org.metachart.jsf.common.Data c = (org.metachart.jsf.common.Data)child;
         		switch(Data.Type.valueOf(c.getType()))
         		{
-        			case data:	data=c; if(Objects.isNull(datas)) {datas = new ArrayList<>();} datas.add(c); break;
+        			case data:	data=c; jfDatas.add(c.getValue()); break;
         			case category: categories=c; break;
         			case edge: edges=c; break;
         		}
@@ -117,13 +115,11 @@ public class Chart extends UINamingContainer
         	else if(child instanceof org.metachart.jsf.common.Datas)
         	{
         		org.metachart.jsf.common.Datas c = (org.metachart.jsf.common.Datas)child;
-        		if(Objects.isNull(datas)) {datas = new ArrayList<>();}
-        		for(JsonData d : ListUtils.emptyIfNull(c.getValue()))
-        		{
-        			datas.add(Data.instance(d));
-        		}
+        		jfDatas.add(c.getValue());
         	}
         }
+		
+		datas = jfDatas.assemble();
 	}
 		
 	@Override
@@ -151,11 +147,10 @@ public class Chart extends UINamingContainer
 			if(Objects.nonNull(scope) && scope.equals("demo")) {EchartProvider.instance(writer).demo(type,chartId);}
 			else if(Objects.nonNull(option))
 			{
-				JsonDatas jDatas = org.metachart.jsf.common.Data.toJson(datas);
 				switch(JsonEchart.Type.valueOf(type))
 				{
-					case time: JsonEchartTimeFactory.instance(writer).id(chartId).json(grid,jDatas,option); break;
-				
+					case time: JsonEchartTimeFactory.instance(writer).id(chartId).json(grid,datas,option); break;
+					case scatter: JsonEchartScatterFactory.instance(writer).id(chartId).json(grid, datas, option); break;
 					default: logger.warn("NYI"); break;
 				}
 			}
@@ -163,7 +158,6 @@ public class Chart extends UINamingContainer
 			{
 				switch(JsonEchart.Type.valueOf(type))
 				{
-					case time: JsonEchartTimeFactory.instance(writer).id(chartId).jsf(grid,EchartTimeDataProvider.instance().datas(datas)); break;
 					case category: JsonEchartCategoryFactory.instance(writer).id(chartId).jsf(grid,EchartCategoryDataProvider.instance().categories(categories).data(data)); break;
 					case heatbar: JsonEchartHeatbarFactory.instance(writer).id(chartId).jsf(chartId,grid,data); break;
 					case graph: JsonEchartGraphFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data,edges); break;
