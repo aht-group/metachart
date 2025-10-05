@@ -11,6 +11,7 @@ import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoScatter;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartScatterFactory;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartTimeFactory;
 import org.metachart.model.json.chart.echart.JsonEchart;
@@ -43,7 +44,7 @@ public class CliEchartScatter extends AbstractCliEchart
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		EchartDemoScatter.instance(jfEchart).demo();
 		jfEchart.init();
-		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
+		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
 	}
 	
 	public void jsf() throws IOException
@@ -53,8 +54,8 @@ public class CliEchartScatter extends AbstractCliEchart
 		
 		StringWriter sw = new StringWriter();
 		JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.jsf(null,datas);
-		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
+		f.json(null,datas,EchartDemoScatter.instance(null).toOption(false));
+		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
 	}
 	
 	public void app() throws IOException
@@ -65,7 +66,7 @@ public class CliEchartScatter extends AbstractCliEchart
 		StringWriter sw = new StringWriter();
 		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
 		f.json(null, JsonDatasFactory.build(datas), option);
-		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".app.html"));
+		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".app.html"));
 	}
 
 	public static void main (String[] args) throws Exception
@@ -78,7 +79,7 @@ public class CliEchartScatter extends AbstractCliEchart
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		
 //		cli.data();
-//		cli.demo();
+		cli.demo();
 		cli.jsf();
 //		cli.app();
 	}

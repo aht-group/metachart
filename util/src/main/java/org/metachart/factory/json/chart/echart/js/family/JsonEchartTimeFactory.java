@@ -2,27 +2,23 @@ package org.metachart.factory.json.chart.echart.js.family;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import org.apache.commons.collections4.ListUtils;
-import org.exlp.util.io.JsUtil;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
-import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
-import org.metachart.factory.txt.chart.TxtDataFactory;
+import org.metachart.interfaces.chart.EchartJsFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonDatas;
-import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonEchartTimeFactory
+public class JsonEchartTimeFactory implements EchartJsFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonEchartTimeFactory.class);
 	
@@ -37,7 +33,7 @@ public class JsonEchartTimeFactory
 		id="";
 	}
 	
-	public void json(JsonGrid grid, JsonDatas datas, JsonOption option) throws IOException
+	@Override public void json(JsonGrid grid, JsonDatas datas, JsonOption option) throws IOException
 	{	
 		if(Objects.isNull(grid)) {grid = JsonGridFactory.fallback();}
 		
@@ -57,6 +53,4 @@ public class JsonEchartTimeFactory
 		jfEchart.option(JsonOptionFactory.toMagicDatas(id,option));
 		jfEchart.init();
 	}
-	
-
 }

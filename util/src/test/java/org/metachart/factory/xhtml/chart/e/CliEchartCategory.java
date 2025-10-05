@@ -32,7 +32,7 @@ public class CliEchartCategory extends AbstractCliEchart
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		EchartDemoCategory.instance(jfEchart).demo();
 		jfEchart.init();
-		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
+		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
 	}
 	
 	public void jsf() throws IOException

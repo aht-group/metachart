@@ -27,7 +27,7 @@ public class AbstractCliEchart
 		logger.info("Writing to "+McBootstrap.pTemp.toString());
 	}
 	
-	protected void render(StringWriter w, Path pFile) throws IOException
+	protected void render(boolean debug, StringWriter w, Path pFile) throws IOException
 	{
 		Element html = new Element("html");
 		html.setAttribute("lang","en");
@@ -37,8 +37,11 @@ public class AbstractCliEchart
         Document doc = new Document(html);
         doc.setDocType(new org.jdom2.DocType("html"));
 
-		JDomUtil.instance().omitDeclaration(true).info(doc);
+        if(debug)
+        {
+        	JDomUtil.instance().omitDeclaration(true).info(doc);
+        }
+		
 		JDomUtil.instance().omitDeclaration(true).write(doc,pFile);
 	}
-
 }

@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.JsonUtil;
-import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
@@ -35,7 +34,7 @@ public class CliEchartTime extends AbstractCliEchart
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		EchartDemoTime.instance(jfEchart).demo();
 		jfEchart.init();
-		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
+		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
 	}
 	
 	public void jsf() throws IOException
@@ -46,7 +45,7 @@ public class CliEchartTime extends AbstractCliEchart
 		StringWriter sw = new StringWriter();
 		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
 		f.json(null,datas,EchartDemoTime.instance(null).toOption(false));
-		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
+		super.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
 	}
 	
 	public void app() throws IOException
@@ -57,7 +56,7 @@ public class CliEchartTime extends AbstractCliEchart
 		StringWriter sw = new StringWriter();
 		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
 		f.json(null, datas,option);
-		this.render(sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".app.html"));
+		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".app.html"));
 	}
 
 	public static void main (String[] args) throws Exception

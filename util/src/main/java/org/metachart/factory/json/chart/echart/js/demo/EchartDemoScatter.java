@@ -68,9 +68,7 @@ public class EchartDemoScatter
 		for(int i=0;i<15;i++)
 		{
 			jf.double2(new double[]{rnd.nextDouble()*i, rnd.nextDouble()*i});
-			
 		}
-		
 
 		return jf.assemble();
 	}
