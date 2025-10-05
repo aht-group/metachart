@@ -6,6 +6,15 @@ import org.metachart.model.json.chart.echart.data.JsonData;
 
 public class TxtDataFactory
 {
+	public static String id(String chartId, String seriesId)
+	{
+		StringBuilder sb = new StringBuilder();
+		if(Objects.nonNull(seriesId)) {sb.append(seriesId);}
+		if(Objects.nonNull(chartId)) {sb.append(chartId);}
+		
+		return sb.toString();
+	}
+	public static String dataId(String seriesId) {return TxtDataFactory.dataId(null,seriesId);}
 	public static String dataId(String chartId, String seriesId)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -13,12 +22,11 @@ public class TxtDataFactory
 		sb.append(TxtDataFactory.id(chartId, seriesId));
 		return sb.toString();
 	}
-	public static String id(String chartId, String seriesId)
+	public static String categoryId(String chartId, String seriesId)
 	{
 		StringBuilder sb = new StringBuilder();
-		if(Objects.nonNull(seriesId)) {sb.append(seriesId);}
-		sb.append(chartId);
-		
+		sb.append("category");
+		sb.append(TxtDataFactory.id(chartId, seriesId));
 		return sb.toString();
 	}
 	

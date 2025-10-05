@@ -8,7 +8,7 @@ import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoCategory;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
+import org.metachart.factory.json.chart.echart.js.family.JsonEchartCategoryFactory;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartTimeFactory;
 import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.model.json.chart.echart.data.JsonDatas;
@@ -30,7 +30,7 @@ public class CliEchartCategory extends AbstractCliEchart
 	{
 		StringWriter sw = new StringWriter();
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
-		EchartDemoCategory.instance(jfEchart).demo();
+		EchartDemoCategory.instance().demo(jfEchart);
 		jfEchart.init();
 		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
 	}
@@ -40,6 +40,11 @@ public class CliEchartCategory extends AbstractCliEchart
 		JsonDatas datas = EchartDemoCategory.toDatas();
 		JsonUtil.info(datas);
 		JsonUtil.instance().write(datas, McBootstrap.pTemp.resolve("echart-"+type.toString()+".datas.json"));
+		
+		StringWriter sw = new StringWriter();
+		JsonEchartCategoryFactory f = JsonEchartCategoryFactory.instance(sw).id(xfEchart.getDivId()); 
+		f.json(null,datas,EchartDemoCategory.instance().toOption(false));
+		super.render(true,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
 	}
 
 	public static void main (String[] args) throws Exception

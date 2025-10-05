@@ -66,13 +66,19 @@ public class JsonOptionFactory
 	
 	public static JsonOption build() {return new JsonOption();}
 	
-	
-	
-	public static JsonOption toMagicDatas(String id, JsonOption option)
-	{	
+	public static JsonOption toMagicDatas(JsonOption option)
+	{	//This is used for demo charts
 		for(JsonSeries s : ListUtils.emptyIfNull(option.getSeries()))
 		{
-			s.setData(JsUtil.magicField(TxtDataFactory.dataId(id,s.getData())));
+			s.setData(JsUtil.magicField(s.getData()));
+		}
+		return option;
+	}
+	public static JsonOption toMagicDatas(String id, JsonOption option)
+	{	//This is used for JSF charts
+		for(JsonSeries s : ListUtils.emptyIfNull(option.getSeries()))
+		{
+			s.setData(JsUtil.magicField(TxtDataFactory.id(id,s.getData())));
 		}
 		return option;
 	}

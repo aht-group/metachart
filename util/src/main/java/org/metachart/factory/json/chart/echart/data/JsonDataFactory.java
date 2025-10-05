@@ -11,7 +11,9 @@ import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonEdge;
 
 public class JsonDataFactory
-{	
+{
+	public enum Type {data,category}
+	
 	private JsonData json;
 	
 	private List<LocalDateTime> times;
@@ -38,11 +40,8 @@ public class JsonDataFactory
 		return json;
 	}
 	
-	public JsonDataFactory id(String seriesId)
-	{
-		json.setId(seriesId);
-		return this;
-	}
+	public JsonDataFactory id(String seriesId) {json.setId(seriesId); return this;}
+	public JsonDataFactory type(Type type) {json.setMcType(type.toString()); return this;}
 	
 	public JsonDataFactory repeat(int number)
 	{

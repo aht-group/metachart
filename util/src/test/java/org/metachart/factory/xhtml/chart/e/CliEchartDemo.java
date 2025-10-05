@@ -46,8 +46,7 @@ public class CliEchartDemo
 		StringWriter sw = new StringWriter();
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xhfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		
-		EchartDemoTime demo = EchartDemoTime.instance(jfEchart);
-		JsonEchartTimeFactory.instance(sw).id(xhfEchart.getDivId()).json(null, EchartDemoTime.toDatas(), demo.toOption(false));
+		JsonEchartTimeFactory.instance(sw).id(xhfEchart.getDivId()).json(null, EchartDemoTime.toDatas(), EchartDemoTime.toOption());
 	
 		html.getChildren().add(xhfEchart.body(sw.toString()));
 

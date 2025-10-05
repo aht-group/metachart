@@ -31,7 +31,7 @@ public class JsonSeriesFactory
 	public JsonSeriesFactory color(String hex){json.setColor(String.format("#%s",hex));return this;}
 	public JsonSeriesFactory color(Color color) {json.setColor(String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue()));return this;}
 	public JsonSeriesFactory showSymbol(boolean value) {json.setShowSymbol(value);return this;}
-	public JsonSeriesFactory data(boolean magic, String id, String name) {json.setData(magic ? JsUtil.magicField(TxtDataFactory.dataId(id,name)) : TxtDataFactory.id(id,name)); return this;}
+	public JsonSeriesFactory data(String name) {json.setData(TxtDataFactory.dataId(name)); return this;}
 	public JsonSeriesFactory markArea(JsonMarkArea area) {json.setMarkArea(area); return this;}
 	
 	public JsonSeries assemble() {return json;}

@@ -32,9 +32,9 @@ public class CliEchartTime extends AbstractCliEchart
 	{
 		StringWriter sw = new StringWriter();
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
-		EchartDemoTime.instance(jfEchart).demo();
+		EchartDemoTime.demo(jfEchart);
 		jfEchart.init();
-		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
+		this.render(true,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
 	}
 	
 	public void jsf() throws IOException
@@ -44,7 +44,7 @@ public class CliEchartTime extends AbstractCliEchart
 		
 		StringWriter sw = new StringWriter();
 		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.json(null,datas,EchartDemoTime.instance(null).toOption(false));
+		f.json(null,datas,EchartDemoTime.toOption());
 		super.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
 	}
 	

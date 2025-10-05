@@ -21,6 +21,12 @@ public class JsonData implements Serializable
 	private String id;
 	public String getId() {return id;}
 	public void setId(String id) {this.id = id;}
+	
+	@JsonProperty("mcType")
+	private String mcType;
+
+	public String getMcType() {return mcType;}
+	public void setMcType(String mcType) {this.mcType = mcType;}
 
 	@JsonProperty("name")
 	private String name;

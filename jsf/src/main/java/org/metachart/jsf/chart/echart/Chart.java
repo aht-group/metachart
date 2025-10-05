@@ -149,6 +149,7 @@ public class Chart extends UINamingContainer
 			{
 				switch(JsonEchart.Type.valueOf(type))
 				{
+					case category: JsonEchartCategoryFactory.instance(writer).id(chartId).json(grid,datas,option); break;
 					case time: JsonEchartTimeFactory.instance(writer).id(chartId).json(grid,datas,option); break;
 					case scatter: JsonEchartScatterFactory.instance(writer).id(chartId).json(grid, datas, option); break;
 					default: logger.warn("NYI"); break;
@@ -158,7 +159,6 @@ public class Chart extends UINamingContainer
 			{
 				switch(JsonEchart.Type.valueOf(type))
 				{
-					case category: JsonEchartCategoryFactory.instance(writer).id(chartId).jsf(grid,EchartCategoryDataProvider.instance().categories(categories).data(data)); break;
 					case heatbar: JsonEchartHeatbarFactory.instance(writer).id(chartId).jsf(chartId,grid,data); break;
 					case graph: JsonEchartGraphFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data,edges); break;
 					default: logger.warn("NYI"); break;

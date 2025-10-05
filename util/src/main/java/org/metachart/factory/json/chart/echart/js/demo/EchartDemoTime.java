@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.exlp.util.io.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonSeriesFactory;
@@ -22,41 +21,33 @@ import org.slf4j.LoggerFactory;
 public class EchartDemoTime
 {
 	final static Logger logger = LoggerFactory.getLogger(EchartDemoTime.class);
-
-	private final JsonEchartFactory jfEchart;
 	
-	private String id; public EchartDemoTime id(String id) {this.id=id; return this;}
-	
-	public static EchartDemoTime instance(JsonEchartFactory fEchart) {return new EchartDemoTime(fEchart);}
-	private EchartDemoTime(JsonEchartFactory jfEchart)
-	{
-		this.jfEchart=jfEchart;
-		id="";
-	}
-	
-	public void demo() throws IOException
+	public static void demo(JsonEchartFactory jfEchart) throws IOException
 	{
 		jfEchart.letData("A").letData("B").letData("AreaSeries");
 		jfEchart.dataTime(EchartDemoTime.toData("A"));
 		jfEchart.dataTime(EchartDemoTime.toData("B"));
-		jfEchart.option(this.toOption(true));
+		
+		jfEchart.option(JsonOptionFactory.toMagicDatas(EchartDemoTime.toOption()));
+
 	}
 	
-	public JsonOption toOption(boolean withMagic)
+	public static JsonOption toOption()
 	{
 		JsonOption option =  JsonOptionFactory.instance().time2().assemble();
 		
 		JsonSeries seriesA = new JsonSeries();
 		seriesA.setType(JsonEchartFactory.Type.line.toString());
-		seriesA.setData(withMagic ? JsUtil.magicField(TxtDataFactory.dataId(id,"A")) : TxtDataFactory.id(id,"A"));
+		seriesA.setData(TxtDataFactory.dataId("A"));
+		logger.info(seriesA.getData());
 		
 		JsonSeries seriesB = new JsonSeries();
 		seriesB.setType(JsonEchartFactory.Type.line.toString());
-		seriesB.setData(withMagic ? JsUtil.magicField(TxtDataFactory.dataId(id,"B")) : TxtDataFactory.id(id,"B"));
+		seriesB.setData(TxtDataFactory.dataId("B"));
 		seriesB.setSmooth(true);
 		
 		JsonSeriesFactory jfSeriesArea = JsonSeriesFactory.instance().type(JsonEchartFactory.Type.line);
-		jfSeriesArea.data(withMagic,id,"AreaSeries");
+		jfSeriesArea.data("AreaSeries");
 		JsonMarkAreaFactory jfArea = JsonMarkAreaFactory.instance().data(EchartDemoTime.toDataArea());
 		jfSeriesArea.markArea(jfArea.assemble());
 		
@@ -79,6 +70,13 @@ public class EchartDemoTime
 		return datas;
 	}
 	
+	public static JsonData toDataArea()
+	{
+		JsonDataFactory jfAxis = JsonDataFactory.instance().id("AreaSeries");
+		jfAxis.axisRange(LocalDateTime.now().plusHours(10), LocalDateTime.now().plusHours(20));
+		return jfAxis.assemble();
+	}
+	
 	private static JsonData toData(String seriesId)
 	{
 		Random rnd = new Random();
@@ -95,14 +93,7 @@ public class EchartDemoTime
 
 		return jf.assemble();
 	}
-	
-	public static JsonData toDataArea()
-	{
-		JsonDataFactory jfAxis = JsonDataFactory.instance().id("AreaSeries");
-		jfAxis.axisRange(LocalDateTime.now().plusHours(10), LocalDateTime.now().plusHours(20));
-		return jfAxis.assemble();
-	}
-	
+		
 	private static void add(JsonDataFactory jf, LocalDateTime ldt, int hours, double value, Random rnd)
 	{
 		jf.time(ldt.plusHours(hours),value+ 2*(rnd.nextDouble()-0.5));

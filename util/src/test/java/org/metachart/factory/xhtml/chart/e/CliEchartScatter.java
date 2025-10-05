@@ -31,13 +31,6 @@ public class CliEchartScatter extends AbstractCliEchart
 		type = JsonEchart.Type.scatter;
 	}
 	
-	public void data()
-	{
-		JsonDatas datas = EchartDemoScatter.toDatas();
-		JsonUtil.info(datas);
-		logger.info(JsonUtil.instance().toFormattedString(datas));
-	}
-
 	public void demo() throws IOException
 	{
 		StringWriter sw = new StringWriter();
@@ -78,7 +71,6 @@ public class CliEchartScatter extends AbstractCliEchart
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		
-//		cli.data();
 		cli.demo();
 		cli.jsf();
 //		cli.app();
