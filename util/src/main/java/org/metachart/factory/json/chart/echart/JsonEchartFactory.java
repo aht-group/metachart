@@ -57,7 +57,7 @@ public class JsonEchartFactory
 	public JsonEchartFactory letData(String nr) throws IOException {w.write("\nlet "+TxtDataFactory.dataId(id,nr)+" = [];"); return this;}
 	public JsonEchartFactory letLinks() throws IOException {w.write("\nlet links"+id+" = [];");return this;}
 	public JsonEchartFactory letEdges() throws IOException {w.write("\nlet edges"+id+" = [];");return this;}
-	public JsonEchartFactory letCategories(String suffix) throws IOException {w.write("\nlet categories"+suffix+id+" = [];");return this;}
+	public JsonEchartFactory letCategory(String suffix) throws IOException {w.write("\nlet category"+suffix+id+" = [];");return this;}
 	public JsonEchartFactory letCategoriesX() throws IOException {w.write("\nlet categoriesX"+id+" = [];");return this;}
 	public JsonEchartFactory letCategoriesY() throws IOException {w.write("\nlet yCategories"+id+" = [];");return this;}
 
@@ -85,7 +85,7 @@ public class JsonEchartFactory
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\ndata").append(id).append(" = ");
+		sb.append("\n").append(TxtDataFactory.dataId(id,data.getId())).append(" = ");
 		sb.append(jom.toFormattedString(data.getDoubles1()));
 		sb.append(";");
 		w.write(sb.toString());
@@ -150,11 +150,11 @@ public class JsonEchartFactory
 		w.write(sb.toString());
 	}
 
-	public String categories(String suffix, JsonData data) throws IOException
+	public String category(String suffix, JsonData data) throws IOException
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append("\n").append("categories").append(suffix).append(id);
+		sb.append("\n").append("category").append(suffix).append(id);
 		sb.append(" = ").append(jom.toFormattedString(data.getStrings()));
 		sb.append(";");
 		w.write(sb.toString());

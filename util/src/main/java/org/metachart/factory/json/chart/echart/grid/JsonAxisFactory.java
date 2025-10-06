@@ -19,7 +19,7 @@ public class JsonAxisFactory
 	
 	public JsonAxisFactory show(Boolean show) {json.setShow(show); return this;}
 	public JsonAxisFactory type(String type) {json.setType(type); return this;}
-	public JsonAxisFactory data(String data) {json.setData(JsUtil.magicField(data+id)); return this;}
+	public JsonAxisFactory data(String data) {json.setData(data); return this;}
 	public JsonAxisFactory splitArea(JsonSplitArea splitArea) {json.setSplitArea(splitArea); return this;}
 	
 	public JsonAxisFactory dataMin() {json.setMin("dataMin"); return this;}

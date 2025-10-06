@@ -3,11 +3,11 @@ package org.metachart.factory.json.chart.echart.js.demo;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.exlp.util.io.JsUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.txt.chart.TxtDataFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
@@ -19,32 +19,24 @@ import org.slf4j.LoggerFactory;
 public class EchartDemoCategory
 {
 	final static Logger logger = LoggerFactory.getLogger(EchartDemoCategory.class);
-
-	private String id; public EchartDemoCategory id(String id) {this.id=id; return this;}
 	
-	public static EchartDemoCategory instance() {return new EchartDemoCategory();}
-	private EchartDemoCategory()
+	public static void demo(JsonEchartFactory jfEchart) throws IOException
 	{
-		id="";
+		jfEchart.letCategory("X").letData("A");
+		jfEchart.category("X",EchartDemoCategory.toCategory("X"));
+		jfEchart.dataDoubles1(EchartDemoCategory.toData("A"));
+		jfEchart.option(JsonOptionFactory.toMagicDatas(EchartDemoCategory.toOption()));
 	}
 	
-	public void demo(JsonEchartFactory jfEchart) throws IOException
-	{
-		jfEchart.letCategories("X").letData();
-		jfEchart.categories("X",EchartDemoCategory.toCategoriesX());
-		jfEchart.dataDoubles1(EchartDemoCategory.toData(""));
-		jfEchart.option(this.toOption(false));
-	}
-	
-	public JsonOption toOption(boolean withMagic)
+	public static JsonOption toOption() 
 	{
 		JsonOption option = new JsonOption();
-		option.setAxisX(JsonAxisFactory.instance().type("category").data(JsUtil.magicField(withMagic,TxtDataFactory.categoryId(id,"X"))).assemble());
+		option.setAxisX(JsonAxisFactory.instance().type("category").data(TxtDataFactory.categoryId("X")).assemble());
 		option.setAxisY(JsonAxisFactory.instance().type("value").assemble());
 		
 		JsonSeries series = new JsonSeries();
 		series.setType(JsonEchartFactory.Type.line.toString());
-		series.setData(JsUtil.magicField(withMagic,TxtDataFactory.dataId(id,"A")));
+		series.setData(TxtDataFactory.dataId("A"));
 		
 		logger.info(series.getData());
 		
@@ -57,15 +49,15 @@ public class EchartDemoCategory
 	public static JsonDatas toDatas()
 	{
 		JsonDatasFactory jf = JsonDatasFactory.instance();
-		jf.add(EchartDemoCategory.toCategoriesX());
+		jf.add(EchartDemoCategory.toCategory("X"));
 		jf.add(EchartDemoCategory.toData("A"));
 		
 		return jf.assemble();
 	}
 	
-	public static JsonData toCategoriesX()
+	private static JsonData toCategory(String seriesId)
 	{
-		JsonDataFactory jf = JsonDataFactory.instance().type(JsonDataFactory.Type.category).id("categoriesX");
+		JsonDataFactory jf = JsonDataFactory.instance().type(JsonDataFactory.Type.category).id(seriesId);
 		jf.string("Mon");
 		jf.string("Tue");
 		jf.string("Wed");

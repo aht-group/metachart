@@ -62,24 +62,22 @@ public class JsonOptionFactory
 	}
 	public JsonOptionFactory axisY(JsonAxis axis) {json.setAxisY(axis); return this;}
 	public JsonOptionFactory legend(JsonLegend legend) {json.setLegend(legend); return this;}
+	
 	public JsonOption assemble() {return json;}
 	
 	public static JsonOption build() {return new JsonOption();}
 	
 	public static JsonOption toMagicDatas(JsonOption option)
 	{	//This is used for demo charts
-		for(JsonSeries s : ListUtils.emptyIfNull(option.getSeries()))
-		{
-			s.setData(JsUtil.magicField(s.getData()));
-		}
-		return option;
+		return JsonOptionFactory.toMagicDatas(null, option);
 	}
-	public static JsonOption toMagicDatas(String id, JsonOption option)
+	public static JsonOption toMagicDatas(String chartId, JsonOption option)
 	{	//This is used for JSF charts
 		for(JsonSeries s : ListUtils.emptyIfNull(option.getSeries()))
 		{
-			s.setData(JsUtil.magicField(TxtDataFactory.id(id,s.getData())));
+			s.setData(JsUtil.magicField(TxtDataFactory.id(chartId,s.getData())));
 		}
+		if(Objects.nonNull(option.getAxisX()) && Objects.nonNull(option.getAxisX().getData())) {option.getAxisX().setData(JsUtil.magicField(TxtDataFactory.id(chartId,option.getAxisX().getData())));}
 		return option;
 	}
 }

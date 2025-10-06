@@ -32,7 +32,7 @@ public class EchartDemoGraph implements EchartGraphDataProvider
 	
 	public void demo() throws IOException
 	{
-		jfEchart.letCategories("Node").letData().letEdges();
+		jfEchart.letCategory("Node").letData().letEdges();
 		jfEchart.categories("Node",this.getGraphCategories().getData());
 		jfEchart.data(this.getGraphNodes().getData());
 		jfEchart.edges(this.getGraphEdges().getEdges());

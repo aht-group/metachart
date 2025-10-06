@@ -30,7 +30,7 @@ public class CliEchartCategory extends AbstractCliEchart
 	{
 		StringWriter sw = new StringWriter();
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
-		EchartDemoCategory.instance().demo(jfEchart);
+		EchartDemoCategory.demo(jfEchart);
 		jfEchart.init();
 		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
 	}
@@ -43,7 +43,7 @@ public class CliEchartCategory extends AbstractCliEchart
 		
 		StringWriter sw = new StringWriter();
 		JsonEchartCategoryFactory f = JsonEchartCategoryFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.json(null,datas,EchartDemoCategory.instance().toOption(false));
+		f.json(null,datas,EchartDemoCategory.toOption());
 		super.render(true,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
 	}
 

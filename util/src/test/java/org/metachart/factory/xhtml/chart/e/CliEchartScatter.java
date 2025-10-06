@@ -11,12 +11,8 @@ import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoScatter;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartScatterFactory;
-import org.metachart.factory.json.chart.echart.js.family.JsonEchartTimeFactory;
 import org.metachart.model.json.chart.echart.JsonEchart;
-import org.metachart.model.json.chart.echart.JsonOption;
-import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
@@ -35,7 +31,7 @@ public class CliEchartScatter extends AbstractCliEchart
 	{
 		StringWriter sw = new StringWriter();
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
-		EchartDemoScatter.instance(jfEchart).demo();
+		EchartDemoScatter.demo(jfEchart);
 		jfEchart.init();
 		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
 	}
@@ -47,18 +43,17 @@ public class CliEchartScatter extends AbstractCliEchart
 		
 		StringWriter sw = new StringWriter();
 		JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.json(null,datas,EchartDemoScatter.instance(null).toOption(false));
+		f.json(null,datas,EchartDemoScatter.toOption());
 		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
 	}
 	
 	public void app() throws IOException
-	{		
-		JsonData[] datas = JsonUtil.instance().readArray(JsonData[].class,McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.time+".datas.json"));
-		JsonOption option = JsonUtil.instance().read(JsonOption.class,McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.time+".option.json"));
+	{	
+		JsonEchart chart = JsonUtil.instance().read(JsonEchart.class,McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.scatter+".chart.json"));
 		
 		StringWriter sw = new StringWriter();
-		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.json(null, JsonDatasFactory.build(datas), option);
+		JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
+		f.json(null, JsonDatasFactory.build(chart.getDatas()), chart.getOption());
 		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".app.html"));
 	}
 
@@ -73,6 +68,6 @@ public class CliEchartScatter extends AbstractCliEchart
 		
 		cli.demo();
 		cli.jsf();
-//		cli.app();
+		cli.app();
 	}
 }

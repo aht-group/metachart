@@ -27,9 +27,7 @@ public class EchartDemoTime
 		jfEchart.letData("A").letData("B").letData("AreaSeries");
 		jfEchart.dataTime(EchartDemoTime.toData("A"));
 		jfEchart.dataTime(EchartDemoTime.toData("B"));
-		
 		jfEchart.option(JsonOptionFactory.toMagicDatas(EchartDemoTime.toOption()));
-
 	}
 	
 	public static JsonOption toOption()

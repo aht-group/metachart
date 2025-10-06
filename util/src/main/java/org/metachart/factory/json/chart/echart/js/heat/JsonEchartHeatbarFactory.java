@@ -53,8 +53,8 @@ public class JsonEchartHeatbarFactory
 		
 		jfEchart.declare(div,JsonHtmlFactory.build(JsonHtmlFactory.Renderer.svg,true,""+dWidth,grid.getHeight()));
 		jfEchart.letData().letCategoriesX().letCategoriesY();
-		jfEchart.categories("x",this.xCategories(data));
-		jfEchart.categories("y",this.yCategories());
+		jfEchart.category("x",this.xCategories(data));
+		jfEchart.category("y",this.yCategories());
 		jfEchart.dataDoubles2(this.toDoubles2(data.getValue()),TxtEchartFunctionFactory.nullify(3));
 		jfEchart.option(this.jsfOption(grid,data));
 		

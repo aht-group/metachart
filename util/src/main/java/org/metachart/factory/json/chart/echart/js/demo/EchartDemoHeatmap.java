@@ -31,8 +31,8 @@ public class EchartDemoHeatmap
 	public void demo() throws IOException
 	{		
 		fEchart.letData().letCategoriesX().letCategoriesY();
-		fEchart.categories("x",this.demoCategoriesX());
-		fEchart.categories("y",this.demoCategoriesY());
+		fEchart.category("x",this.demoCategoriesX());
+		fEchart.category("y",this.demoCategoriesY());
 		fEchart.dataDoubles2(this.demoData(),TxtEchartFunctionFactory.nullify(3));
 		fEchart.option(this.demoOption());
 	}

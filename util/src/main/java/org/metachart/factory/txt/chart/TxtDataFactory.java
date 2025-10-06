@@ -14,6 +14,7 @@ public class TxtDataFactory
 		
 		return sb.toString();
 	}
+	
 	public static String dataId(String seriesId) {return TxtDataFactory.dataId(null,seriesId);}
 	public static String dataId(String chartId, String seriesId)
 	{
@@ -22,6 +23,8 @@ public class TxtDataFactory
 		sb.append(TxtDataFactory.id(chartId, seriesId));
 		return sb.toString();
 	}
+	
+	public static String categoryId(String seriesId) {return TxtDataFactory.categoryId(null,seriesId);}
 	public static String categoryId(String chartId, String seriesId)
 	{
 		StringBuilder sb = new StringBuilder();

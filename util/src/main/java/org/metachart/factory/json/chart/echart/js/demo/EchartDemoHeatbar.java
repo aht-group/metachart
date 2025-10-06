@@ -40,8 +40,8 @@ public class EchartDemoHeatbar
 		org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory fHeatbar = org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory.instance();
 		
 		fEchart.letData().letCategoriesX().letCategoriesY();
-		fEchart.categories("x",this.categoriesX());
-		fEchart.categories("y",fHeatbar.yCategories());
+		fEchart.category("x",this.categoriesX());
+		fEchart.category("y",fHeatbar.yCategories());
 		fEchart.dataDoubles2(fHeatbar.toDoubles2(this.demoData()),TxtEchartFunctionFactory.nullify(3));
 		fEchart.option(this.demoOption());
 	}
