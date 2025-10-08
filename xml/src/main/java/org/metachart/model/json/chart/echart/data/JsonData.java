@@ -1,6 +1,7 @@
 package org.metachart.model.json.chart.echart.data;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 public class JsonData implements Serializable
@@ -24,7 +27,6 @@ public class JsonData implements Serializable
 	
 	@JsonProperty("mcType")
 	private String mcType;
-
 	public String getMcType() {return mcType;}
 	public void setMcType(String mcType) {this.mcType = mcType;}
 
@@ -50,6 +52,14 @@ public class JsonData implements Serializable
 	private LocalDateTime[] times;
 	public LocalDateTime[] getTimes() {return times;}
 	public void setTimes(LocalDateTime[] times) {this.times = times;}
+	
+	@JsonProperty("dates")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonDeserialize(contentUsing = LocalDateDeserializer.class)
+	@JsonSerialize(contentUsing = LocalDateSerializer.class)
+	private LocalDate[] dates;
+	public LocalDate[] getDates() {return dates;}
+	public void setDates(LocalDate[] dates) {this.dates = dates;}
 
 	@JsonProperty("doubles1")
 	private double[] doubles1;

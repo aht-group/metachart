@@ -2,6 +2,8 @@ package org.metachart.factory.xhtml.chart.e;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 
 import org.exlp.interfaces.system.property.Configuration;
@@ -13,6 +15,7 @@ import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoScatter;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartScatterFactory;
 import org.metachart.model.json.chart.echart.JsonEchart;
+import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
@@ -41,20 +44,27 @@ public class CliEchartScatter extends AbstractCliEchart
 		JsonDatas datas = EchartDemoScatter.toDatas();
 		JsonUtil.instance().write(datas, McBootstrap.pTemp.resolve("echart-"+type.toString()+".datas.json"));
 		
+		JsonOption option = EchartDemoScatter.toOption();
+		option.setTooltip(null);
+		
 		StringWriter sw = new StringWriter();
 		JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.json(null,datas,EchartDemoScatter.toOption());
+		f.json(null,datas,option);
 		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
 	}
 	
 	public void app() throws IOException
 	{	
-		JsonEchart chart = JsonUtil.instance().read(JsonEchart.class,McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.scatter+".chart.json"));
-		
-		StringWriter sw = new StringWriter();
-		JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.json(null, JsonDatasFactory.build(chart.getDatas()), chart.getOption());
-		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".app.html"));
+		Path p = McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.scatter+".chart.json");
+		if(Files.exists(p))
+		{
+			JsonEchart chart = JsonUtil.instance().read(JsonEchart.class,p);
+			
+			StringWriter sw = new StringWriter();
+			JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
+			f.json(null, JsonDatasFactory.build(chart.getDatas()), chart.getOption());
+			this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".app.html"));
+		}
 	}
 
 	public static void main (String[] args) throws Exception

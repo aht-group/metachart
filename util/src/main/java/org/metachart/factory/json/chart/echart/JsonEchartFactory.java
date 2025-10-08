@@ -104,12 +104,30 @@ public class JsonEchartFactory
 			for(int i=0; i<data.getTimes().length; i++)
 			{
 				sb.append(" [");
-	//			sb.append(data.getTimes()[i].atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
-	//			sb.append(data.getTimes()[i].toString());
 				sb.append("\"").append(data.getTimes()[i].format(formatter)).append("\"");
 				sb.append(" , ").append(data.getDoubles1()[i]);
 				sb.append("]");
 				if(i<data.getTimes().length-1) {sb.append(", ");}
+			}
+		}
+		sb.append("];");
+		w.write(sb.toString());
+		return sb.toString();
+	}
+	
+	public String dataDate1(JsonData data) throws IOException
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\n").append(TxtDataFactory.dataId(id,data.getId())).append(" = [");
+		if(Objects.nonNull(data.getDates()))
+		{
+			for(int i=0; i<data.getDates().length; i++)
+			{
+				sb.append("\'").append(data.getDates()[i].format(formatter)).append("'");
+				if(i<data.getDates().length-1) {sb.append(", ");}
 			}
 		}
 		sb.append("];");
@@ -190,6 +208,12 @@ public class JsonEchartFactory
 		sb.append(";");
 		w.write(sb.toString());
 		return sb.toString();
+	}
+	
+	public void function(String function) throws IOException
+	{
+		w.write("\n\n");
+		w.write(function);
 	}
 
 	public void init() throws IOException

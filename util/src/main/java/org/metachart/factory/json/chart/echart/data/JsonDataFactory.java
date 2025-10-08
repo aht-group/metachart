@@ -1,22 +1,24 @@
 package org.metachart.factory.json.chart.echart.data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-import org.exlp.util.io.JsonUtil;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonEdge;
 
 public class JsonDataFactory
 {
-	public enum Type {data,category}
+	public enum Type {data,category,dates}
 	
 	private JsonData json;
 	
 	private List<LocalDateTime> times;
+	private List<LocalDate> dates;
+	
 	private List<String> strings;
 	private List<Double> doubles1;
 	private List<double[]> doubles2;
@@ -32,6 +34,7 @@ public class JsonDataFactory
 	public JsonData assemble()
 	{
 		if(Objects.nonNull(times)) {json.setTimes(times.toArray(new LocalDateTime[times.size()]));}
+		if(Objects.nonNull(dates)) {json.setDates(dates.toArray(new LocalDate[dates.size()]));}
 		if(Objects.nonNull(strings)) {json.setStrings(strings.toArray(new String[strings.size()]));}
 		if(Objects.nonNull(doubles1)) {json.setDoubles1(doubles1.stream().mapToDouble(Double::doubleValue).toArray());}
 		if(Objects.nonNull(doubles2)) {json.setDoubles2(doubles2.stream().toArray(double[][]::new));}
@@ -74,6 +77,13 @@ public class JsonDataFactory
 		
 		times.add(ldt);
 		doubles1.add(value);
+		return this;
+	}
+	
+	public JsonDataFactory date(LocalDate ld)
+	{
+		if(Objects.isNull(dates)) {dates = new ArrayList<>();}
+		dates.add(ld);
 		return this;
 	}
 	

@@ -15,10 +15,11 @@ public class JsonTooltip implements Serializable
 
 	@JsonProperty("position")
 	private String position;
-	public String getPosition() {
-		return position;
-	}
-	public void setPosition(String position) {
-		this.position = position;
-	}
+	public String getPosition() {return position;}
+	public void setPosition(String position) {this.position = position;}
+	
+	@JsonProperty("formatter")
+	private String formatter;
+	public String getFormatter() {return formatter;}
+	public void setFormatter(String formatter) {this.formatter = formatter;}
 }

@@ -12,8 +12,11 @@ public class JsonTooltipFactory
 		json = new JsonTooltip();
 	}
 	
-	public JsonTooltipFactory trigger(String trigger) {json.setTrigger(trigger);return this;}
+	public JsonTooltipFactory trigger(String trigger) {json.setTrigger(trigger); return this;}
+	public JsonTooltipFactory triggerItem() {json.setTrigger("item"); return this;}
 	public JsonTooltipFactory position(String position) {json.setPosition(position); return this;}
+	
+	public JsonTooltipFactory formatter(String formatter) {json.setFormatter(formatter); return this;}
 	
 	public JsonTooltip build() {return json;}
 }

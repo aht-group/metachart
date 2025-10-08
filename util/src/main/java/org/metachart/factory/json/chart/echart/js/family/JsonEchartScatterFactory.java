@@ -8,6 +8,7 @@ import org.apache.commons.collections4.ListUtils;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
+import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.interfaces.chart.EchartJsFactory;
@@ -40,17 +41,29 @@ public class JsonEchartScatterFactory implements EchartJsFactory
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);
 		jfEchart.declare(id,JsonHtmlFactory.instance().assemble());
 		
-		for(JsonData d : ListUtils.emptyIfNull(datas.getList()))
-		{
-			jfEchart.letData(d.getId());
-		}
+		for(JsonData d : ListUtils.emptyIfNull(datas.getList())) {jfEchart.letData(d.getId());}
 		
 		for(JsonData d : ListUtils.emptyIfNull(datas.getList()))
 		{
-			jfEchart.dataDoubles2(d);
+			switch(JsonDataFactory.Type.valueOf(d.getMcType()))
+			{
+				case data:  jfEchart.dataDoubles2(d); break;
+				case dates:  jfEchart.dataDate1(d); break;
+			}
 		}
+		
 
 		jfEchart.option(JsonOptionFactory.toMagicDatas(id,option));
 		jfEchart.init();
+	}
+	
+	public static String functionTooltipDate(String data)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("function scatterTooltipFormatter(params) {");
+		sb.append("const index = params.dataIndex;");
+		sb.append("const datum = ").append(data).append("[index];");
+		sb.append(" return `${datum}`}");
+		return sb.toString();
 	}
 }
