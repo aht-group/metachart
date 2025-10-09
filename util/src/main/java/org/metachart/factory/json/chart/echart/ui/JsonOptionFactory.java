@@ -36,7 +36,7 @@ public class JsonOptionFactory
 	{
 		json.setAxisX(JsonAxisFactory.instance().type("time").assemble());
 		json.setAxisY(JsonAxisFactory.instance().type("value").assemble());
-		json.setUseUtc(true);
+//		json.setUseUtc(true);
 		return this;
 	}
 	public JsonOptionFactory scatter()
