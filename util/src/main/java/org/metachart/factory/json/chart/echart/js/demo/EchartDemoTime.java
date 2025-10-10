@@ -32,7 +32,7 @@ public class EchartDemoTime
 	
 	public static JsonOption toOption()
 	{
-		JsonOption option =  JsonOptionFactory.instance().time2().assemble();
+		JsonOption option =  JsonOptionFactory.instance().time2().grid("10", "25", "20", "10").assemble();
 		
 		JsonSeries seriesA = new JsonSeries();
 		seriesA.setType(JsonEchartFactory.Type.line.toString());

@@ -12,8 +12,8 @@ import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonAxis;
+import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.model.json.chart.echart.grid.JsonLegend;
-import org.metachart.model.json.chart.echart.ui.JsonTooltip;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,13 +36,23 @@ public class JsonOptionFactory
 	{
 		json.setAxisX(JsonAxisFactory.instance().type("time").assemble());
 		json.setAxisY(JsonAxisFactory.instance().type("value").assemble());
-//		json.setUseUtc(true);
+		json.setUseUtc(true);
 		return this;
 	}
 	public JsonOptionFactory scatter()
 	{
 		json.setAxisX(JsonAxisFactory.instance().assemble());
 		json.setAxisY(JsonAxisFactory.instance().assemble());
+		return this;
+	}
+	
+	public JsonOptionFactory grid(String top, String bottom, String left, String right) {
+		JsonGrid grid = new JsonGrid();
+		grid.setTop(top);
+		grid.setBottom(bottom);
+		grid.setLeft(left);
+		grid.setRight(right);
+		json.setGrid(grid);
 		return this;
 	}
 	
@@ -63,7 +73,6 @@ public class JsonOptionFactory
 	}
 	public JsonOptionFactory axisY(JsonAxis axis) {json.setAxisY(axis); return this;}
 	public JsonOptionFactory legend(JsonLegend legend) {json.setLegend(legend); return this;}
-	public JsonOptionFactory tooltip(JsonTooltip tooltip) {json.setTooltip(tooltip); return this;}
 	
 	public JsonOption assemble() {return json;}
 	
@@ -80,7 +89,6 @@ public class JsonOptionFactory
 			s.setData(JsUtil.magicField(TxtDataFactory.id(chartId,s.getData())));
 		}
 		if(Objects.nonNull(option.getAxisX()) && Objects.nonNull(option.getAxisX().getData())) {option.getAxisX().setData(JsUtil.magicField(TxtDataFactory.id(chartId,option.getAxisX().getData())));}
-		if(Objects.nonNull(option.getTooltip()) && Objects.nonNull(option.getTooltip().getFormatter())) {option.getTooltip().setFormatter(JsUtil.magicField(TxtDataFactory.id(chartId,option.getTooltip().getFormatter())));}
 		return option;
 	}
 }
