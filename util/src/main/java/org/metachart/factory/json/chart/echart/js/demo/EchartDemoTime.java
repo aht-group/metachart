@@ -8,6 +8,7 @@ import java.util.Random;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonSeriesFactory;
+import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonMarkAreaFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.txt.chart.TxtDataFactory;
@@ -15,6 +16,7 @@ import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
+import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +34,9 @@ public class EchartDemoTime
 	
 	public static JsonOption toOption()
 	{
-		JsonOption option =  JsonOptionFactory.instance().time2().grid("10", "25", "20", "10").assemble();
+		JsonGrid grid = JsonGridFactory.instance().margin(10,25,20,10).assemble();
+		
+		JsonOption option =  JsonOptionFactory.instance().time2().grid(grid).assemble();
 		
 		JsonSeries seriesA = new JsonSeries();
 		seriesA.setType(JsonEchartFactory.Type.line.toString());

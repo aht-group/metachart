@@ -2,13 +2,11 @@ package org.metachart.factory.json.chart.echart.js.demo;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Random;
 
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
-import org.metachart.factory.json.chart.echart.data.JsonSeriesFactory;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartScatterFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
@@ -31,7 +29,6 @@ public class EchartDemoScatter
 		jfEchart.dataDate1(EchartDemoScatter.toDataDays("B"));
 		jfEchart.function(JsonEchartScatterFactory.functionTooltipDate("dataB"));
 		jfEchart.option(JsonOptionFactory.toMagicDatas(EchartDemoScatter.toOption()));
-		
 	}
 	
 	public static JsonOption toOption()

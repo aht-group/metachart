@@ -110,12 +110,10 @@ public class JsonDataFactory
 		areas.add(l);
 		return this;
 	}
-	
-	
+
 	public JsonDataFactory name(String value) {json.setName(value); return this;}
 	public JsonDataFactory category(int index) {json.setCategory(index); return this;}
 
-	
 	public static JsonData create() {return new JsonData();}
 	public static JsonData build(String name)
 	{
