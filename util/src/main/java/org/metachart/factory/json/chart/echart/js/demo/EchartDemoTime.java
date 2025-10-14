@@ -52,7 +52,6 @@ public class EchartDemoTime
 		JsonSeries seriesA = new JsonSeries();
 		seriesA.setType(JsonEchartFactory.Type.line.toString());
 		seriesA.setData(TxtDataFactory.dataId("A"));
-		logger.info(seriesA.getData());
 		
 		JsonSeries seriesB = new JsonSeries();
 		seriesB.setType(JsonEchartFactory.Type.line.toString());

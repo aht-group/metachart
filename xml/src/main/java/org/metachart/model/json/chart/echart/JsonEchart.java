@@ -13,6 +13,8 @@ public class JsonEchart implements Serializable
 						graph,sankey,gauge,
 						heatbar,heatmap}
 	
+//	private JsonEchart() {}
+	
 	private JsonOption option;
 	public JsonOption getOption() {return option;}
 	public void setOption(JsonOption option) {this.option = option;}

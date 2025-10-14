@@ -76,53 +76,6 @@ public class JsonEchartHeatbarFactory extends AbstractJsonEchartFactory implemen
 		jfEchart.init();
 	}
 	
-	public void jsf(String div, JsonGrid grid, Data data) throws IOException
-	{	
-		if(Objects.isNull(grid)) {grid = JsonGridFactory.instance().size("12",null).assemble();}
-		
-		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(div);
-
-		Double dHeight = Double.valueOf(grid.getHeight());
-		Double dWidth = dHeight;
-		if(Objects.nonNull(data.getValue()) && ObjectUtils.isNotEmpty(data.getValue().getDoubles1())) {dWidth = dHeight*data.getValue().getDoubles1().length;}
-		
-		jfEchart.declare(div,JsonHtmlFactory.build(JsonHtmlFactory.Renderer.svg,true,""+dWidth,grid.getHeight()));
-		jfEchart.letData().letCategory("X").letCategory("Y");
-		jfEchart.category("x",this.xCategories(data));
-		jfEchart.category("y",this.categoryY());
-		jfEchart.dataDoubles2(this.toDoubles2(data.getValue()),TxtEchartFunctionFactory.nullify(3));
-		jfEchart.option(this.jsfOption(grid,data));
-		
-		jfEchart.init();
-	}
-	
-	private JsonOption jsfOption(JsonGrid jsfGrid, Data data)
-	{
-		if(Objects.nonNull(jsfGrid.getHeight()))
-		{
-			Double d=1d; if(ObjectUtils.isNotEmpty(jsfGrid.getHeight())) {d= Double.valueOf(jsfGrid.getHeight());}
-			Integer w=1; if(Objects.nonNull(data.getValue())) {w = data.getValue().getDoubles1().length;}
-			jsfGrid.setWidth(""+d*w);
-		}
-		
-		JsonOption option = new JsonOption();
-		option.setGrid(JsonGridFactory.instance().size(jsfGrid).margin(0,0,0,0).assemble());
-		
-		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
-		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).assemble());
-		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).assemble());
-		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
-		option.setTooltip(JsonTooltipFactory.instance().position("top").assemble());
-		
-		option.setSeries(new ArrayList<>());
-		JsonSeries series = new JsonSeries();
-		series.setData(JsUtil.magicField("data"+id));
-		series.setType(JsonEchartFactory.Type.heatmap.toString());
-		
-		option.getSeries().add(series);
-		return option;
-	}
-	
 	public static JsonData categoryX(int size)
 	{
 		JsonDataFactory jf = JsonDataFactory.instance().id("X").type(Type.category);
