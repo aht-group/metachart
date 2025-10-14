@@ -19,7 +19,7 @@ import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonEchartCategoryFactory implements EchartJsFactory
+public class JsonEchartCategoryFactory extends AbstractJsonEchartFactory implements EchartJsFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonEchartCategoryFactory.class);
 	
@@ -33,7 +33,7 @@ public class JsonEchartCategoryFactory implements EchartJsFactory
 		this.w=w;
 		id="";
 	}
-	
+
 	@Override public void json(JsonGrid grid, JsonDatas datas, JsonOption option) throws IOException
 	{	
 		if(Objects.isNull(grid)) {grid = JsonGridFactory.fallback();}
@@ -41,17 +41,8 @@ public class JsonEchartCategoryFactory implements EchartJsFactory
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);
 		jfEchart.declare(id,JsonHtmlFactory.instance().assemble());
 		
-		for(JsonData d : ListUtils.emptyIfNull(datas.getList()))
-		{
-			if(Objects.nonNull(d.getMcType()))
-			{
-				switch(JsonDataFactory.Type.valueOf(d.getMcType()))
-				{
-					case category:  jfEchart.letCategory(d.getId()); break;
-					case data:  jfEchart.letData(d.getId()); break;
-				}
-			}
-		}
+		super.let(jfEchart,datas);
+		
 		
 		for(JsonData d : ListUtils.emptyIfNull(datas.getList()))
 		{

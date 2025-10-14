@@ -31,13 +31,13 @@ public class EchartDemoHeatmap
 	public void demo() throws IOException
 	{		
 		fEchart.letData().letCategory("X").letCategory("Y");
-		fEchart.category("X",this.demoCategoriesX());
-		fEchart.category("Y",this.demoCategoriesY());
-		fEchart.dataDoubles2(this.demoData(),TxtEchartFunctionFactory.nullify(3));
-		fEchart.option(this.demoOption());
+		fEchart.category("X",EchartDemoHeatmap.demoCategoriesX());
+		fEchart.category("Y",EchartDemoHeatmap.demoCategoriesY());
+		fEchart.dataDoubles2(EchartDemoHeatmap.demoData(),TxtEchartFunctionFactory.nullify(3));
+		fEchart.option(EchartDemoHeatmap.demoOption());
 	}
 	
-	public JsonOption demoOption()
+	public static JsonOption demoOption()
 	{
 		JsonOption option = new JsonOption();
 		
@@ -57,7 +57,7 @@ public class EchartDemoHeatmap
 		return option;
 	}
 	
-	public JsonData demoCategoriesX()
+	public static JsonData demoCategoriesX()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		for (int i=0;i<24;i++) 
@@ -66,7 +66,8 @@ public class EchartDemoHeatmap
         }
 		return jf.assemble();
 	}
-	public JsonData demoCategoriesY()
+	
+	public static JsonData demoCategoriesY()
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
 		for (DayOfWeek day : DayOfWeek.values())
@@ -75,7 +76,8 @@ public class EchartDemoHeatmap
         }
 		return jf.assemble();
 	}
-	public JsonData demoData()
+	
+	public static JsonData demoData()
 	{
 		Random rnd = new Random();
 		JsonDataFactory jf = JsonDataFactory.instance();

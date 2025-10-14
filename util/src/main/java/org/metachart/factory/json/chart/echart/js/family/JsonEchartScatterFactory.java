@@ -19,7 +19,7 @@ import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonEchartScatterFactory implements EchartJsFactory
+public class JsonEchartScatterFactory extends AbstractJsonEchartFactory implements EchartJsFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonEchartScatterFactory.class);
 	
@@ -41,7 +41,7 @@ public class JsonEchartScatterFactory implements EchartJsFactory
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);
 		jfEchart.declare(id,JsonHtmlFactory.instance().assemble());
 		
-		for(JsonData d : ListUtils.emptyIfNull(datas.getList())) {jfEchart.letData(d.getId());}
+		super.let(jfEchart,datas);
 		
 		for(JsonData d : ListUtils.emptyIfNull(datas.getList()))
 		{

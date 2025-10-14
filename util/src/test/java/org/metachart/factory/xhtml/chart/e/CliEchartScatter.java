@@ -50,7 +50,7 @@ public class CliEchartScatter extends AbstractCliEchart
 		StringWriter sw = new StringWriter();
 		JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
 		f.json(null,datas,option);
-		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".jsf.html"));
+		super.render(true,sw,"jsf");
 	}
 	
 	public void app() throws IOException
@@ -63,7 +63,7 @@ public class CliEchartScatter extends AbstractCliEchart
 			StringWriter sw = new StringWriter();
 			JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
 			f.json(null, JsonDatasFactory.build(chart.getDatas()), chart.getOption());
-			this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".app.html"));
+			super.render(true,sw,"app");
 		}
 	}
 

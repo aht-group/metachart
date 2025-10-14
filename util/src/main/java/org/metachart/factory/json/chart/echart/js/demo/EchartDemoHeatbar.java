@@ -7,11 +7,12 @@ import java.util.Random;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
+import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory.Type;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
-import org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory;
+import org.metachart.factory.json.chart.echart.js.family.JsonEchartHeatbarFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonVisualMapFactory;
@@ -19,6 +20,7 @@ import org.metachart.factory.json.function.TxtEchartFunctionFactory;
 import org.metachart.factory.txt.chart.TxtDataFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonSplitArea;
 import org.slf4j.Logger;
@@ -28,28 +30,17 @@ public class EchartDemoHeatbar
 {
 	final static Logger logger = LoggerFactory.getLogger(EchartDemoHeatbar.class);
 	
-	private final JsonEchartFactory fEchart;
-	
-	private String id; public EchartDemoHeatbar id(String id) {this.id=id; return this;}
-	
-	public static EchartDemoHeatbar instance(JsonEchartFactory fEchart) {return new EchartDemoHeatbar(fEchart);}
-	private EchartDemoHeatbar(JsonEchartFactory fEchart)
-	{
-		this.fEchart=fEchart;
-		id="";
-	}
-	
-	public void demo() throws IOException
+	public static void demo(JsonEchartFactory jfEchart) throws IOException
 	{
 		JsonEchartHeatbarFactory fHeatbar = JsonEchartHeatbarFactory.instance();
-		fEchart.letData().letCategory("X").letCategory("Y");
-		fEchart.category("X",this.categoriesX());
-		fEchart.category("Y",JsonEchartHeatbarFactory.yCategories());
-		fEchart.dataDoubles2(fHeatbar.toDoubles2(EchartDemoHeatbar.demoData()),TxtEchartFunctionFactory.nullify(3));
-		fEchart.option(JsonOptionFactory.toMagicDatas(this.demoOption()));
+		jfEchart.letData().letCategory("X").letCategory("Y");
+		jfEchart.category("X",EchartDemoHeatbar.categoriesX());
+		jfEchart.category("Y",JsonEchartHeatbarFactory.yCategories());
+		jfEchart.dataDoubles2(fHeatbar.toDoubles2(EchartDemoHeatbar.demoData()),TxtEchartFunctionFactory.nullify(3));
+		jfEchart.option(JsonOptionFactory.toMagicDatas(EchartDemoHeatbar.toOption()));
 	}
 	
-	public JsonOption demoOption()
+	public static JsonOption toOption()
 	{
 		JsonOption option = new JsonOption();
 		option.setGrid(JsonGridFactory.instance().size(12,(12*24)).margin(5,5,5,5).assemble());
@@ -57,7 +48,6 @@ public class EchartDemoHeatbar
 		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
 		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("categoryX").splitArea(splitArea).assemble());
 		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("categoryY").splitArea(splitArea).assemble());
-		JsonUtil.info(option);
 		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
 		option.setTooltip(JsonTooltipFactory.instance().position("top").assemble());
 		
@@ -70,9 +60,18 @@ public class EchartDemoHeatbar
 		return option;
 	}
 	
-	private JsonData categoriesX()
+	public static JsonDatas toDatas()
 	{
-		JsonDataFactory jf = JsonDataFactory.instance();
+		JsonDatasFactory jf = JsonDatasFactory.instance();
+		jf.add(EchartDemoHeatbar.categoriesX());
+		jf.add(JsonEchartHeatbarFactory.yCategories());
+		jf.add(EchartDemoHeatbar.demoData());
+		return jf.assemble();
+	}
+	
+	private static JsonData categoriesX()
+	{
+		JsonDataFactory jf = JsonDataFactory.instance().id("X").type(Type.category);
 		for (int i=0;i<24;i++)
 		{
 			jf.string(""+i);

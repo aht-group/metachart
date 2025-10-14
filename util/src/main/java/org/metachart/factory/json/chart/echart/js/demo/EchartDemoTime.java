@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
+import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.data.JsonSeriesFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonMarkAreaFactory;
@@ -73,13 +74,11 @@ public class EchartDemoTime
 	
 	public static JsonDatas toDatas()
 	{
-		JsonDatas datas = new JsonDatas();
-		datas.setList(new ArrayList<>());
-		datas.getList().add(EchartDemoTime.toData("A"));
-		datas.getList().add(EchartDemoTime.toData("B"));
-		datas.getList().add(EchartDemoTime.toDataArea());
-		
-		return datas;
+		JsonDatasFactory jf = JsonDatasFactory.instance();
+		jf.add(EchartDemoTime.toData("A"));
+		jf.add(EchartDemoTime.toData("B"));
+		jf.add(EchartDemoTime.toDataArea());
+		return jf.assemble();
 	}
 	
 	public static JsonData toDataArea()
