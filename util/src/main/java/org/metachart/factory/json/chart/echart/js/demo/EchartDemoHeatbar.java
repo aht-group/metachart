@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.exlp.util.io.JsUtil;
+import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonVisualMapFactory;
 import org.metachart.factory.json.function.TxtEchartFunctionFactory;
@@ -39,11 +41,11 @@ public class EchartDemoHeatbar
 	{
 		org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory fHeatbar = org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory.instance();
 		
-		fEchart.letData().letCategoriesX().letCategoriesY();
-		fEchart.category("x",this.categoriesX());
-		fEchart.category("y",fHeatbar.yCategories());
+		fEchart.letData().letCategory("X").letCategory("Y");
+		fEchart.category("X",this.categoriesX());
+		fEchart.category("Y",fHeatbar.yCategories());
 		fEchart.dataDoubles2(fHeatbar.toDoubles2(this.demoData()),TxtEchartFunctionFactory.nullify(3));
-		fEchart.option(this.demoOption());
+		fEchart.option(JsonOptionFactory.toMagicDatas(this.demoOption()));
 	}
 	
 	public JsonOption demoOption()
@@ -52,10 +54,11 @@ public class EchartDemoHeatbar
 		option.setGrid(JsonGridFactory.instance().size(12,(12*24)).margin(5,5,5,5).assemble());
 		
 		JsonSplitArea splitArea = JsonSplitAreaFactory.instance().show(true).build();
-		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).assemble());
-		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).assemble());
+		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("categoryX").splitArea(splitArea).assemble());
+		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("categoryY").splitArea(splitArea).assemble());
+		JsonUtil.info(option);
 		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
-		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
+		option.setTooltip(JsonTooltipFactory.instance().position("top").assemble());
 		
 		option.setSeries(new ArrayList<>());
 		JsonSeries series = new JsonSeries();

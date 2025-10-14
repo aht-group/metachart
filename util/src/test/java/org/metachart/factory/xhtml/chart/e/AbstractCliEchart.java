@@ -27,6 +27,11 @@ public class AbstractCliEchart
 		logger.info("Writing to "+McBootstrap.pTemp.toString());
 	}
 	
+	protected void render(boolean deubg, StringWriter w, String option) throws IOException
+	{
+		Path p = McBootstrap.pTemp.resolve("echart-"+type.toString()+"."+option+".html");
+		this.render(deubg, w, p);
+	}
 	protected void render(boolean debug, StringWriter w, Path pFile) throws IOException
 	{
 		Element html = new Element("html");

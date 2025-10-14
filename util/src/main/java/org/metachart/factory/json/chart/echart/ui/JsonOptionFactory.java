@@ -84,6 +84,7 @@ public class JsonOptionFactory
 			s.setData(JsUtil.magicField(TxtDataFactory.id(chartId,s.getData())));
 		}
 		if(Objects.nonNull(option.getAxisX()) && Objects.nonNull(option.getAxisX().getData())) {option.getAxisX().setData(JsUtil.magicField(TxtDataFactory.id(chartId,option.getAxisX().getData())));}
+		if(Objects.nonNull(option.getAxisY()) && Objects.nonNull(option.getAxisY().getData())) {option.getAxisY().setData(JsUtil.magicField(TxtDataFactory.id(chartId,option.getAxisY().getData())));}
 		if(Objects.nonNull(option.getTooltip()) && Objects.nonNull(option.getTooltip().getFormatter())) {option.getTooltip().setFormatter(JsUtil.magicField(TxtDataFactory.id(chartId,option.getTooltip().getFormatter())));}
 		return option;
 	}

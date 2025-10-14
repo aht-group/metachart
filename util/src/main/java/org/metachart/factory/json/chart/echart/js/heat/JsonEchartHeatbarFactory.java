@@ -52,7 +52,7 @@ public class JsonEchartHeatbarFactory
 		if(Objects.nonNull(data.getValue()) && ObjectUtils.isNotEmpty(data.getValue().getDoubles1())) {dWidth = dHeight*data.getValue().getDoubles1().length;}
 		
 		jfEchart.declare(div,JsonHtmlFactory.build(JsonHtmlFactory.Renderer.svg,true,""+dWidth,grid.getHeight()));
-		jfEchart.letData().letCategoriesX().letCategoriesY();
+		jfEchart.letData().letCategory("X").letCategory("Y");
 		jfEchart.category("x",this.xCategories(data));
 		jfEchart.category("y",this.yCategories());
 		jfEchart.dataDoubles2(this.toDoubles2(data.getValue()),TxtEchartFunctionFactory.nullify(3));
@@ -77,7 +77,7 @@ public class JsonEchartHeatbarFactory
 		option.setAxisX(JsonAxisFactory.instance().show(false).type("category").data("xCategories"+id).splitArea(splitArea).assemble());
 		option.setAxisY(JsonAxisFactory.instance().show(false).type("category").data("yCategories"+id).splitArea(splitArea).assemble());
 		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
-		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
+		option.setTooltip(JsonTooltipFactory.instance().position("top").assemble());
 		
 		option.setSeries(new ArrayList<>());
 		JsonSeries series = new JsonSeries();

@@ -22,4 +22,9 @@ public class JsonTooltip implements Serializable
 	private String formatter;
 	public String getFormatter() {return formatter;}
 	public void setFormatter(String formatter) {this.formatter = formatter;}
+	
+	@JsonProperty("axisPointer")
+	private JsonAxisPointer axisPointer;
+	public JsonAxisPointer getAxisPointer() {return axisPointer;}
+	public void setAxisPointer(JsonAxisPointer axisPointer) {this.axisPointer = axisPointer;}
 }

@@ -35,8 +35,6 @@ public class JsonEchartTimeFactory implements EchartJsFactory
 	
 	@Override public void json(JsonGrid grid, JsonDatas datas, JsonOption option) throws IOException
 	{	
-		
-		
 		if(Objects.isNull(grid)) {grid = JsonGridFactory.fallback();}
 		
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);

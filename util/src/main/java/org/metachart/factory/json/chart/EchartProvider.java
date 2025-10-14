@@ -6,14 +6,10 @@ import java.io.Writer;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoCategory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGauge;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGraph;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoHeatbar;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoHeatmap;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoSankey;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoScatter;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.metachart.model.json.chart.echart.JsonEchart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +34,6 @@ public class EchartProvider
 		{
 			case sankey: EchartDemoSankey.instance(jfEchart).demo(); break;
 			case heatmap: EchartDemoHeatmap.instance(jfEchart).demo(); break;
-			case heatbar: EchartDemoHeatbar.instance(jfEchart).demo(); break;
 			case gauge: EchartDemoGauge.instance(jfEchart).demo(); break;
 			case graph: EchartDemoGraph.instance(jfEchart).demo(); break;
 			default: logger.warn("NYI: "+type.toString());

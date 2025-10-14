@@ -18,7 +18,7 @@ import org.metachart.model.json.chart.echart.data.JsonLink;
 public class JsonEchartFactory
 {
 	public enum Type{line,time,scatter,
-					heatmap,heatbar,
+					heatmap,
 					sankey,graph,gauge}
 
 	private final Writer w;
@@ -58,8 +58,6 @@ public class JsonEchartFactory
 	public JsonEchartFactory letLinks() throws IOException {w.write("\nlet links"+id+" = [];");return this;}
 	public JsonEchartFactory letEdges() throws IOException {w.write("\nlet edges"+id+" = [];");return this;}
 	public JsonEchartFactory letCategory(String suffix) throws IOException {w.write("\nlet category"+suffix+id+" = [];");return this;}
-	public JsonEchartFactory letCategoriesX() throws IOException {w.write("\nlet categoriesX"+id+" = [];");return this;}
-	public JsonEchartFactory letCategoriesY() throws IOException {w.write("\nlet yCategories"+id+" = [];");return this;}
 
 	public void option(JsonOption echart) throws IOException
 	{

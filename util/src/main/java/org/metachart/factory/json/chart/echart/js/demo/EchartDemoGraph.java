@@ -42,7 +42,7 @@ public class EchartDemoGraph implements EchartGraphDataProvider
 	{
 		JsonOption option = new JsonOption();
 			
-		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
+		option.setTooltip(JsonTooltipFactory.instance().position("top").assemble());
 		option.setSeries(new ArrayList<>());
 		
 		JsonSeries series = new JsonSeries();

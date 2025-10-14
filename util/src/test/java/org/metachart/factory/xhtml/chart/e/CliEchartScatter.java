@@ -36,7 +36,7 @@ public class CliEchartScatter extends AbstractCliEchart
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		EchartDemoScatter.demo(jfEchart);
 		jfEchart.init();
-		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
+		super.render(true,sw,"demo");
 	}
 	
 	public void jsf() throws IOException

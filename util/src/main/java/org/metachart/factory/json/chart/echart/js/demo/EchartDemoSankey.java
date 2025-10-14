@@ -47,7 +47,7 @@ public class EchartDemoSankey
 		series.setLinks(JsUtil.magicField("links"));
 		
 		JsonOption option = new JsonOption();
-		option.setTooltip(JsonTooltipFactory.instance().trigger("item").build());
+		option.setTooltip(JsonTooltipFactory.instance().trigger("item").assemble());
 		option.setSeries(new ArrayList<>());
 		option.getSeries().add(series);
 		return option;

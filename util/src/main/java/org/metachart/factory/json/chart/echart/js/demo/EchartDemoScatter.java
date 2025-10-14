@@ -37,7 +37,7 @@ public class EchartDemoScatter
 
 		JsonTooltipFactory jfTt = JsonTooltipFactory.instance().triggerItem().formatter("scatterTooltipFormatter");
 		
-		jfOption.tooltip(jfTt.build());
+		jfOption.tooltip(jfTt.assemble());
 		
 		JsonSeries seriesA = new JsonSeries();
 		seriesA.setType(JsonEchartFactory.Type.scatter.toString());

@@ -30,9 +30,9 @@ public class EchartDemoHeatmap
 	
 	public void demo() throws IOException
 	{		
-		fEchart.letData().letCategoriesX().letCategoriesY();
-		fEchart.category("x",this.demoCategoriesX());
-		fEchart.category("y",this.demoCategoriesY());
+		fEchart.letData().letCategory("X").letCategory("Y");
+		fEchart.category("X",this.demoCategoriesX());
+		fEchart.category("Y",this.demoCategoriesY());
 		fEchart.dataDoubles2(this.demoData(),TxtEchartFunctionFactory.nullify(3));
 		fEchart.option(this.demoOption());
 	}
@@ -46,7 +46,7 @@ public class EchartDemoHeatmap
 		option.setAxisY(JsonAxisFactory.instance().type("category").data("yCategories").splitArea(splitArea).assemble());
 		option.setVisualMap(JsonVisualMapFactory.instance().show(false).minMax(0,10).build());
 		
-		option.setTooltip(JsonTooltipFactory.instance().position("top").build());
+		option.setTooltip(JsonTooltipFactory.instance().position("top").assemble());
 		
 		option.setSeries(new ArrayList<>());
 		JsonSeries series = new JsonSeries();	
