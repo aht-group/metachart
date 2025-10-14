@@ -4,17 +4,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.exlp.util.io.JsUtil;
 import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
+import org.metachart.factory.json.chart.echart.data.JsonDataFactory.Type;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
+import org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonVisualMapFactory;
 import org.metachart.factory.json.function.TxtEchartFunctionFactory;
+import org.metachart.factory.txt.chart.TxtDataFactory;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
@@ -39,12 +41,11 @@ public class EchartDemoHeatbar
 	
 	public void demo() throws IOException
 	{
-		org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory fHeatbar = org.metachart.factory.json.chart.echart.js.heat.JsonEchartHeatbarFactory.instance();
-		
+		JsonEchartHeatbarFactory fHeatbar = JsonEchartHeatbarFactory.instance();
 		fEchart.letData().letCategory("X").letCategory("Y");
 		fEchart.category("X",this.categoriesX());
-		fEchart.category("Y",fHeatbar.yCategories());
-		fEchart.dataDoubles2(fHeatbar.toDoubles2(this.demoData()),TxtEchartFunctionFactory.nullify(3));
+		fEchart.category("Y",JsonEchartHeatbarFactory.yCategories());
+		fEchart.dataDoubles2(fHeatbar.toDoubles2(EchartDemoHeatbar.demoData()),TxtEchartFunctionFactory.nullify(3));
 		fEchart.option(JsonOptionFactory.toMagicDatas(this.demoOption()));
 	}
 	
@@ -62,7 +63,7 @@ public class EchartDemoHeatbar
 		
 		option.setSeries(new ArrayList<>());
 		JsonSeries series = new JsonSeries();
-		series.setData(JsUtil.magicField("data"+id));
+		series.setData(TxtDataFactory.dataId("A"));
 		series.setType(JsonEchartFactory.Type.heatmap.toString());
 		
 		option.getSeries().add(series);
@@ -78,10 +79,11 @@ public class EchartDemoHeatbar
         }
 		return jf.assemble();
 	}
-	private JsonData demoData()
+	
+	public static JsonData demoData()
 	{
 		Random rnd = new Random();
-		JsonDataFactory jf = JsonDataFactory.instance();
+		JsonDataFactory jf = JsonDataFactory.instance().id("A").type(Type.data);
 		for(int x=0;x<24;x++)
 		{
 			int value = rnd.nextInt(15)-5;

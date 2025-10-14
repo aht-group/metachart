@@ -11,6 +11,7 @@ import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
+import org.metachart.factory.json.chart.echart.data.JsonDataFactory.Type;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
@@ -88,7 +89,7 @@ public class JsonEchartHeatbarFactory
 		return option;
 	}
 	
-	public JsonData yCategories() {return JsonDataFactory.instance().string("A").assemble();}
+	public static JsonData yCategories() {return JsonDataFactory.instance().string("A").assemble();}
 	public JsonData xCategories(Data data)
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
@@ -99,7 +100,7 @@ public class JsonEchartHeatbarFactory
 	
 	public JsonData toDoubles2(JsonData data)
 	{
-		JsonDataFactory jf = JsonDataFactory.instance();
+		JsonDataFactory jf = JsonDataFactory.instance().id(data.getId()).type(Type.data);
 		if(Objects.nonNull(data) && ObjectUtils.isNotEmpty(data.getDoubles1()))
 		{
 			for(int i=0;i<data.getDoubles1().length;i++)
