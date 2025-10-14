@@ -5,7 +5,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.JsUtil;
 import org.exlp.util.io.JsonUtil;
@@ -54,7 +53,15 @@ public class JsonEchartHeatbarFactory extends AbstractJsonEchartFactory implemen
 		jfEchart.declare(id,JsonHtmlFactory.instance().assemble());
 		
 		super.let(jfEchart,datas);
-//		
+		jfEchart.letCategory("X");
+		jfEchart.letCategory("Y");
+		
+		JsonData data = datas.getList().get(0);
+		jfEchart.category("X",JsonEchartHeatbarFactory.categoryX(data.getDoubles1().length));
+		jfEchart.category("Y",JsonEchartHeatbarFactory.categoryY());
+		jfEchart.dataDoubles2(JsonEchartHeatbarFactory.toDoubles2(data),TxtEchartFunctionFactory.nullify(3));
+		
+		JsonUtil.info(datas);
 //		for(JsonData d : ListUtils.emptyIfNull(datas.getList()))
 //		{
 //			switch(JsonDataFactory.Type.valueOf(d.getMcType()))
@@ -82,7 +89,7 @@ public class JsonEchartHeatbarFactory extends AbstractJsonEchartFactory implemen
 		jfEchart.declare(div,JsonHtmlFactory.build(JsonHtmlFactory.Renderer.svg,true,""+dWidth,grid.getHeight()));
 		jfEchart.letData().letCategory("X").letCategory("Y");
 		jfEchart.category("x",this.xCategories(data));
-		jfEchart.category("y",this.yCategories());
+		jfEchart.category("y",this.categoryY());
 		jfEchart.dataDoubles2(this.toDoubles2(data.getValue()),TxtEchartFunctionFactory.nullify(3));
 		jfEchart.option(this.jsfOption(grid,data));
 		
@@ -116,7 +123,18 @@ public class JsonEchartHeatbarFactory extends AbstractJsonEchartFactory implemen
 		return option;
 	}
 	
-	public static JsonData yCategories() {return JsonDataFactory.instance().id("Y").type(Type.category).string("A").assemble();}
+	public static JsonData categoryX(int size)
+	{
+		JsonDataFactory jf = JsonDataFactory.instance().id("X").type(Type.category);
+		for (int i=0;i<size;i++)
+		{
+			jf.string(""+i);
+        }
+		return jf.assemble();
+	}
+	
+	public static JsonData categoryY() {return JsonDataFactory.instance().id("Y").type(Type.category).string("A").assemble();}
+	
 	public JsonData xCategories(Data data)
 	{
 		JsonDataFactory jf = JsonDataFactory.instance();
@@ -125,7 +143,7 @@ public class JsonEchartHeatbarFactory extends AbstractJsonEchartFactory implemen
 		return jf.assemble();
 	}
 	
-	public JsonData toDoubles2(JsonData data)
+	public static JsonData toDoubles2(JsonData data)
 	{
 		JsonDataFactory jf = JsonDataFactory.instance().id(data.getId()).type(Type.data);
 		if(Objects.nonNull(data) && ObjectUtils.isNotEmpty(data.getDoubles1()))

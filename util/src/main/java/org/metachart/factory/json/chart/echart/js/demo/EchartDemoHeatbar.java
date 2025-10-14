@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
-import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory.Type;
+import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonAxisFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonSplitAreaFactory;
@@ -32,11 +31,10 @@ public class EchartDemoHeatbar
 	
 	public static void demo(JsonEchartFactory jfEchart) throws IOException
 	{
-		JsonEchartHeatbarFactory fHeatbar = JsonEchartHeatbarFactory.instance();
 		jfEchart.letData().letCategory("X").letCategory("Y");
-		jfEchart.category("X",EchartDemoHeatbar.categoriesX());
-		jfEchart.category("Y",JsonEchartHeatbarFactory.yCategories());
-		jfEchart.dataDoubles2(fHeatbar.toDoubles2(EchartDemoHeatbar.demoData()),TxtEchartFunctionFactory.nullify(3));
+		jfEchart.category("X",JsonEchartHeatbarFactory.categoryX(24));
+		jfEchart.category("Y",JsonEchartHeatbarFactory.categoryY());
+		jfEchart.dataDoubles2(JsonEchartHeatbarFactory.toDoubles2(EchartDemoHeatbar.demoData()),TxtEchartFunctionFactory.nullify(3));
 		jfEchart.option(JsonOptionFactory.toMagicDatas(EchartDemoHeatbar.toOption()));
 	}
 	
@@ -63,19 +61,9 @@ public class EchartDemoHeatbar
 	public static JsonDatas toDatas()
 	{
 		JsonDatasFactory jf = JsonDatasFactory.instance();
-		jf.add(EchartDemoHeatbar.categoriesX());
-		jf.add(JsonEchartHeatbarFactory.yCategories());
+//		jf.add(EchartDemoHeatbar.categoriesX());
+//		jf.add(JsonEchartHeatbarFactory.yCategories());
 		jf.add(EchartDemoHeatbar.demoData());
-		return jf.assemble();
-	}
-	
-	private static JsonData categoriesX()
-	{
-		JsonDataFactory jf = JsonDataFactory.instance().id("X").type(Type.category);
-		for (int i=0;i<24;i++)
-		{
-			jf.string(""+i);
-        }
 		return jf.assemble();
 	}
 	
