@@ -14,6 +14,7 @@ import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.grid.JsonAxis;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.model.json.chart.echart.grid.JsonLegend;
+import org.metachart.model.json.chart.echart.ui.JsonDataZoom;
 import org.metachart.model.json.chart.echart.ui.JsonTooltip;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +69,7 @@ public class JsonOptionFactory
 	public JsonOptionFactory axisY(JsonAxis axis) {json.setAxisY(axis); return this;}
 	public JsonOptionFactory legend(JsonLegend legend) {json.setLegend(legend); return this;}
 	public JsonOptionFactory tooltip(JsonTooltip tooltip) {json.setTooltip(tooltip); return this;}
+	public JsonOptionFactory zoom(JsonDataZoom zoom) {if(Objects.isNull(json.getDataZoom())) {json.setDataZoom(new ArrayList<>());}json.getDataZoom().add(zoom); return this;}
 	
 	public JsonOption assemble() {return json;}
 	

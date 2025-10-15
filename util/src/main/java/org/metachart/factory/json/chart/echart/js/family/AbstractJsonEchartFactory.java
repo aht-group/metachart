@@ -1,6 +1,7 @@
 package org.metachart.factory.json.chart.echart.js.family;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.collections4.ListUtils;
@@ -14,11 +15,15 @@ import org.slf4j.LoggerFactory;
 
 public class AbstractJsonEchartFactory 
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractJsonEchartFactory.class);
+	final Logger logger = LoggerFactory.getLogger(AbstractJsonEchartFactory.class);
 	
 	protected void let(JsonEchartFactory jfEchart, JsonDatas datas) throws IOException
 	{
-		for(JsonData d : ListUtils.emptyIfNull(datas.getList()))
+		this.let(jfEchart, datas.getList());
+	}
+	protected void let(JsonEchartFactory jfEchart, List<JsonData> datas) throws IOException
+	{
+		for(JsonData d : ListUtils.emptyIfNull(datas))
 		{
 			if(Objects.nonNull(d.getMcType()))
 			{
@@ -26,7 +31,7 @@ public class AbstractJsonEchartFactory
 				{
 					case category:  jfEchart.letCategory(d.getId()); break;
 					case data:  jfEchart.letData(d.getId()); break;
-					default: logger.warn("NYI");
+					default: logger.warn("{} NYI ",this.getClass().getSimpleName());
 				}
 			}
 			else

@@ -8,6 +8,7 @@ import org.metachart.model.json.chart.echart.grid.JsonAxis;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.metachart.model.json.chart.echart.grid.JsonLegend;
 import org.metachart.model.json.chart.echart.grid.JsonTitle;
+import org.metachart.model.json.chart.echart.ui.JsonDataZoom;
 import org.metachart.model.json.chart.echart.ui.JsonTooltip;
 import org.metachart.model.json.chart.echart.ui.JsonVisualMap;
 
@@ -62,5 +63,10 @@ public class JsonOption implements Serializable
 	private List<JsonSeries> series;
 	public List<JsonSeries> getSeries() {return series;}
 	public void setSeries(List<JsonSeries> series) {this.series = series;}
+	
+	@JsonProperty("dataZoom")
+	private List<JsonDataZoom> dataZoom;
+	public List<JsonDataZoom> getDataZoom() {return dataZoom;}
+	public void setDataZoom(List<JsonDataZoom> dataZoom) {this.dataZoom = dataZoom;}
 	
 }

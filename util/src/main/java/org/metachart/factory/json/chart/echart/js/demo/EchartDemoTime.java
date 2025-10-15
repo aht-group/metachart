@@ -12,6 +12,7 @@ import org.metachart.factory.json.chart.echart.data.JsonSeriesFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonMarkAreaFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonAxisPointerFactory;
+import org.metachart.factory.json.chart.echart.ui.JsonDataZoomFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonTooltipFactory;
 import org.metachart.factory.txt.chart.TxtDataFactory;
@@ -38,15 +39,17 @@ public class EchartDemoTime
 	
 	public static JsonOption toOption()
 	{
-		JsonGrid grid = JsonGridFactory.instance().margin(10,25,20,10).assemble();
+		JsonGrid grid = JsonGridFactory.instance().margin(10,50,20,10).assemble();
 		JsonTooltip tt = JsonTooltipFactory.instance()
 							.trigger(JsonTooltipFactory.Trigger.axis)
 							.axisPointer(JsonAxisPointerFactory.instance().typeCross().assemble())
 							.assemble();
 		
+		
 		JsonOption option =  JsonOptionFactory.instance().time2()
 							.grid(grid)
 							.tooltip(tt)
+							.zoom(JsonDataZoomFactory.instance().slider().assemble())
 							.assemble();
 		
 		JsonSeries seriesA = new JsonSeries();
@@ -92,7 +95,7 @@ public class EchartDemoTime
 		Random rnd = new Random();
 		LocalDateTime ldt = LocalDateTime.now();
 		
-		JsonDataFactory jf = JsonDataFactory.instance().id(seriesId);
+		JsonDataFactory jf = JsonDataFactory.instance().id(seriesId).type(JsonDataFactory.Type.data);
 		EchartDemoTime.add(jf,ldt, 05, 2, rnd);
 		EchartDemoTime.add(jf,ldt, 10, 3, rnd);
 		EchartDemoTime.add(jf,ldt, 15, 1, rnd);

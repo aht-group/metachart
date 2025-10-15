@@ -5,7 +5,7 @@ import org.metachart.model.json.chart.echart.ui.JsonTooltip;
 
 public class JsonTooltipFactory
 {	
-	public enum Trigger {axis}
+	public enum Trigger {axis,iten,none}
 	private JsonTooltip json;
 	
 	public static JsonTooltipFactory instance() {return new JsonTooltipFactory();}
