@@ -222,4 +222,22 @@ public class JsonEchartFactory
 		sb.append("\nwindow.addEventListener('resize', ").append(varChart).append(id).append(".resize);");
 		w.write(sb.toString());
 	}
+	
+	public void onZoom() throws IOException
+	{
+		String timeout = "zoomTimeout"+id;
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\n").append("let ").append(timeout).append(";");
+		sb.append("\n").append(varChart).append(id).append(".on('datazoom', function(evt){");
+		sb.append("\n").append("if (").append(timeout).append(") {clearTimeout(").append(timeout).append(");}");
+		sb.append("\n").append(timeout).append(" = setTimeout(function() {");
+		sb.append("\n").append(" console.log('Zoom END:', evt.type, evt.start, evt.end);");
+		sb.append("\n").append("if (typeof sendZoomRange === 'function') {sendZoomRange([{name: 'start', value: startValue},{name: 'end', value: endValue}]);}");
+		sb.append("\n").append("    }, 300);");
+//		sb.append("\n").append("sendZoomRange([{name: 'start', value: startValue},{name: 'end', value: endValue}]);");
+		sb.append("\n});");
+		sb.append("\n");
+		w.write(sb.toString());
+	}
 }

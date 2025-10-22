@@ -36,8 +36,6 @@ public class JsonEchartTimeFactory extends AbstractJsonEchartFactory implements 
 	
 	public void js(JsonEchart chart) throws IOException
 	{
-		
-		
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);
 		jfEchart.declare(id,JsonHtmlFactory.instance().assemble());
 		
@@ -50,6 +48,7 @@ public class JsonEchartTimeFactory extends AbstractJsonEchartFactory implements 
 
 		jfEchart.option(JsonOptionFactory.toMagicDatas(id,chart.getOption()));
 		jfEchart.init();
+//		jfEchart.onZoom();
 	}
 	
 	@Deprecated
@@ -69,5 +68,6 @@ public class JsonEchartTimeFactory extends AbstractJsonEchartFactory implements 
 
 		jfEchart.option(JsonOptionFactory.toMagicDatas(id,option));
 		jfEchart.init();
+//		jfEchart.onZoom();
 	}
 }
