@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.exlp.util.system.DateUtil;
-import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
+import org.metachart.interfaces.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.model.xml.chart.Data;
 import org.metachart.model.xml.chart.Ds;
 import org.metachart.model.xml.chart.RendererTimeseries;

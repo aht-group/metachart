@@ -3,8 +3,8 @@ package org.metachart.factory.xml.chart.high;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.metachart.factory.chart.high.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.factory.xml.chart.high.core.XmlAxisFactory;
+import org.metachart.interfaces.TimePeriodFactory.OfxChartTimePeriod;
 import org.metachart.model.xml.chart.Axis;
 import org.metachart.model.xml.chart.AxisType;
 import org.metachart.model.xml.chart.Chart;

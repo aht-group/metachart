@@ -6,8 +6,8 @@ import java.util.Random;
 
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
-import org.metachart.factory.chart.high.TimePeriodFactory;
 import org.metachart.factory.pojo.ChartColorFactory;
+import org.metachart.interfaces.TimePeriodFactory;
 import org.metachart.model.xml.chart.Chart;
 import org.metachart.model.xml.chart.Data;
 import org.metachart.model.xml.chart.Ds;
