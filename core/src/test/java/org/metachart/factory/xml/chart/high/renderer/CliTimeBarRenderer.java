@@ -1,13 +1,6 @@
 package org.metachart.factory.xml.chart.high.renderer;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-
 import org.exlp.util.jx.JaxbUtil;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.metachart.chart.OfxChartRenderer;
 import org.metachart.model.xml.chart.Chart;
 import org.metachart.model.xml.chart.Grid;
 import org.metachart.model.xml.chart.Renderer;
@@ -62,10 +55,5 @@ public class CliTimeBarRenderer
 		Chart chart = test.getTimeSeries();
 		JaxbUtil.info(chart);
 			
-		OfxChartRenderer ofxRenderer = new OfxChartRenderer();
-		JFreeChart jfreeChart = ofxRenderer.render(chart);
-		
-		OutputStream os = new FileOutputStream(new File("target/chart.png"));
-		ChartUtilities.writeChartAsPNG(os,jfreeChart,800,300);
 	}
 }

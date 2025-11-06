@@ -1,17 +1,11 @@
 package org.metachart.factory.xml.chart.high.renderer;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.Random;
 
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.metachart.chart.OfxChartRenderer;
 import org.metachart.factory.pojo.ChartColorFactory;
 import org.metachart.factory.xml.chart.high.TimeSeriesChartFactory;
 import org.metachart.model.xml.chart.Chart;
@@ -79,12 +73,5 @@ public class CliTimeSeriesChartRenderer
 		CliTimeSeriesChartRenderer test = new CliTimeSeriesChartRenderer();
 		Chart chart = test.getTimeSeries();
 		
-		JaxbUtil.info(chart);
-			
-		OfxChartRenderer ofxRenderer = new OfxChartRenderer();
-		JFreeChart jfreeChart = ofxRenderer.render(chart);
-		
-		OutputStream os = new FileOutputStream(new File("target/chart.png"));
-		ChartUtilities.writeChartAsPNG(os,jfreeChart,800,300);
 	}
 }

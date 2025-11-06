@@ -1,16 +1,9 @@
 package org.metachart.factory.xml.chart.high.type;
 
-import java.awt.Dimension;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.time.LocalDate;
 
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.metachart.chart.OfxChartRenderer;
 import org.metachart.factory.pojo.ChartColorFactory;
 import org.metachart.model.xml.chart.Chart;
 import org.metachart.model.xml.chart.Color;
@@ -101,13 +94,5 @@ public class CliGanttRenderer
 		logger.info("Using Chart from "+args[0]);
 		
 		JaxbUtil.debug(chart);
-			
-		OfxChartRenderer ofxRenderer = new OfxChartRenderer();
-		JFreeChart jfreeChart = ofxRenderer.render(chart);
-		
-		Dimension d = ofxRenderer.getOfxRenderer().getSuggestedSize();
-		logger.debug(d.toString());
-		OutputStream os = new FileOutputStream(new File("dist/chart.png"));
-		ChartUtilities.writeChartAsPNG(os,jfreeChart,800,d.height);
 	}
 }

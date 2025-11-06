@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.exlp.util.jx.JaxbUtil;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.metachart.chart.OfxChartRenderer;
 import org.metachart.model.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,13 +41,6 @@ public class OfxChart extends HttpServlet
 			Map<String,Chart> mCharts = (Map<String,Chart>)session.getAttribute("charts");
 			Chart chart = mCharts.get(uuid);
 			
-//			JaxbUtil.debug(chart, new MwiNsPrefixMapper());
-			
-			OfxChartRenderer ofxRenderer = new OfxChartRenderer();
-			JFreeChart jfreeChart = ofxRenderer.render(JaxbUtil.toDocument(chart));
-
-			response.setContentType("image/png");
-			ChartUtilities.writeChartAsPNG(out,jfreeChart,chart.getDimension().getWidth(),chart.getDimension().getHeight());
 		}
 		catch (IOException e) {e.printStackTrace();}
 	}
