@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.JsonUtil;
+import org.metachart.factory.json.chart.echart.JsonEchart2Factory;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
@@ -47,9 +48,13 @@ public class CliEchartScatter extends AbstractCliEchart
 		JsonOption option = EchartDemoScatter.toOption();
 		option.setTooltip(null);
 		
+		JsonEchart chart = JsonEchart2Factory.build();
+		chart.setDatas(datas.getList());
+		chart.setOption(option);
+		
 		StringWriter sw = new StringWriter();
 		JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
-		f.json(null,datas,option);
+		f.js(chart);
 		super.render(true,sw,"jsf");
 	}
 	
@@ -62,7 +67,7 @@ public class CliEchartScatter extends AbstractCliEchart
 			
 			StringWriter sw = new StringWriter();
 			JsonEchartScatterFactory f = JsonEchartScatterFactory.instance(sw).id(xfEchart.getDivId()); 
-			f.json(null, JsonDatasFactory.build(chart.getDatas()), chart.getOption());
+			f.js(chart);
 			super.render(true,sw,"app");
 		}
 	}
@@ -76,8 +81,8 @@ public class CliEchartScatter extends AbstractCliEchart
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		
-		cli.demo();
+//		cli.demo();
 		cli.jsf();
-		cli.app();
+//		cli.app();
 	}
 }

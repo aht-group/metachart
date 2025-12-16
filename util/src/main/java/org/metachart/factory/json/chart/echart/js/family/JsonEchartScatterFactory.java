@@ -12,6 +12,7 @@ import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.interfaces.chart.EchartJsFactory;
+import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonDatas;
@@ -19,7 +20,7 @@ import org.metachart.model.json.chart.echart.grid.JsonGrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonEchartScatterFactory extends AbstractJsonEchartFactory implements EchartJsFactory
+public class JsonEchartScatterFactory extends AbstractJsonEchartFactory //implements EchartJsFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonEchartScatterFactory.class);
 	
@@ -34,7 +35,31 @@ public class JsonEchartScatterFactory extends AbstractJsonEchartFactory implemen
 		id="";
 	}
 	
-	@Override public void json(JsonGrid grid, JsonDatas datas, JsonOption option) throws IOException
+	public void js(JsonEchart chart) throws IOException
+	{
+		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);
+		jfEchart.declare(id,JsonHtmlFactory.instance().assemble());
+		
+		super.let(jfEchart,chart.getDatas());
+		
+		for(JsonData d : ListUtils.emptyIfNull(chart.getDatas()))
+		{
+			switch(JsonDataFactory.Type.valueOf(d.getMcType()))
+			{
+				case data:  jfEchart.dataDoubles2(d); break;
+				case dates:  jfEchart.dataDate1(d); break;
+			}
+		}
+		
+
+		jfEchart.option(JsonOptionFactory.toMagicDatas(id,chart.getOption()));
+		jfEchart.init();
+	}
+	
+	
+//	@Override
+	@Deprecated
+	public void json(JsonGrid grid, JsonDatas datas, JsonOption option) throws IOException
 	{	
 		if(Objects.isNull(grid)) {grid = JsonGridFactory.fallback();}
 		
@@ -51,7 +76,6 @@ public class JsonEchartScatterFactory extends AbstractJsonEchartFactory implemen
 				case dates:  jfEchart.dataDate1(d); break;
 			}
 		}
-		
 
 		jfEchart.option(JsonOptionFactory.toMagicDatas(id,option));
 		jfEchart.init();

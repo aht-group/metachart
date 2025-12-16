@@ -26,7 +26,7 @@ public class JsonEchartTimeFactory extends AbstractJsonEchartFactory implements 
 	private final Writer w;
 	private String id; public JsonEchartTimeFactory id(String id) {this.id=id; return this;}
 
-	public static JsonEchartTimeFactory instance() {return new JsonEchartTimeFactory(null);}
+	private static JsonEchartTimeFactory instance() {return new JsonEchartTimeFactory(null);}
 	public static JsonEchartTimeFactory instance(Writer w) {return new JsonEchartTimeFactory(w);}
 	private JsonEchartTimeFactory(Writer w)
 	{
