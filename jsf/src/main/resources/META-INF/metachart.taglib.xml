@@ -25,6 +25,13 @@
              <component-type>org.metachart.jsf.chart.echart.Chart</component-type>
         </component>
 	</tag>
+	
+	<tag>
+        <tag-name>orgchart</tag-name>
+        <component>
+             <component-type>org.metachart.jsf.chart.orgchart.Chart</component-type>
+        </component>
+	</tag>
 	<tag>
         <tag-name>title</tag-name>
         <component>
