@@ -66,10 +66,6 @@
 					<groupId>commons-lang</groupId>
 				</exclusion>
 				<exclusion>
-					<artifactId>commons-configuration</artifactId>
-					<groupId>commons-configuration</groupId>
-				</exclusion>
-				<exclusion>
 					<artifactId>commons-jxpath</artifactId>
 					<groupId>commons-jxpath</groupId>
 				</exclusion>
@@ -116,8 +112,8 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-	 		<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
+	 		<groupId>org.apache.commons</groupId>
+			<artifactId>commons-configuration2</artifactId>
 			<type>jar</type>
 			<scope>test</scope>
 			<exclusions>

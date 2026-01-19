@@ -65,21 +65,7 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
-		
-		<!--
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency> -->
-   	   	
-   	   	<!-- 2025-02-10 tk: Removed
-   	   	<dependency>
-			<groupId>org.jdom</groupId>
-			<artifactId>jdom</artifactId>
-			<scope>provided</scope>
-		</dependency> -->
-		
+				
 		<!-- JAXB -->
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
@@ -100,13 +86,24 @@
 		   <scope>provided</scope>
 		</dependency>
 		
-		<!-- Apache Commons-->
+		<!-- Apache Commons
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
 			<type>jar</type>
 			<scope>test</scope>
 			<exclusions>
+        		<exclusion>
+        			<artifactId>commons-logging</artifactId>
+        			<groupId>commons-logging</groupId>
+        		</exclusion>
+        	</exclusions>
+		</dependency> -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-configuration2</artifactId>
+			 <scope>test</scope>
+			 <exclusions>
         		<exclusion>
         			<artifactId>commons-logging</artifactId>
         			<groupId>commons-logging</groupId>
