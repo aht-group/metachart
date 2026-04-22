@@ -1,6 +1,7 @@
 package org.metachart.factory.json.chart.echart.js.family;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Objects;
 
@@ -26,7 +27,7 @@ public class JsonEchartTimeFactory extends AbstractJsonEchartFactory implements 
 	private final Writer w;
 	private String id; public JsonEchartTimeFactory id(String id) {this.id=id; return this;}
 
-	private static JsonEchartTimeFactory instance() {return new JsonEchartTimeFactory(null);}
+	public static JsonEchartTimeFactory instance() {return new JsonEchartTimeFactory(new StringWriter());}
 	public static JsonEchartTimeFactory instance(Writer w) {return new JsonEchartTimeFactory(w);}
 	private JsonEchartTimeFactory(Writer w)
 	{
@@ -34,7 +35,7 @@ public class JsonEchartTimeFactory extends AbstractJsonEchartFactory implements 
 		id="";
 	}
 	
-	public void js(JsonEchart chart) throws IOException
+	public Writer js(JsonEchart chart) throws IOException
 	{
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(w,JsonUtil.instance()).id(id);
 		jfEchart.declare(id,JsonHtmlFactory.instance().assemble());
@@ -49,6 +50,7 @@ public class JsonEchartTimeFactory extends AbstractJsonEchartFactory implements 
 		jfEchart.option(JsonOptionFactory.toMagicDatas(id,chart.getOption()));
 		jfEchart.init();
 //		jfEchart.onZoom();
+		return w;
 	}
 	
 	@Deprecated

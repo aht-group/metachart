@@ -1,7 +1,7 @@
 package org.metachart.factory.xhtml;
 
 import java.io.IOException;
-import java.io.StringWriter;
+import java.io.Writer;
 import java.nio.file.Path;
 
 import org.jdom2.Document;
@@ -19,7 +19,7 @@ public class XhtmlEchartFactory
 		divId = "ChartContainer";
 	}
 	
-	public void write(Path path, StringWriter w) throws IOException
+	public void write(Writer w, Path path) throws IOException
 	{
 		Element html = new Element("html");
 		html.setAttribute("lang","en");
