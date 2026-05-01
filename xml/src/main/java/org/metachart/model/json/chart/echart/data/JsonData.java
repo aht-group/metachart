@@ -60,6 +60,11 @@ public class JsonData implements Serializable
 	private LocalDate[] dates;
 	public LocalDate[] getDates() {return dates;}
 	public void setDates(LocalDate[] dates) {this.dates = dates;}
+	
+	@JsonProperty("value")
+	private Double value;
+	public Double getValue() {return value;}
+	public void setValue(Double value) {this.value = value;}
 
 	@JsonProperty("doubles1")
 	private double[] doubles1;

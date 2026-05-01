@@ -11,7 +11,6 @@ import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
-import org.metachart.interfaces.chart.EchartJsFactory;
 import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonData;
@@ -44,10 +43,12 @@ public class JsonEchartScatterFactory extends AbstractJsonEchartFactory //implem
 		
 		for(JsonData d : ListUtils.emptyIfNull(chart.getDatas()))
 		{
+			if(Objects.isNull(d.getMcType())) {logger.warn("Null d.getMcType");}
 			switch(JsonDataFactory.Type.valueOf(d.getMcType()))
 			{
 				case data:  jfEchart.dataDoubles2(d); break;
 				case dates:  jfEchart.dataDate1(d); break;
+				default: logger.warn("NYI {}",d.getMcType());
 			}
 		}
 		

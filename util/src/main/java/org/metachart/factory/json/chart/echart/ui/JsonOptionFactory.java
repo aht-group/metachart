@@ -47,6 +47,11 @@ public class JsonOptionFactory
 		json.setAxisY(JsonAxisFactory.instance().assemble());
 		return this;
 	}
+	public JsonOptionFactory gauge()
+	{
+
+		return this;
+	}
 	
 	public JsonOptionFactory grid(JsonGrid grid) {json.setGrid(grid);return this;}
 	

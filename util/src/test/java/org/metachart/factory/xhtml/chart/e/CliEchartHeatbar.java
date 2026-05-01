@@ -10,7 +10,6 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoHeatbar;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartHeatbarFactory;
 import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.model.json.chart.echart.data.JsonDatas;

@@ -2,7 +2,13 @@ package org.metachart.model.json.chart.echart.data;
 
 import java.io.Serializable;
 
+import org.metachart.model.json.chart.echart.axis.JsonAxisLabel;
+import org.metachart.model.json.chart.echart.axis.JsonAxisLine;
+import org.metachart.model.json.chart.echart.axis.JsonAxisTick;
 import org.metachart.model.json.chart.echart.grid.JsonMarkArea;
+import org.metachart.model.json.chart.echart.label.JsonDetail;
+import org.metachart.model.json.chart.echart.line.JsonPointer;
+import org.metachart.model.json.chart.echart.line.JsonSplitLine;
 import org.metachart.model.json.chart.echart.ui.JsonEmphasis;
 import org.metachart.model.json.chart.echart.ui.JsonLabel;
 import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
@@ -43,6 +49,11 @@ public class JsonSeries implements Serializable
 	public JsonLineStyle getLineStyle() {return lineStyle;}
 	public void setLineStyle(JsonLineStyle lineStyle) {this.lineStyle = lineStyle;}
 	
+	@JsonProperty("pointer")
+	private JsonPointer pointer;
+	public JsonPointer getPointer() {return pointer;}
+	public void setPointer(JsonPointer pointer) {this.pointer = pointer;}
+
 	@JsonProperty("animation")
 	private Boolean animation;
 	public Boolean getAnimation() {return animation;}
@@ -58,6 +69,11 @@ public class JsonSeries implements Serializable
 	public JsonLabel getLabel() {return label;}
 	public void setLabel(JsonLabel label) {this.label = label;}
 	
+	@JsonProperty("detail")
+	private JsonDetail detail;
+	public JsonDetail getDetail() {return detail;}
+	public void setDetail(JsonDetail detail) {this.detail = detail;}
+
 	@JsonProperty("emphasis")
 	private JsonEmphasis emphasis;
 	public JsonEmphasis getEmphasis() {return emphasis;}
@@ -103,4 +119,23 @@ public class JsonSeries implements Serializable
 	public JsonMarkArea getMarkArea() {return markArea;}
 	public void setMarkArea(JsonMarkArea markArea) {this.markArea = markArea;}
 	
+	@JsonProperty("axisLine")
+	private JsonAxisLine axisLine;
+	public JsonAxisLine getAxisLine() {return axisLine;}
+	public void setAxisLine(JsonAxisLine axisLine) {this.axisLine = axisLine;}
+	
+	@JsonProperty("axisTick")
+	private JsonAxisTick axisTick;
+	public JsonAxisTick getAxisTick() {return axisTick;}
+	public void setAxisTick(JsonAxisTick axisTick) {this.axisTick = axisTick;}
+	
+	@JsonProperty("axisLabel")
+	private JsonAxisLabel axisLabel;
+	public JsonAxisLabel getAxisLabel() {return axisLabel;}
+	public void setAxisLabel(JsonAxisLabel axisLabel) {this.axisLabel = axisLabel;}
+	
+	@JsonProperty("splitLine")
+	private JsonSplitLine splitLine;
+	public JsonSplitLine getSplitLine() {return splitLine;}
+	public void setSplitLine(JsonSplitLine splitLine) {this.splitLine = splitLine;}
 }

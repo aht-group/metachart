@@ -4,5 +4,5 @@ import org.metachart.model.json.chart.echart.data.JsonData;
 
 public interface EchartGaugeDataProvider
 {
-	JsonData getGaugeData();
+//	JsonData getGaugeData();
 }

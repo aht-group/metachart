@@ -12,7 +12,6 @@ import org.metachart.factory.json.chart.echart.JsonEchart2Factory;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
-import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoScatter;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartScatterFactory;
 import org.metachart.model.json.chart.echart.JsonEchart;
@@ -29,6 +28,7 @@ public class CliEchartScatter extends AbstractCliEchart
 	public CliEchartScatter(Configuration config)
 	{
 		type = JsonEchart.Type.scatter;
+		logger.info("Wrting to "+McBootstrap.pTemp.toString());
 	}
 	
 	public void demo() throws IOException
@@ -81,8 +81,8 @@ public class CliEchartScatter extends AbstractCliEchart
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		
-//		cli.demo();
-		cli.jsf();
+		cli.demo();
+//		cli.jsf();
 //		cli.app();
 	}
 }

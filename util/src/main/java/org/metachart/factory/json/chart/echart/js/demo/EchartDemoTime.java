@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 public class EchartDemoTime
 {
 	final static Logger logger = LoggerFactory.getLogger(EchartDemoTime.class);
-	
+
 	public static void demo(JsonEchartFactory jfEchart) throws IOException
 	{
 		jfEchart.letData("A").letData("B").letData("AreaSeries");
@@ -36,7 +36,7 @@ public class EchartDemoTime
 		jfEchart.dataTime(EchartDemoTime.toData("B"));
 		jfEchart.option(JsonOptionFactory.toMagicDatas(EchartDemoTime.toOption()));
 	}
-	
+
 	public static JsonOption toOption()
 	{
 		JsonGrid grid = JsonGridFactory.instance().margin(10,50,20,10).assemble();
@@ -73,7 +73,7 @@ public class EchartDemoTime
 	
 		return option;
 	}
-	
+
 	public static JsonDatas toDatas()
 	{
 		JsonDatasFactory jf = JsonDatasFactory.instance();
@@ -82,14 +82,14 @@ public class EchartDemoTime
 		jf.add(EchartDemoTime.toDataArea());
 		return jf.assemble();
 	}
-	
+
 	public static JsonData toDataArea()
 	{
 		JsonDataFactory jfAxis = JsonDataFactory.instance().id("AreaSeries");
 		jfAxis.axisRange(LocalDateTime.now().plusHours(10), LocalDateTime.now().plusHours(20));
 		return jfAxis.assemble();
 	}
-	
+
 	private static JsonData toData(String seriesId)
 	{
 		Random rnd = new Random();
@@ -106,7 +106,7 @@ public class EchartDemoTime
 
 		return jf.assemble();
 	}
-		
+
 	private static void add(JsonDataFactory jf, LocalDateTime ldt, int hours, double value, Random rnd)
 	{
 		jf.time(ldt.plusHours(hours),value+ 2*(rnd.nextDouble()-0.5));

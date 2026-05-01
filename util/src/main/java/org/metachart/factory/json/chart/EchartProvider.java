@@ -34,7 +34,7 @@ public class EchartProvider
 		{
 			case sankey: EchartDemoSankey.instance(jfEchart).demo(); break;
 			case heatmap: EchartDemoHeatmap.instance(jfEchart).demo(); break;
-			case gauge: EchartDemoGauge.instance(jfEchart).demo(); break;
+//			case gauge: EchartDemoGauge.instance(jfEchart).demo(); break;
 			case graph: EchartDemoGraph.instance(jfEchart).demo(); break;
 			default: logger.warn("NYI: "+type.toString());
 		}

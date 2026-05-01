@@ -12,7 +12,7 @@ import org.metachart.model.json.chart.echart.data.JsonEdge;
 
 public class JsonDataFactory
 {
-	public enum Type {data,category,dates}
+	public enum Type {data,category,dates,value}
 	
 	private JsonData json;
 	
@@ -20,6 +20,7 @@ public class JsonDataFactory
 	private List<LocalDate> dates;
 	
 	private List<String> strings;
+	private List<Double> values;
 	private List<Double> doubles1;
 	private List<double[]> doubles2;
 	private List<List<JsonData>> areas;
@@ -36,6 +37,7 @@ public class JsonDataFactory
 		if(Objects.nonNull(times)) {json.setTimes(times.toArray(new LocalDateTime[times.size()]));}
 		if(Objects.nonNull(dates)) {json.setDates(dates.toArray(new LocalDate[dates.size()]));}
 		if(Objects.nonNull(strings)) {json.setStrings(strings.toArray(new String[strings.size()]));}
+		if(Objects.nonNull(values)) {json.setValue(values.get(0));}
 		if(Objects.nonNull(doubles1)) {json.setDoubles1(doubles1.stream().mapToDouble(Double::doubleValue).toArray());}
 		if(Objects.nonNull(doubles2)) {json.setDoubles2(doubles2.stream().toArray(double[][]::new));}
 		if(Objects.nonNull(areas)) {json.setAreas(areas.stream().toArray(List[]::new));}
@@ -56,6 +58,12 @@ public class JsonDataFactory
 	{
 		if(Objects.isNull(strings)) {strings = new ArrayList<>();}
 		strings.add(value);
+		return this;
+	}
+	public JsonDataFactory value(double value)
+	{
+		if(Objects.isNull(values)) {values = new ArrayList<>();}
+		values.add(value);
 		return this;
 	}
 	public JsonDataFactory double1(double value)

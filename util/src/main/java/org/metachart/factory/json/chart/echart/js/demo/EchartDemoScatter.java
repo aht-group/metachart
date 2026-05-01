@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Random;
 
+import org.exlp.util.io.JsonUtil;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
@@ -36,16 +37,15 @@ public class EchartDemoScatter
 		JsonOptionFactory jfOption = JsonOptionFactory.instance().scatter();
 
 		JsonTooltipFactory jfTt = JsonTooltipFactory.instance().triggerItem().formatter("scatterTooltipFormatter");
-		
+
 		jfOption.tooltip(jfTt.assemble());
-		
+
 		JsonSeries seriesA = new JsonSeries();
 		seriesA.setType(JsonEchartFactory.Type.scatter.toString());
 		seriesA.setData(TxtDataFactory.dataId("A"));
 
 		jfOption.series(seriesA);
-		
-	
+
 		return jfOption.assemble();
 	}
 	
@@ -67,7 +67,10 @@ public class EchartDemoScatter
 			jf.double2(new double[]{rnd.nextDouble()*i, rnd.nextDouble()*i});
 		}
 
-		return jf.assemble();
+		JsonData json = jf.assemble();
+		JsonUtil.info(json);
+
+		return json;
 	}
 	
 	public static JsonData toDataDays(String seriesId)
@@ -77,7 +80,10 @@ public class EchartDemoScatter
 		{
 			jf.date(LocalDate.now().minusDays(i));
 		}
+		
+		JsonData json = jf.assemble();
+		JsonUtil.info(json);
 
-		return jf.assemble();
+		return json;
 	}
 }

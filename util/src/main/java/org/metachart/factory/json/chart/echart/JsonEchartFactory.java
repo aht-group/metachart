@@ -78,6 +78,17 @@ public class JsonEchartFactory
 		w.write(sb.toString());
 		return sb.toString();
 	}
+	
+	public String dataValues(JsonData data) throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("\n").append(TxtDataFactory.dataId(id,data.getId())).append(" = ");
+		sb.append("[").append(jom.toFormattedString(data)).append("]");
+		sb.append(";");
+		w.write(sb.toString());
+		return sb.toString();
+	}
 
 	public String dataDoubles1(JsonData data) throws IOException
 	{

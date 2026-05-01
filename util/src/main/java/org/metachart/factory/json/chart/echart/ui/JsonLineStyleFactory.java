@@ -1,5 +1,6 @@
 package org.metachart.factory.json.chart.echart.ui;
 
+import org.metachart.model.json.chart.echart.color.Color;
 import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
 
 public class JsonLineStyleFactory
@@ -14,7 +15,7 @@ public class JsonLineStyleFactory
 	
 	public JsonLineStyleFactory width(int width) {json.setWidth(width); return this;}
 	public JsonLineStyleFactory curveness(double value) {json.setCurveness(value); return this;}
-	public JsonLineStyleFactory colorSource() {json.setColor("source"); return this;}
+	public JsonLineStyleFactory colorSource() {json.setColor(Color.of("source")); return this;}
 	
 	public JsonLineStyle assemble() {return json;}
 }

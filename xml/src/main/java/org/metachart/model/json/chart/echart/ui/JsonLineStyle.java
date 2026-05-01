@@ -2,17 +2,24 @@ package org.metachart.model.json.chart.echart.ui;
 
 import java.io.Serializable;
 
+import org.metachart.model.json.chart.echart.color.Color;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JsonLineStyle implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
-	@JsonProperty("color")
-	private String color;
-	public String getColor() {return color;}
-	public void setColor(String color) {this.color = color;}
+//	@JsonProperty("color")
+//	private String color;
+//	public String getColor() {return color;}
+//	public void setColor(String color) {this.color = color;}
 	
+	@JsonProperty("color")
+	private Color color;
+	public Color getColor() {return color;}
+	public void setColor(Color color) {this.color = color;}
+
 	@JsonProperty("width")
 	private Integer width;
 	public Integer getWidth() {return width;}

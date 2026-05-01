@@ -12,6 +12,7 @@ import org.metachart.factory.json.chart.echart.JsonEchart2Factory;
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
+import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGauge;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartScatterFactory;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartTimeFactory;
@@ -22,13 +23,13 @@ import org.metachart.test.McBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CliEchartTime extends AbstractCliEchart
+public class CliEchartGauge extends AbstractCliEchart
 {
-	final static Logger logger = LoggerFactory.getLogger(CliEchartTime.class);
+	final static Logger logger = LoggerFactory.getLogger(CliEchartGauge.class);
 
-	public CliEchartTime(Configuration config)
+	public CliEchartGauge(Configuration config)
 	{
-		type = JsonEchart.Type.time;
+		type = JsonEchart.Type.gauge;
 		logger.info("Wrting to "+McBootstrap.pTemp.toString());
 	}
 	
@@ -36,11 +37,11 @@ public class CliEchartTime extends AbstractCliEchart
 	{
 		StringWriter sw = new StringWriter();
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
-		EchartDemoTime.demo(jfEchart);
+		EchartDemoGauge.demo(jfEchart);
 		jfEchart.init();
-		this.render(false,sw,McBootstrap.pTemp.resolve("echart-"+type.toString()+".demo.html"));
+		this.render(true,sw,McBootstrap.pTemp.resolve("echart-"+type+".demo.html"));
 	}
-	
+
 	public void jsf() throws IOException
 	{
 		JsonDatas datas = EchartDemoTime.toDatas();
@@ -60,7 +61,7 @@ public class CliEchartTime extends AbstractCliEchart
 	
 	public void app() throws IOException
 	{
-		Path p = McBootstrap.pTemp.resolve("echart-"+JsonEchart.Type.time+".chart.json");
+		Path p = McBootstrap.pTemp.resolve("echart-"+type+".chart.json");
 		if(Files.exists(p))
 		{
 			JsonEchart chart = JsonUtil.instance().read(JsonEchart.class,p);
@@ -75,14 +76,14 @@ public class CliEchartTime extends AbstractCliEchart
 	public static void main (String[] args) throws Exception
 	{
 		Configuration config = McBootstrap.init();
-		CliEchartTime cli = new CliEchartTime(config);
+		CliEchartGauge cli = new CliEchartGauge(config);
 
 		JsonDataFactory jfAxis = JsonDataFactory.instance();
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		
 		cli.demo();
-		cli.jsf();
-		cli.app();
+//		cli.jsf();
+//		cli.app();
 	}
 }

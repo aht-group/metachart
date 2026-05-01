@@ -30,10 +30,6 @@ public class McBootstrap
 	public static Configuration init(String configFile)
 	{
 		LoggerBootstrap.instance("cli.xml.log4j2.xml").path("metachart/system/io/log").init();
-//		LoggerInit loggerBootstrap = new LoggerInit("log4j.xml");
-//		loggerBootstrap.path("metachart/system/io/log");
-//		loggerBootstrap.init();
-		//JaxbUtil.setNsPrefixMapper(new McNsPrefixMapper());
 		
 		ConfigLoader configBootstrap = ConfigLoader.instance();
 		configBootstrap.add(ExlpCentralConfigPointer.instance(System.metachart).jaxb(JaxbUtil.instance()).toPath("core"));
