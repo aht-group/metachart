@@ -1,7 +1,7 @@
 package org.metachart.factory.json.chart.echart.ui;
 
 import org.metachart.model.json.chart.echart.color.Color;
-import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
+import org.metachart.model.json.chart.echart.line.JsonLineStyle;
 
 public class JsonLineStyleFactory
 {	

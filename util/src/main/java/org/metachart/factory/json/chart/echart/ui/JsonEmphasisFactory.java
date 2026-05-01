@@ -1,7 +1,7 @@
 package org.metachart.factory.json.chart.echart.ui;
 
-import org.metachart.model.json.chart.echart.ui.JsonEmphasis;
-import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
+import org.metachart.model.json.chart.echart.label.JsonEmphasis;
+import org.metachart.model.json.chart.echart.line.JsonLineStyle;
 
 public class JsonEmphasisFactory
 {

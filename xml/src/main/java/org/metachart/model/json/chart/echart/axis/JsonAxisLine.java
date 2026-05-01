@@ -2,7 +2,7 @@ package org.metachart.model.json.chart.echart.axis;
 
 import java.io.Serializable;
 
-import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
+import org.metachart.model.json.chart.echart.line.JsonLineStyle;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

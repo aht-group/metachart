@@ -2,8 +2,6 @@ package org.metachart.model.json.chart.echart.line;
 
 import java.io.Serializable;
 
-import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JsonSplitLine implements Serializable

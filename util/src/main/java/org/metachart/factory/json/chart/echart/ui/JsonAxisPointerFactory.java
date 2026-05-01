@@ -1,6 +1,6 @@
 package org.metachart.factory.json.chart.echart.ui;
 
-import org.metachart.model.json.chart.echart.ui.JsonAxisPointer;
+import org.metachart.model.json.chart.echart.axis.JsonAxisPointer;
 
 public class JsonAxisPointerFactory
 {	

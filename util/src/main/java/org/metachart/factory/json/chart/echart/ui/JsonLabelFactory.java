@@ -1,6 +1,6 @@
 package org.metachart.factory.json.chart.echart.ui;
 
-import org.metachart.model.json.chart.echart.ui.JsonLabel;
+import org.metachart.model.json.chart.echart.label.JsonLabel;
 
 public class JsonLabelFactory
 {	

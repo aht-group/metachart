@@ -1,4 +1,4 @@
-package org.metachart.model.json.chart.echart.ui;
+package org.metachart.model.json.chart.echart.axis;
 
 import java.io.Serializable;
 

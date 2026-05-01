@@ -17,10 +17,10 @@ import org.metachart.model.json.chart.echart.color.ColorStop;
 import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.label.JsonDetail;
+import org.metachart.model.json.chart.echart.line.JsonLineStyle;
 import org.metachart.model.json.chart.echart.line.JsonPointer;
 import org.metachart.model.json.chart.echart.line.JsonSplitLine;
 import org.metachart.model.json.chart.echart.style.JsonItemStyle;
-import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

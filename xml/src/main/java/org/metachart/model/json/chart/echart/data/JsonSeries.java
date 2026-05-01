@@ -7,11 +7,11 @@ import org.metachart.model.json.chart.echart.axis.JsonAxisLine;
 import org.metachart.model.json.chart.echart.axis.JsonAxisTick;
 import org.metachart.model.json.chart.echart.grid.JsonMarkArea;
 import org.metachart.model.json.chart.echart.label.JsonDetail;
+import org.metachart.model.json.chart.echart.label.JsonEmphasis;
+import org.metachart.model.json.chart.echart.label.JsonLabel;
+import org.metachart.model.json.chart.echart.line.JsonLineStyle;
 import org.metachart.model.json.chart.echart.line.JsonPointer;
 import org.metachart.model.json.chart.echart.line.JsonSplitLine;
-import org.metachart.model.json.chart.echart.ui.JsonEmphasis;
-import org.metachart.model.json.chart.echart.ui.JsonLabel;
-import org.metachart.model.json.chart.echart.ui.JsonLineStyle;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

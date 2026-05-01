@@ -2,6 +2,8 @@ package org.metachart.model.json.chart.echart.ui;
 
 import java.io.Serializable;
 
+import org.metachart.model.json.chart.echart.axis.JsonAxisPointer;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JsonTooltip implements Serializable

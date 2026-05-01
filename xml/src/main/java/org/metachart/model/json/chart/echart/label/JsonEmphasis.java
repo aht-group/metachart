@@ -1,6 +1,8 @@
-package org.metachart.model.json.chart.echart.ui;
+package org.metachart.model.json.chart.echart.label;
 
 import java.io.Serializable;
+
+import org.metachart.model.json.chart.echart.line.JsonLineStyle;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
