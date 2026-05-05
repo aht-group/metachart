@@ -44,7 +44,6 @@ public class CliEchartTime extends AbstractCliEchart
 	public void jsf() throws IOException
 	{
 		JsonDatas datas = EchartDemoTime.toDatas();
-//		JsonUtil.instance().write(datas, McBootstrap.pTemp.resolve("echart-"+type.toString()+".datas.json"));
 		
 		JsonOption option = EchartDemoTime.toOption();
 		

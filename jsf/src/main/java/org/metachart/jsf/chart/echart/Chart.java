@@ -14,12 +14,14 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.ComponentAttribute;
 import org.exlp.util.jx.JsfUtil;
 import org.metachart.factory.json.chart.EchartProvider;
 import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.grid.JsonGridFactory;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartCategoryFactory;
+import org.metachart.factory.json.chart.echart.js.family.JsonEchartGaugeFactory;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartHeatbarFactory;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartScatterFactory;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartTimeFactory;
@@ -30,7 +32,6 @@ import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.grid.JsonGrid;
-import org.metachart.util.provider.data.EchartCategoryDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,8 +47,9 @@ public class Chart extends UINamingContainer
 	private String height; public String getHeight() {return height;} public void setHeight(String height) {this.height = height;}
 	
 	private JsonOption option; public JsonOption getOption() {return option;} public void setOption(JsonOption option) {this.option = option;}
+	private JsonEchart chart; public JsonEchart getChart() {return chart;} public void setChart(JsonEchart chart) {this.chart = chart;}
 
-	private static enum Attribute {scope,type,height,option}
+	private static enum Attribute {scope,type,height,option,chart}
 
 	public Chart()
 	{
@@ -64,20 +66,23 @@ public class Chart extends UINamingContainer
 	@Override
  	public void encodeBegin(FacesContext ctx) throws IOException
  	{
-//		System.out.println();
 		super.encodeBegin(ctx);
 		logger.trace("encodeBegin "+this.getClientId());
 		
+//		ComponentAttribute.debugOnInfo(true);
 		type = ComponentAttribute.toString(ctx,this,Attribute.type,type);
 		scope = ComponentAttribute.toString(ctx,this,Attribute.scope,scope);
 		height = ComponentAttribute.toString(ctx,this,Attribute.height,height);
 		option = ComponentAttribute.toObject(ctx, this, Attribute.option,null);
+		if(Objects.isNull(chart)){chart = ComponentAttribute.toObject(ctx, this, Attribute.chart, null);}
 		
 //		logger.info(StringUtil.stars());
 //		logger.info("ID:"+super.getId());
 //		logger.info("ClientID:"+super.getClientId());
 //		logger.info("Parent.ID:"+super.getParent().getId());
 //		logger.info("Parent.ClientID:"+super.getParent().getClientId());
+//		logger.info("Type {}",Objects.nonNull(type) ? type : "--");
+//		logger.info("Chart null?{}",Objects.isNull(chart));
  	}
 	
 	private Title title;
@@ -144,7 +149,18 @@ public class Chart extends UINamingContainer
 		
 		if(Objects.nonNull(type))
 		{
-			if(Objects.nonNull(scope) && scope.equals("demo")) {EchartProvider.instance(writer).demo(type,chartId);}
+			if(Objects.nonNull(scope) && scope.equals("demo"))
+			{
+				EchartProvider.instance(writer).demo(type,chartId);
+			}
+			else if(ObjectUtils.allNotNull(type,chart))
+			{
+				switch(JsonEchart.Type.valueOf(type))
+				{
+					case gauge: 	JsonEchartGaugeFactory.instance(writer).id(chartId).js(chart); break;
+					default: logger.warn("NYI js(chart) {}",type); break;
+				}
+			}
 			else if(Objects.nonNull(option))
 			{
 				switch(JsonEchart.Type.valueOf(type))
@@ -153,7 +169,7 @@ public class Chart extends UINamingContainer
 					case time: 		JsonEchartTimeFactory.instance(writer).id(chartId).json(grid, datas, option); break;
 					case scatter: 	JsonEchartScatterFactory.instance(writer).id(chartId).json(grid, datas, option); break;
 					case heatbar: 	JsonEchartHeatbarFactory.instance(writer).id(chartId).json(grid, datas, option); break;
-					default: logger.warn("NYI"); break;
+					default: logger.warn("NYI datas/option {}",type); break;
 				}
 			}
 			else
@@ -161,7 +177,7 @@ public class Chart extends UINamingContainer
 				switch(JsonEchart.Type.valueOf(type))
 				{
 					case graph: JsonEchartGraphFactory.instance(writer).id(chartId).jsf(chartId,grid,categories,data,edges); break;
-					default: logger.warn("NYI"); break;
+					default: logger.warn("NYI null-option {}",type); break;
 				}
 			}
 		}

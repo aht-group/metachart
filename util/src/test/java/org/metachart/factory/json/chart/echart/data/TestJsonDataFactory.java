@@ -28,8 +28,6 @@ public class TestJsonDataFactory
 		JsonData data1 = jf.assemble();
 		JsonUtil.info(data1);
 		
-		
-		
 		Path pJson = McBootstrap.pTemp.resolve("data.json");
 		JsonUtil.instance().write(data1,pJson);
 		logger.info("saved to "+pJson);
@@ -40,6 +38,14 @@ public class TestJsonDataFactory
 		
 		JsonData data3 = JsonUtil.instance().read(JsonData.class,pJson);
 		JsonUtil.info(data3);
+	}
+	
+	public void value()
+	{
+    	JsonData json = new JsonData();
+    	json.setValue(70d);
+    	
+    	JsonUtil.info(json);
 	}
 	
 	public static void main(String args[]) throws IOException

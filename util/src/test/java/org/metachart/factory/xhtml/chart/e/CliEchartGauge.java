@@ -13,9 +13,8 @@ import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.JsonHtmlFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.json.chart.echart.js.demo.EchartDemoGauge;
-import org.metachart.factory.json.chart.echart.js.demo.EchartDemoTime;
+import org.metachart.factory.json.chart.echart.js.family.JsonEchartGaugeFactory;
 import org.metachart.factory.json.chart.echart.js.family.JsonEchartScatterFactory;
-import org.metachart.factory.json.chart.echart.js.family.JsonEchartTimeFactory;
 import org.metachart.model.json.chart.echart.JsonEchart;
 import org.metachart.model.json.chart.echart.JsonOption;
 import org.metachart.model.json.chart.echart.data.JsonDatas;
@@ -39,22 +38,23 @@ public class CliEchartGauge extends AbstractCliEchart
 		JsonEchartFactory jfEchart = JsonEchartFactory.instance(sw,JsonUtil.instance()).declare(xfEchart.getDivId(),JsonHtmlFactory.build(JsonHtmlFactory.Renderer.canvas,false));
 		EchartDemoGauge.demo(jfEchart);
 		jfEchart.init();
-		this.render(true,sw,McBootstrap.pTemp.resolve("echart-"+type+".demo.html"));
+		this.render(true,sw,"demo");
 	}
 
 	public void jsf() throws IOException
 	{
-		JsonDatas datas = EchartDemoTime.toDatas();
-//		JsonUtil.instance().write(datas, McBootstrap.pTemp.resolve("echart-"+type.toString()+".datas.json"));
+		JsonDatas datas = EchartDemoGauge.toDatas();
 		
-		JsonOption option = EchartDemoTime.toOption();
+		JsonOption option = EchartDemoGauge.toOption();
 		
 		JsonEchart chart = JsonEchart2Factory.build();
 		chart.setDatas(datas.getList());
 		chart.setOption(option);
 		
+		JsonUtil.info(chart);
+		
 		StringWriter sw = new StringWriter();
-		JsonEchartTimeFactory f = JsonEchartTimeFactory.instance(sw).id(xfEchart.getDivId()); 
+		JsonEchartGaugeFactory f = JsonEchartGaugeFactory.instance(sw).id(xfEchart.getDivId()); 
 		f.js(chart);
 		super.render(true,sw,"jsf");
 	}
@@ -82,8 +82,8 @@ public class CliEchartGauge extends AbstractCliEchart
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		jfAxis.axisRange(LocalDateTime.now(), LocalDateTime.now());
 		
-		cli.demo();
-//		cli.jsf();
+//		cli.demo();
+		cli.jsf();
 //		cli.app();
 	}
 }

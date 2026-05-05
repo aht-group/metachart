@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.metachart.factory.json.chart.echart.JsonEchartFactory;
 import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
+import org.metachart.factory.json.chart.echart.data.JsonDatasFactory;
 import org.metachart.factory.json.chart.echart.ui.JsonOptionFactory;
 import org.metachart.factory.txt.chart.TxtDataFactory;
 import org.metachart.interfaces.data.EchartGaugeDataProvider;
@@ -15,6 +16,7 @@ import org.metachart.model.json.chart.echart.axis.JsonAxisTick;
 import org.metachart.model.json.chart.echart.color.Color;
 import org.metachart.model.json.chart.echart.color.ColorStop;
 import org.metachart.model.json.chart.echart.data.JsonData;
+import org.metachart.model.json.chart.echart.data.JsonDatas;
 import org.metachart.model.json.chart.echart.data.JsonSeries;
 import org.metachart.model.json.chart.echart.label.JsonDetail;
 import org.metachart.model.json.chart.echart.line.JsonLineStyle;
@@ -89,12 +91,19 @@ public class EchartDemoGauge implements EchartGaugeDataProvider
 		JsonDetail detail = new JsonDetail();
 		detail.setValueAnimation(true);
 		detail.setColor("inherit");
-		detail.setFormatter("{value} kWh");
+		detail.setFormatter("{value} K");
 		seriesA.setDetail(detail);
 		
 		jfOption.series(seriesA);
 
 		return jfOption.assemble();
+	}
+	
+	public static JsonDatas toDatas()
+	{
+		JsonDatasFactory jf = JsonDatasFactory.instance();
+		jf.add(EchartDemoGauge.toData("A"));
+		return jf.assemble();
 	}
 	
 	public static JsonData toData(String seriesId)
