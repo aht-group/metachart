@@ -35,6 +35,7 @@
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-xml</artifactId>
+			<classifier>javax</classifier>
 			<scope>test</scope>
 		</dependency>
 
