@@ -1,48 +1,54 @@
 ---
 id: ADR-0001
 title: Compile all modules against the Java 8 API
-status: proposed
+status: accepted
 date: 2026-10-15
+related:
+  - ADR-0002
 ---
 
 # ADR-0001: Compile all modules against the Java 8 API
 
 ## Context
 
-The project overview records Java 8 as the compile target (`README.md`, `## Decided Fundamental Decisions`)
-and Java source/target `1.8` with the `maven-compiler-plugin` (`README.md`, `## Relevant Values`). The root
-`pom.xml` manages `maven-compiler-plugin` in version `2.3.2` and configures `source` and `target` `1.8`.
+The open question was with which compiler setting the modules of the reactor compile against the Java 8 API;
+it was open in the project overview (`README.md`, `## Relevant Values`, `## Decided Fundamental Decisions`).
 
-- `source` and `target` select the source level and the class-file version, but the compilation uses the
-  API of the JDK that runs the compiler.
-- A build on JDK 11 could therefore use types and members that Java 8 does not have; the class files
-  stay at version 52, and the failure appears only at runtime on Java 8.
+- The root `pom.xml` managed `maven-compiler-plugin` in version `2.3.2` and configured `source` and `target`
+  `1.8`; the parent BOM `org.jeesl.bom:bom-parent8` declares the same parameters in its `<build><plugins>`.
+- `source` and `target` select the source level and the class-file version, but the compilation uses the API
+  of the JDK that runs the compiler.
+- A build of the reactor on JDK 17 compiled a call to `java.util.List.of` (Java 9) into class-file version 52;
+  the failure appears only in the runtime of a Java 8 consumer.
 
 ## Decision
 
 Every module of the repository compiles against the Java 8 API.
 
-- The root `pom.xml` manages `maven-compiler-plugin` in version `3.6.0` or newer and configures the
-  parameter `release` with the value `8`; it drops its own parameters `source` and `target` `1.8`.
-- While `release` is set, the compilation uses the API data of Java 8 and writes class-file version 52;
-  the compiler call carries `--release 8` and no value of `source` or `target`.
+- The root `pom.xml` manages `maven-compiler-plugin` in version `3.8.1` and configures the parameter `release`
+  with the value `8`; it drops its own parameters `source` and `target` `1.8`.
+- While `release` is set, the compilation uses the API data of Java 8 and writes class-file version 52; the
+  compiler call carries `--release 8` and no value of `source` or `target`.
 - The build requires JDK 9 or newer for the `release` argument.
-- The artifacts of the modules of the reactor carry class-file version 52 and use the Java 8 API only;
-  the test compilation is checked in the same way.
+- The artifacts of the modules of the reactor carry class-file version 52 and use the Java 8 API only; the
+  test compilation is checked in the same way.
 
 ## Rationale
 
-- `--release` selects the API data of that Java version, so the compiler rejects types and members that
-  the version does not provide.
+- `--release` selects the API data of that Java version, so the compiler rejects types and members that the
+  version does not provide.
 - One value in the root `pom.xml` covers the reactor; a module with its own value states it itself.
 - The failure appears while compiling instead of in the runtime of a Java 8 consumer.
+- The parameters `source` and `target` of the parent BOM stay in the effective configuration of the modules;
+  `maven-compiler-plugin` gives `release` precedence, so no `source` or `target` argument reaches the compiler.
+- Version `3.8.1` supports the parameter `release` and resolves from the configured repositories.
 
 ## Alternatives
 
 ### `source` and `target` `1.8` (initial situation)
 
 Keeps class-file version 52 but compiles against the API of the build JDK, so a Java 9 or newer API
-stays unnoticed.
+stays unnoticed; a call to `java.util.List.of` compiles.
 
 ### Building with JDK 8
 
@@ -55,32 +61,42 @@ its own, and a separate signature artifact.
 
 ## Impact
 
+- Affected requirements: none.
 - `pom.xml` (root) – the parameter `release` replaces `source` and `target` for every module, and the managed
-  `maven-compiler-plugin` carries a version of 3.6.0 or newer.
+  `maven-compiler-plugin` carries version `3.8.1`.
 - `README.md` (`## Technical Assumptions`) – the language entry names the Java 8 API of the compilation.
+- `README.md` (`## Relevant Values`) – the row of the Java compile level names the parameter `release` and the
+  root `pom.xml` as its authoritative location.
 - `README.md` (`## Build and Start`) – the prerequisite names JDK 9 or newer in place of JDK 8.
-- `doc/requirements/architecture.md` displays the decision.
-- The index (`doc/status.md`) lists the decision.
+- `README.md` (`## Decided Fundamental Decisions`) – the compile level names the Java 8 API.
+- `doc/requirements/architecture.md` – the compile level and its authoritative location.
+- `doc/status.md` – the index carries the decision with its status.
+- A build on JDK 8 ends in the first module with `invalid flag: --release`.
 
 ## Open Points
 
 - A module that later needs Java 11 APIs configures its own `release` value; the decision does not
   regulate which module that is.
 - The JDK that runs the build is not regulated beyond the minimum that the `release` argument requires.
+- The Javadoc path is not regulated; `maven-javadoc-plugin` in version `2.8` knows no `release` parameter.
 
 ## Evidence
 
 ### Implementation
 
-- `pom.xml` (root) – open: `maven-compiler-plugin` 3.6.0 or newer with the parameter `release` with the value
-  `8` in place of the parameters `source` and `target` `1.8`
+- `pom.xml` (root) – `maven-compiler-plugin` `3.8.1` with the parameter `release` `8` in place of the
+  parameters `source` and `target` `1.8`
 
 ### Tests
 
-- `mvn -DskipTests clean install` of the reactor on JDK 9 or newer – open: the build ends with BUILD SUCCESS
-  and `javap -v` reports class-file version 52 for the classes of the modules
+- `mvn -o -DskipTests clean install` on JDK 17 – BUILD SUCCESS for the six modules
+- `javap -v` on a class of a module – `major version: 52`
+- Compilation of a class that calls `java.util.List.of` – `cannot find symbol: method of(java.lang.String)`
+- `mvn -o -DskipTests clean install` on JDK 8 – BUILD FAILURE in `metachart-doc`: `invalid flag: --release`
 
 ### Documentation
 
-- `README.md` (`## Technical Assumptions`) – open: the language entry names the Java 8 API of the compilation
-- `README.md` (`## Build and Start`) – open: the prerequisite names JDK 9 or newer
+- `README.md` (`## Technical Assumptions`, `## Relevant Values`, `## Build and Start`,
+  `## Decided Fundamental Decisions`) – names the Java 8 API of the compilation, `release` `8`, and JDK 9 or
+  newer
+- `doc/requirements/architecture.md` – names the compile level and its authoritative location
