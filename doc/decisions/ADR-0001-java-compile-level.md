@@ -12,7 +12,8 @@ related:
 ## Context
 
 The open question was with which compiler setting the modules of the reactor compile against the Java 8 API;
-it was open in the project overview (`README.md`, `## Relevant Values`, `## Decided Fundamental Decisions`).
+the project overview (`README.md`, `## Relevant Values`, `## Decided Fundamental Decisions`) recorded Java 8
+as the compile level with the parameters `source` and `target` `1.8`.
 
 - The root `pom.xml` managed `maven-compiler-plugin` in version `2.3.2` and configured `source` and `target`
   `1.8`; the parent BOM `org.jeesl.bom:bom-parent8` declares the same parameters in its `<build><plugins>`.
@@ -78,7 +79,8 @@ its own, and a separate signature artifact.
 - A module that later needs Java 11 APIs configures its own `release` value; the decision does not
   regulate which module that is.
 - The JDK that runs the build is not regulated beyond the minimum that the `release` argument requires.
-- The Javadoc path is not regulated; `maven-javadoc-plugin` in version `2.8` knows no `release` parameter.
+- The Javadoc path is not regulated: the `release` profile declares `maven-javadoc-plugin` without the parameter
+  `release` (`doc/decisions/ADR-0002-maven-build.md`).
 
 ## Evidence
 
@@ -90,7 +92,9 @@ its own, and a separate signature artifact.
 ### Tests
 
 - `mvn -o -DskipTests clean install` on JDK 17 – BUILD SUCCESS for the six modules
-- `javap -v` on a class of a module – `major version: 52`
+- `javap -v` on classes of the modules and of their test classes – `major version: 52`
+- `mvn -o -N help:effective-pom` (root) – `release` `8` and version `3.8.1` in `pluginManagement`; `source` `1.8`,
+  `target` `1.8` and `release` `8` in the effective configuration
 - Compilation of a class that calls `java.util.List.of` – `cannot find symbol: method of(java.lang.String)`
 - `mvn -o -DskipTests clean install` on JDK 8 – BUILD FAILURE in `metachart-doc`: `invalid flag: --release`
 

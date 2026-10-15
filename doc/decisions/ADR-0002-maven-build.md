@@ -12,18 +12,19 @@ related:
 ## Context
 
 The open question was which build tool builds the modules of the reactor, resolves their dependencies, and binds
-the parent, the BOMs, and the target platform; the build tool is evident from the build files and named in
-`README.md`, `## Technical Assumptions`.
+the parent, the BOMs, and the target platform; the build files are Maven POMs, and the project overview
+(`README.md`, `## Technical Assumptions`) names Apache Maven.
 
 ## Decision
 
-1. Maven builds the project; the root project `metachart` with packaging `pom` leads the modules `doc`, `xml`,
-   `util`, `core`, `jsf`, and `bom` in one reactor.
+1. Maven builds the project; the root project `metachart` with packaging `pom` leads the modules `doc`, `jsf`,
+   `core`, `bom`, `util`, and `xml` in one reactor.
 2. The packaging is `pom` for `bom` and `jar` for the other modules; the reactor contains no `war`.
 3. The dependency versions come from the parent BOM `org.jeesl.bom:bom-parent8` and from the project BOM
    `metachart-bom`, which imports the BOM `net.sf.exlp:exlp-bom`.
-4. Maven enforces banned dependencies with `maven-enforcer-plugin` and generates the Javadoc with
-   `maven-javadoc-plugin` in the `release` profile.
+4. `maven-enforcer-plugin` enforces banned dependencies; the rule `bannedDependencies` bans
+   `commons-logging:commons-logging`; the module `metachart-jsf` deactivates the rule with `enforcer.skip`.
+5. The `release` profile generates the Javadoc with `maven-javadoc-plugin`.
 
 ## Rationale
 
@@ -38,13 +39,17 @@ the parent, the BOMs, and the target platform; the build tool is evident from th
 ## Impact
 
 - Affected requirements: none.
-- Files: `pom.xml` (root) and the module POMs of the named modules.
+- Files: `pom.xml` (root) and `doc/pom.xml`, `xml/pom.xml`, `util/pom.xml`, `core/pom.xml`, `jsf/pom.xml`,
+  `bom/pom.xml`.
 
 ## Open Points
 
-- A fixed Maven version with its own build execution is not regulated; the root `pom.xml` declares no
-  `prerequisites`, and the project overview (`README.md`, `## Build and Start`) names Maven 3.9 or newer. The bound
-  version is fixed in a constraint or its own decision.
+- A fixed Maven version is not regulated; the root `pom.xml` declares no `prerequisites`. The bound version is
+  fixed in a constraint or its own decision.
+- The project overview (`README.md`, `## Build and Start`) names Maven 3.9 or newer without a location that
+  maintains the value.
+- The version of `maven-javadoc-plugin` is not regulated: the `release` profile declares the plugin without a
+  version, the parent BOM manages none, and `maven-javadoc-plugin.version` is not referenced.
 
 ## Evidence
 
@@ -53,6 +58,7 @@ the parent, the BOMs, and the target platform; the build tool is evident from th
 - `pom.xml` (root) – packaging `pom`, six `<module>` entries; parent `org.jeesl.bom:bom-parent8`
 - `pom.xml` (root) – `maven-enforcer-plugin` with `bannedDependencies`; `maven-javadoc-plugin` in the `release`
   profile
+- `jsf/pom.xml` – deactivates the rule `bannedDependencies` with `enforcer.skip`
 - `doc/pom.xml`, `xml/pom.xml`, `util/pom.xml`, `core/pom.xml`, `jsf/pom.xml` – packaging `jar`
 - `bom/pom.xml` – packaging `pom`; imports `net.sf.exlp:exlp-bom`
 
