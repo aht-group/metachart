@@ -76,31 +76,11 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
-                     <groupId>org.apache.maven.plugins</groupId>
-                     <artifactId>maven-release-plugin</artifactId>
-                     <version>2.5</version>
-                     <configuration>
-                          <useReleaseProfile>false</useReleaseProfile>
-                          <releaseProfiles>release</releaseProfiles>
-                          <goals>deploy</goals>
-                     </configuration>
-                </plugin>
-				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<inherited>true</inherited>
 					<version>${maven-compiler-plugin.version}</version>
 					<configuration>
 						<release>8</release>
-						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
-				</plugin>
-				<plugin>
-		         <groupId>org.apache.maven.plugins</groupId>
-		        	<artifactId>maven-pmd-plugin</artifactId>
-		        	<version>3.6</version>
-		        	<configuration>
-			        	<linkXRef>false</linkXRef>
-			      </configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
