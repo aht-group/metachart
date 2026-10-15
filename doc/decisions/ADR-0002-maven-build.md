@@ -25,12 +25,18 @@ the parent, the BOMs, and the target platform; the build files are Maven POMs, a
 4. `maven-enforcer-plugin` enforces banned dependencies; the rule `bannedDependencies` bans
    `commons-logging:commons-logging`; the module `metachart-jsf` deactivates the rule with `enforcer.skip`.
 5. The `release` profile generates the Javadoc with `maven-javadoc-plugin`.
+6. The plugin versions come from the parent POMs; the BOM `org.jeesl.bom:bom` binds them in its `pluginManagement`,
+   among them `maven-javadoc-plugin` `2.9.1`.
+7. The parent POM `org.jeesl.bom:bom` enforces the minimum Maven version `3.6.3` with the rule `requireMavenVersion`
+   of `maven-enforcer-plugin` `1.4.1`.
 
 ## Rationale
 
 - The parent BOM `org.jeesl.bom:bom-parent8` and the project BOM `metachart-bom` come from the JEESL
   environment and the project itself and are Maven artifacts.
 - The packagings `pom` and `jar` map the BOM and the reusable libraries to Maven modules.
+- The plugin versions and the minimum Maven version are maintained once in the parent POM chain; the root `pom.xml`
+  overrides only `maven-compiler-plugin` (ADR-0001).
 
 ## Alternatives
 
@@ -44,12 +50,7 @@ the parent, the BOMs, and the target platform; the build files are Maven POMs, a
 
 ## Open Points
 
-- A fixed Maven version is not regulated; the root `pom.xml` declares no `prerequisites`. The bound version is
-  fixed in a constraint or its own decision.
-- The project overview (`README.md`, `## Build and Start`) names Maven 3.9 or newer without a location that
-  maintains the value.
-- The version of `maven-javadoc-plugin` is not regulated: the `release` profile declares the plugin without a
-  version, the parent BOM manages none, and `maven-javadoc-plugin.version` is not referenced.
+None.
 
 ## Evidence
 
@@ -65,6 +66,8 @@ the parent, the BOMs, and the target platform; the build files are Maven POMs, a
 ### Tests
 
 - `mvn -q clean install` (root) – the reactor resolves the BOMs and builds the six modules
+- `mvn -o -N help:effective-pom` (root) – `maven-javadoc-plugin` `2.9.1` in `pluginManagement`;
+  `requireMavenVersion` `3.6.3`
 
 ### Documentation
 

@@ -4,9 +4,9 @@ Activities of this project, newest first; the topmost entry covers the activity 
 
 ## 2026-10-15 – ADR-0001 and ADR-0002 aligned with the implementation
 
-What: Statements of both decisions aligned with the build files, the compiled classes and the documentation.
-Result: Both decisions now name the unregulated parts of the build; `metachart-jsf` deactivates the enforcer rule.
-Evidence: `javap -v` – `major version: 52`; `help:effective-pom` – `release` `8`; `enforcer.skip` in `jsf/pom.xml`.
+What: Statements of both decisions aligned with the build files, the parent POMs and the documentation.
+Result: Both decisions name the versions from the parent POMs; `metachart-jsf` deactivates the enforcer rule.
+Evidence: `help:effective-pom` – `maven-compiler-plugin` `3.16.0`, `maven-javadoc-plugin` `2.9.1`, Maven `3.6.3`.
 Files: `doc/decisions/ADR-0001-java-compile-level.md`, `doc/decisions/ADR-0002-maven-build.md`, `doc/changelog.md`.
 
 ## 2026-10-15 – ADR-0001 accepted and compile level changed

@@ -26,8 +26,8 @@ as the compile level with the parameters `source` and `target` `1.8`.
 
 Every module of the repository compiles against the Java 8 API.
 
-- The root `pom.xml` manages `maven-compiler-plugin` in version `3.8.1` and configures the parameter `release`
-  with the value `8`; it drops its own parameters `source` and `target` `1.8`.
+- The root `pom.xml` configures the parameter `release` with the value `8`; it drops its own parameters `source` and
+  `target` `1.8`, and the version of `maven-compiler-plugin` comes from the parent POMs.
 - While `release` is set, the compilation uses the API data of Java 8 and writes class-file version 52; the
   compiler call carries `--release 8` and no value of `source` or `target`.
 - The build requires JDK 9 or newer for the `release` argument.
@@ -42,7 +42,7 @@ Every module of the repository compiles against the Java 8 API.
 - The failure appears while compiling instead of in the runtime of a Java 8 consumer.
 - The parameters `source` and `target` of the parent BOM stay in the effective configuration of the modules;
   `maven-compiler-plugin` gives `release` precedence, so no `source` or `target` argument reaches the compiler.
-- Version `3.8.1` supports the parameter `release` and resolves from the configured repositories.
+- The version of `maven-compiler-plugin` comes from the parent POMs and supports the parameter `release`.
 
 ## Alternatives
 
@@ -63,8 +63,8 @@ its own, and a separate signature artifact.
 ## Impact
 
 - Affected requirements: none.
-- `pom.xml` (root) – the parameter `release` replaces `source` and `target` for every module, and the managed
-  `maven-compiler-plugin` carries version `3.8.1`.
+- `pom.xml` (root) – the parameter `release` replaces `source` and `target` for every module; the version of
+  `maven-compiler-plugin` comes from the parent POMs.
 - `README.md` (`## Technical Assumptions`) – the language entry names the Java 8 API of the compilation.
 - `README.md` (`## Relevant Values`) – the row of the Java compile level names the parameter `release` and the
   root `pom.xml` as its authoritative location.
@@ -79,22 +79,23 @@ its own, and a separate signature artifact.
 - A module that later needs Java 11 APIs configures its own `release` value; the decision does not
   regulate which module that is.
 - The JDK that runs the build is not regulated beyond the minimum that the `release` argument requires.
-- The Javadoc path is not regulated: the `release` profile declares `maven-javadoc-plugin` without the parameter
-  `release` (`doc/decisions/ADR-0002-maven-build.md`).
+- The Javadoc path is not regulated: `maven-javadoc-plugin` `2.9.1` from the parent POMs knows no parameter `release`
+  (`doc/decisions/ADR-0002-maven-build.md`).
 
 ## Evidence
 
 ### Implementation
 
-- `pom.xml` (root) – `maven-compiler-plugin` `3.8.1` with the parameter `release` `8` in place of the
-  parameters `source` and `target` `1.8`
+- `pom.xml` (root) – the parameter `release` `8` in place of the parameters `source` and `target` `1.8`, without a
+  version of `maven-compiler-plugin`
 
 ### Tests
 
 - `mvn -o -DskipTests clean install` on JDK 17 – BUILD SUCCESS for the six modules
+- `mvn -o -DskipTests clean install -pl doc` on JDK 17 – `javac [debug release 8]`, BUILD SUCCESS
 - `javap -v` on classes of the modules and of their test classes – `major version: 52`
-- `mvn -o -N help:effective-pom` (root) – `release` `8` and version `3.8.1` in `pluginManagement`; `source` `1.8`,
-  `target` `1.8` and `release` `8` in the effective configuration
+- `mvn -o -N help:effective-pom` (root) – `maven-compiler-plugin` `3.16.0` with `release` `8` in `pluginManagement`;
+  `source` `1.8` and `target` `1.8` next to `release` `8` in the effective configuration
 - Compilation of a class that calls `java.util.List.of` – `cannot find symbol: method of(java.lang.String)`
 - `mvn -o -DskipTests clean install` on JDK 8 – BUILD FAILURE in `metachart-doc`: `invalid flag: --release`
 
