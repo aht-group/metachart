@@ -60,8 +60,8 @@ The values above are maintained in the build files; this table only names them.
 
 ## Decided Fundamental Decisions
 
-No architecture decision has been recorded in `doc/decisions/` yet. The constraints below are
-evident from the build files:
+Architecture decisions are recorded in `doc/decisions/`, including ADR-0002 (Maven as the build tool). The
+constraints below are evident from the build files:
 
 - The project is a multi-module Maven reactor with a central `metachart-bom` for version management.
 - Java 8 is the compile target and GNU GPL v3 the license (see Relevant Values).
@@ -97,12 +97,12 @@ Modules (reactor order):
 
 | Module | Artifact | Purpose |
 |---|---|---|
-| `bom` | `metachart-bom` | Dependency management (BOM) for all MC modules |
 | `doc` | `metachart-doc` | Documentation placeholder (no production code) |
 | `xml` | `metachart-xml` | XML (JAXB) and JSON models for charts and graphs |
 | `util` | `metachart-util` | Factories that turn models into JS/JSON, XHTML, XML, and TXT |
 | `core` | `metachart-core` | Servlets and processors (export, graph/DOT, timeseries) |
 | `jsf` | `metachart-jsf` | JSF/PrimeFaces components and web resources (TypeScript bundles) |
+| `bom` | `metachart-bom` | Dependency management (BOM) for all MC modules |
 
 The `web` directory is not part of the reactor modules.
 
