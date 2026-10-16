@@ -47,6 +47,8 @@ The values above are maintained in the build files; this table only names them.
 - The JSF module targets a JSF 2.3 / PrimeFaces 12 servlet container; charts are rendered as HTML
   and JavaScript fragments that a host application embeds.
 - Helper libraries come from `net.sf.exlp` (`exlp-util`, `exlp-xml`, ...) and the JEESL BOM family.
+- Tests run with JUnit 5 over the test basis `net.sf.exlp:exlp-test`; the test strategy is fixed by
+  ADR-0003 (`doc/decisions/`).
 - The `doc` module is a documentation placeholder with no production code.
 
 ## Open Fundamental Decisions

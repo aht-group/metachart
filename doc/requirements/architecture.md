@@ -42,6 +42,8 @@ module POMs; the build tool is fixed by `doc/decisions/ADR-0002-maven-build.md`.
   servlet container; the versions are maintained in the build files (`README.md`, `## Relevant Values`).
 - Helper libraries come from `net.sf.exlp` and the JEESL BOM family
   (`README.md`, `## Technical Assumptions`).
+- Tests run with JUnit 5 over the test basis `net.sf.exlp:exlp-test`; the test strategy is fixed by
+  `doc/decisions/ADR-0003-test-strategy.md` (`README.md`, `## Technical Assumptions`).
 
 ## Documentation Framework
 
